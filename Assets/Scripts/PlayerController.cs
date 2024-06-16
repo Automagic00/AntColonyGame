@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
-    private Movement moveScript;
+    private Entity moveScript;
 
     private Camera _camera;
     private Bounds cameraBounds;
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        moveScript = GetComponent<Movement>();
+        moveScript = GetComponent<Entity>();
 
         // Bound camera to map bounds
         var camHei = _camera.orthographicSize;

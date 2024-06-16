@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Entity : MonoBehaviour
 {
     private const int ST_GROUND = 0, ST_AIR = 1, ST_GROUND_ATK = 2;
     private int state = ST_AIR;
@@ -18,6 +18,10 @@ public class Movement : MonoBehaviour
     public float groundFrictionCoefficient = 0.96f;
     public float airFrictionCoefficient = 0.4f;
     public float grav = 2.25f;
+
+    public float maxHealth = 100;
+    public float currentHealth;
+
     private Rigidbody2D rb;
     private BoxCollider2D col;
 
@@ -27,6 +31,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         rb.gravityScale = grav;
+        currentHealth = maxHealth;
     }
 
     void updateState()
