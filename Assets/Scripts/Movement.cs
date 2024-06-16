@@ -39,6 +39,10 @@ public class Movement : MonoBehaviour
                 {
                     state = ST_AIR;
                 }
+                else
+                {
+                    jumps = defaultJumps;
+                }
                 break;
             case ST_AIR:
                 if (below)

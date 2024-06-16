@@ -8,7 +8,9 @@ using UnityEngine.Tilemaps;
 public class NewBehaviourScript : MonoBehaviour
 {
 
-    public GameObject loungePrefab;
+    public GameObject loungePf, nextRoomPf;
+    private int gameProgression = 0;
+
     private Tilemap fg, bg;
     // Start is called before the first frame update
     void Start()
@@ -21,13 +23,19 @@ public class NewBehaviourScript : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("z"))
-            addLounge();
+        {
+            gameProgression++;
+            if (gameProgression == 1)
+                add(loungePf);
+            if (gameProgression == 2)
+                add(nextRoomPf);
+        }
     }
 
-    void addLounge()
+    void add(GameObject prefab)
     {
-        Tilemap addBG = loungePrefab.gameObject.transform.Find("BGTiles").GetComponent<Tilemap>();
-        Tilemap addFG = loungePrefab.gameObject.transform.Find("Tiles").GetComponent<Tilemap>();
+        Tilemap addBG = prefab.transform.Find("pfBGTiles").GetComponent<Tilemap>();
+        Tilemap addFG = prefab.transform.Find("pfTiles").GetComponent<Tilemap>();
         addTilemaps(addBG, bg);
         addTilemaps(addFG, fg);
     }
