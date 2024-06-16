@@ -2998,6 +2998,7 @@ MonoBehaviour:
   defaultGroundSpeed: 12
   defaultAirSpeed: 6
   defaultSpeed: 0
+  defaultJumps: 1
   frictionCoefficient: 0.96
   grav: 2.25
 --- !u!61 &1446326328
@@ -3071,7 +3072,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1592883768
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,9 +3084,9 @@ GameObject:
   - component: {fileID: 1592883770}
   - component: {fileID: 1592883769}
   - component: {fileID: 1592883771}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Map
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
