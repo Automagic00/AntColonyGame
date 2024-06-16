@@ -32,6 +32,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //Dont do anything if game is paused
+        if (PauseController.gameIsPaused)
+        {
+            return;
+        }
+
         float leftKey = Input.GetKey(KeyCode.LeftArrow) ? 1 : 0;
         float rightKey = Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
 
