@@ -27,9 +27,28 @@ public class Movement : MonoBehaviour
         rb.gravityScale = grav;
     }
 
-    // Update is called once per frame
-    void Update()
+    void updateState()
     {
+        var below = Physics2D.Raycast(rb.position, Vector2.down, col.bounds.extents.y + 0.5f, LayerMask.GetMask("Ground"));
+
+        switch (state)
+        {
+            default:
+            case ST_GROUND:
+                if (!below)
+                {
+                    state = ST_AIR;
+                }
+                break;
+            case ST_AIR:
+                if (below)
+                {
+                    state = ST_GROUND;
+                    jumps = defaultJumps;
+                }
+                break;
+        }
+
 
     }
 
@@ -42,12 +61,21 @@ public class Movement : MonoBehaviour
         float hSpeed = hIn * defaultSpeed;
         float fricForce = frictionCoefficient * rb.velocity.x;
 
+
+        // Airtime & fastfall
+        if (vIn == 0)
+            rb.gravityScale = grav;
+        else if (vIn < 0 && rb.velocity.y > 0) rb.gravityScale = grav * 0.65f;
+        else if (vIn > 0) rb.gravityScale = grav * 2f;
+
+
+
+
         //Vertical Movement Forces
         if (jumpIn != 0 && jumps > 0)
         {
             float vSpeed = jumpIn * jumpSpeed;
             rb.AddForce(new Vector2(0, vSpeed), ForceMode2D.Impulse);
-            state = ST_AIR;
             jumps--;
         }
 
@@ -59,21 +87,9 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
+
+        updateState();
     }
 
     //
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.transform.tag != "Ground") return;
-
-
-        var detection = Physics2D.Raycast(rb.position, Vector2.down, col.bounds.extents.y + 0.5f, LayerMask.GetMask("Ground"));
-
-        if (detection)
-        {
-            Debug.Log(detection.distance);
-            state = ST_GROUND;
-            jumps = defaultJumps;
-        }
-    }
 }
