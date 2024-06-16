@@ -14,7 +14,9 @@ public class Movement : MonoBehaviour
     public int defaultJumps = 1;
     private int jumps = 0;
 
-    public float frictionCoefficient = 0.96f;
+    private float frictionCoefficient = 0.96f;
+    public float groundFrictionCoefficient = 0.96f;
+    public float airFrictionCoefficient = 0.4f;
     public float grav = 2.25f;
     private Rigidbody2D rb;
     private BoxCollider2D col;
@@ -29,7 +31,9 @@ public class Movement : MonoBehaviour
 
     void updateState()
     {
-        var below = Physics2D.Raycast(rb.position, Vector2.down, col.bounds.extents.y + 0.5f, LayerMask.GetMask("Ground"));
+        //var below = Physics2D.Raycast(rb.position, Vector2.down, col.bounds.extents.y + 0.5f, LayerMask.GetMask("Ground"));
+        var below = Physics2D.CapsuleCast(rb.position, col.size, CapsuleDirection2D.Vertical, 0, Vector2.down, col.bounds.extents.y + 0.5f, LayerMask.GetMask("Ground"));
+        
 
         switch (state)
         {
@@ -59,7 +63,8 @@ public class Movement : MonoBehaviour
 
     public void TryMove(float hIn, float vIn, float jumpIn)
     {
-        float defaultSpeed = (state == ST_GROUND) ? defaultGroundSpeed : defaultAirSpeed;
+        defaultSpeed = (state == ST_GROUND) ? defaultGroundSpeed : defaultAirSpeed;
+        frictionCoefficient = (state == ST_GROUND) ? groundFrictionCoefficient : airFrictionCoefficient;
 
         //Horizontal Movement Forces
         float hSpeed = hIn * defaultSpeed;
