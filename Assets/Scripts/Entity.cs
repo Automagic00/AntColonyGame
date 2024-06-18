@@ -47,7 +47,7 @@ public class Entity : MonoBehaviour
     void updateState()
     {
         //var below = Physics2D.Raycast(rb.position, Vector2.down, col.bounds.extents.y + 0.5f, LayerMask.GetMask("Ground"));
-        below = Physics2D.CapsuleCast(rb.position, col.size, CapsuleDirection2D.Vertical, 0, Vector2.down, col.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground"));
+        
 
 
         switch (state)
@@ -113,6 +113,24 @@ public class Entity : MonoBehaviour
 
         updateState();
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Ground")
+        {
+            below = Physics2D.BoxCast(rb.position, new Vector2(col.size.x - 0.15f, col.size.y), 0, Vector2.down, col.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground"));
+        }
+        updateState();
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Ground")
+        {
+            below = false;
+        }
+        updateState();
+    }
+
 
     public EntityStates GetState()
     {
