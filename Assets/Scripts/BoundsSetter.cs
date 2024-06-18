@@ -15,7 +15,6 @@ public class BoundsSetter : MonoBehaviour
 
         Globals.mapBounds = new Bounds();
         Globals.mapBounds.SetMinMax(worldmin, worldmax);
-        Debug.Log(Globals.mapBounds);
     }
 
 }

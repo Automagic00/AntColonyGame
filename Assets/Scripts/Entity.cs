@@ -12,7 +12,7 @@ public class Entity : MonoBehaviour
         Air_Atk = 3,
         Hurt = 4
     }
-   // private const int ST_GROUND = 0, ST_AIR = 1, ST_GROUND_ATK = 2;
+    // private const int ST_GROUND = 0, ST_AIR = 1, ST_GROUND_ATK = 2;
     private EntityStates state = EntityStates.Ground;
 
     public float jumpSpeed = 10.0f;
@@ -48,7 +48,7 @@ public class Entity : MonoBehaviour
     {
         //var below = Physics2D.Raycast(rb.position, Vector2.down, col.bounds.extents.y + 0.5f, LayerMask.GetMask("Ground"));
         below = Physics2D.CapsuleCast(rb.position, col.size, CapsuleDirection2D.Vertical, 0, Vector2.down, col.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground"));
-        
+
 
         switch (state)
         {
@@ -84,7 +84,6 @@ public class Entity : MonoBehaviour
         //Horizontal Movement Forces
         float hSpeed = hIn * defaultSpeed;
         fricForce = frictionCoefficient * rb.velocity.x;
-        Debug.Log(fricForce);
 
         // Airtime & fastfall
         if (vIn == 0)

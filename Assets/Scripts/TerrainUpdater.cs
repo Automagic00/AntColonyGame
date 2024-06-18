@@ -9,27 +9,25 @@ public class NewBehaviourScript : MonoBehaviour
 {
 
     public GameObject loungePf, nextRoomPf;
-    private int gameProgression = 0;
-
     private Tilemap fg, bg;
-    // Start is called before the first frame update
+
+    void Awake()
+    {
+        Globals.addProgressionListener(updateMap);
+    }
     void Start()
     {
         bg = transform.Find("BGTiles").GetComponent<Tilemap>();
         fg = transform.Find("Tiles").GetComponent<Tilemap>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void updateMap()
     {
-        if (Input.GetKeyDown("z"))
-        {
-            gameProgression++;
-            if (gameProgression == 1)
-                add(loungePf);
-            if (gameProgression == 2)
-                add(nextRoomPf);
-        }
+        if (Globals.gameProgression == 1)
+            add(loungePf);
+        if (Globals.gameProgression == 2)
+            add(nextRoomPf);
+
     }
 
     void add(GameObject prefab)

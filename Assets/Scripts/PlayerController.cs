@@ -64,25 +64,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    const float INTERACT_DISTANCE = 1;
     private Interactable currentInteraction = null;
     private void UpdateInteraction()
     {
-        // Find closest interactable object
-        Interactable interact = null;
-        float dist = INTERACT_DISTANCE;
-
-        foreach (Interactable i in Object.FindObjectsOfType<Interactable>())
-        {
-            float iDist = Vector3.Distance(i.transform.position, transform.position);
-            if (iDist < dist)
-            {
-                interact = i;
-                dist = iDist;
-            }
-        }
-
-        // Update current selected interactable
+        Interactable interact = Interactable.closestInteractable(transform.position);
         if (interact != currentInteraction)
         {
             if (currentInteraction != null) currentInteraction.disableInteraction();
