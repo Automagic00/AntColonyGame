@@ -60,6 +60,39 @@ public class PlayerController : MonoBehaviour
         if ((scale.x > 0 && hThrottle < 0) || (scale.x < 0 && hThrottle > 0))
             transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
 
+        UpdateInteraction();
+    }
+
+
+    const float INTERACT_DISTANCE = 1;
+    private Interactable currentInteraction = null;
+    private void UpdateInteraction()
+    {
+        // Find closest interactable object
+        Interactable interact = null;
+        float dist = INTERACT_DISTANCE;
+
+        foreach (Interactable i in Object.FindObjectsOfType<Interactable>())
+        {
+            float iDist = Vector3.Distance(i.transform.position, transform.position);
+            if (iDist < dist)
+            {
+                interact = i;
+                dist = iDist;
+            }
+        }
+
+        // Update current selected interactable
+        if (interact != currentInteraction)
+        {
+            if (currentInteraction != null) currentInteraction.disableInteraction();
+            if (interact != null) interact.enableInteraction();
+            currentInteraction = interact;
+        }
+
+        if (currentInteraction != null && Input.GetKeyDown(KeyCode.F))
+            currentInteraction.interact();
+
     }
 
     private Vector3 boundPlayer(Vector3 pos)
