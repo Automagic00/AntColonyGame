@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
-    private Entity moveScript;
+    private Entity entity;
 
     private Camera _camera;
     private Bounds cameraBounds;
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        moveScript = GetComponent<Entity>();
+        entity = GetComponent<Entity>();
 
         // Bound camera to map bounds
         var camHei = _camera.orthographicSize;
@@ -46,10 +46,21 @@ public class PlayerController : MonoBehaviour
 
         float jumpKey = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
 
+        bool attackKey = Input.GetKeyDown(KeyCode.X);
+
         float hThrottle = rightKey - leftKey;
         float vThrottle = downKey - upKey;
 
-        moveScript.TryMove(hThrottle, vThrottle, jumpKey);
+        entity.TryMove(hThrottle, vThrottle, jumpKey);
+        
+        if (attackKey)
+        {
+            Vector2 hitboxOffset = transform.position + (new Vector3(1,0,0) * Mathf.Sign(transform.localScale.x));
+            HitboxData hitbox = new HitboxData(hitboxOffset, new Vector2(2,1), 0.5f, 5, 5);
+            Hitbox.CreateHitbox(hitbox, entity);
+        }
+
+
         transform.position = boundPlayer(transform.position);
 
         // Camera follows player

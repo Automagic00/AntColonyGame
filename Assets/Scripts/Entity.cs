@@ -141,5 +141,10 @@ public class Entity : MonoBehaviour
         return rb.velocity.x;
     }
 
+    public IEnumerator DestroyHitbox(float lifetime, BoxCollider2D hitbox)
+    {
+        yield return new WaitForSeconds(lifetime);
+        Destroy(hitbox.gameObject);
+    }
     //
 }
