@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bb95aa9bc51fc06438460488660de8bb
+guid: 80b7b495a7263904ba1ae00d6c1802aa
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 96
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -93,19 +93,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -114,9 +101,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
-        width: 32
-        height: 32
+        y: 288
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de4fa57007338864696b1fb59a35813f
-      internalID: -18412994
+      spriteID: ef1d4ec0b178fcd48be73277fb8d6822
+      internalID: 83882834
       vertices: []
       indices: 
       edges: []
@@ -134,10 +121,10 @@ TextureImporter:
       name: tileset_anthill_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 96
-        width: 32
-        height: 32
+        x: 96
+        y: 288
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d487008140c56f45b791c6e5b4b148d
-      internalID: -2011520707
+      spriteID: 765e497c12a59a64d9d5426600a551f5
+      internalID: -1454003837
       vertices: []
       indices: 
       edges: []
@@ -155,10 +142,10 @@ TextureImporter:
       name: tileset_anthill_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 96
-        width: 32
-        height: 32
+        x: 192
+        y: 288
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b22ddf78d41f5941be3e08c065636a4
-      internalID: -1114924097
+      spriteID: 970048ad27b112144a9c24682506eb6c
+      internalID: 253359441
       vertices: []
       indices: 
       edges: []
@@ -176,10 +163,10 @@ TextureImporter:
       name: tileset_anthill_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 96
-        width: 32
-        height: 32
+        x: 288
+        y: 288
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26fa612e07c482b48ad0d83837f9d131
-      internalID: 232346577
+      spriteID: fb4c8e02594fe584a858ca3e14be6ea1
+      internalID: 647812821
       vertices: []
       indices: 
       edges: []
@@ -197,10 +184,10 @@ TextureImporter:
       name: tileset_anthill_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 32
+        x: 384
+        y: 288
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87023f72189c4084990af9b07d580a3e
-      internalID: 1735675131
+      spriteID: 6ccb1da6332570a4a871d6e06e188750
+      internalID: 2109525137
       vertices: []
       indices: 
       edges: []
@@ -218,10 +205,10 @@ TextureImporter:
       name: tileset_anthill_5
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 32
+        x: 0
+        y: 192
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7026335b88273dd479d5b4a5f8298540
-      internalID: 461826607
+      spriteID: 3cfa7877da235214ca8a6d36cd1cb6ac
+      internalID: -908838710
       vertices: []
       indices: 
       edges: []
@@ -239,10 +226,10 @@ TextureImporter:
       name: tileset_anthill_6
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 32
+        x: 96
+        y: 192
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,8 +237,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da7d940964fe47e4f840ab73c2789fb5
-      internalID: 1759612016
+      spriteID: 8e333c98bdc143c47884a85728cff685
+      internalID: 1772764082
       vertices: []
       indices: 
       edges: []
@@ -260,10 +247,10 @@ TextureImporter:
       name: tileset_anthill_7
       rect:
         serializedVersion: 2
-        x: 96
-        y: 64
-        width: 32
-        height: 32
+        x: 192
+        y: 192
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,8 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ababd186e70419b4b974dfc1fb374d7a
-      internalID: -305251740
+      spriteID: 147724d551ab892438457385f0fccd3d
+      internalID: -1430666576
       vertices: []
       indices: 
       edges: []
@@ -281,10 +268,10 @@ TextureImporter:
       name: tileset_anthill_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
+        x: 288
+        y: 192
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,8 +279,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 695bfaae4f36f3643b7cebc605a8c687
-      internalID: 1080011597
+      spriteID: 32a7217d9dcf28e4c833d351d5379d32
+      internalID: 1283255135
       vertices: []
       indices: 
       edges: []
@@ -302,10 +289,10 @@ TextureImporter:
       name: tileset_anthill_9
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
+        x: 384
+        y: 192
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,8 +300,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3c03d835d4eda748896002a5c892fb2
-      internalID: -440848366
+      spriteID: eaf1739c8cb93cf47822d958c05c747c
+      internalID: 1584955777
       vertices: []
       indices: 
       edges: []
@@ -323,10 +310,10 @@ TextureImporter:
       name: tileset_anthill_10
       rect:
         serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
+        x: 0
+        y: 96
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -334,8 +321,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1520e08ece0796140965e5cdb962ff46
-      internalID: -1202471214
+      spriteID: 2508ebf1948a1ec46a94a5ca9a41797d
+      internalID: -1053357948
       vertices: []
       indices: 
       edges: []
@@ -345,9 +332,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 32
-        width: 32
-        height: 32
+        y: 96
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -355,8 +342,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da4cf95fbdf78b3499410b439a8ef95f
-      internalID: 457583998
+      spriteID: ab3a4e16cacd45641bbc5358d2022a33
+      internalID: -1655256282
       vertices: []
       indices: 
       edges: []
@@ -365,10 +352,10 @@ TextureImporter:
       name: tileset_anthill_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
+        x: 192
+        y: 96
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -376,8 +363,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d42cfbb340b0df418106dd0ec74da34
-      internalID: 117320790
+      spriteID: 0f5ade21727160449a98663c5e604584
+      internalID: 123363839
       vertices: []
       indices: 
       edges: []
@@ -386,10 +373,10 @@ TextureImporter:
       name: tileset_anthill_13
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
+        x: 288
+        y: 96
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,8 +384,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99529b02bceabe14caa549570323e9f4
-      internalID: -914542878
+      spriteID: db3fcde80be06cd488013807b9f56175
+      internalID: -1129943838
       vertices: []
       indices: 
       edges: []
@@ -407,10 +394,10 @@ TextureImporter:
       name: tileset_anthill_14
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
+        x: 384
+        y: 96
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -418,8 +405,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed5ad0f6c60950948aa6d4ee05a7e7ff
-      internalID: -1177577390
+      spriteID: cd0e7059e358ab7428c77f68699863b9
+      internalID: 1921328606
       vertices: []
       indices: 
       edges: []
@@ -428,10 +415,10 @@ TextureImporter:
       name: tileset_anthill_15
       rect:
         serializedVersion: 2
-        x: 96
+        x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -439,8 +426,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50a2496d6163c9a469e2a7243184631d
-      internalID: 1583363658
+      spriteID: a730e5fc17349284da7b0dbb66e00b2e
+      internalID: 2030194084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset_anthill_16
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3aaf6c88a4ebc5489c2cfaf38316d70
+      internalID: -37461982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset_anthill_17
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0820f8074ef9404e95d70f04ed62148
+      internalID: -961075549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset_anthill_18
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9701617938098e442b7386df3d9f1987
+      internalID: 113843583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset_anthill_19
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fe60f6e6d8a20a4a8e89e4337aa53ab
+      internalID: 1463675635
       vertices: []
       indices: 
       edges: []
@@ -456,22 +527,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tileset_anthill_0: -18412994
-      tileset_anthill_1: -2011520707
-      tileset_anthill_10: -1202471214
-      tileset_anthill_11: 457583998
-      tileset_anthill_12: 117320790
-      tileset_anthill_13: -914542878
-      tileset_anthill_14: -1177577390
-      tileset_anthill_15: 1583363658
-      tileset_anthill_2: -1114924097
-      tileset_anthill_3: 232346577
-      tileset_anthill_4: 1735675131
-      tileset_anthill_5: 461826607
-      tileset_anthill_6: 1759612016
-      tileset_anthill_7: -305251740
-      tileset_anthill_8: 1080011597
-      tileset_anthill_9: -440848366
+      tileset_anthill_0: 83882834
+      tileset_anthill_1: -1454003837
+      tileset_anthill_10: -1053357948
+      tileset_anthill_11: -1655256282
+      tileset_anthill_12: 123363839
+      tileset_anthill_13: -1129943838
+      tileset_anthill_14: 1921328606
+      tileset_anthill_15: 2030194084
+      tileset_anthill_16: -37461982
+      tileset_anthill_17: -961075549
+      tileset_anthill_18: 113843583
+      tileset_anthill_19: 1463675635
+      tileset_anthill_2: 253359441
+      tileset_anthill_3: 647812821
+      tileset_anthill_4: 2109525137
+      tileset_anthill_5: -908838710
+      tileset_anthill_6: 1772764082
+      tileset_anthill_7: -1430666576
+      tileset_anthill_8: 1283255135
+      tileset_anthill_9: 1584955777
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
