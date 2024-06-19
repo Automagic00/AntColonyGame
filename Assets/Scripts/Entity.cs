@@ -146,5 +146,22 @@ public class Entity : MonoBehaviour
         yield return new WaitForSeconds(lifetime);
         Destroy(hitbox.gameObject);
     }
-    //
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("TriggerEntered");
+        HitboxData hitboxData;
+
+        if (collision.tag == "Hitbox")
+        {
+            hitboxData = collision.GetComponent<HitboxData>();
+            Hurt(hitboxData, collision.transform.parent.gameObject);
+        }
+    }
+
+    private void Hurt(HitboxData hitboxData, GameObject owner)
+    {
+        currentHealth -= hitboxData.damage;
+        rb.velocity = new Vector2(hitboxData.knockback * Mathf.Sign(owner.transform.localScale.x), 5);
+    }
 }

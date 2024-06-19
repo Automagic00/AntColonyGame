@@ -16,7 +16,7 @@ public class HitboxDebugGizmo : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(new Vector3(origin.x, origin.y, 0), new Vector3(size.x, size.y, 1));
+        Gizmos.DrawCube(new Vector3(transform.position.x, transform.position.y, 0), new Vector3(size.x, size.y, 1));
     }
 
 }

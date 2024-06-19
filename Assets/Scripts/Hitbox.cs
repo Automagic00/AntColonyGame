@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitboxData
+public class HitboxData : MonoBehaviour
 {
     public Vector2 origin;
     public Vector2 size;
@@ -24,44 +24,38 @@ public class HitboxData
 
 public class Hitbox : MonoBehaviour
 {
-    static MonoBehaviour instance;
-    private void Awake()
+    static HitboxData hitboxData;
+    public static void CreateHitbox(HitboxData hitboxDataIn, Entity owner)
     {
-        instance = this;
-    }
-    public static void CreateHitbox(HitboxData hitboxData, Entity owner)
-    {
-        GameObject hitboxObj = new GameObject("Hitbox");
-        hitboxObj.transform.position = owner.transform.position;
-        hitboxObj.transform.localScale = hitboxData.size;
-        BoxCollider2D hitbox = hitboxObj.AddComponent<BoxCollider2D>();
+        //Assign Hitbox Data
+        hitboxData = hitboxDataIn;
 
+        //Create Hitbox Object and Trigger
+        GameObject hitboxObj = new GameObject("Hitbox");
+        hitboxObj.transform.position = owner.transform.position + new Vector3 (hitboxData.origin.x, hitboxData.origin.y,0);
+        hitboxObj.transform.localScale = hitboxData.size;
+        hitboxObj.tag = "Hitbox";
+        hitboxObj.transform.SetParent(owner.transform);
+        BoxCollider2D hitbox = hitboxObj.AddComponent<BoxCollider2D>();
+        hitbox.isTrigger = true;
+
+        //Assign Hitbox Data
+        HitboxData data = hitboxObj.AddComponent<HitboxData>();
+        data.damage = hitboxData.damage;
+        data.knockback = hitboxData.knockback;
+        
+
+        //Debug Visual
         var gizmo = hitboxObj.AddComponent<HitboxDebugGizmo>();
         gizmo.origin = hitboxData.origin;
         gizmo.size = hitboxData.size;
 
-        /*SpriteRenderer debugImage = hitboxObj.AddComponent<SpriteRenderer>();
-        debugImage.size = hitboxData.size;
-        Texture2D tex;
-        debugImage.sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height),new Vector2(0.5f, 0.5f),100f);*/
-
-
-        //hitbox.offset = hitboxData.origin;
-        //hitbox.size = hitboxData.size;
-        hitbox.isTrigger = true;
-
+        //Hitbox Lifetime
         owner.StartCoroutine(owner.DestroyHitbox(hitboxData.duration, hitbox));
-
-        //Gizmos.DrawCube(new Vector3(hitboxData.origin.x, hitboxData.origin.y, 0), new Vector3(hitboxData.size.x, hitboxData.size.y, 1));
     }
 
-    /*public void StartDestroyRoutine(float lifetime, BoxCollider2D hitbox)
+    public HitboxData GetHitboxData()
     {
-        StartCoroutine(DestroyHitbox(lifetime, hitbox));
+        return hitboxData;
     }
-    IEnumerator DestroyHitbox(float lifetime, BoxCollider2D hitbox)
-    {
-        yield return new WaitForSeconds(lifetime);
-        Destroy(hitbox);
-    }*/
 }
