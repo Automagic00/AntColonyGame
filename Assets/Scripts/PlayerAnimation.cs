@@ -17,15 +17,28 @@ public class PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animator.SetFloat("Health", entity.GetCurrentHealth());
+
+        if (entity.hurt)
+        {
+            animator.SetTrigger("Hurt");
+        }
+        else
+        {
+            animator.ResetTrigger("Hurt");
+        }
+
         Entity.EntityStates currentState = entity.GetState();
         if (currentState == Entity.EntityStates.Ground)
         {
             animator.SetFloat("Walking", Mathf.Abs(entity.GetCurrentXVelocity()));
+            
             animator.SetBool("IsGrounded", true);
         }
         else if (currentState == Entity.EntityStates.Air)
         {
             animator.SetBool("IsGrounded", false);
+            animator.SetFloat("YVelo", entity.GetCurrentYVelocity());
         }
     }
 }
