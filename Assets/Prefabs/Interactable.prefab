@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 291798530949318214}
   - component: {fileID: 3443780618104504125}
   - component: {fileID: 863022415356108895}
+  - component: {fileID: 3502677538675537804}
   m_Layer: 0
   m_Name: Interactable
   m_TagString: Untagged
@@ -67,7 +68,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.61, y: 4.67, z: 0.0113824075}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5710318731524596673}
@@ -114,9 +115,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f6530dfdab7d714abddd3ee3ccc3f53, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_Sprite: {fileID: 21300000, guid: 21c5222648f09fc408d483e8e9191dd5, type: 3}
+  m_Color: {r: 0.9404913, g: 0.6933962, b: 1, a: 1}
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -138,6 +139,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  interactor: {fileID: 3502677538675537804}
+--- !u!114 &3502677538675537804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436506815772254002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ca66accb414534c92e26452fcb4f27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canInteract: 1
 --- !u!1 &1897245593202861846
 GameObject:
   m_ObjectHideFlags: 0

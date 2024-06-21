@@ -8,7 +8,6 @@ public class PauseController : MonoBehaviour
     public static bool gameIsPaused;
     public GameObject pauseText;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Entity
 {
-    private Entity entity;
 
     private Camera _camera;
     private Bounds cameraBounds;
 
-    public Tilemap terrain;
 
     void Awake() => _camera = Camera.main;
 
-    void Start()
+    public override void Start()
     {
-        entity = GetComponent<Entity>();
 
         // Bound camera to map bounds
         var camHei = _camera.orthographicSize;
@@ -28,9 +25,11 @@ public class PlayerController : MonoBehaviour
             new Vector3(Globals.mapBounds.max.x - camWid, Globals.mapBounds.max.y - camHei, 0)
         );
 
+        base.Start();
+
     }
 
-    void Update()
+    public override void Update()
     {
         //Dont do anything if game is paused
         if (PauseController.gameIsPaused)
@@ -51,13 +50,13 @@ public class PlayerController : MonoBehaviour
         float hThrottle = rightKey - leftKey;
         float vThrottle = downKey - upKey;
 
-        entity.TryMove(hThrottle, vThrottle, jumpKey);
-        
+        Move(hThrottle, vThrottle, jumpKey);
+
         if (attackKey)
         {
-            Vector2 hitboxOffset = new Vector3(1,0,0) * Mathf.Sign(transform.localScale.x);
-            HitboxData hitbox = new HitboxData(hitboxOffset, new Vector2(2,1), 0.5f, 5, 5);
-            Hitbox.CreateHitbox(hitbox, entity);
+            Vector2 hitboxOffset = new Vector3(1, 0, 0) * Mathf.Sign(transform.localScale.x);
+            HitboxData hitbox = new HitboxData(hitboxOffset, new Vector2(2, 1), 0.5f, 5, 5);
+            Hitbox.CreateHitbox(hitbox, this);
         }
 
 
@@ -72,6 +71,7 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
 
         UpdateInteraction();
+        base.Update();
     }
 
 

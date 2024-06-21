@@ -22,10 +22,8 @@ public class Entity : MonoBehaviour
     public int defaultJumps = 1;
     private int jumps = 0;
 
-    private float frictionCoefficient;
     public float groundFrictionCoefficient = 0.96f;
     public float airFrictionCoefficient = 0.4f;
-    float fricForce;
     public float grav = 2.25f;
 
     public float maxHealth = 100;
@@ -36,7 +34,7 @@ public class Entity : MonoBehaviour
     private BoxCollider2D col;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
@@ -47,9 +45,6 @@ public class Entity : MonoBehaviour
     void updateState()
     {
         //var below = Physics2D.Raycast(rb.position, Vector2.down, col.bounds.extents.y + 0.5f, LayerMask.GetMask("Ground"));
-        
-
-
         switch (state)
         {
             default:
@@ -71,47 +66,50 @@ public class Entity : MonoBehaviour
                 }
                 break;
         }
-
-
     }
 
 
-    public void TryMove(float hIn, float vIn, float jumpIn)
+    public void Move(float hIn, float vIn, float jumpIn)
     {
+        if (PauseController.gameIsPaused)
+            return;
+
         defaultSpeed = (state == EntityStates.Ground) ? defaultGroundSpeed : defaultAirSpeed;
-        frictionCoefficient = (state == EntityStates.Ground) ? groundFrictionCoefficient : airFrictionCoefficient;
 
         //Horizontal Movement Forces
         float hSpeed = hIn * defaultSpeed;
-        fricForce = frictionCoefficient * rb.velocity.x;
+        rb.AddForce(new Vector2(hSpeed, 0));
+
+        //Vertical Movement Forces
+        if (jumpIn != 0 && jumps > 0)
+        {
+            float vSpeed = jumpIn * jumpSpeed;
+            rb.velocity = new Vector2(rb.velocity.x, vSpeed);
+            jumps--;
+        }
 
         // Airtime & fastfall
         if (vIn == 0)
             rb.gravityScale = grav;
         else if (vIn < 0 && rb.velocity.y > 0) rb.gravityScale = grav * 0.65f;
         else if (vIn > 0) rb.gravityScale = grav * 2f;
+    }
+    public virtual void Update()
+    {
+        if (PauseController.gameIsPaused)
+            return;
 
-
-        //Vertical Movement Forces
-        if (jumpIn != 0 && jumps > 0)
-        {
-            float vSpeed = jumpIn * jumpSpeed;
-            //rb.AddForce(new Vector2(0, vSpeed), ForceMode2D.Impulse);
-            rb.velocity = new Vector2(rb.velocity.x, vSpeed);
-            jumps--;
-        }
-
-        //Apply Forces
-        rb.AddForce(new Vector2(hSpeed - fricForce, 0));
+        // Friction
+        float frictionCoefficient = (state == EntityStates.Ground) ? groundFrictionCoefficient : airFrictionCoefficient;
+        float fricForce = frictionCoefficient * rb.velocity.x;
+        rb.AddForce(new Vector2(-fricForce, 0));
 
         //Stop at Low Speed
         if (Mathf.Abs(rb.velocity.x) < 0.2)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
-            fricForce = 0;
         }
 
-        updateState();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -132,14 +130,8 @@ public class Entity : MonoBehaviour
     }
 
 
-    public EntityStates GetState()
-    {
-        return state;
-    }
-    public float GetCurrentXVelocity()
-    {
-        return rb.velocity.x;
-    }
+    public EntityStates GetState() => state;
+    public float GetCurrentXVelocity() => rb.velocity.x;
 
     public IEnumerator DestroyHitbox(float lifetime, BoxCollider2D hitbox)
     {
@@ -149,12 +141,9 @@ public class Entity : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("TriggerEntered");
-        HitboxData hitboxData;
-
         if (collision.tag == "Hitbox")
         {
-            hitboxData = collision.GetComponent<HitboxData>();
+            HitboxData hitboxData = collision.GetComponent<HitboxData>();
             Hurt(hitboxData, collision.transform.parent.gameObject);
         }
     }
