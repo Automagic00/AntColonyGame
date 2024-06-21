@@ -30,6 +30,10 @@ public class Entity : MonoBehaviour
 
     public float maxHealth = 100;
     public float currentHealth;
+    public bool hurt;
+
+    public float defaultInvulnTime = 0.2f;
+
     bool below;
 
     private Rigidbody2D rb;
@@ -143,10 +147,18 @@ public class Entity : MonoBehaviour
 
     public float GetCurrentYVelocity() => rb.velocity.y;
 
+    public float GetCurrentHealth() => currentHealth;
+
     public IEnumerator DestroyHitbox(float lifetime, BoxCollider2D hitbox)
     {
         yield return new WaitForSeconds(lifetime);
         Destroy(hitbox.gameObject);
+    }
+
+    public IEnumerator DamageInvulnerabilityPeriod(float invulnTime)
+    {
+        yield return new WaitForSeconds(invulnTime);
+        hurt = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -154,7 +166,7 @@ public class Entity : MonoBehaviour
         Debug.Log("TriggerEntered");
         HitboxData hitboxData;
 
-        if (collision.tag == "Hitbox")
+        if (collision.tag == "Hitbox" && hurt == false)
         {
             hitboxData = collision.GetComponent<HitboxData>();
             Hurt(hitboxData, collision.transform.parent.gameObject);
@@ -163,7 +175,10 @@ public class Entity : MonoBehaviour
 
     private void Hurt(HitboxData hitboxData, GameObject owner)
     {
+        hurt = true;
         currentHealth -= hitboxData.damage;
         rb.velocity = new Vector2(hitboxData.knockback * Mathf.Sign(owner.transform.localScale.x), 5);
+
+        StartCoroutine(DamageInvulnerabilityPeriod(defaultInvulnTime));
     }
 }
