@@ -141,6 +141,8 @@ public class Entity : MonoBehaviour
         return rb.velocity.x;
     }
 
+    public float GetCurrentYVelocity() => rb.velocity.y;
+
     public IEnumerator DestroyHitbox(float lifetime, BoxCollider2D hitbox)
     {
         yield return new WaitForSeconds(lifetime);

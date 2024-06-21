@@ -21,11 +21,13 @@ public class PlayerAnimation : MonoBehaviour
         if (currentState == Entity.EntityStates.Ground)
         {
             animator.SetFloat("Walking", Mathf.Abs(entity.GetCurrentXVelocity()));
+            
             animator.SetBool("IsGrounded", true);
         }
         else if (currentState == Entity.EntityStates.Air)
         {
             animator.SetBool("IsGrounded", false);
+            animator.SetFloat("YVelo", entity.GetCurrentYVelocity());
         }
     }
 }
