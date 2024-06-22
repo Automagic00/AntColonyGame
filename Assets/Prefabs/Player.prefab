@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4726289366238920415}
   - component: {fileID: 8403771907283430603}
   - component: {fileID: 6363246216772661671}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -47,17 +47,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8a2a00da6faee4c87c1a0f6164dab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: 10
+  defaultJumpSpeed: 10
   defaultGroundSpeed: 5
   defaultAirSpeed: 3
-  defaultSpeed: 5
   defaultJumps: 1
   groundFrictionCoefficient: 0.96
   airFrictionCoefficient: 0.4
   grav: 3
-  maxHealth: 100
+  defaultMaxHealth: 100
+  maxHP: 0
   currentHealth: 100
   hurt: 0
+  defaultRollSpeed: 12
   defaultInvulnTime: 1
   attacks:
   - origin: {x: 1, y: 0}
@@ -149,7 +150,7 @@ GameObject:
   - component: {fileID: 8073669466350652739}
   - component: {fileID: 6765146148596756862}
   - component: {fileID: 3699700626864051441}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sugar_Ant_Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
