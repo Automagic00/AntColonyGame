@@ -9947,6 +9947,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 470001285967541013, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4941728321735437585, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.3044701
@@ -9986,6 +9990,10 @@ PrefabInstance:
     - target: {fileID: 4941728321735437585, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185528967896710943, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10938,7 +10946,7 @@ GameObject:
   - component: {fileID: 8079477549109772531}
   - component: {fileID: 8079477549109772530}
   - component: {fileID: 6687540572945816990}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -10955,7 +10963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4361777752622186327}
   - component: {fileID: 6944698939030452292}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11218,7 +11226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3677685722681512036}
   - component: {fileID: 4186821773887113677}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11237,7 +11245,7 @@ GameObject:
   - component: {fileID: 8397893453305356666}
   - component: {fileID: 6440851791827541319}
   - component: {fileID: 4023924615165393096}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sugar_Ant_Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11294,6 +11302,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   hurt: 0
+  defaultRollSpeed: 12
   defaultInvulnTime: 0.2
   attacks: []
 --- !u!212 &8397893453305356666

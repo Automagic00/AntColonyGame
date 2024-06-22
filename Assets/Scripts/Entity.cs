@@ -15,7 +15,8 @@ public class Entity : MonoBehaviour
         None = 0,
         Atk = 1,
         Hurt = 2,
-        Dead = 3
+        Dead = 3,
+        Dodge = 4
     }
 
     // private const int ST_GROUND = 0, ST_AIR = 1, ST_GROUND_ATK = 2;
@@ -38,6 +39,7 @@ public class Entity : MonoBehaviour
     public bool hurt;
     private bool invuln = false;
 
+    public float defaultRollSpeed = 12;
     public float defaultInvulnTime = 0.2f;
 
 
@@ -139,6 +141,26 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public void Dodge()
+    {
+        if (subState == EntitySubStates.None)
+        {
+            subState = EntitySubStates.Dodge;
+            Physics2D.IgnoreLayerCollision(6, 7);
+            rb.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * defaultRollSpeed, rb.velocity.y);
+        }
+    }
+
+    public void EndDodge()
+    {
+        if (subState == EntitySubStates.Dodge)
+        {
+            subState = EntitySubStates.None;
+            Physics2D.IgnoreLayerCollision(6, 7, false);
+            //rb.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * defaultRollSpeed, rb.velocity.y);
+        }
+    }
+
     public void CreateHitbox(int i)
     {
         Vector2 hitboxOffset = new Vector3(1, 0, 0) * Mathf.Sign(transform.localScale.x);
@@ -183,17 +205,11 @@ public class Entity : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        /*Debug.Log(collision.tag);
-        Debug.Log("This " + gameObject.tag);*/
-
         if (collision.collider.tag == "Ground")
         {
             below = Physics2D.BoxCast(rb.position, new Vector2(col.size.x - 0.15f, col.size.y), 0, Vector2.down, col.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground"));
-            
-            
-
         }
-        else if (collision.collider.tag == "Enemy" && gameObject.tag == "Player" && invuln == false)
+        if (collision.collider.tag == "Enemy" && gameObject.tag == "Player" && invuln == false)
         {
             HitboxData hitboxData = new HitboxData(Vector2.zero, Vector2.zero, 0, 10, 8);
             Hurt(hitboxData, collision.collider.gameObject);
@@ -228,10 +244,18 @@ public class Entity : MonoBehaviour
 
     public IEnumerator DamageInvulnerabilityPeriod(float invulnTime)
     {
-        invuln = true;
+        StartInvuln();
         yield return new WaitForSeconds(invulnTime);
-        invuln = false;
+        EndInvuln();
         subState = EntitySubStates.None;
+    }
+    public void StartInvuln()
+    {
+        invuln = true;
+    }
+    public void EndInvuln()
+    {
+        invuln = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

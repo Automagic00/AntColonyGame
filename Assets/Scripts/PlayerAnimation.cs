@@ -29,12 +29,17 @@ public class PlayerAnimation : MonoBehaviour
         else if (currentSubState == Entity.EntitySubStates.Atk)
         {
             animator.SetTrigger("Attack");
-            animator.ResetTrigger("Hurt");
+            //animator.ResetTrigger("Hurt");
+        }
+        else if (currentSubState == Entity.EntitySubStates.Dodge)
+        {
+            animator.SetTrigger("Dodge");
         }
         else
         {
             animator.ResetTrigger("Hurt");
             animator.ResetTrigger("Attack");
+            animator.ResetTrigger("Dodge");
         }
 
 
@@ -61,6 +66,18 @@ public class PlayerAnimation : MonoBehaviour
     public void CreateHitbox(int i)
     {
         entity.CreateHitbox(i);
+    }
+    public void StartInvuln()
+    {
+        entity.StartInvuln();
+    }
+    public void EndInvuln()
+    {
+        entity.EndInvuln();
+    }
+    public void EndDodge()
+    {
+        entity.EndDodge();
     }
 }
 
