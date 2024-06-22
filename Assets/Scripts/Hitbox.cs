@@ -2,13 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class HitboxData : MonoBehaviour
 {
+    /*public class HitboxDataStruct
+    {
+        public Vector2 origin;
+        public Vector2 size;
+        public float duration;
+        public float damage;
+        public float knockback;
+    }*/
+
     public Vector2 origin;
     public Vector2 size;
     public float duration;
     public float damage;
     public float knockback;
+
 
     public HitboxData(Vector2 originIn,Vector2 sizeIn, float durationIn, float dmgIn, float kbIn)
     {
@@ -18,6 +29,15 @@ public class HitboxData : MonoBehaviour
         damage = dmgIn;
         knockback = kbIn;
     }
+
+    /*public HitboxData(HitboxDataStruct structIn)
+    {
+        origin = structIn.origin;
+        size = structIn.size;
+        duration = structIn.duration;
+        damage = structIn.damage;
+        knockback = structIn.knockback;
+    }*/
 
 
 }
@@ -32,7 +52,7 @@ public class Hitbox : MonoBehaviour
 
         //Create Hitbox Object and Trigger
         GameObject hitboxObj = new GameObject("Hitbox");
-        hitboxObj.transform.position = owner.transform.position + new Vector3 (hitboxData.origin.x, hitboxData.origin.y,0);
+        hitboxObj.transform.position = owner.transform.position + new Vector3 (hitboxData.origin.x * Mathf.Sign(owner.transform.localScale.x), hitboxData.origin.y,0);
         hitboxObj.transform.localScale = hitboxData.size;
         hitboxObj.tag = "Hitbox";
         hitboxObj.transform.SetParent(owner.transform);

@@ -54,9 +54,10 @@ public class PlayerController : Entity
 
         if (attackKey)
         {
-            Vector2 hitboxOffset = new Vector3(1, 0, 0) * Mathf.Sign(transform.localScale.x);
+            Attack();
+            /*Vector2 hitboxOffset = new Vector3(1, 0, 0) * Mathf.Sign(transform.localScale.x);
             HitboxData hitbox = new HitboxData(hitboxOffset, new Vector2(2, 1), 0.5f, 5, 5);
-            Hitbox.CreateHitbox(hitbox, this);
+            Hitbox.CreateHitbox(hitbox, this);*/
         }
 
 

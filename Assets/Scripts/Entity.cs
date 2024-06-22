@@ -8,12 +8,19 @@ public class Entity : MonoBehaviour
     {
         Ground = 0,
         Air = 1,
-        Ground_Atk = 2,
-        Air_Atk = 3,
-        Hurt = 4
+        
     }
+    public enum EntitySubStates
+    {
+        None = 0,
+        Atk = 1,
+        Hurt = 2,
+        Dead = 3
+    }
+
     // private const int ST_GROUND = 0, ST_AIR = 1, ST_GROUND_ATK = 2;
     private EntityStates state = EntityStates.Ground;
+    private EntitySubStates subState = EntitySubStates.None;
 
     public float jumpSpeed = 10.0f;
     public float defaultGroundSpeed = 12.0f;
@@ -29,8 +36,28 @@ public class Entity : MonoBehaviour
     public float maxHealth = 100;
     public float currentHealth;
     public bool hurt;
+    private bool invuln = false;
 
     public float defaultInvulnTime = 0.2f;
+
+
+    
+    [System.Serializable]
+    public class HitboxDataClass
+    {
+        public Vector2 origin;
+        public Vector2 size;
+        public float duration;
+        public float damage;
+        public float knockback;
+
+        public HitboxData Convert()
+        {
+            HitboxData convert = new HitboxData(origin, size,duration,damage,knockback);
+            return convert;
+        }
+    }
+    public HitboxDataClass[] attacks;
 
     bool below;
 
@@ -56,6 +83,7 @@ public class Entity : MonoBehaviour
                 if (!below)
                 {
                     state = EntityStates.Air;
+                    
                 }
                 else
                 {
@@ -67,6 +95,10 @@ public class Entity : MonoBehaviour
                 {
                     state = EntityStates.Ground;
                     jumps = defaultJumps;
+                    if (subState == EntitySubStates.Hurt)
+                    {
+                        subState = EntitySubStates.None;
+                    }
                 }
                 break;
         }
@@ -98,6 +130,39 @@ public class Entity : MonoBehaviour
         else if (vIn < 0 && rb.velocity.y > 0) rb.gravityScale = grav * 0.65f;
         else if (vIn > 0) rb.gravityScale = grav * 2f;
     }
+
+    public void Attack()
+    {
+        if(subState == EntitySubStates.None)
+        {
+            subState = EntitySubStates.Atk;
+        }
+    }
+
+    public void CreateHitbox(int i)
+    {
+        Vector2 hitboxOffset = new Vector3(1, 0, 0) * Mathf.Sign(transform.localScale.x);
+        HitboxData hitbox = attacks[i].Convert();
+
+        Hitbox.CreateHitbox(hitbox, this);
+    }
+
+    public void EndAttack()
+    {
+        if(subState == EntitySubStates.Atk)
+        {
+            subState = EntitySubStates.None;
+        }
+    }
+
+    public void EndHurt()
+    {
+        if (subState == EntitySubStates.Hurt)
+        {
+            subState = EntitySubStates.None;
+        }
+    }
+
     public virtual void Update()
     {
         if (PauseController.gameIsPaused)
@@ -118,10 +183,22 @@ public class Entity : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        /*Debug.Log(collision.tag);
+        Debug.Log("This " + gameObject.tag);*/
+
         if (collision.collider.tag == "Ground")
         {
             below = Physics2D.BoxCast(rb.position, new Vector2(col.size.x - 0.15f, col.size.y), 0, Vector2.down, col.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground"));
+            
+            
+
         }
+        else if (collision.collider.tag == "Enemy" && gameObject.tag == "Player" && invuln == false)
+        {
+            HitboxData hitboxData = new HitboxData(Vector2.zero, Vector2.zero, 0, 10, 8);
+            Hurt(hitboxData, collision.collider.gameObject);
+        }
+
         updateState();
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -141,6 +218,8 @@ public class Entity : MonoBehaviour
 
     public float GetCurrentHealth() => currentHealth;
 
+    public EntitySubStates GetCurrentSubState() => subState;
+
     public IEnumerator DestroyHitbox(float lifetime, BoxCollider2D hitbox)
     {
         yield return new WaitForSeconds(lifetime);
@@ -149,24 +228,28 @@ public class Entity : MonoBehaviour
 
     public IEnumerator DamageInvulnerabilityPeriod(float invulnTime)
     {
+        invuln = true;
         yield return new WaitForSeconds(invulnTime);
-        hurt = false;
+        invuln = false;
+        subState = EntitySubStates.None;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Hitbox" && hurt == false)
+        
+        if (collision.tag == "Hitbox" && invuln == false)
         {
             HitboxData hitboxData = collision.GetComponent<HitboxData>();
             Hurt(hitboxData, collision.transform.parent.gameObject);
         }
+        
     }
 
     private void Hurt(HitboxData hitboxData, GameObject owner)
     {
-        hurt = true;
+        subState = EntitySubStates.Hurt;
         currentHealth -= hitboxData.damage;
-        rb.velocity = new Vector2(hitboxData.knockback * Mathf.Sign(owner.transform.localScale.x), 5);
+        rb.velocity = new Vector2(hitboxData.knockback * Mathf.Sign(transform.position.x - owner.transform.position.x), 5);
 
         StartCoroutine(DamageInvulnerabilityPeriod(defaultInvulnTime));
     }
