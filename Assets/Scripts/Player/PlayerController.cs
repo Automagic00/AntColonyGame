@@ -10,7 +10,11 @@ public class PlayerController : Entity
     private Bounds cameraBounds;
 
 
-    void Awake() => _camera = Camera.main;
+    public override void Awake()
+    {
+        _camera = Camera.main;
+        base.Awake();
+    }
 
     public override void Start()
     {

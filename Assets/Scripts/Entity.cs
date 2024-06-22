@@ -96,7 +96,6 @@ public class Entity : MonoBehaviour
         float hpRatio = (maxHP != 0) ? currentHealth / maxHP : 1;
         maxHP = defaultMaxHealth * hpMod;
         currentHealth = maxHP * hpRatio;
-
     }
 
     void updateState()
