@@ -32,5 +32,12 @@ public class CreateProjectile : MonoBehaviour
         //Assign sprite
         SpriteRenderer spriteRenderer = projObj.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = proj.sprite;
+
+        //Assign projectile lifetime
+        ProjectileLife projLife = projObj.AddComponent<ProjectileLife>();
+        projLife.StartCoroutine(projLife.Lifetime(proj.lifetime));
+        projLife.SetPierce(proj.pierce);
+        projLife.SetOwner(owner.gameObject);
+
     }
 }

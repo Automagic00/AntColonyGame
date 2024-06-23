@@ -10781,8 +10781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a32d7edc15cf2094fb2c6f155f26d570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loungePf: {fileID: 1906250048751793421, guid: 1596cb92955ab434e9ff9fd51e8e5ba9, type: 3}
-  nextRoomPf: {fileID: 5895024893582085809, guid: 73667bb1aa15352439bdfacf38ab2b9f, type: 3}
+  gameStatePrefabs: []
 --- !u!1 &1624400095
 GameObject:
   m_ObjectHideFlags: 0
