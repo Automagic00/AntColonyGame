@@ -41,6 +41,7 @@ public class Inventory : MonoBehaviour
         rings[index] = ring;
         updateEquipmentStats();
     }
+    public Ring ring(int index) => rings[index];
 
 
     private void updateEquipmentStats()

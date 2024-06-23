@@ -9,46 +9,66 @@ public class Interactable : MonoBehaviour
 
     const float OUTLINE_SIZE = 2.0f;
 
-    public const float INTERACT_DISTANCE = 3.0f;
+    public float interactDistance = 3.0f;
 
     public Color outlineColor = Color.white;
 
     public Interactor interactor;
 
+    private GameObject outline;
+    private SpriteRenderer sprite;
+    private Sprite lastUpdatedSprite;
+
 
     void Awake()
     {
-
         // Setup outline to use sprite
-        GameObject outline = transform.Find("Outline").gameObject;
-        SpriteRenderer parentSpr = GetComponent<SpriteRenderer>();
+        outline = transform.Find("Outline").gameObject;
+        sprite = GetComponent<SpriteRenderer>();
 
+        // Set constants from parent sprite renderer
         for (int i = 0; i < outline.transform.childCount; i++)
         {
             SpriteRenderer childSpr = outline.transform.GetChild(i).GetComponent<SpriteRenderer>();
             childSpr.color = outlineColor;
-            childSpr.sprite = parentSpr.sprite;
-            childSpr.sortingLayerID = parentSpr.sortingLayerID;
-            childSpr.sortingOrder = parentSpr.sortingOrder - 1;
-            childSpr.flipX = parentSpr.flipX;
-            childSpr.flipY = parentSpr.flipY;
+            childSpr.sortingLayerID = sprite.sortingLayerID;
+            childSpr.sortingOrder = sprite.sortingOrder - 1;
+            childSpr.flipX = sprite.flipX;
+            childSpr.flipY = sprite.flipY;
 
-            outline.transform.GetChild(i).transform.localPosition *= OUTLINE_SIZE / parentSpr.sprite.pixelsPerUnit;
+            outline.transform.GetChild(i).transform.localPosition *= OUTLINE_SIZE / sprite.sprite.pixelsPerUnit;
         }
+        updateOutlineSprites();
+    }
+    private void updateOutlineSprites()
+    {
+        // Only update if new sprite
+        if (lastUpdatedSprite == sprite.sprite) return;
+        lastUpdatedSprite = sprite.sprite;
+
+        for (int i = 0; i < outline.transform.childCount; i++)
+        {
+            SpriteRenderer childSpr = outline.transform.GetChild(i).GetComponent<SpriteRenderer>();
+            childSpr.sprite = sprite.sprite;
+        }
+    }
+    public void Update()
+    {
+        updateOutlineSprites();
     }
 
     public static Interactable closestInteractable(Vector3 position)
     {
 
         Interactable interact = null;
-        float dist = Interactable.INTERACT_DISTANCE;
+        float dist = 999;
 
         foreach (Interactable i in FindObjectsOfType<Interactable>())
         {
             if (!i.interactor.canInteract) continue;
 
             float iDist = Vector3.Distance(i.transform.position, position);
-            if (iDist < dist)
+            if (iDist < i.interactDistance && iDist < dist)
             {
                 interact = i;
                 dist = iDist;
