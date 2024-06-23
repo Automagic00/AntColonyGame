@@ -5,41 +5,25 @@ using UnityEngine;
 
 public class HitboxData : MonoBehaviour
 {
-    /*public class HitboxDataStruct
-    {
-        public Vector2 origin;
-        public Vector2 size;
-        public float duration;
-        public float damage;
-        public float knockback;
-    }*/
-
     public Vector2 origin;
     public Vector2 size;
     public float duration;
     public float damage;
     public float knockback;
+    public int pierce; //Only for projectiles
+    public GameObject owner;
 
 
-    public HitboxData(Vector2 originIn,Vector2 sizeIn, float durationIn, float dmgIn, float kbIn)
+    public HitboxData(Vector2 originIn,Vector2 sizeIn, float durationIn, float dmgIn, float kbIn, int pierceIn = 0, GameObject ownerIn = null)
     {
         origin = originIn;
         size = sizeIn;
         duration = durationIn;
         damage = dmgIn;
         knockback = kbIn;
+        pierce = pierceIn;
+        owner = ownerIn;
     }
-
-    /*public HitboxData(HitboxDataStruct structIn)
-    {
-        origin = structIn.origin;
-        size = structIn.size;
-        duration = structIn.duration;
-        damage = structIn.damage;
-        knockback = structIn.knockback;
-    }*/
-
-
 }
 
 public class Hitbox : MonoBehaviour

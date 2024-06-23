@@ -65,6 +65,7 @@ public class Entity : MonoBehaviour
         }
     }
     public HitboxDataClass[] attacks;
+    public Projectile[] projectiles;
 
     bool below;
 
@@ -172,6 +173,14 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public void Magic()
+    {
+        if (subState == EntitySubStates.None)
+        {
+            
+        }
+    }
+
     public void EndDodge()
     {
         if (subState == EntitySubStates.Dodge)
@@ -184,10 +193,15 @@ public class Entity : MonoBehaviour
 
     public void CreateHitbox(int i)
     {
-        Vector2 hitboxOffset = new Vector3(1, 0, 0) * Mathf.Sign(transform.localScale.x);
+        //Vector2 hitboxOffset = new Vector3(1, 0, 0) * Mathf.Sign(transform.localScale.x);
         HitboxData hitbox = attacks[i].Convert();
 
         Hitbox.CreateHitbox(hitbox, this);
+    }
+
+    public void FireProjectile(Projectile proj)
+    {
+        CreateProjectile.Create(proj, this);
     }
 
     public void EndAttack()
@@ -286,6 +300,14 @@ public class Entity : MonoBehaviour
         {
             HitboxData hitboxData = collision.GetComponent<HitboxData>();
             Hurt(hitboxData, collision.transform.parent.gameObject);
+        }
+        else if (collision.tag == "Projectile" && invuln == false)
+        {
+            HitboxData hitboxData = collision.GetComponent<HitboxData>();
+            if (hitboxData.owner != gameObject)
+            {
+                Hurt(hitboxData, collision.transform.gameObject);
+            }
         }
 
     }
