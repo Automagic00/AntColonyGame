@@ -11,6 +11,7 @@ public class ProjectileLife : MonoBehaviour
     public IEnumerator Lifetime(float lifetime)
     {
         yield return new WaitForSeconds(lifetime);
+        DestroyProjectile();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
