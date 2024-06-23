@@ -10416,13 +10416,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
+      propertyPath: projectiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
+      propertyPath: projectiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 512bb3cee6ea17147bf497b7953338af, type: 2}
     - target: {fileID: 4941728321735437585, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.3044701
+      value: -0.66
       objectReference: {fileID: 0}
     - target: {fileID: 4941728321735437585, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7297858
+      value: 1.06
       objectReference: {fileID: 0}
     - target: {fileID: 4941728321735437585, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10455,18 +10463,6 @@ PrefabInstance:
     - target: {fileID: 4941728321735437585, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8073669466350652739, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8073669466350652739, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8073669466350652739, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1918842155
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11623,10 +11619,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1946856534474720464, guid: a78a2fb503b16514f9f91cb994aa567c, type: 3}
-      propertyPath: interactDistance
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11839,6 +11831,9 @@ MonoBehaviour:
   defaultRollSpeed: 12
   defaultInvulnTime: 0.2
   attacks: []
+  projectiles: []
+  aggroRangeStart: 5
+  aggroRangeEnd: 10
 --- !u!212 &8397893453305356666
 SpriteRenderer:
   m_ObjectHideFlags: 0

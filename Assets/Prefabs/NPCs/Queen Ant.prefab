@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d330e264899b149827a815e65630f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactDistance: 5
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   interactor: {fileID: 2333585120591418115}
 --- !u!114 &2333585120591418115

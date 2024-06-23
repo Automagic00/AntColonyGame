@@ -51,6 +51,7 @@ public class PlayerController : Entity
 
         bool attackKey = Input.GetKeyDown(KeyCode.X);
         bool dodgeKey = Input.GetKeyDown(KeyCode.Z);
+        bool magicKey = Input.GetKeyDown(KeyCode.C);
 
         float hThrottle = rightKey - leftKey;
         float vThrottle = downKey - upKey;
@@ -64,6 +65,10 @@ public class PlayerController : Entity
         if (dodgeKey)
         {
             Dodge();
+        }
+        if (magicKey)
+        {
+            FireProjectile(projectiles[0]);
         }
 
 
