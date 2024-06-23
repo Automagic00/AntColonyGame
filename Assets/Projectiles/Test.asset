@@ -16,6 +16,7 @@ MonoBehaviour:
   damage: 15
   knockback: 5
   size: {x: 1, y: 1}
-  speed: 5
+  speed: 10
   pierce: 0
+  lifetime: 1
   sprite: {fileID: 443439183, guid: 62e4f1d47bf168f46b7bed87e40944b2, type: 3}
