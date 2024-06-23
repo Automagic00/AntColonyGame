@@ -8,26 +8,38 @@ using UnityEngine.Tilemaps;
 public class NewBehaviourScript : MonoBehaviour
 {
 
-    public GameObject loungePf, nextRoomPf;
+
+    public GameObject[] gameStatePrefabs;
     private Tilemap fg, bg;
 
     void Awake()
     {
-        Globals.addProgressionListener(updateMap);
+
+        // Set camera bounds to tilemap
+        Tilemap tilemap = transform.Find("Tiles").GetComponent<Tilemap>();
+
+        Vector3 worldmin = tilemap.transform.TransformPoint(tilemap.localBounds.min);
+        Vector3 worldmax = tilemap.transform.TransformPoint(tilemap.localBounds.max) + new Vector3(0, 16, 0);
+
+        Globals.mapBounds = new Bounds();
+        Globals.mapBounds.SetMinMax(worldmin, worldmax);
     }
     void Start()
     {
         bg = transform.Find("BGTiles").GetComponent<Tilemap>();
         fg = transform.Find("Tiles").GetComponent<Tilemap>();
+
+
+        // Update map when game progresses
+        Globals.addProgressionListener(updateMap);
+        updateMap();
     }
 
     void updateMap()
     {
-        if (Globals.gameProgression == 1)
-            add(loungePf);
-        if (Globals.gameProgression == 2)
-            add(nextRoomPf);
-
+        if (Globals.gameProgression >= 0 && Globals.gameProgression < gameStatePrefabs.Length
+        && gameStatePrefabs[Globals.gameProgression] != null)
+            add(gameStatePrefabs[Globals.gameProgression]);
     }
 
     void add(GameObject prefab)
@@ -36,6 +48,13 @@ public class NewBehaviourScript : MonoBehaviour
         Tilemap addFG = prefab.transform.Find("pfTiles").GetComponent<Tilemap>();
         addTilemaps(addBG, bg);
         addTilemaps(addFG, fg);
+
+        Transform addObjects = prefab.transform.Find("objects");
+        if (addObjects != null)
+            for (int i = 0; i < addObjects.childCount; i++)
+            {
+                Instantiate(addObjects.GetChild(i));
+            }
     }
 
     private void addTilemaps(Tilemap fromMap, Tilemap toMap)

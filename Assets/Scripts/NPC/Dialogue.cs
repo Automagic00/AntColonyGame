@@ -8,71 +8,91 @@ using UnityEngine.UI;
 public class Dialogue : MonoBehaviour
 {
 
-    private Dialoguer currentDia = null;
+    private List<DialogueItem> dialogue = null;
     private int diaStep = -1;
+    private bool canAdvanceDialouge = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F)) AdvanceDialogue();
+        if (canAdvanceDialouge && Input.GetKeyDown(KeyCode.F)) AdvanceDialogue();
     }
 
 
     public static void OpenDialogue(Dialoguer target)
     {
-        FindObjectOfType<Dialogue>(true).StartDialogue(target);
+        FindObjectOfType<Dialogue>(true).StartDia(target);
     }
-    private void StartDialogue(Dialoguer target)
+    private void StartDia(Dialoguer target)
     {
         gameObject.SetActive(true);
 
-        currentDia = target;
+        dialogue = target.getDialogue();
         diaStep = -1;
 
         AdvanceDialogue();
     }
     private void AdvanceDialogue()
     {
-        if (currentDia == null) return;
+        if (dialogue == null) return;
 
+        canAdvanceDialouge = false;
         diaStep++;
-        Debug.Log(diaStep);
-
-        // Finish if past count
-        if (diaStep >= currentDia.getDialogueCount())
+        if (diaStep >= dialogue.Count)
         {
-            FinishDialogue();
+            FinishDia();
             return;
         }
 
-        bool finish = diaStep + 1 >= currentDia.getDialogueCount();
+        DialogueItem item = dialogue[diaStep];
 
-        // Set current dialogue on screen
-        transform.Find("Name").GetComponent<TextMeshProUGUI>().text = currentDia.getName();
-        transform.Find("Text").GetComponent<TextMeshProUGUI>().text = currentDia.getDialogueContent(diaStep);
-        transform.Find("Image").GetComponent<Image>().sprite = currentDia.getPicture(diaStep);
-        transform.Find("ContinueText").GetComponent<TextMeshProUGUI>().text = finish ? "[F] done" : "[F] continue...";
+        if (item.name != null)
+            transform.Find("Name").GetComponent<TextMeshProUGUI>().text = item.name;
+        if (item.picture != null)
+            transform.Find("Image").GetComponent<Image>().sprite = item.picture;
+        if (item.action != null)
+            item.action();
+
+        // Go to next dialogue immediately if no textbox
+        if (item.text == null)
+        {
+            AdvanceDialogue();
+            return;
+        }
+
+        // Setup textbox
+        bool lastDia = true;
+        for (int i = diaStep + 1; i < dialogue.Count; i++)
+            if (dialogue[i].text != null)
+            {
+                lastDia = false;
+                break;
+            }
+
+        transform.Find("Text").GetComponent<TextMeshProUGUI>().text = item.text;
+        transform.Find("ContinueText").GetComponent<TextMeshProUGUI>().text = lastDia ? "[F] done" : "[F] continue...";
+        canAdvanceDialouge = true;
     }
-    private void FinishDialogue()
+    private void FinishDia()
     {
-        Debug.Log("FINISH");
         gameObject.SetActive(false);
 
-        currentDia.dialogueFinished();
-        currentDia = null;
+        dialogue = null;
         diaStep = -1;
+        canAdvanceDialouge = false;
     }
 }
 
 public interface Dialoguer
 {
 
-    int getDialogueCount();
+    List<DialogueItem> getDialogue();
+}
 
-    String getName();
-    String getDialogueContent(int i);
-    Sprite getPicture(int i);
+public class DialogueItem
+{
+    public string name;
+    public string text;
+    public Action action;
+    public Sprite picture;
 
-
-
-    void dialogueFinished();
 }

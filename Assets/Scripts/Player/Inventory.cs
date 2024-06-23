@@ -1,13 +1,14 @@
 
 
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
 
-    private Item _carry;
+    private ItemData _carry;
 
     private Weapon _weapon;
     private List<Ring> rings = new List<Ring>(MAX_RINGS);
@@ -15,16 +16,37 @@ public class Inventory : MonoBehaviour
 
 
     private PlayerController player;
+    private SpriteRenderer carrySprite;
     public void Start()
     {
         player = GetComponent<PlayerController>();
+        carrySprite = transform.Find("Hold").GetComponent<SpriteRenderer>();
     }
 
-    public Item carry
+    public ItemData carry
     {
         get => _carry;
-        set => _carry = value;
+        set
+        {
+            _carry = value;
+            if (_carry == null) carrySprite.sprite = null;
+            else carrySprite.sprite = _carry.sprite;
+        }
     }
+    public bool holding(string name) => _carry != null && _carry.name.ToUpper() == name.ToUpper();
+
+    public GameObject itemPrefab;
+    public void dropCarry()
+    {
+        if (_carry == null) return;
+
+        GameObject throwItem = Instantiate(itemPrefab);
+        throwItem.GetComponent<Item>().item = _carry;
+        // TODO add velocity
+
+        _carry = null;
+    }
+
     public Weapon weapon
     {
         get => _weapon;

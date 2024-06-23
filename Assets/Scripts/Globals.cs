@@ -7,7 +7,7 @@ public static class Globals
 {
     public static Bounds mapBounds;
 
-    private static int _progression;
+    private static int _progression = 0;
 
     public static int gameProgression
     {

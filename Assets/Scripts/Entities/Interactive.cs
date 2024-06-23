@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Interactable : MonoBehaviour
+public class Interactive : MonoBehaviour
 {
 
-    const float OUTLINE_SIZE = 2.0f;
 
+    public float outlineSize = 2;
     public float interactDistance = 3.0f;
 
     public Color outlineColor = Color.white;
 
-    public Interactor interactor;
+    public Interactable interactor;
 
     private GameObject outline;
     private SpriteRenderer sprite;
@@ -36,7 +36,7 @@ public class Interactable : MonoBehaviour
             childSpr.flipX = sprite.flipX;
             childSpr.flipY = sprite.flipY;
 
-            outline.transform.GetChild(i).transform.localPosition *= OUTLINE_SIZE / sprite.sprite.pixelsPerUnit;
+            outline.transform.GetChild(i).transform.localPosition *= outlineSize / sprite.sprite.pixelsPerUnit;
         }
         updateOutlineSprites();
     }
@@ -57,13 +57,14 @@ public class Interactable : MonoBehaviour
         updateOutlineSprites();
     }
 
-    public static Interactable closestInteractable(Vector3 position)
+    public static Interactive closestInteractable(Vector3 position)
     {
 
-        Interactable interact = null;
+        Interactive interact = null;
         float dist = 999;
 
-        foreach (Interactable i in FindObjectsOfType<Interactable>())
+
+        foreach (Interactive i in FindObjectsOfType<Interactive>())
         {
             if (!i.interactor.canInteract) continue;
 

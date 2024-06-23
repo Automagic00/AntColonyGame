@@ -82,10 +82,10 @@ public class PlayerController : Entity
     }
 
 
-    private Interactable currentInteraction = null;
+    private Interactive currentInteraction = null;
     private void UpdateInteraction()
     {
-        Interactable interact = Interactable.closestInteractable(transform.position);
+        Interactive interact = Interactive.closestInteractable(transform.position);
         if (interact != currentInteraction)
         {
             if (currentInteraction != null) currentInteraction.disableInteraction();
