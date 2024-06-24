@@ -385,7 +385,6 @@ GameObject:
   - component: {fileID: 724738412}
   - component: {fileID: 724738417}
   - component: {fileID: 724738416}
-  - component: {fileID: 724738418}
   - component: {fileID: 724738415}
   - component: {fileID: 724738414}
   - component: {fileID: 724738413}
@@ -9802,18 +9801,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &724738418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 724738411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad0dc8bfe828435449d01dab62e53f47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &979781518
 GameObject:
   m_ObjectHideFlags: 0
@@ -11817,12 +11804,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultJumpSpeed: 10
-  defaultGroundSpeed: 12
-  defaultAirSpeed: 6
+  defaultGroundSpeed: 5
+  defaultAirSpeed: 3
   defaultJumps: 1
   groundFrictionCoefficient: 0.96
   airFrictionCoefficient: 0.4
-  grav: 2.25
+  grav: 3
   defaultMaxHealth: 100
   maxHP: 0
   currentHealth: 0
@@ -11831,8 +11818,11 @@ MonoBehaviour:
   defaultInvulnTime: 0.2
   attacks: []
   projectiles: []
+  rb: {fileID: 0}
+  col: {fileID: 0}
   aggroRangeStart: 5
   aggroRangeEnd: 10
+  facing: 0
 --- !u!212 &8397893453305356666
 SpriteRenderer:
   m_ObjectHideFlags: 0

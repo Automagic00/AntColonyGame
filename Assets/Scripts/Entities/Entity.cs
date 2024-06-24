@@ -25,9 +25,9 @@ public class Entity : MonoBehaviour
 
     public float defaultJumpSpeed = 10.0f;
     private float jumpSpeed;
-    public float defaultGroundSpeed = 12.0f;
+    public float defaultGroundSpeed = 5.0f;
     private float groundSpeed;
-    public float defaultAirSpeed = 6.0f;
+    public float defaultAirSpeed = 3.0f;
     private float airSpeed;
     public int defaultJumps = 1;
     private int jumps;
@@ -36,7 +36,7 @@ public class Entity : MonoBehaviour
 
     public float groundFrictionCoefficient = 0.96f;
     public float airFrictionCoefficient = 0.4f;
-    public float grav = 2.25f;
+    public float grav = 3f;
 
     public float defaultMaxHealth = 100;
     [HideInInspector] public float maxHP;
@@ -69,8 +69,8 @@ public class Entity : MonoBehaviour
 
     bool below;
 
-    private Rigidbody2D rb;
-    private BoxCollider2D col;
+    public Rigidbody2D rb;
+    public BoxCollider2D col;
 
     public virtual void Awake()
     {
