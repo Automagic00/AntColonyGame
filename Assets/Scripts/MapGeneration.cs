@@ -16,6 +16,14 @@ public class MapGeneration : MonoBehaviour
         fg = transform.Find("Tiles").GetComponent<Tilemap>();
         
         updateMap();
+        // Set camera bounds to tilemap
+        Tilemap tilemap = transform.Find("Tiles").GetComponent<Tilemap>();
+
+        Vector3 worldmin = tilemap.transform.TransformPoint(tilemap.localBounds.min);
+        Vector3 worldmax = tilemap.transform.TransformPoint(tilemap.localBounds.max) + new Vector3(0, 16, 0);
+
+        Globals.mapBounds = new Bounds();
+        Globals.mapBounds.SetMinMax(worldmin, worldmax);
     }
 void updateMap()
     {
