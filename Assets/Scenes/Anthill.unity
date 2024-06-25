@@ -324,16 +324,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385421200}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 979781519}
+  m_Father: {fileID: 1789453657}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -360, y: 20}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &385421202
@@ -385,7 +385,6 @@ GameObject:
   - component: {fileID: 724738412}
   - component: {fileID: 724738417}
   - component: {fileID: 724738416}
-  - component: {fileID: 724738418}
   - component: {fileID: 724738415}
   - component: {fileID: 724738414}
   - component: {fileID: 724738413}
@@ -9802,18 +9801,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &724738418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 724738411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad0dc8bfe828435449d01dab62e53f47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &979781518
 GameObject:
   m_ObjectHideFlags: 0
@@ -9849,13 +9836,12 @@ RectTransform:
   - {fileID: 2066547196}
   - {fileID: 2053657585}
   - {fileID: 1789453657}
-  - {fileID: 385421201}
   m_Father: {fileID: 1573117153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -120}
-  m_SizeDelta: {x: 960, y: 160}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 120}
+  m_SizeDelta: {x: 1000, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &979781520
 MonoBehaviour:
@@ -10417,13 +10403,9 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
-      propertyPath: projectiles.Array.size
+      propertyPath: defaultJumps
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
-      propertyPath: projectiles.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 512bb3cee6ea17147bf497b7953338af, type: 2}
     - target: {fileID: 4941728321735437585, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.66
@@ -10518,10 +10500,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 96
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -10541,7 +10523,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -10672,8 +10654,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10781,8 +10763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a32d7edc15cf2094fb2c6f155f26d570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loungePf: {fileID: 1906250048751793421, guid: 1596cb92955ab434e9ff9fd51e8e5ba9, type: 3}
-  nextRoomPf: {fileID: 5895024893582085809, guid: 73667bb1aa15352439bdfacf38ab2b9f, type: 3}
+  gameStatePrefabs: []
 --- !u!1 &1624400095
 GameObject:
   m_ObjectHideFlags: 0
@@ -10890,9 +10871,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 979781519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -360, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 70, y: 30}
   m_SizeDelta: {x: 320, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1690128648
@@ -11089,12 +11070,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 385421201}
   m_Father: {fileID: 979781519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -360, y: 20}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 70, y: -60}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1789453658
@@ -11167,9 +11149,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 979781519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: -60}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -75.2, y: 20}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2053657586
@@ -11301,9 +11283,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 979781519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 120, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 524.5, y: -64.8}
   m_SizeDelta: {x: 720, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2066547197
@@ -11818,22 +11800,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultJumpSpeed: 10
-  defaultGroundSpeed: 12
-  defaultAirSpeed: 6
+  defaultGroundSpeed: 3
+  defaultAirSpeed: 3
   defaultJumps: 1
   groundFrictionCoefficient: 0.96
-  airFrictionCoefficient: 0.4
-  grav: 2.25
+  airFrictionCoefficient: 0.6
+  grav: 3
   defaultMaxHealth: 100
   maxHP: 0
   currentHealth: 0
   hurt: 0
   defaultRollSpeed: 12
-  defaultInvulnTime: 0.2
+  defaultInvulnTime: 0.4
   attacks: []
   projectiles: []
+  rb: {fileID: 0}
+  col: {fileID: 0}
   aggroRangeStart: 5
   aggroRangeEnd: 10
+  facing: 0
 --- !u!212 &8397893453305356666
 SpriteRenderer:
   m_ObjectHideFlags: 0
