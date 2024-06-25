@@ -120,7 +120,7 @@ public class Entity : MonoBehaviour
                 if (below)
                 {
                     state = EntityStates.Ground;
-                    currentJumps = jumps;
+                    //currentJumps = jumps;
                     if (subState == EntitySubStates.Hurt)
                     {
                         subState = EntitySubStates.None;
@@ -136,6 +136,10 @@ public class Entity : MonoBehaviour
         if (PauseController.gameIsPaused)
             return;
 
+        if (currentHealth <= 0)
+            subState = EntitySubStates.Dead;
+        
+
         //Horizontal Movement Forces
         float hSpeed = hIn * ((state == EntityStates.Ground) ? groundSpeed : airSpeed);
         rb.AddForce(new Vector2(hSpeed, 0));
@@ -146,6 +150,8 @@ public class Entity : MonoBehaviour
             float vSpeed = jumpIn * jumpSpeed;
             rb.velocity = new Vector2(rb.velocity.x, vSpeed);
             currentJumps--;
+            StopCoroutine(CoyoteTime());
+           // below = false;
         }
 
         // Airtime & fastfall
@@ -153,6 +159,11 @@ public class Entity : MonoBehaviour
             rb.gravityScale = grav;
         else if (vIn < 0 && rb.velocity.y > 0) rb.gravityScale = grav * 0.65f;
         else if (vIn > 0) rb.gravityScale = grav * 2f;
+
+        // Turn around if pressing other direction
+        Vector3 scale = transform.localScale;
+        if ((scale.x > 0 && hIn < 0) || (scale.x < 0 && hIn > 0))
+            transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
     }
 
     public void Attack()
@@ -242,7 +253,13 @@ public class Entity : MonoBehaviour
     {
         if (collision.collider.tag == "Ground")
         {
-            below = Physics2D.BoxCast(rb.position, new Vector2(col.size.x - 0.15f, col.size.y), 0, Vector2.down, col.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground"));
+            
+            below = Physics2D.BoxCast(rb.position, new Vector2(col.size.x - 0.15f, col.bounds.extents.y), 0, Vector2.down, col.bounds.extents.y - 0.1f, LayerMask.GetMask("Ground"));
+            
+            if (below)
+            {
+                StopCoroutine(CoyoteTime());
+            }
         }
         if (collision.collider.tag == "Enemy" && gameObject.tag == "Player" && invuln == false)
         {
@@ -256,8 +273,13 @@ public class Entity : MonoBehaviour
     {
         if (collision.collider.tag == "Ground")
         {
-            below = false;
+            below = Physics2D.BoxCast(rb.position, new Vector2(col.size.x - 0.15f, col.bounds.extents.y), 0, Vector2.down, col.bounds.extents.y - 0.1f, LayerMask.GetMask("Ground"));
+            if (currentJumps == jumps && rb.velocity.y !< 0)
+            {
+                StartCoroutine(CoyoteTime());
+            }
         }
+        
         updateState();
     }
 
@@ -283,6 +305,12 @@ public class Entity : MonoBehaviour
         yield return new WaitForSeconds(invulnTime);
         EndInvuln();
         subState = EntitySubStates.None;
+    }
+
+    public IEnumerator CoyoteTime()
+    {
+        yield return new WaitForSeconds(1);
+        currentJumps--;
     }
     public void StartInvuln()
     {

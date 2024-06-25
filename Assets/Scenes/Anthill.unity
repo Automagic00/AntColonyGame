@@ -10403,13 +10403,9 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
-      propertyPath: projectiles.Array.size
+      propertyPath: defaultJumps
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
-      propertyPath: projectiles.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 512bb3cee6ea17147bf497b7953338af, type: 2}
     - target: {fileID: 4941728321735437585, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.66
@@ -11804,18 +11800,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultJumpSpeed: 10
-  defaultGroundSpeed: 5
+  defaultGroundSpeed: 3
   defaultAirSpeed: 3
   defaultJumps: 1
   groundFrictionCoefficient: 0.96
-  airFrictionCoefficient: 0.4
+  airFrictionCoefficient: 0.6
   grav: 3
   defaultMaxHealth: 100
   maxHP: 0
   currentHealth: 0
   hurt: 0
   defaultRollSpeed: 12
-  defaultInvulnTime: 0.2
+  defaultInvulnTime: 0.4
   attacks: []
   projectiles: []
   rb: {fileID: 0}

@@ -13,7 +13,7 @@ public class EnemyController : Entity
 
     public override void Start()
     {
-        GameObject.Find("Player");
+        player = GameObject.Find("Player");
 
         facing = (int)Mathf.Sign(transform.localScale.x);
 
@@ -23,7 +23,18 @@ public class EnemyController : Entity
     public override void Update()
     {
         // TryMove(0, 0, 0);
-        Patrol();
+        if (GetCurrentSubState() != EntitySubStates.Hurt && GetCurrentSubState() != EntitySubStates.Dead)
+        {
+            CheckAggro();
+            if (aggro == false)
+            {
+                Patrol();
+            }
+            else
+            {
+                AggroSequence();
+            }
+        }
         base.Update();
     }
 
@@ -39,6 +50,19 @@ public class EnemyController : Entity
         }
     }
 
+    public void AggroSequence()
+    {
+        facing = (int)Mathf.Sign(transform.localScale.x);
+        bool ledge = !Physics2D.Raycast(rb.position + new Vector2((float)((col.bounds.extents.x + 0.1) * facing), -col.bounds.extents.y), Vector2.down, 0.2f, LayerMask.GetMask("Ground"));
+        bool wall = Physics2D.Raycast(rb.position + new Vector2((float)((col.bounds.extents.x + 0.1) * facing), 0), new Vector2((float)(0.1 * facing), 0), col.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground"));
+
+        float jump = (ledge || wall) ? 1 : 0;
+        int direction = (int)Mathf.Sign(player.transform.position.x - transform.position.x);
+
+        Debug.Log(jump);
+        Move(direction, jump, jump);
+    }
+
     public void Patrol()
     {
         bool ledge = !Physics2D.Raycast(rb.position + new Vector2((float)((col.bounds.extents.x + 0.1) * facing), -col.bounds.extents.y), Vector2.down,  0.2f, LayerMask.GetMask("Ground"));
@@ -50,7 +74,7 @@ public class EnemyController : Entity
         if (ledge == true || wall == true) //If there is a ledge or wall, turn around
         {
             facing *= -1;
-            transform.localScale *= new Vector2(-1,1);
+            //transform.localScale *= new Vector2(-1,1);
         }
 
         Move(facing, 0, 0);

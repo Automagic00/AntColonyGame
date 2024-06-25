@@ -67,7 +67,11 @@ MonoBehaviour:
     size: {x: 1.5, y: 1}
     duration: 0.5
     damage: 10
-    knockback: 5
+    knockback: 10
+  projectiles:
+  - {fileID: 11400000, guid: 512bb3cee6ea17147bf497b7953338af, type: 2}
+  rb: {fileID: 0}
+  col: {fileID: 0}
 --- !u!114 &4338957865356691542
 MonoBehaviour:
   m_ObjectHideFlags: 0
