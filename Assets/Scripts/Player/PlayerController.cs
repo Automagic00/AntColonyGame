@@ -140,26 +140,26 @@ public class PlayerController : Entity
 
     private Vector3 boundCamera(Vector3 pos)
     {
-        float camGoTo;
+        Vector3 camPos = _camera.transform.position;
+        Vector3 camGoTo;
 
-        float cameraSmoothingFactor = 0.05f;
+        float cameraSmoothingFactor = 0.1f;
 
-        float camPosY = _camera.transform.position.y;
-        float playerPosY = pos.y;
+        Vector3 direction = -(camPos - pos).normalized;
+        float dist = Vector3.Distance(camPos, pos);
 
-        float dist = playerPosY - camPosY;
 
-        if (Mathf.Abs(dist) > cameraSmoothingFactor)
+        if (Mathf.Abs(dist) > 0.01f)
         {
-            camGoTo = camPosY + (cameraSmoothingFactor * dist);
+            camGoTo = camPos + (direction * cameraSmoothingFactor * dist);
         }
         else
         {
-            camGoTo = playerPosY;
+            camGoTo = pos;
         }
 
-        return new Vector3(Mathf.Clamp(pos.x, cameraBounds.min.x, cameraBounds.max.x),
-        Mathf.Clamp(camGoTo, cameraBounds.min.y, cameraBounds.max.y),
+        return new Vector3(Mathf.Clamp(camGoTo.x, cameraBounds.min.x, cameraBounds.max.x),
+        Mathf.Clamp(camGoTo.y, cameraBounds.min.y, cameraBounds.max.y),
         pos.z
         );
     }

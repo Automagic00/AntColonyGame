@@ -152,7 +152,7 @@ public class Entity : MonoBehaviour
 
     public void Move(float hIn, float vIn, bool jump)
     {
-        if (PauseController.gameIsPaused)
+        if (PauseController.gameIsPaused || Dialogue.dialogueIsOpen)
             return;
 
 

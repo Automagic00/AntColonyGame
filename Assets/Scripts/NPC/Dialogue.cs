@@ -11,6 +11,7 @@ public class Dialogue : MonoBehaviour
     private List<DialogueItem> dialogue = null;
     private int diaStep = -1;
     private bool canAdvanceDialouge = false;
+    public static bool dialogueIsOpen = false;
 
     void Update()
     {
@@ -24,6 +25,7 @@ public class Dialogue : MonoBehaviour
     }
     private void StartDia(Dialoguer target)
     {
+        dialogueIsOpen = true;
         gameObject.SetActive(true);
 
         dialogue = target.getDialogue();
@@ -74,6 +76,7 @@ public class Dialogue : MonoBehaviour
     }
     private void FinishDia()
     {
+        dialogueIsOpen = false;
         gameObject.SetActive(false);
 
         dialogue = null;
