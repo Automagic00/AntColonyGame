@@ -49,19 +49,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8a2a00da6faee4c87c1a0f6164dab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultJumpSpeed: 10
-  defaultGroundSpeed: 50
-  defaultAirSpeed: 45
+  defaultJumpSpeed: 12
+  defaultGroundSpeed: 20
+  defaultAirSpeed: 15
   defaultJumps: 1
-  groundFriction: 16
-  airFriction: 13
+  groundFriction: 5
+  airFriction: 3
   grav: 3
   defaultMaxHealth: 100
   maxHP: 0
   currentHealth: 100
   hurt: 0
-  defaultRollSpeed: 12
+  defaultRollSpeed: 10
   defaultInvulnTime: 1
+  jumpSfx: {fileID: 8300000, guid: 6f84988ac5b81ba4295475ef6f1cc858, type: 3}
+  doubleJumpSfx: {fileID: 8300000, guid: a7a8daa1113a5e141be24309dfccd230, type: 3}
   attacks:
   - origin: {x: 1, y: 0}
     size: {x: 1.5, y: 1}
