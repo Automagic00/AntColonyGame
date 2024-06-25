@@ -47,6 +47,8 @@ public class Entity : MonoBehaviour
     public float defaultRollSpeed = 12;
     public float defaultInvulnTime = 0.2f;
 
+    public AudioClip jumpSfx;
+    public AudioClip doubleJumpSfx;
 
 
     [System.Serializable]
@@ -166,6 +168,7 @@ public class Entity : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, vSpeed);
             currentJumps--;
             StopCoroutine(CoyoteTime());
+            AudioSource.PlayClipAtPoint(jumpSfx, transform.position);
             // below = false;
         }
 
