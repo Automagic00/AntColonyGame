@@ -50,11 +50,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultJumpSpeed: 10
-  defaultGroundSpeed: 50
-  defaultAirSpeed: 45
+  defaultGroundSpeed: 55
+  defaultAirSpeed: 8
   defaultJumps: 1
   groundFriction: 16
-  airFriction: 13
+  airFriction: 1.5
   grav: 3
   defaultMaxHealth: 100
   maxHP: 0

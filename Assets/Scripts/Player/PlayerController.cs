@@ -9,17 +9,24 @@ public class PlayerController : Entity
     private Camera _camera;
     private Bounds cameraBounds;
 
+    private Inventory inventory;
+
 
     public override void Awake()
     {
         _camera = Camera.main;
+        inventory = GetComponent<Inventory>();
         base.Awake();
     }
 
     public override void Start()
     {
+        updateCameraBounds();
+        base.Start();
 
-        // Bound camera to map bounds
+    }
+    private void updateCameraBounds()
+    {
         var camHei = _camera.orthographicSize;
         var camWid = camHei * _camera.aspect;
 
@@ -29,8 +36,6 @@ public class PlayerController : Entity
             new Vector3(Globals.mapBounds.max.x - camWid, Globals.mapBounds.max.y - camHei, 0)
         );
 
-        base.Start();
-
     }
 
     private float hThrottle = 0, vThrottle = 0;
@@ -39,6 +44,13 @@ public class PlayerController : Entity
 
     void Update()
     {
+
+        var camHei = _camera.orthographicSize;
+        var camWid = camHei * _camera.aspect;
+        cameraBounds.SetMinMax(
+            new Vector3(Globals.mapBounds.min.x + camWid, Globals.mapBounds.min.y + camHei, 0),
+            new Vector3(Globals.mapBounds.max.x - camWid, Globals.mapBounds.max.y - camHei, 0)
+        );
 
         float leftKey = Input.GetKey(KeyCode.LeftArrow) ? 1 : 0;
         float rightKey = Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
@@ -62,6 +74,8 @@ public class PlayerController : Entity
         if (PauseController.gameIsPaused)
             return;
 
+        // TODO is this needed every update?
+        updateCameraBounds();
 
         Move(hThrottle, vThrottle, bufferUseJump);
 
@@ -104,8 +118,14 @@ public class PlayerController : Entity
             currentInteraction = interact;
         }
 
-        if (currentInteraction != null && Input.GetKeyDown(KeyCode.F))
-            currentInteraction.interact();
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+
+            if (currentInteraction != null)
+                currentInteraction.interact();
+            else if (inventory.carry != null)
+                inventory.dropCarry(false);
+        }
 
     }
 

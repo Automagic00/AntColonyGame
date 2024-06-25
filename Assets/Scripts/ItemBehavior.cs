@@ -18,7 +18,7 @@ public class ItemBehavior : Interactable
         Inventory player = GameObject.Find("Player").GetComponent<Inventory>();
 
         if (player.carry != null)
-            player.dropCarry();
+            player.dropCarry(true);
 
         player.carry = item;
         Destroy(this.gameObject);

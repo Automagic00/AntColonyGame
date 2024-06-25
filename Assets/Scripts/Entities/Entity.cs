@@ -173,7 +173,7 @@ public class Entity : MonoBehaviour
         if (vIn == 0)
             rb.gravityScale = grav;
         else if (vIn < 0 && rb.velocity.y > 0) rb.gravityScale = grav * 0.65f;
-        else if (vIn > 0) rb.gravityScale = grav * 2f;
+        else if (vIn > 0) rb.gravityScale = grav * 1.2f;
 
         // Turn around if pressing other direction
         Vector3 scale = transform.localScale;

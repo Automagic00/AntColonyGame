@@ -36,16 +36,16 @@ public class Inventory : MonoBehaviour
     public bool holding(string name) => _carry != null && _carry.name.ToUpper() == name.ToUpper();
 
     public GameObject itemPrefab;
-    public void dropCarry()
+    public void dropCarry(bool backwards)
     {
-        if (_carry == null) return;
+        if (carry == null) return;
 
         GameObject throwItem = Instantiate(itemPrefab, transform.Find("Hold").position, Quaternion.identity);
-        throwItem.GetComponent<ItemBehavior>().item = _carry;
+        throwItem.GetComponent<ItemBehavior>().item = carry;
 
-        throwItem.GetComponent<Rigidbody2D>().velocity = new Vector3(-2.5f * transform.localScale.x, 4, 0);
+        throwItem.GetComponent<Rigidbody2D>().velocity = new Vector3(2.5f * transform.localScale.x * (backwards ? -1 : 1), 4, 0);
 
-        _carry = null;
+        carry = null;
     }
 
     public Weapon weapon

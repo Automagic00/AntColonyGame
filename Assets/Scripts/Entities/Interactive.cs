@@ -40,6 +40,18 @@ public class Interactive : MonoBehaviour
         }
         updateOutlineSprites();
     }
+
+    public void SetOutlineColor(Color color)
+    {
+        if (color == outlineColor) return;
+        outlineColor = color;
+
+        for (int i = 0; i < outline.transform.childCount; i++)
+        {
+            SpriteRenderer childSpr = outline.transform.GetChild(i).GetComponent<SpriteRenderer>();
+            childSpr.color = outlineColor;
+        }
+    }
     private void updateOutlineSprites()
     {
         // Only update if new sprite
