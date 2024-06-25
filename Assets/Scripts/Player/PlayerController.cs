@@ -33,13 +33,12 @@ public class PlayerController : Entity
 
     }
 
-    public override void Update()
+    private float hThrottle = 0, vThrottle = 0;
+
+    private bool bufferUseJump, bufferUseAttack, bufferUseDodge, bufferUseMagic;
+
+    void Update()
     {
-        //Dont do anything if game is paused
-        if (PauseController.gameIsPaused)
-        {
-            return;
-        }
 
         float leftKey = Input.GetKey(KeyCode.LeftArrow) ? 1 : 0;
         float rightKey = Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
@@ -47,29 +46,31 @@ public class PlayerController : Entity
         float upKey = Input.GetKey(KeyCode.Space) ? 1 : 0;
         float downKey = Input.GetKey(KeyCode.DownArrow) ? 1 : 0;
 
-        float jumpKey = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
+        hThrottle = rightKey - leftKey;
+        vThrottle = downKey - upKey;
 
-        bool attackKey = Input.GetKeyDown(KeyCode.X);
-        bool dodgeKey = Input.GetKeyDown(KeyCode.Z);
-        bool magicKey = Input.GetKeyDown(KeyCode.C);
+        if (Input.GetKeyDown(KeyCode.Space)) bufferUseJump = true;
+        if (Input.GetKeyDown(KeyCode.X)) bufferUseAttack = true;
+        if (Input.GetKeyDown(KeyCode.Z)) bufferUseDodge = true;
+        if (Input.GetKeyDown(KeyCode.C)) bufferUseMagic = true;
 
-        float hThrottle = rightKey - leftKey;
-        float vThrottle = downKey - upKey;
+        UpdateInteraction();
+    }
 
-        Move(hThrottle, vThrottle, jumpKey);
+    public override void FixedUpdate()
+    {
+        if (PauseController.gameIsPaused)
+            return;
 
-        if (attackKey)
-        {
+
+        Move(hThrottle, vThrottle, bufferUseJump);
+
+        if (bufferUseAttack)
             Attack();
-        }
-        if (dodgeKey)
-        {
+        if (bufferUseDodge)
             Dodge();
-        }
-        if (magicKey)
-        {
+        if (bufferUseMagic)
             FireProjectile(projectiles[0]);
-        }
 
 
         transform.position = boundPlayer(transform.position);
@@ -82,8 +83,13 @@ public class PlayerController : Entity
         if ((scale.x > 0 && hThrottle < 0) || (scale.x < 0 && hThrottle > 0))
             transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
 
-        UpdateInteraction();
-        base.Update();
+        base.FixedUpdate();
+
+        // Inputs have been consumed
+        bufferUseJump = false;
+        bufferUseAttack = false;
+        bufferUseDodge = false;
+        bufferUseMagic = false;
     }
 
 

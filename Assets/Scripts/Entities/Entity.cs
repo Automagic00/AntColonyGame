@@ -20,7 +20,7 @@ public class Entity : MonoBehaviour
     }
 
     // private const int ST_GROUND = 0, ST_AIR = 1, ST_GROUND_ATK = 2;
-    private EntityStates state = EntityStates.Ground;
+    private EntityStates state = EntityStates.Air;
     private EntitySubStates subState = EntitySubStates.None;
 
     public float defaultJumpSpeed = 10.0f;
@@ -34,8 +34,8 @@ public class Entity : MonoBehaviour
 
     private int currentJumps = 0;
 
-    public float groundFrictionCoefficient = 0.96f;
-    public float airFrictionCoefficient = 0.4f;
+    public float groundFriction = 0.96f;
+    public float airFriction = 0.4f;
     public float grav = 2.25f;
 
     public float defaultMaxHealth = 100;
@@ -130,20 +130,36 @@ public class Entity : MonoBehaviour
         }
     }
 
-
-    public void Move(float hIn, float vIn, float jumpIn)
+    public virtual void FixedUpdate()
     {
         if (PauseController.gameIsPaused)
             return;
 
+        //Stop at Low Speed
+        if (Mathf.Abs(rb.velocity.x) < 0.1)
+            rb.velocity = new Vector2(0, rb.velocity.y);
+
+        // Friction
+        float frictionCoefficient = (state == EntityStates.Ground) ? groundFriction : airFriction;
+        float frictionForce = Mathf.Max(0, 1 - frictionCoefficient / 60);
+        rb.velocity = new Vector2(frictionForce * rb.velocity.x, rb.velocity.y);
+    }
+
+    public void Move(float hIn, float vIn, bool jump)
+    {
+        if (PauseController.gameIsPaused)
+            return;
+
+
         //Horizontal Movement Forces
         float hSpeed = hIn * ((state == EntityStates.Ground) ? groundSpeed : airSpeed);
+        // rb.velocity = new Vector2(hSpeed, rb.velocity.y);
         rb.AddForce(new Vector2(hSpeed, 0));
 
         //Vertical Movement Forces
-        if (jumpIn != 0 && currentJumps > 0)
+        if (jump && currentJumps > 0)
         {
-            float vSpeed = jumpIn * jumpSpeed;
+            float vSpeed = jumpSpeed;
             rb.velocity = new Vector2(rb.velocity.x, vSpeed);
             currentJumps--;
         }
@@ -177,7 +193,7 @@ public class Entity : MonoBehaviour
     {
         if (subState == EntitySubStates.None)
         {
-            
+
         }
     }
 
@@ -218,24 +234,6 @@ public class Entity : MonoBehaviour
         {
             subState = EntitySubStates.None;
         }
-    }
-
-    public virtual void Update()
-    {
-        if (PauseController.gameIsPaused)
-            return;
-
-        // Friction
-        float frictionCoefficient = (state == EntityStates.Ground) ? groundFrictionCoefficient : airFrictionCoefficient;
-        float fricForce = frictionCoefficient * rb.velocity.x;
-        rb.AddForce(new Vector2(-fricForce, 0));
-
-        //Stop at Low Speed
-        if (Mathf.Abs(rb.velocity.x) < 0.2)
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-        }
-
     }
 
     private void OnCollisionStay2D(Collision2D collision)

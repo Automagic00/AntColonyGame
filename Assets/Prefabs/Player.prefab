@@ -50,11 +50,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultJumpSpeed: 10
-  defaultGroundSpeed: 5
-  defaultAirSpeed: 3
+  defaultGroundSpeed: 50
+  defaultAirSpeed: 45
   defaultJumps: 1
-  groundFrictionCoefficient: 0.96
-  airFrictionCoefficient: 0.4
+  groundFriction: 16
+  airFriction: 13
   grav: 3
   defaultMaxHealth: 100
   maxHP: 0
@@ -68,6 +68,7 @@ MonoBehaviour:
     duration: 0.5
     damage: 10
     knockback: 5
+  projectiles: []
 --- !u!114 &4338957865356691542
 MonoBehaviour:
   m_ObjectHideFlags: 0

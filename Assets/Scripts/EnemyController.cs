@@ -17,16 +17,15 @@ public class EnemyController : Entity
         base.Start();
     }
 
-    public override void Update()
+    public override void FixedUpdate()
     {
-        // TryMove(0, 0, 0);
-
-        base.Update();
+        // Move(0, 0, 0);
+        base.FixedUpdate();
     }
 
     public void CheckAggro()
     {
-        if (aggro == false && Vector2.Distance(player.transform.position,transform.position) < aggroRangeStart)
+        if (aggro == false && Vector2.Distance(player.transform.position, transform.position) < aggroRangeStart)
         {
             aggro = true;
         }

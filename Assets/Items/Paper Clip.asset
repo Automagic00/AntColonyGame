@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecadd77c8422c0c41b154afd213f019f, type: 3}
+  m_Name: Paper Clip
+  m_EditorClassIdentifier: 
+  name: Paper Clip
+  sprite: {fileID: 21300000, guid: 0b889bf8398db124290db90b7f0d3de2, type: 3}

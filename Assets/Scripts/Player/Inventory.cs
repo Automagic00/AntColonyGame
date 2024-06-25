@@ -8,7 +8,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
 
-    private ItemData _carry;
+    private Item _carry;
 
     private Weapon _weapon;
     private List<Ring> rings = new List<Ring>(MAX_RINGS);
@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
         carrySprite = transform.Find("Hold").GetComponent<SpriteRenderer>();
     }
 
-    public ItemData carry
+    public Item carry
     {
         get => _carry;
         set
@@ -40,9 +40,10 @@ public class Inventory : MonoBehaviour
     {
         if (_carry == null) return;
 
-        GameObject throwItem = Instantiate(itemPrefab);
-        throwItem.GetComponent<Item>().item = _carry;
-        // TODO add velocity
+        GameObject throwItem = Instantiate(itemPrefab, transform.Find("Hold").position, Quaternion.identity);
+        throwItem.GetComponent<ItemBehavior>().item = _carry;
+
+        throwItem.GetComponent<Rigidbody2D>().velocity = new Vector3(-2.5f * transform.localScale.x, 4, 0);
 
         _carry = null;
     }
