@@ -16,7 +16,9 @@ public class ProjectileLife : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != owner.tag && !entitiesHit.Contains(collision.gameObject))
+        Debug.Log(collision.tag);
+        Debug.Log(owner.tag);
+        if (collision.tag != owner.tag && !entitiesHit.Contains(collision.gameObject) && collision.tag != "Projectile")
         {
             entitiesHit.Add(collision.gameObject);
             pierce--;

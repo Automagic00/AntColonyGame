@@ -7,8 +7,22 @@ public class EnemyController : Entity
 {
     public float aggroRangeStart = 5;
     public float aggroRangeEnd = 10;
+
+    public float attackRange = 3;
+    public float attackCooldown = 4;
+    private bool attackOnCooldown = false;
+
     private GameObject player;
     private bool aggro = false;
+    public enum attackType
+    {
+        None = 0,
+        Melee = 1,
+        Ranged = 2,
+        Hybrid = 3
+    }
+
+    public attackType enemyAttackType = attackType.None;
     public int facing;
 
     public override void Start()
@@ -44,7 +58,7 @@ public class EnemyController : Entity
         {
             aggro = true;
         }
-        if (aggro == true && Vector2.Distance(player.transform.position, transform.position) > aggroRangeEnd)
+        if ((aggro == true && Vector2.Distance(player.transform.position, transform.position) > aggroRangeEnd) || player.GetComponent<PlayerController>().GetCurrentSubState() == EntitySubStates.Dead)
         {
             aggro = false;
         }
@@ -56,8 +70,37 @@ public class EnemyController : Entity
         bool ledge = !Physics2D.Raycast(rb.position + new Vector2((float)((col.bounds.extents.x + 0.1) * facing), -col.bounds.extents.y), Vector2.down, 0.2f, LayerMask.GetMask("Ground"));
         bool wall = Physics2D.Raycast(rb.position + new Vector2((float)((col.bounds.extents.x + 0.1) * facing), 0), new Vector2((float)(0.1 * facing), 0), col.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground"));
 
-        bool jump = ledge || wall;
-        int direction = (int)Mathf.Sign(player.transform.position.x - transform.position.x);
+        bool jump;
+        int direction;
+
+        if (attackOnCooldown == false)
+        {
+            //If Enemy Has an Attack type and is in range
+            if (enemyAttackType == attackType.Melee && Vector2.Distance(player.transform.position, transform.position) < attackRange)
+            {
+                Attack();
+                jump = false;
+                direction = 0;
+                StartCoroutine(AttackCooldown());
+            }
+            else if (enemyAttackType == attackType.Ranged && Vector2.Distance(player.transform.position, transform.position) < attackRange)
+            {
+                FireProjectile(projectiles[Random.Range(0, projectiles.Length - 1)]);
+                jump = false;
+                direction = 0;
+                StartCoroutine(AttackCooldown());
+            }
+            else
+            {
+                jump = ledge || wall;
+                direction = (int)Mathf.Sign(player.transform.position.x - transform.position.x);
+            }
+        }
+        else
+        {
+            jump = false;
+            direction = 0;
+        }
 
         Debug.Log(jump);
         Move(direction, jump ? 1 : 0, jump);
@@ -78,5 +121,12 @@ public class EnemyController : Entity
         }
 
         Move(facing, 0, false);
+    }
+
+    public IEnumerator AttackCooldown()
+    {
+        attackOnCooldown = true;
+        yield return new WaitForSeconds(attackCooldown);
+        attackOnCooldown = false;
     }
 }
