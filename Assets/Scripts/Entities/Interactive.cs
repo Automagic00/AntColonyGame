@@ -13,6 +13,8 @@ public class Interactive : MonoBehaviour
 
     public Color outlineColor = Color.white;
 
+    private bool inRange;
+
     public Interactable interactor;
 
     private GameObject outline;
@@ -71,17 +73,30 @@ public class Interactive : MonoBehaviour
 
     public static Interactive closestInteractable(Vector3 position)
     {
-
         Interactive interact = null;
         float dist = 999;
 
 
         foreach (Interactive i in FindObjectsOfType<Interactive>())
         {
+            float iDist = Vector3.Distance(i.transform.position, position);
+
+            // Enable / disable interaction range
+            if (iDist < i.interactDistance && !i.inRange)
+            {
+                i.inRange = true;
+                i.interactor.enterInteractionRange();
+            }
+            if (iDist >= i.interactDistance && i.inRange)
+            {
+                i.inRange = false;
+                i.interactor.exitInteractionRange();
+            }
+
+            if (iDist > i.interactDistance) continue;
             if (!i.interactor.canInteract) continue;
 
-            float iDist = Vector3.Distance(i.transform.position, position);
-            if (iDist < i.interactDistance && iDist < dist)
+            if (iDist < dist)
             {
                 interact = i;
                 dist = iDist;
@@ -97,11 +112,9 @@ public class Interactive : MonoBehaviour
     public void enableInteraction()
     {
         transform.Find("Outline").gameObject.SetActive(true);
-        interactor.enableInteraction();
     }
     public void disableInteraction()
     {
         transform.Find("Outline").gameObject.SetActive(false);
-        interactor.disableInteraction();
     }
 }

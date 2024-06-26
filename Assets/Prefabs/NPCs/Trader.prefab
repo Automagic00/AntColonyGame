@@ -902,7 +902,7 @@ MonoBehaviour:
   want: {fileID: 11400000, guid: 7e97022dc17873240bfffad211633342, type: 2}
   give: {fileID: 11400000, guid: f9e292b509738c84eba30aded6ca7c82, type: 2}
   noTradeHighlight: {r: 1, g: 0.4481132, b: 0.4481132, a: 1}
-  tradeHighlight: {r: 0.5211275, g: 1, b: 0.514151, a: 1}
+  tradeHighlight: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &305495990181368711
 MonoBehaviour:
   m_ObjectHideFlags: 0

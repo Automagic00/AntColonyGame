@@ -29,12 +29,12 @@ public class Door : Interactable
 
     private Coroutine currentCoroutine;
 
-    public override void enableInteraction()
+    public override void enterInteractionRange()
     {
         if (currentCoroutine != null) StopCoroutine(currentCoroutine);
         currentCoroutine = StartCoroutine(FadeTextIn(0.5f));
     }
-    public override void disableInteraction()
+    public override void exitInteractionRange()
     {
         if (currentCoroutine != null) StopCoroutine(currentCoroutine);
         currentCoroutine = StartCoroutine(FadeTextOut(0.5f));

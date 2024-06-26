@@ -118,9 +118,8 @@ public class PlayerController : Entity
             if (currentInteraction != null) currentInteraction.disableInteraction();
             if (interact != null) interact.enableInteraction();
             currentInteraction = interact;
-
-
         }
+
         // Show interact on UI
         if (uiInteractButton != null) uiInteractButton.gameObject.SetActive(currentInteraction != null);
 
