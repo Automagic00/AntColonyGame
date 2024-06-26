@@ -55,6 +55,14 @@ public class NewBehaviourScript : MonoBehaviour
             {
                 Instantiate(addObjects.GetChild(i));
             }
+
+        Transform removeObjects = prefab.transform.Find("removeObjects");
+        if (removeObjects != null)
+            for (int i = 0; i < addObjects.childCount; i++)
+            {
+                string removeTarget = removeObjects.GetChild(i).name + "(Clone)";
+                Destroy(GameObject.Find(removeTarget));
+            }
     }
 
     private void addTilemaps(Tilemap fromMap, Tilemap toMap)

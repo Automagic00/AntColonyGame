@@ -87,6 +87,7 @@ public class Interactive : MonoBehaviour
                 dist = iDist;
             }
         }
+
         return interact;
     }
 
