@@ -27,7 +27,8 @@ public class MapGeneration : MonoBehaviour
     }
 void updateMap()
     {
-        add(dungeonRooms[0], new Vector3Int (24, 0, 0));
+        add(dungeonRooms[0], new Vector3Int (32, 0, 0));
+        add(dungeonRooms[1], new Vector3Int (32*2, 0, 0));
     }
 
     void add(GameObject prefab, Vector3Int Offset)
