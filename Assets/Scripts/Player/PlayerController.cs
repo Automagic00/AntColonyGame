@@ -40,7 +40,7 @@ public class PlayerController : Entity
 
     }
 
-    private float hThrottle = 0, vThrottle = 0;
+    public float hThrottle = 0, vThrottle = 0;
 
     private bool bufferUseJump, bufferUseAttack, bufferUseDodge, bufferUseMagic;
 
