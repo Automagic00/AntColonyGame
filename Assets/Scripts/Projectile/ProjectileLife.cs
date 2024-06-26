@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProjectileLife : MonoBehaviour
 {
-    
+
     GameObject owner;
     List<GameObject> entitiesHit = new List<GameObject>();
     int pierce = 0;
@@ -17,7 +17,8 @@ public class ProjectileLife : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.tag);
-        if (collision.tag != owner.tag && !entitiesHit.Contains(collision.gameObject))
+        Debug.Log(owner.tag);
+        if (collision.tag != owner.tag && !entitiesHit.Contains(collision.gameObject) && collision.tag != "Projectile")
         {
             entitiesHit.Add(collision.gameObject);
             pierce--;

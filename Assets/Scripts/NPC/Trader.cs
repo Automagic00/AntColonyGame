@@ -6,25 +6,35 @@ public class Trader : Interactable
     private Inventory player;
     private Interactive interactive;
 
+    private GameObject interactionBox;
+
     public Item want, give;
 
     void Awake()
     {
+
         player = GameObject.Find("Player").GetComponent<Inventory>();
         interactive = GetComponent<Interactive>();
+        interactionBox = transform.Find("TradeBox").gameObject;
     }
 
-    public Color noTradeHighlight, tradeHighlight;
 
     bool canTrade() => player.holding(want.name);
 
     void Update()
     {
-        if (canTrade())
-            interactive.SetOutlineColor(tradeHighlight);
-        else
-            interactive.SetOutlineColor(noTradeHighlight);
+        canInteract = canTrade();
+    }
 
+    public override void enterInteractionRange()
+    {
+        interactionBox.transform.Find("want").GetComponent<SpriteRenderer>().sprite = want.sprite;
+        interactionBox.transform.Find("give").GetComponent<SpriteRenderer>().sprite = give.sprite;
+        interactionBox.SetActive(true);
+    }
+    public override void exitInteractionRange()
+    {
+        interactionBox.SetActive(false);
     }
 
     public override void interact()
