@@ -10,12 +10,14 @@ public class PlayerController : Entity
     private Bounds cameraBounds;
 
     private Inventory inventory;
+    private Transform uiInteractButton;
 
 
     public override void Awake()
     {
         _camera = Camera.main;
         inventory = GetComponent<Inventory>();
+        uiInteractButton = GameObject.Find("UI_Canvas").transform.Find("Show Interact");
         base.Awake();
     }
 
@@ -117,6 +119,9 @@ public class PlayerController : Entity
             if (interact != null) interact.enableInteraction();
             currentInteraction = interact;
         }
+
+        // Show interact on UI
+        if (uiInteractButton != null) uiInteractButton.gameObject.SetActive(currentInteraction != null);
 
         if (Input.GetKeyDown(KeyCode.F))
         {

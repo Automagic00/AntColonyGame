@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProjectileLife : MonoBehaviour
 {
-    
+
     GameObject owner;
     List<GameObject> entitiesHit = new List<GameObject>();
     int pierce = 0;
