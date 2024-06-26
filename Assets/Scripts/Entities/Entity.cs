@@ -291,6 +291,8 @@ public class Entity : MonoBehaviour
 
     public float GetCurrentHealth() => currentHealth;
 
+    public bool GetInvuln() => invuln;
+
     public EntitySubStates GetCurrentSubState() => subState;
 
     public IEnumerator DestroyHitbox(float lifetime, BoxCollider2D hitbox)

@@ -11817,9 +11817,9 @@ MonoBehaviour:
   col: {fileID: 0}
   aggroRangeStart: 5
   aggroRangeEnd: 10
-  attackRange: 3
-  attackCooldown: 1.5
-  enemyAttackType: 2
+  attackRange: 5
+  attackCooldown: 2
+  enemyAttackType: 0
   facing: 0
 --- !u!212 &8397893453305356666
 SpriteRenderer:

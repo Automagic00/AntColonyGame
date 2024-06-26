@@ -20,8 +20,11 @@ public class ProjectileLife : MonoBehaviour
         Debug.Log(owner.tag);
         if (collision.tag != owner.tag && !entitiesHit.Contains(collision.gameObject) && collision.tag != "Projectile")
         {
-            entitiesHit.Add(collision.gameObject);
-            pierce--;
+            if (collision.GetComponent<Entity>() != null && collision.GetComponent<Entity>().GetInvuln() == false)
+            {
+                entitiesHit.Add(collision.gameObject);
+                pierce--;
+            }
         }
 
         if (collision.tag == "Ground")
