@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -2.13389, y: 2.1338897, z: 2.1338897}
+  m_LocalScale: {x: 2.13389, y: 2.1338897, z: 2.1338897}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2239341517795528397}
@@ -174,7 +174,7 @@ MonoBehaviour:
   groundFriction: 5
   airFriction: 3
   grav: 3
-  defaultMaxHealth: 100
+  defaultMaxHealth: 40
   maxHP: 0
   currentHealth: 0
   hurt: 0

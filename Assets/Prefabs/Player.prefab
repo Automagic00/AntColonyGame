@@ -67,13 +67,15 @@ MonoBehaviour:
   attacks:
   - origin: {x: 1, y: 0}
     size: {x: 1.5, y: 1}
-    duration: 0.5
+    duration: 0.75
     damage: 10
     knockback: 10
   projectiles:
   - {fileID: 11400000, guid: 512bb3cee6ea17147bf497b7953338af, type: 2}
   rb: {fileID: 0}
   col: {fileID: 0}
+  hThrottle: 0
+  vThrottle: 0
 --- !u!114 &4338957865356691542
 MonoBehaviour:
   m_ObjectHideFlags: 0
