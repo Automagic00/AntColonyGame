@@ -39,7 +39,7 @@ public class Entity : MonoBehaviour
     public float grav = 3f;
 
     public float defaultMaxHealth = 100;
-    [HideInInspector] public float maxHP;
+    /*[HideInInspector]*/ public float maxHP;
     public float currentHealth;
     public bool hurt;
     private bool invuln = false;

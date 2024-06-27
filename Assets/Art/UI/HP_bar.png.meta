@@ -391,7 +391,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HP_barFG_2
+      name: HP_barFG_1
       rect:
         serializedVersion: 2
         x: 450
@@ -412,7 +412,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HP_barFG_3
+      name: HP_barFG_2
       rect:
         serializedVersion: 2
         x: 480
@@ -433,7 +433,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HP_barFG_
+      name: HP_barFG_3
       rect:
         serializedVersion: 2
         x: 510
@@ -578,10 +578,10 @@ TextureImporter:
       HP_barBG_6: 921658298
       HP_barBG_7: -673907634
       HP_barBG_start: 553811069
-      HP_barFG_: 856173231
       HP_barFG_0: -1128686839
-      HP_barFG_2: -696799359
-      HP_barFG_3: 1513685072
+      HP_barFG_1: -696799359
+      HP_barFG_2: 1513685072
+      HP_barFG_3: 856173231
       HP_barFG_4: -2142324020
       HP_barFG_5: -1554316930
       HP_barFG_6: -1968197531
