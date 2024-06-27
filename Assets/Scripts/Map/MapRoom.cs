@@ -18,6 +18,7 @@ public class Room : ScriptableObject
 
     public GameObject layout;
     public float weight;
+    public float currentWeight;
 
     public bool allowMirror = true;
 
@@ -210,11 +211,11 @@ public class Room : ScriptableObject
         mirrored.layout = Instantiate(layout);
         Destroy(mirrored.layout);
 
-        for (int x = bounds.xMin; x <= bounds.xMax; x++)
-            for (int y = bounds.yMin; y <= bounds.yMax; y++)
+        for (int x = bounds.xMin; x < bounds.xMax; x++)
+            for (int y = bounds.yMin; y < bounds.yMax; y++)
             {
                 Vector3Int pos = new Vector3Int(x, y);
-                Vector3Int mirrorPos = new Vector3Int(bounds.xMax - (x - bounds.xMin), y);
+                Vector3Int mirrorPos = new Vector3Int(bounds.xMax - 1 - (x - bounds.xMin), y);
                 mirrored.bg.SetTile(pos, bg.GetTile(mirrorPos));
                 mirrored.fg.SetTile(pos, fg.GetTile(mirrorPos));
                 mirrored.plat.SetTile(pos, plat.GetTile(mirrorPos));
@@ -233,17 +234,27 @@ public class Room : ScriptableObject
         return mirrored;
     }
 
+    public void Prepare()
+    {
+        currentWeight = weight;
+    }
+    public void Used()
+    {
+        currentWeight -= 0.1f;
+        if (currentWeight <= 0) currentWeight = 0.1f;
+    }
+
     public static Room weightedRandom(List<Room> options)
     {
         float totalWeight = 0;
 
-        foreach (Room r in options) totalWeight += r.weight;
+        foreach (Room r in options) totalWeight += r.currentWeight;
 
         float weight = UnityEngine.Random.Range(0, totalWeight);
 
         foreach (Room r in options)
         {
-            weight -= r.weight;
+            weight -= r.currentWeight;
             if (weight <= 0) return r;
         }
         return options.Last();

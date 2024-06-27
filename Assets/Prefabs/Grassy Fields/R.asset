@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: R
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: 6ae12635483ece249bb300c6fa334e69, type: 3}
-  weight: 0.5
+  weight: 0.25
+  allowMirror: 1

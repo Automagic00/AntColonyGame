@@ -29,10 +29,12 @@ public class GrassyFieldsGen : MonoBehaviour
             if (room.allowMirror)
                 allRooms.Add(room.mirror());
 
+        foreach (Room room in allRooms)
+            room.Prepare();
+
         GenerateMap();
 
         RemoveArrows();
-
         UpdateMapBounds();
     }
 
@@ -149,6 +151,7 @@ public class GrassyFieldsGen : MonoBehaviour
             }
         }
         if (!foundRoom) return;
+        place.Used();
 
         // Place room
         foreach (Transform t in place.objs)
