@@ -7,7 +7,7 @@ public class HealthBar : MonoBehaviour
 {
     private Entity player;
     //private Slider hpSlider;
-    private float healthPerPiece = 25;
+    private float healthPerPiece = 20;
     private float pieceWidth = 30;
     public GameObject borderFolder;
     public GameObject healthbarFolder;

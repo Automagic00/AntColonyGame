@@ -54,6 +54,11 @@ public class PlayerAnimation : MonoBehaviour
             animator.SetBool("IsGrounded", false);
             animator.SetFloat("YVelo", entity.GetCurrentYVelocity());
         }
+
+        if (entity.GetComponent<EnemyController>() != null)
+        {
+            animator.SetBool("Aggro", entity.GetComponent<EnemyController>().GetAggro());
+        }
     }
     public void EndHurt()
     {

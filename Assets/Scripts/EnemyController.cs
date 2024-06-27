@@ -129,4 +129,6 @@ public class EnemyController : Entity
         yield return new WaitForSeconds(attackCooldown);
         attackOnCooldown = false;
     }
+
+    public bool GetAggro() => aggro;
 }
