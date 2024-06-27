@@ -183,7 +183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GRASSY FIELDS
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a6b350c7b3b630d44ac422aa12decb6e, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: a6b350c7b3b630d44ac422aa12decb6e, type: 2}

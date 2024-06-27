@@ -10,6 +10,9 @@ public class GrassyFieldsGen : MonoBehaviour
 {
 
     public Room[] rooms;
+    private List<Room> allRooms = new List<Room>();
+
+    public TileBase[] doorTiles;
 
 
     private Tilemap fg, bg, plat;
@@ -21,66 +24,57 @@ public class GrassyFieldsGen : MonoBehaviour
         fg = transform.Find("Tiles").GetComponent<Tilemap>();
         plat = transform.Find("Platforms").GetComponent<Tilemap>();
 
+        allRooms.AddRange(rooms);
+        foreach (Room room in rooms)
+            if (room.allowMirror)
+                allRooms.Add(room.mirror());
+
         GenerateMap();
+
+        RemoveArrows();
 
         UpdateMapBounds();
     }
 
-    private int maxDepth = 5;
+    private int maxDepth = 3;
 
     void GenerateMap()
     {
-        // Find all arrows
+        // Find all doors
         List<Vector3Int> roomLocs = new List<Vector3Int>();
 
         fg.CompressBounds();
         BoundsInt bounds = fg.cellBounds;
-        Debug.Log(bounds.size);
         for (int x = bounds.xMin; x < bounds.xMax; x++)
             for (int y = bounds.yMin; y < bounds.yMax; y++)
             {
                 Vector3Int pos = new Vector3Int(x, y);
                 TileBase tile = fg.GetTile(pos);
-                if (tile == null) continue;
-                switch (tile.name)
-                {
-                    case Room.G_LEFT:
-                    case Room.G_RIGHT:
-                    case Room.G_UP:
-                    case Room.G_DOWN:
-                        roomLocs.Add(pos);
-                        break;
-                    default: break;
-                }
+                if (tile != null && doorTiles.Contains(tile))
+                    roomLocs.Add(pos);
             }
 
-        // Recursively add other rooms at arrows
+        // Recursively add other rooms at doors
         List<BoundsInt> blockingArea = new List<BoundsInt> { bounds };
         foreach (Vector3Int pos in roomLocs)
             addRoom(pos, blockingArea, 0);
 
-        // Remove generation tiles
-        bounds = fg.cellBounds;
+    }
+    void RemoveArrows()
+    {
+
+        BoundsInt bounds = fg.cellBounds;
         for (int x = bounds.xMin; x < bounds.xMax; x++)
             for (int y = bounds.yMin; y < bounds.yMax; y++)
             {
                 Vector3Int pos = new Vector3Int(x, y);
                 TileBase tile = fg.GetTile(new Vector3Int(x, y));
-                if (tile == null) continue;
-                switch (tile.name)
-                {
-                    case Room.G_LEFT:
-                    case Room.G_RIGHT:
-                    case Room.G_UP:
-                    case Room.G_DOWN:
-                        fg.SetTile(pos, null);
-                        break;
-                    default: break;
-                }
+                if (tile != null && doorTiles.Contains(tile))
+                    fg.SetTile(pos, null);
             }
     }
 
-    // TODO incorporate weights
+    // TODO recursively check that each room has a valid placement. Remove or try a different room if not.
     void addRoom(Vector3Int tilePos, List<BoundsInt> block, int currentDepth)
     {
 
@@ -88,7 +82,7 @@ public class GrassyFieldsGen : MonoBehaviour
 
         // Find all rooms with matching exit
         List<Room> validRooms = new List<Room>();
-        foreach (Room room in rooms)
+        foreach (Room room in allRooms)
         {
             if (currentDepth >= maxDepth && room.exits > 1) continue;
 
@@ -108,7 +102,6 @@ public class GrassyFieldsGen : MonoBehaviour
                     break;
             }
         }
-        if (currentDepth == maxDepth) Debug.Log(validRooms.Count);
 
         // Try to fit room into spot
         Room place = null;
