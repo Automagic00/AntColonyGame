@@ -64,3 +64,4 @@ crashlytics-build.properties
 
 # I think we don't need this
 UserSettings/Layouts/*
+UserSettings/EditorUserSettings.asset

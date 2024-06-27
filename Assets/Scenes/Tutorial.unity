@@ -23657,8 +23657,16 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
+      propertyPath: currentHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: defaultAirSpeed
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
+      propertyPath: defaultMaxHealth
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: defaultGroundSpeed
@@ -23931,14 +23939,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4114503130583802397, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5584541492093659075, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5584541492093659075, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

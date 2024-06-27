@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,13 +9,17 @@ public class MapGeneration : MonoBehaviour
 {
 
     public GameObject[] dungeonRooms;
-    private Tilemap fg, bg;
+    public GameObject door;
+    private Tilemap fg, bg, platforms;
+    public int dungeonGridPosX, dungeonGridPosY, dungeonGridBlockSizeX, dungeonGridBlockSizeY;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         bg = transform.Find("BGTiles").GetComponent<Tilemap>();
         fg = transform.Find("Tiles").GetComponent<Tilemap>();
+        platforms = transform.Find("Platforms").GetComponent<Tilemap>();
         
         updateMap();
         // Set camera bounds to tilemap
@@ -27,16 +33,26 @@ public class MapGeneration : MonoBehaviour
     }
 void updateMap()
     {
-        add(dungeonRooms[0], new Vector3Int (32, 0, 0));
-        add(dungeonRooms[1], new Vector3Int (32*2, 0, 0));
+        dungeonGridBlockSizeX = 32;
+        dungeonGridBlockSizeY = 24;
+        dungeonGridPosX = 0; 
+        dungeonGridPosY = 0;
+
+        foreach (GameObject room in dungeonRooms){
+            dungeonGridPosX++;
+            add(room, new Vector3Int (dungeonGridBlockSizeX*dungeonGridPosX, 0, 0));
+            add(door, new Vector3Int (dungeonGridBlockSizeX*(dungeonGridPosX-1)+(dungeonGridBlockSizeX/2), 0, 0));
+        }
     }
 
     void add(GameObject prefab, Vector3Int Offset)
     {
         Tilemap addBG = prefab.transform.Find("pfBGTiles").GetComponent<Tilemap>();
         Tilemap addFG = prefab.transform.Find("pfTiles").GetComponent<Tilemap>();
+        Tilemap addPlatforms = prefab.transform.Find("pfPlatforms").GetComponent<Tilemap>();
         addTilemaps(addBG, bg, Offset);
         addTilemaps(addFG, fg, Offset);
+        addTilemaps(addPlatforms, platforms, Offset);
 
         Transform addObjects = prefab.transform.Find("objects");
         if (addObjects != null)
