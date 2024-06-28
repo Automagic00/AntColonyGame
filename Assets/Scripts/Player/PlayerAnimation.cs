@@ -7,8 +7,9 @@ public class PlayerAnimation : MonoBehaviour
 {
     public Entity entity;
     private Animator animator;
-    public ParticleSystem particleSystem;
+    public new ParticleSystem particleSystem;
     public ParticleSystemRenderer psr;
+    public Inventory inventory;
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +62,20 @@ public class PlayerAnimation : MonoBehaviour
         {
             animator.SetBool("Aggro", entity.GetComponent<EnemyController>().GetAggro());
         }
+
+        if (inventory != null)
+        {
+            if (inventory.weapon != null)
+            {
+                animator.SetBool("MeleeWeaponEquipped", inventory.weapon.weaponType == Weapon.WeaponType.Melee ? true : false);
+                animator.SetBool("RangedWeaponEquipped", inventory.weapon.weaponType == Weapon.WeaponType.Ranged ? true : false);
+            }
+            else
+            {
+                animator.SetBool("MeleeWeaponEquipped", false);
+                animator.SetBool("RangedWeaponEquipped", false);
+            }
+        }
     }
     public void EndHurt()
     {
@@ -86,9 +101,13 @@ public class PlayerAnimation : MonoBehaviour
     {
         entity.EndDodge();
     }
+    public void FireProjectile(int i)
+    {
+        entity.FireProjectile(entity.projectiles[i]);
+    }
 
 
-    public void AttackSplash()
+    public void AttackSplash(int i)
     {
         var main = particleSystem.main;
 
@@ -97,6 +116,13 @@ public class PlayerAnimation : MonoBehaviour
         particleSystem.transform.localRotation = Mathf.Sign(entity.transform.localScale.x) == -1 ? Quaternion.Euler(-90, -180, 0) : Quaternion.Euler(-90, 0, 0);
         
         main.flipRotation = Mathf.Sign(entity.transform.localScale.x) == -1 ? 1 : 0;
+
+        psr.material = entity.attacks[i].splash.splashMaterial;
+        main.startSize3D = true;
+        main.startSizeX = entity.attacks[i].splash.splashScale.x;
+        main.startSizeY = entity.attacks[i].splash.splashScale.y;
+        main.startSpeed = entity.attacks[i].splash.speed;
+
         particleSystem.Play();
     }
 }

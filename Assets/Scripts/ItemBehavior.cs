@@ -17,10 +17,21 @@ public class ItemBehavior : Interactable
     // Pick up on interact
     public override void interact()
     {
-        if (player.carry != null)
-            player.dropCarry(true);
+        if (item.GetType() == typeof(Weapon))
+        {
+            if (player.weapon != null)
+                player.dropWeapon(true);
 
-        player.carry = item;
-        Destroy(this.gameObject);
+            player.weapon = (Weapon)item;
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            if (player.carry != null)
+                player.dropCarry(true);
+
+            player.carry = item;
+            Destroy(this.gameObject);
+        }
     }
 }

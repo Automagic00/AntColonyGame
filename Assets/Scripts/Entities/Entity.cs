@@ -60,6 +60,7 @@ public class Entity : MonoBehaviour
         public float duration;
         public float damage;
         public float knockback;
+        public Splash splash;
 
         public HitboxData Convert()
         {

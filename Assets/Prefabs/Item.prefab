@@ -563,6 +563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 1
   item: {fileID: 11400000, guid: 95a6a90715e98104480680fdc695b271, type: 2}
+  player: {fileID: 0}
 --- !u!114 &5934689869915621797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,6 +605,8 @@ MonoBehaviour:
   hurt: 0
   defaultRollSpeed: 12
   defaultInvulnTime: 0.2
+  jumpSfx: {fileID: 0}
+  doubleJumpSfx: {fileID: 0}
   attacks: []
   projectiles: []
   rb: {fileID: 0}

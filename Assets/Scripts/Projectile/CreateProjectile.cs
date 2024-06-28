@@ -10,7 +10,7 @@ public class CreateProjectile : MonoBehaviour
 
         GameObject projObj = new GameObject(proj.name);
         projObj.transform.position = owner.transform.position;
-        projObj.transform.localScale = proj.size;
+        projObj.transform.localScale = proj.size * new Vector3(Mathf.Sign(owner.transform.localScale.x),1,1);
         projObj.tag = "Projectile";
 
         BoxCollider2D hitbox = projObj.AddComponent<BoxCollider2D>();

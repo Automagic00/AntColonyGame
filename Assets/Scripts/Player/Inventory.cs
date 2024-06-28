@@ -17,10 +17,14 @@ public class Inventory : MonoBehaviour
 
     private PlayerController player;
     private SpriteRenderer carrySprite;
+    private GameObject weaponPosition;
+    private SpriteRenderer weaponSprite;
     public void Start()
     {
         player = GetComponent<PlayerController>();
         carrySprite = transform.Find("Hold").GetComponent<SpriteRenderer>();
+        weaponPosition = transform.Find("Sugar_Ant_Sprite").Find("Hands").Find("Weapon").gameObject;
+        weaponSprite = weaponPosition.GetComponent<SpriteRenderer>();
     }
 
     public Item carry
@@ -47,6 +51,17 @@ public class Inventory : MonoBehaviour
 
         carry = null;
     }
+    public void dropWeapon(bool backwards)
+    {
+        if (weapon == null) return;
+
+        GameObject throwItem = Instantiate(itemPrefab, transform.Find("Hold").position, Quaternion.identity);
+        throwItem.GetComponent<ItemBehavior>().item = weapon;
+
+        throwItem.GetComponent<Rigidbody2D>().velocity = new Vector3(2.5f * transform.localScale.x * (backwards ? -1 : 1), 4, 0);
+
+        weapon = null;
+    }
 
     public Weapon weapon
     {
@@ -54,7 +69,9 @@ public class Inventory : MonoBehaviour
         set
         {
             _weapon = value;
-            updateEquipmentStats();
+            if (_weapon == null) weaponSprite.sprite = null;
+            else weaponSprite.sprite = _weapon.sprite;
+            updateWeaponStats();
         }
     }
 
@@ -90,6 +107,22 @@ public class Inventory : MonoBehaviour
         }
 
         player.ModifyStats(groundspeedMod, airspeedMod, jumpHeightMod, doubleJumpMod, hpMod);
+    }
+
+    private void updateWeaponStats()
+    {
+        updateEquipmentStats();
+        weaponPosition.transform.localPosition = weapon.holdPosition;
+
+        if (weapon.weaponType == Weapon.WeaponType.Melee)
+        {
+            player.attacks[1].damage = weapon.baseDamage;
+            player.attacks[1].splash = weapon.splash;
+        }
+        else if (weapon.weaponType == Weapon.WeaponType.Ranged)
+        {
+            player.projectiles[0] = weapon.Projectile;
+        }
     }
 
     // Generated whenever needed

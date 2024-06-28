@@ -340,7 +340,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -606,7 +606,7 @@ ParticleSystem:
     gravitySource: 1
     maxNumParticles: 5
     customEmitterVelocity: {x: 0, y: 0, z: 0}
-    size3D: 0
+    size3D: 1
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
@@ -5010,6 +5010,7 @@ MonoBehaviour:
   entity: {fileID: 8277878228601756376}
   particleSystem: {fileID: 3000005421213558205}
   psr: {fileID: 5778296844413108783}
+  inventory: {fileID: 0}
 --- !u!1 &3071022364905130618
 GameObject:
   m_ObjectHideFlags: 0
@@ -5079,8 +5080,8 @@ MonoBehaviour:
     duration: 0.5
     damage: 25
     knockback: 14
-  projectiles:
-  - {fileID: 11400000, guid: 512bb3cee6ea17147bf497b7953338af, type: 2}
+    splash: {fileID: 11400000, guid: 2ca1c10789d3195428f4cf2518de19c0, type: 2}
+  projectiles: []
   rb: {fileID: 0}
   col: {fileID: 0}
   aggroRangeStart: 5
