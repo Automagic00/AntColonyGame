@@ -1490,7 +1490,11 @@ MonoBehaviour:
   - {fileID: 5641930851780275941, guid: 092a33b92f8b8cc47824170204dd43c4, type: 3}
   - {fileID: 358224355181911989, guid: 52d634824c9912e488eeab378c2badab, type: 3}
   - {fileID: 4702133293471136572, guid: 328627bdc221af047956144d31c4b210, type: 3}
-  door: {fileID: 0}
+  door: {fileID: 8869190116197407201, guid: 8094077fc2f4d9345acd4df9006f9e38, type: 3}
+  dungeonGridPosX: 0
+  dungeonGridPosY: 0
+  dungeonGridBlockSizeX: 0
+  dungeonGridBlockSizeY: 0
 --- !u!1 &2053657584
 GameObject:
   m_ObjectHideFlags: 0
