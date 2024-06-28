@@ -42,7 +42,7 @@ public class GrassyFieldsGen : MonoBehaviour
 
     private int childCount = 0;
 
-    private float minDepth = 20, maxDepth = 30;
+    private float minDepth = 2, maxDepth = 5;
     private List<Node> genQueue = new List<Node>();
     private List<BoundsInt> blockedArea = new List<BoundsInt>();
     void GenerateMap()
