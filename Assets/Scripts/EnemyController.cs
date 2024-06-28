@@ -101,8 +101,6 @@ public class EnemyController : Entity
             jump = false;
             direction = 0;
         }
-
-        Debug.Log(jump);
         Move(direction, jump ? 1 : 0, jump);
     }
 
@@ -132,8 +130,8 @@ public class EnemyController : Entity
 
     public override void Die()
     {
-        col.excludeLayers = (int)Mathf.Pow(2, 7);
-        rb.excludeLayers = (int)Mathf.Pow(2, 7);
+        col.excludeLayers = (int)Mathf.Pow(2, 7) + (int)Mathf.Pow(2, 8) + (int)Mathf.Pow(2, 6) + (int)Mathf.Pow(2, 9);
+        rb.excludeLayers = (int)Mathf.Pow(2, 7) + (int)Mathf.Pow(2, 8) + (int)Mathf.Pow(2, 6) + (int)Mathf.Pow(2, 9);
         base.Die();
     }
     public bool GetAggro() => aggro;

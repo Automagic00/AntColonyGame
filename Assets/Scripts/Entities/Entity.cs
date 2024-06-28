@@ -354,7 +354,10 @@ public class Entity : MonoBehaviour
     private void Hurt(HitboxData hitboxData, GameObject owner)
     {
         subState = EntitySubStates.Hurt;
-        currentHealth -= hitboxData.damage;
+        if (GetComponent<ItemBehavior>() == null)
+        {
+            currentHealth -= hitboxData.damage;
+        }
         rb.velocity = new Vector2(hitboxData.knockback * Mathf.Sign(transform.position.x - owner.transform.position.x), 5);
 
         StartCoroutine(DamageInvulnerabilityPeriod(defaultInvulnTime));
