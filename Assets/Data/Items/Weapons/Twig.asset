@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447abec179a27444c93635e9d3c952d9, type: 3}
+  m_Name: Twig
+  m_EditorClassIdentifier: 
+  name: 
+  sprite: {fileID: 0}
+  flavorText: 
+  weight: 2
+  throwDamage: 0
+  groundspeedMod: 1
+  airspeedMod: 1
+  damageMod: 1
+  jumpHeightMod: 1
+  hpMod: 1
+  doubleJumpMod: 0
+  holdPosition: {x: 0, y: 0}
+  weaponType: 0
+  baseDamage: 0
+  attackSpeed: 1
+  splash: {fileID: 0}
+  Projectile: {fileID: 0}

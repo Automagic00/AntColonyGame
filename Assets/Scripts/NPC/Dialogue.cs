@@ -13,9 +13,17 @@ public class Dialogue : MonoBehaviour
     private bool canAdvanceDialouge = false;
     public static bool dialogueIsOpen = false;
 
+
     void Update()
     {
-        if (canAdvanceDialouge && Input.GetKeyDown(KeyCode.F)) AdvanceDialogue();
+        if (canAdvanceDialouge && Input.GetKeyDown(KeyCode.F))
+        {
+            bool skippedText = skipText();
+            if (!skippedText)
+                AdvanceDialogue();
+        }
+
+        advanceText();
     }
 
 
@@ -57,22 +65,69 @@ public class Dialogue : MonoBehaviour
         // Go to next dialogue immediately if no textbox
         if (item.text == null)
         {
+            fullText = "";
             AdvanceDialogue();
             return;
         }
 
         // Setup textbox
-        bool lastDia = true;
+        lastDialogue = true;
         for (int i = diaStep + 1; i < dialogue.Count; i++)
             if (dialogue[i].text != null)
             {
-                lastDia = false;
+                lastDialogue = false;
                 break;
             }
+        SetText(item.text);
 
-        transform.Find("Text").GetComponent<TextMeshProUGUI>().text = item.text;
-        transform.Find("ContinueText").GetComponent<TextMeshProUGUI>().text = lastDia ? "[F] done" : "[F] continue...";
+    }
+
+    public float characterAdvanceTime = 0.04f;
+    private string fullText;
+    private float advanceTime = 0;
+    private int charactersShown = 0;
+    private bool lastDialogue;
+
+    private void SetText(string full)
+    {
+        fullText = full;
+        advanceTime = 0;
+        charactersShown = 0;
         canAdvanceDialouge = true;
+        advanceText();
+
+    }
+    private bool skipText()
+    {
+        if (fullText == "") return false;
+
+        if (charactersShown < fullText.Length)
+        {
+            charactersShown = fullText.Length;
+            return true;
+        }
+        return false;
+
+    }
+    private void advanceText()
+    {
+        if (fullText == "") return;
+
+        advanceTime += Time.deltaTime;
+        charactersShown = Math.Max(charactersShown, (int)(advanceTime / characterAdvanceTime));
+
+        if (charactersShown >= fullText.Length)
+        {
+            // Complete
+            transform.Find("Text").GetComponent<TextMeshProUGUI>().text = fullText;
+            transform.Find("ContinueText").GetComponent<TextMeshProUGUI>().text = lastDialogue ? "[F] done" : "[F] continue...";
+        }
+        else
+        {
+            transform.Find("Text").GetComponent<TextMeshProUGUI>().text = fullText.Substring(0, charactersShown);
+            transform.Find("ContinueText").GetComponent<TextMeshProUGUI>().text = "[F]";
+        }
+
     }
     private void FinishDia()
     {

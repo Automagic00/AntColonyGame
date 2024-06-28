@@ -118,6 +118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canInteract: 1
+  want1: {fileID: 11400000, guid: 95a6a90715e98104480680fdc695b271, type: 2}
+  want2: {fileID: 11400000, guid: 76aed060a6c505046875e0231b6f86b8, type: 2}
 --- !u!95 &6596726461384571019
 Animator:
   serializedVersion: 5

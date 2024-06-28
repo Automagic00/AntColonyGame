@@ -19,7 +19,7 @@ public class Trader : Interactable
     }
 
 
-    bool canTrade() => player.holding(want.name);
+    bool canTrade() => player.holding(want);
 
     void Update()
     {

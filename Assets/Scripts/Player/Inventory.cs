@@ -37,7 +37,12 @@ public class Inventory : MonoBehaviour
             else carrySprite.sprite = _carry.sprite;
         }
     }
-    public bool holding(string name) => _carry != null && _carry.name.ToUpper() == name.ToUpper();
+    public bool holding(Item item) => carry == item || weapon == item;
+    public void remove(Item item)
+    {
+        if (carry == item) carry = null;
+        else if (weapon == item) weapon = null;
+    }
 
     public GameObject itemPrefab;
     public void dropCarry(bool backwards)
