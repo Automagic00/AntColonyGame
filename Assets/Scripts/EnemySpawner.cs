@@ -10,8 +10,13 @@ public class EnemySpawner : MonoBehaviour
         public GameObject enemyPrefab;
         public float weight;
     }
+    public float respawnTime;
 
     public EnemySpawnData[] enemySpawnData;
+    public GameObject enemySpawned;
+    private GameObject enemyPrefabRespawn;
+    private bool respawning = false;
+    private Coroutine respawnRoutine;
 
     // Start is called before the first frame update
     void Start()
@@ -31,9 +36,46 @@ public class EnemySpawner : MonoBehaviour
             testWeight += enemy.weight;
             if (testWeight >= randomPick)
             {
-                Instantiate(enemy.enemyPrefab, transform.position, transform.rotation);
+                if (enemy.enemyPrefab != null)
+                {
+                    enemySpawned = Instantiate(enemy.enemyPrefab, transform.position, transform.rotation);
+                    enemyPrefabRespawn = enemy.enemyPrefab;
+                }
                 break;
             } 
         }
     }
+
+    private void Update()
+    {
+        if (enemySpawned != null)
+        {
+            Debug.Log("is visible: " + enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible);
+            if (!enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible && enemySpawned.GetComponent<EnemyController>().GetCurrentSubState() == EnemyController.EntitySubStates.Dead && respawning == false)
+            {
+                respawning = true;
+                respawnRoutine = StartCoroutine(TryRespawn());
+                
+            }
+            else if (enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible)
+            {
+                if (respawnRoutine != null)
+                    StopCoroutine(respawnRoutine);
+                respawning = false;
+            }
+        }
+        else
+        {
+            if (respawnRoutine != null)
+                StopCoroutine(respawnRoutine);
+            respawning = false;
+        }
+    }
+
+    private IEnumerator TryRespawn()
+    {
+        yield return new WaitForSeconds(respawnTime);
+        enemySpawned = Instantiate(enemyPrefabRespawn, transform.position, transform.rotation);
+    }
+
 }
