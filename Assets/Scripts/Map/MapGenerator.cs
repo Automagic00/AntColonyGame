@@ -50,6 +50,7 @@ public class MapGenerator : MonoBehaviour
 
     public float minDepth = 4, maxDepth = 6;
     public float requiredRoomDepth = 2f;
+    public float requiredRoomIncrement = 0.5f;
     private List<Node> genQueue = new List<Node>();
     private List<BoundsInt> blockedArea = new List<BoundsInt>();
     void GenerateMap()
@@ -75,7 +76,8 @@ public class MapGenerator : MonoBehaviour
         foreach (Node node in rootNodes) genQueue.Add(node);
         while (genQueue.Count > 0)
         {
-            Node n = genQueue[Random.Range(0, genQueue.Count)];
+            genQueue.Sort((Node a, Node b) => (int)(a.depth - b.depth));
+            Node n = genQueue[0];
             genQueue.Remove(n);
             n.ChooseRoom();
         }
@@ -118,7 +120,7 @@ public class MapGenerator : MonoBehaviour
         Vector3Int roomLoc;
         string from;
         Vector3Int pos;
-        float depth;
+        public float depth;
         Node parent;
         List<Node> children = new List<Node>();
 
@@ -197,7 +199,8 @@ public class MapGenerator : MonoBehaviour
             foreach (Room r in validRooms)
             {
                 int roomIndex = System.Array.FindIndex(root.rooms, match => match == r.unmirrored);
-                if (r.unmirrored.requiredCount > root.roomCount[roomIndex])
+                if (root.roomCount[roomIndex] < r.unmirrored.requiredCount &&
+                depth >= root.requiredRoomDepth + root.roomCount[roomIndex] * root.requiredRoomIncrement)
                     stillRequired.Add(r);
             }
 
@@ -208,7 +211,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        public void Remove()
+        public void RemoveRoomOption()
         {
             if (room == null) return;
             room.UndoUsed(root.maxDepth);
@@ -217,7 +220,7 @@ public class MapGenerator : MonoBehaviour
             int roomIndex = System.Array.FindIndex(root.rooms, r => r == room.unmirrored);
             if (roomIndex != -1) root.roomCount[roomIndex]--;
 
-            foreach (Node c in children) c.Remove();
+            foreach (Node c in children) c.RemoveRoomOption();
             foreach (Node c in children) root.genQueue.Remove(c);
             children.Clear();
 
@@ -235,6 +238,7 @@ public class MapGenerator : MonoBehaviour
                     validRooms.AddRange(lowPriorityValidRooms);
                     lowPriorityValidRooms.Clear();
                 }
+
                 Room place = Room.weightedRandom(validRooms);
                 validRooms.Remove(place);
 
@@ -274,12 +278,12 @@ public class MapGenerator : MonoBehaviour
                 }
             }
 
-            // No valid room options changes parent room
+            // No valid room options. Remove parent room's selection from pool
             if (room == null)
             {
                 if (parent != null)
                 {
-                    parent.Remove();
+                    parent.RemoveRoomOption();
                     parent.ChooseRoom();
                 }
                 return;
@@ -310,6 +314,7 @@ public class MapGenerator : MonoBehaviour
             foreach (Node child in children)
                 root.genQueue.Add(child);
         }
+
         public void ApplyToMap()
         {
             if (room != null)
@@ -340,12 +345,6 @@ public class MapGenerator : MonoBehaviour
 
             foreach (Node n in children)
                 n.ApplyToMap();
-        }
-        public int Count()
-        {
-            int c = 1;
-            foreach (Node n in children) c += n.Count();
-            return c;
         }
     }
 }
