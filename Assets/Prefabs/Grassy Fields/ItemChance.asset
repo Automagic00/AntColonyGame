@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a365807df86b4694ba21bbca341ef3fe, type: 3}
   m_Name: ItemChance
   m_EditorClassIdentifier: 
-  layout: {fileID: 1853980688481997053, guid: 51d1ee1bb88922741ba25deaf70f2b99, type: 3}
-  weight: 12
+  layout: {fileID: 1853980688481997053, guid: d9a87f969a8f47c4d978cb9b4102d46a, type: 3}
+  weight: 2
   depth: 0.2
   overheadBounds: 8
   allowMirror: 1
