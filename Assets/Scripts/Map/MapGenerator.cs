@@ -41,7 +41,7 @@ public class MapGenerator : MonoBehaviour
     }
 
 
-    public float minDepth = 20, maxDepth = 30;
+    public float minDepth = 2, maxDepth = 3;
     private List<Node> genQueue = new List<Node>();
     private List<BoundsInt> blockedArea = new List<BoundsInt>();
     void GenerateMap()
