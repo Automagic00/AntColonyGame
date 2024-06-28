@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: 5a82de67ab168844ab4acb0720cde8d7, type: 3}
   weight: 1
+  depth: 1
+  overheadBounds: 0
   allowMirror: 1

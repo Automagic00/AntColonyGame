@@ -59,7 +59,9 @@ public class MapGenerator : MonoBehaviour
                 if (tile != null && doorTiles.Contains(tile))
                     rootNodes.Add(new Node(this, null, pos, tile.name, 0));
             }
-        blockedArea.Add(bounds);
+
+        blockedArea.Add(new BoundsInt(bounds.xMin, bounds.yMin, bounds.zMin,
+        bounds.xMax, bounds.yMax + 8, bounds.zMax));
 
         // Recursively add other rooms at doors
         foreach (Node node in rootNodes) genQueue.Add(node);
@@ -112,7 +114,7 @@ public class MapGenerator : MonoBehaviour
         Node parent;
         List<Node> children = new List<Node>();
 
-        List<Room> validRooms = new List<Room>(), backupValidRooms = new List<Room>();
+        List<Room> validRooms = new List<Room>(), lowPriorityValidRooms = new List<Room>();
         public Node(MapGenerator root, Node parent, Vector3Int pos, string from, float depth)
         {
             this.root = root;
@@ -156,19 +158,33 @@ public class MapGenerator : MonoBehaviour
                         if (!room.hasUp) continue;
                         break;
                 }
+                // Don't exit early
                 if (depth < root.minDepth && room.exits <= 1)
-                    backupValidRooms.Add(room);
-                else if (depth >= root.maxDepth && room.exits > 1)
-                    backupValidRooms.Add(room);
-                else
-                    validRooms.Add(room);
+                {
+                    lowPriorityValidRooms.Add(room);
+                    continue;
+                }
+                // Don't continue late
+                if (depth >= root.maxDepth && room.exits > 1)
+                {
+                    lowPriorityValidRooms.Add(room);
+                    continue;
+                }
+                // Don't repeat rooms
+                if (parent != null && room == parent.room)
+                {
+                    lowPriorityValidRooms.Add(room);
+                    continue;
+                }
+
+                validRooms.Add(room);
             }
         }
 
         public void Remove()
         {
             if (room == null) return;
-            room.UndoUsed();
+            room.UndoUsed(root.maxDepth);
             root.blockedArea.Remove(bounds);
 
             foreach (Node c in children) c.Remove();
@@ -179,12 +195,12 @@ public class MapGenerator : MonoBehaviour
 
         public void ChooseRoom()
         {
-            while (room == null && (validRooms.Count > 0 || backupValidRooms.Count > 0))
+            while (room == null && (validRooms.Count > 0 || lowPriorityValidRooms.Count > 0))
             {
-                if (validRooms.Count == 0 && backupValidRooms.Count > 0)
+                if (validRooms.Count == 0)
                 {
-                    validRooms.AddRange(backupValidRooms);
-                    backupValidRooms.Clear();
+                    validRooms.AddRange(lowPriorityValidRooms);
+                    lowPriorityValidRooms.Clear();
                 }
                 Room place = Room.weightedRandom(validRooms);
                 validRooms.Remove(place);
@@ -210,7 +226,7 @@ public class MapGenerator : MonoBehaviour
                 // Check if bounds intersects other bounds
                 BoundsInt roomBounds = new BoundsInt();
                 place.fg.CompressBounds();
-                roomBounds.SetMinMax(place.fg.cellBounds.min + roomLoc, place.fg.cellBounds.max + roomLoc);
+                roomBounds.SetMinMax(place.fg.cellBounds.min + roomLoc, place.fg.cellBounds.max + roomLoc + new Vector3Int(0, place.overheadBounds));
                 foreach (BoundsInt blocking in root.blockedArea)
                     if (blocking.Intersects(roomBounds))
                     {
@@ -236,7 +252,7 @@ public class MapGenerator : MonoBehaviour
                 return;
             }
 
-            room.Used();
+            room.Used(root.maxDepth);
             root.blockedArea.Add(bounds);
 
             // Repeat on exits

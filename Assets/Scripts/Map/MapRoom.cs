@@ -19,6 +19,7 @@ public class Room : ScriptableObject
     public GameObject layout;
     public float weight = 1;
     public float depth = 1;
+    public int overheadBounds = 8;
     protected float currentWeight;
 
     public bool allowMirror = true;
@@ -240,13 +241,13 @@ public class Room : ScriptableObject
     {
         currentWeight = weight;
     }
-    public void Used()
+    public void Used(float maxDepth)
     {
-        currentWeight -= 0.1f;
+        currentWeight -= 1.0f / maxDepth;
     }
-    public void UndoUsed()
+    public void UndoUsed(float maxDepth)
     {
-        currentWeight += 0.1f;
+        currentWeight += 1.0f / maxDepth;
 
     }
 
