@@ -40,7 +40,7 @@ public class PlayerController : Entity
 
     }
 
-    public float hThrottle = 0, vThrottle = 0;
+    public float hThrottle = 0, vThrottle = 0, vThrottleJump = 0;
 
     private bool bufferUseJump, bufferUseAttack, bufferUseDodge, bufferUseMagic;
 
@@ -57,11 +57,13 @@ public class PlayerController : Entity
         float leftKey = Input.GetKey(KeyCode.LeftArrow) ? 1 : 0;
         float rightKey = Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
 
-        float upKey = Input.GetKey(KeyCode.Space) ? 1 : 0;
+        float upKey = Input.GetKey(KeyCode.UpArrow) ? 1 : 0;
+        float jumpKey = Input.GetKey(KeyCode.Space) ? 1 : 0;
         float downKey = Input.GetKey(KeyCode.DownArrow) ? 1 : 0;
 
         hThrottle = rightKey - leftKey;
         vThrottle = downKey - upKey;
+        vThrottleJump = downKey - jumpKey;
 
         if (Input.GetKeyDown(KeyCode.Space)) bufferUseJump = true;
         if (Input.GetKeyDown(KeyCode.X)) bufferUseAttack = true;
@@ -79,7 +81,7 @@ public class PlayerController : Entity
         // TODO is this needed every update?
         updateCameraBounds();
 
-        Move(hThrottle, vThrottle, bufferUseJump);
+        Move(hThrottle, vThrottleJump, bufferUseJump);
 
         if (bufferUseAttack)
             Attack();
@@ -127,14 +129,38 @@ public class PlayerController : Entity
         if (uiInteractButton != null) uiInteractButton.gameObject.SetActive(currentInteraction != null);
 
         if (Input.GetKeyDown(KeyCode.F))
+            Interact();
+    }
+    private void Interact()
+    {
+        if (currentInteraction != null)
         {
-
-            if (currentInteraction != null)
-                currentInteraction.interact();
-            else if (inventory.carry != null)
-                inventory.dropCarry(false);
+            currentInteraction.interact();
+            return;
         }
 
+        Item drop = inventory.carry;
+        if (drop != null)
+        {
+            Vector2 throwDirection = new Vector2(hThrottle, -vThrottle);
+            if (inventory.carry.throwDamage <= 0) throwDirection.x = 0;
+            else if (throwDirection.x != 0) throwDirection.y += 0.4f;
+            throwDirection = throwDirection.normalized;
+            Vector2 pushDirection = -throwDirection;
+            if (throwDirection.y != 0)
+            {
+                throwDirection.y += 0.25f;
+                pushDirection.y += 0.15f;
+            }
+
+            if (throwDirection == Vector2.zero)
+                inventory.dropCarry(false);
+            else
+            {
+                inventory.throwCarry(throwDirection);
+                rb.velocity += 3 * (1.5f + drop.weight / 3) * pushDirection;
+            }
+        }
     }
 
     private Vector3 boundPlayer(Vector3 pos)

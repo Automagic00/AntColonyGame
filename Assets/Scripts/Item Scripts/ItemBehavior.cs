@@ -6,7 +6,6 @@ public class ItemBehavior : Interactable
     public Item item;
     public Inventory player;
 
-
     public virtual void Start()
     {
         GetComponent<SpriteRenderer>().sprite = item.sprite;

@@ -592,12 +592,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a0857f41c954b43abaf465fef975f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mat: {fileID: 0}
   defaultJumpSpeed: 0
   defaultGroundSpeed: 0
   defaultAirSpeed: 0
   defaultJumps: 0
   groundFriction: 8
-  airFriction: 0.5
+  airFriction: 0.2
   grav: 1
   defaultMaxHealth: 100
   maxHP: 0

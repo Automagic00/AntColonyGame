@@ -51,6 +51,16 @@ public class Inventory : MonoBehaviour
 
         carry = null;
     }
+    public void throwCarry(Vector2 direction)
+    {
+        if (carry == null) return;
+
+        GameObject throwItem = Instantiate(itemPrefab, transform.position, Quaternion.identity);
+        throwItem.GetComponent<ItemBehavior>().item = carry;
+        throwItem.GetComponent<Rigidbody2D>().velocity = new Vector3(12f * direction.x, 5f * direction.y, 0);
+
+        carry = null;
+    }
     public void dropWeapon(bool backwards)
     {
         if (weapon == null) return;
