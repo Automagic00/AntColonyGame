@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class GrassyFieldsGen : MonoBehaviour
+public class MapGenerator : MonoBehaviour
 {
 
     public Room[] rooms;
@@ -40,9 +40,8 @@ public class GrassyFieldsGen : MonoBehaviour
         UpdateMapBounds();
     }
 
-    private int childCount = 0;
 
-    private float minDepth = 2, maxDepth = 5;
+    public float minDepth = 20, maxDepth = 30;
     private List<Node> genQueue = new List<Node>();
     private List<BoundsInt> blockedArea = new List<BoundsInt>();
     void GenerateMap()
@@ -73,13 +72,8 @@ public class GrassyFieldsGen : MonoBehaviour
 
         foreach (Node n in rootNodes)
             n.ApplyToMap();
-
-        Debug.Log(childCount);
-        Debug.Log(blockedArea.Count);
-        foreach (Node n in rootNodes)
-            Debug.Log(n.Count());
-
     }
+
     void RemoveArrows()
     {
 
@@ -108,7 +102,7 @@ public class GrassyFieldsGen : MonoBehaviour
     class Node
     {
 
-        GrassyFieldsGen root;
+        MapGenerator root;
         Room room;
         BoundsInt bounds;
         Vector3Int roomLoc;
@@ -119,7 +113,7 @@ public class GrassyFieldsGen : MonoBehaviour
         List<Node> children = new List<Node>();
 
         List<Room> validRooms = new List<Room>(), backupValidRooms = new List<Room>();
-        public Node(GrassyFieldsGen root, Node parent, Vector3Int pos, string from, float depth)
+        public Node(MapGenerator root, Node parent, Vector3Int pos, string from, float depth)
         {
             this.root = root;
             this.parent = parent;
@@ -243,7 +237,6 @@ public class GrassyFieldsGen : MonoBehaviour
             }
 
             room.Used();
-            Debug.Log(root.blockedArea.Contains(bounds));
             root.blockedArea.Add(bounds);
 
             // Repeat on exits
@@ -268,8 +261,14 @@ public class GrassyFieldsGen : MonoBehaviour
         {
             if (room != null)
             {
+                float spawnSeed = Random.Range(0, 100f);
                 foreach (Transform t in room.objs)
+                {
+                    SpawnChance chance = t.GetComponent<SpawnChance>();
+                    if (chance != null && !chance.SpawnCheck(spawnSeed)) continue;
+
                     Instantiate(t, new UnityEngine.Vector3(roomLoc.x, roomLoc.y, 0) + t.position, UnityEngine.Quaternion.identity);
+                }
 
                 BoundsInt bounds = room.fg.cellBounds;
                 for (int x = bounds.xMin; x < bounds.xMax; x++)

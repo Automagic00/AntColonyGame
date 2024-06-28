@@ -272,7 +272,7 @@ public class Room : ScriptableObject
     {
         get
         {
-            if (_doors == null) _doors = FindFirstObjectByType<GrassyFieldsGen>().doorTiles;
+            if (_doors == null) _doors = FindFirstObjectByType<MapGenerator>().doorTiles;
             return _doors;
         }
     }
