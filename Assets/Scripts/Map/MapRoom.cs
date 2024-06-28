@@ -22,6 +22,8 @@ public class Room : ScriptableObject
     public int overheadBounds = 8;
     protected float currentWeight;
 
+    public int requiredCount = 0;
+
     public bool allowMirror = true;
 
     private bool _init;

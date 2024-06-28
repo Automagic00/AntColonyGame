@@ -12,9 +12,7 @@ public class MapGenerator : MonoBehaviour
     public Room[] rooms;
     private List<Room> allRooms = new List<Room>();
 
-    public Room[] requiredRooms;
-    private List<Room> allRequiredRooms = new List<Room>();
-    private int[] requiredRoomCount;
+    private int[] roomCount;
 
     public TileBase[] doorTiles;
 
@@ -31,6 +29,8 @@ public class MapGenerator : MonoBehaviour
 
         seed = Random.Range(0, 100f);
 
+        roomCount = new int[rooms.Count()];
+
         foreach (Room r in rooms) r.refreshInitialization();
         allRooms.AddRange(rooms);
         foreach (Room room in rooms)
@@ -40,8 +40,6 @@ public class MapGenerator : MonoBehaviour
         foreach (Room room in allRooms)
             room.Prepare();
 
-        allRequiredRooms.AddRange(requiredRooms);
-        requiredRoomCount = new int[requiredRooms.Count()];
 
         GenerateMap();
 
@@ -77,7 +75,7 @@ public class MapGenerator : MonoBehaviour
         foreach (Node node in rootNodes) genQueue.Add(node);
         while (genQueue.Count > 0)
         {
-            Node n = genQueue[0];
+            Node n = genQueue[Random.Range(0, genQueue.Count)];
             genQueue.Remove(n);
             n.ChooseRoom();
         }
@@ -190,23 +188,23 @@ public class MapGenerator : MonoBehaviour
                 validRooms.Add(room);
             }
 
-            // Prioritize required rooms past a certain depth
-            if (depth >= root.requiredRoomDepth)
-            {
-                List<Room> stillRequired = new List<Room>();
-                foreach (Room r in validRooms)
-                {
-                    int i = root.allRequiredRooms.IndexOf(r.unmirrored);
-                    if (i == -1) continue;
-                    if (root.requiredRoomCount[i] > 0) continue;
-                    stillRequired.Add(r);
-                }
+        }
+        private void PrioritizeRequiredRooms()
+        {
+            if (depth < root.requiredRoomDepth) return;
 
-                if (stillRequired.Count > 0)
-                {
-                    lowPriorityValidRooms.AddRange(validRooms.Except(stillRequired));
-                    validRooms = stillRequired;
-                }
+            List<Room> stillRequired = new List<Room>();
+            foreach (Room r in validRooms)
+            {
+                int roomIndex = System.Array.FindIndex(root.rooms, match => match == r.unmirrored);
+                if (r.unmirrored.requiredCount > root.roomCount[roomIndex])
+                    stillRequired.Add(r);
+            }
+
+            if (stillRequired.Count > 0)
+            {
+                lowPriorityValidRooms.AddRange(validRooms.Except(stillRequired));
+                validRooms = stillRequired;
             }
         }
 
@@ -216,8 +214,8 @@ public class MapGenerator : MonoBehaviour
             room.UndoUsed(root.maxDepth);
             root.blockedArea.Remove(bounds);
 
-            if (root.allRequiredRooms.Contains(room.unmirrored))
-                root.requiredRoomCount[root.allRequiredRooms.IndexOf(room.unmirrored)]--;
+            int roomIndex = System.Array.FindIndex(root.rooms, r => r == room.unmirrored);
+            if (roomIndex != -1) root.roomCount[roomIndex]--;
 
             foreach (Node c in children) c.Remove();
             foreach (Node c in children) root.genQueue.Remove(c);
@@ -228,6 +226,8 @@ public class MapGenerator : MonoBehaviour
 
         public void ChooseRoom()
         {
+            PrioritizeRequiredRooms();
+
             while (room == null && (validRooms.Count > 0 || lowPriorityValidRooms.Count > 0))
             {
                 if (validRooms.Count == 0)
@@ -288,8 +288,8 @@ public class MapGenerator : MonoBehaviour
             // ROOM CHOSEN. Set data
             room.Used(root.maxDepth);
             root.blockedArea.Add(bounds);
-            if (root.allRequiredRooms.Contains(room.unmirrored))
-                root.requiredRoomCount[root.allRequiredRooms.IndexOf(room.unmirrored)]++;
+            int roomIndex = System.Array.FindIndex(root.rooms, r => r == room.unmirrored);
+            if (roomIndex != -1) root.roomCount[roomIndex]++;
 
 
             // Repeat on exits
