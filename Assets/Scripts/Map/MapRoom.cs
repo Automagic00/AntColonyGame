@@ -25,6 +25,7 @@ public class Room : ScriptableObject
     public bool allowMirror = true;
 
     private bool _init;
+    protected Room _unmirrored;
 
     private List<Vector3Int> _leftExits = new List<Vector3Int>(),
     _rightExits = new List<Vector3Int>(),
@@ -34,6 +35,7 @@ public class Room : ScriptableObject
     private Tilemap _bg, _fg, _plat;
 
     private List<Transform> _objs = new List<Transform>();
+
 
     public void refreshInitialization()
     {
@@ -201,6 +203,15 @@ public class Room : ScriptableObject
             return fg.cellBounds;
         }
     }
+    public Room unmirrored
+    {
+        get
+        {
+            if (_unmirrored == null) return this;
+            return _unmirrored;
+        }
+    }
+
     public Room mirror()
     {
         if (!allowMirror) return null;
@@ -213,6 +224,7 @@ public class Room : ScriptableObject
         mirrored.layout = Instantiate(layout);
         Destroy(mirrored.layout);
         mirrored.layout.name = layout.name + "_Mirrored";
+        mirrored._unmirrored = this;
 
         for (int x = bounds.xMin; x < bounds.xMax; x++)
             for (int y = bounds.yMin; y < bounds.yMax; y++)
