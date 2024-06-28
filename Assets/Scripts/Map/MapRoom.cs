@@ -22,7 +22,8 @@ public class Room : ScriptableObject
     public int overheadBounds = 8;
     protected float currentWeight;
 
-    public int requiredCount = 0;
+    public int minAmount = 0;
+    public int maxAmount = -1; // negative value = no max limit
 
     public bool allowMirror = true;
 

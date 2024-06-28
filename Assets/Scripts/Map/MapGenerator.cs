@@ -191,13 +191,23 @@ public class MapGenerator : MonoBehaviour
         }
         private void PrioritizeRequiredRooms()
         {
+            for (int i = 0; i < validRooms.Count; i++)
+            {
+                Room r = validRooms[i];
+                int roomIndex = System.Array.FindIndex(root.rooms, match => match == r.unmirrored);
+                if (root.roomCount[roomIndex] >= r.unmirrored.maxAmount && r.unmirrored.maxAmount >= 0){
+                    validRooms.Remove(r);
+                    i--;
+                }
+            }
+
             if (depth < root.requiredRoomDepth) return;
 
             List<Room> stillRequired = new List<Room>();
             foreach (Room r in validRooms)
             {
                 int roomIndex = System.Array.FindIndex(root.rooms, match => match == r.unmirrored);
-                if (r.unmirrored.requiredCount > root.roomCount[roomIndex])
+                if (r.unmirrored.minAmount > root.roomCount[roomIndex])
                     stillRequired.Add(r);
             }
 
