@@ -7,6 +7,8 @@ public class PlayerAnimation : MonoBehaviour
 {
     public Entity entity;
     private Animator animator;
+    public ParticleSystem particleSystem;
+    public ParticleSystemRenderer psr;
 
     // Start is called before the first frame update
     void Start()
@@ -83,6 +85,19 @@ public class PlayerAnimation : MonoBehaviour
     public void EndDodge()
     {
         entity.EndDodge();
+    }
+
+
+    public void AttackSplash()
+    {
+        var main = particleSystem.main;
+
+        int flip = Mathf.Sign(entity.transform.localScale.x) == -1 ? 1 : 0;
+        psr.flip = new Vector3(flip, 0, 0);
+        particleSystem.transform.localRotation = Mathf.Sign(entity.transform.localScale.x) == -1 ? Quaternion.Euler(-90, -180, 0) : Quaternion.Euler(-90, 0, 0);
+        
+        main.flipRotation = Mathf.Sign(entity.transform.localScale.x) == -1 ? 1 : 0;
+        particleSystem.Play();
     }
 }
 
