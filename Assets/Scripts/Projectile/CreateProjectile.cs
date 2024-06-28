@@ -12,6 +12,7 @@ public class CreateProjectile : MonoBehaviour
         projObj.transform.position = owner.transform.position;
         projObj.transform.localScale = proj.size * new Vector3(Mathf.Sign(owner.transform.localScale.x),1,1);
         projObj.tag = "Projectile";
+        projObj.layer = 9;
 
         BoxCollider2D hitbox = projObj.AddComponent<BoxCollider2D>();
         hitbox.isTrigger = true;
@@ -31,7 +32,7 @@ public class CreateProjectile : MonoBehaviour
 
         //Assign sprite
         SpriteRenderer spriteRenderer = projObj.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = proj.sprite;
+        spriteRenderer.sprite = proj.sprites[Random.Range(0,proj.sprites.Length)];
 
         //Assign projectile lifetime
         ProjectileLife projLife = projObj.AddComponent<ProjectileLife>();

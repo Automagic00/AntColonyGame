@@ -130,5 +130,11 @@ public class EnemyController : Entity
         attackOnCooldown = false;
     }
 
+    public override void Die()
+    {
+        col.excludeLayers = (int)Mathf.Pow(2, 7);
+        rb.excludeLayers = (int)Mathf.Pow(2, 7);
+        base.Die();
+    }
     public bool GetAggro() => aggro;
 }

@@ -19,4 +19,8 @@ MonoBehaviour:
   speed: 10
   pierce: 0
   lifetime: 1
-  sprite: {fileID: -1827592648, guid: 6a2d5a2541afac84b84d3e366ff267a5, type: 3}
+  sprites:
+  - {fileID: -1827592648, guid: 6a2d5a2541afac84b84d3e366ff267a5, type: 3}
+  - {fileID: -2108368828, guid: 6a2d5a2541afac84b84d3e366ff267a5, type: 3}
+  - {fileID: -1781418912, guid: 6a2d5a2541afac84b84d3e366ff267a5, type: 3}
+  - {fileID: -1676826439, guid: 6a2d5a2541afac84b84d3e366ff267a5, type: 3}

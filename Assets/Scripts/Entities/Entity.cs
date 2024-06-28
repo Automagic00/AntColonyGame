@@ -22,6 +22,8 @@ public class Entity : MonoBehaviour
     // private const int ST_GROUND = 0, ST_AIR = 1, ST_GROUND_ATK = 2;
     private EntityStates state = EntityStates.Air;
     private EntitySubStates subState = EntitySubStates.None;
+    public SpriteRenderer mat;
+    private float dissolveAmount;
 
     public float defaultJumpSpeed = 10.0f;
     private float jumpSpeed;
@@ -44,6 +46,7 @@ public class Entity : MonoBehaviour
     public float currentHealth;
     public bool hurt;
     private bool invuln = false;
+    //public bool dead = false;
 
     public float defaultRollSpeed = 12;
     public float defaultInvulnTime = 0.2f;
@@ -76,6 +79,7 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rb;
     public BoxCollider2D col;
 
+
     public virtual void Awake()
     {
         // Init all stats to default
@@ -88,6 +92,7 @@ public class Entity : MonoBehaviour
         col = GetComponent<BoxCollider2D>();
         rb.gravityScale = grav;
         currentHealth = maxHP;
+        
     }
 
     public void ModifyStats(float groundSpeedMod, float airSpeedMod, float jumpSpeedMod, int doubleJumpMod, float hpMod)
@@ -140,7 +145,7 @@ public class Entity : MonoBehaviour
             return;
 
         if (currentHealth <= 0)
-            subState = EntitySubStates.Dead;
+            Die();
 
         //Stop at Low Speed
         if (Mathf.Abs(rb.velocity.x) < 0.1)
@@ -154,7 +159,7 @@ public class Entity : MonoBehaviour
 
     public void Move(float hIn, float vIn, bool jump)
     {
-        if (PauseController.gameIsPaused || Dialogue.dialogueIsOpen)
+        if (PauseController.gameIsPaused || Dialogue.dialogueIsOpen || subState == EntitySubStates.Dead)
             return;
 
 
@@ -297,6 +302,8 @@ public class Entity : MonoBehaviour
 
     public EntitySubStates GetCurrentSubState() => subState;
 
+    public BoxCollider2D GetCollider() => col;
+
     public IEnumerator DestroyHitbox(float lifetime, BoxCollider2D hitbox)
     {
         yield return new WaitForSeconds(lifetime);
@@ -351,5 +358,17 @@ public class Entity : MonoBehaviour
         rb.velocity = new Vector2(hitboxData.knockback * Mathf.Sign(transform.position.x - owner.transform.position.x), 5);
 
         StartCoroutine(DamageInvulnerabilityPeriod(defaultInvulnTime));
+    }
+    public virtual void Die()
+    {
+        subState = EntitySubStates.Dead;
+        StartCoroutine(DissolveEffect());
+    }
+
+    private IEnumerator DissolveEffect()
+    {
+        dissolveAmount = Mathf.Clamp01(dissolveAmount + Time.deltaTime);
+        yield return new WaitForSeconds(0.1f);
+        mat.material.SetFloat("_DissolveAmount", dissolveAmount);
     }
 }

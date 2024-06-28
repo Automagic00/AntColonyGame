@@ -545,7 +545,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sugar_Ant_Dead
+  m_Name: Dead
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -558,7 +558,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 940da134997f53346a5a421cf73255b9, type: 2}
+  m_Motion: {fileID: 7400000, guid: b86f72d92f3d7a845adb4b2ba7d0b492, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

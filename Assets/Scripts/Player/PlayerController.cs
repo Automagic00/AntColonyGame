@@ -95,10 +95,6 @@ public class PlayerController : Entity
         _camera.transform.position = boundCamera(transform.position + new Vector3(0, 0, -14));
 
         // Turn around if pressing other direction
-        /*Vector3 scale = transform.localScale;
-        if ((scale.x > 0 && hThrottle < 0) || (scale.x < 0 && hThrottle > 0))
-            transform.localScale = new Vector3(-scale.x, scale.y, scale.z);*/
-
         base.FixedUpdate();
 
         // Inputs have been consumed

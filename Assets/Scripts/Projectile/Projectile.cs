@@ -13,5 +13,5 @@ public class Projectile : ScriptableObject
     public int pierce; //How many enemies will it pierce
     public float lifetime;
 
-    public Sprite sprite;
+    public Sprite[] sprites;
 }
