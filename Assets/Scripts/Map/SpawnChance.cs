@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class SpawnChance : MonoBehaviour
 {
-    public float minRange = 0;
-    public float maxRange = 100;
+    public float roomMinRange = 0;
+    public float roomMaxRange = 100;
+    public float sceneMinRange = 0;
+    public float sceneMaxRange = 100;
 
-    public bool SpawnCheck(float value)
+    public bool SpawnCheck(float roomValue, float sceneValue)
     {
-        return value >= minRange && value <= maxRange;
+        return roomValue >= roomMinRange && roomValue <= roomMaxRange &&
+        sceneValue >= sceneMinRange && sceneValue <= sceneMaxRange;
     }
 }

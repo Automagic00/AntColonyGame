@@ -16,6 +16,8 @@ public class MapGenerator : MonoBehaviour
 
     private Tilemap fg, bg, plat;
 
+    private float seed = Random.Range(0, 100f);
+
 
     void Start()
     {
@@ -281,7 +283,7 @@ public class MapGenerator : MonoBehaviour
                 foreach (Transform t in room.objs)
                 {
                     SpawnChance chance = t.GetComponent<SpawnChance>();
-                    if (chance != null && !chance.SpawnCheck(spawnSeed)) continue;
+                    if (chance != null && !chance.SpawnCheck(spawnSeed, root.seed)) continue;
 
                     Instantiate(t, new UnityEngine.Vector3(roomLoc.x, roomLoc.y, 0) + t.position, UnityEngine.Quaternion.identity);
                 }
