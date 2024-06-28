@@ -45,8 +45,6 @@ public class MapGenerator : MonoBehaviour
 
         GenerateMap();
 
-        foreach (int i in requiredRoomCount) Debug.Log(i);
-
         RemoveArrows();
         UpdateMapBounds();
     }

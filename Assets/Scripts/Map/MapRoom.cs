@@ -263,17 +263,21 @@ public class Room : ScriptableObject
 
     }
 
+    public float effectiveWeight { get => Math.Max(Math.Min(weight, 0.1f), currentWeight); }
+
     public static Room weightedRandom(List<Room> options)
     {
         float totalWeight = 0;
 
-        foreach (Room r in options) totalWeight += Math.Max(0.1f, r.currentWeight);
+        foreach (Room r in options) totalWeight += r.effectiveWeight;
+
+        if (totalWeight > 0) options = options.Where(r => r.effectiveWeight > 0).ToList();
 
         float weight = UnityEngine.Random.Range(0, totalWeight);
 
         foreach (Room r in options)
         {
-            weight -= Math.Max(0.1f, r.currentWeight);
+            weight -= r.effectiveWeight;
             if (weight <= 0) return r;
         }
         return options.Last();

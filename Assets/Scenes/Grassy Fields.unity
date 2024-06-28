@@ -2132,11 +2132,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 22a1914e4c85d5648bb7fce300137a81, type: 2}
   - {fileID: 11400000, guid: 3d5a3e63eee7a00459c0fa943f9c2265, type: 2}
   - {fileID: 11400000, guid: b02a0cbccc1e87647b4fb60330abecb0, type: 2}
+  - {fileID: 11400000, guid: 482aef79baeda9345a6fe4671ee1d8dc, type: 2}
+  requiredRooms:
+  - {fileID: 11400000, guid: 01c248d411a36cd4c83de21e0ebbbeef, type: 2}
+  - {fileID: 11400000, guid: 482aef79baeda9345a6fe4671ee1d8dc, type: 2}
   doorTiles:
   - {fileID: 11400000, guid: d1af07f49aab04e45848d9f6094c3416, type: 2}
   - {fileID: 11400000, guid: 8cbf9b1f5092bcb40babcbdc84ba643f, type: 2}
   - {fileID: 11400000, guid: 0034866eb3ad9b243894beb400acae07, type: 2}
   - {fileID: 11400000, guid: ad8594d3f2c0fc54ea1542b9879c2436, type: 2}
+  minDepth: 4
+  maxDepth: 5
+  requiredRoomDepth: 1
 --- !u!19719996 &6433734372411016096
 TilemapCollider2D:
   m_ObjectHideFlags: 0
