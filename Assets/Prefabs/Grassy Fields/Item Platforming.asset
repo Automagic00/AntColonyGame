@@ -16,4 +16,5 @@ MonoBehaviour:
   weight: 0.25
   depth: 1
   overheadBounds: 0
+  requiredCount: 1
   allowMirror: 1

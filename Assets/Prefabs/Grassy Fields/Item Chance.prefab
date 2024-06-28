@@ -1975,11 +1975,11 @@ PrefabInstance:
     - target: {fileID: 7704190190105591337, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: f9e292b509738c84eba30aded6ca7c82, type: 2}
+      objectReference: {fileID: 11400000, guid: ae08b850e84181b478df7801fc11cb67, type: 2}
     - target: {fileID: 8342710419267567651, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5ff33f391e46c7248b071ae1f11ad81b, type: 3}
+      objectReference: {fileID: 21300000, guid: ef1a034407f945940a08260054f3870d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

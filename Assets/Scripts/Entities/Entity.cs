@@ -39,7 +39,8 @@ public class Entity : MonoBehaviour
     public float grav = 3f;
 
     public float defaultMaxHealth = 100;
-    /*[HideInInspector]*/ public float maxHP;
+    /*[HideInInspector]*/
+    public float maxHP;
     public float currentHealth;
     public bool hurt;
     private bool invuln = false;
@@ -184,7 +185,7 @@ public class Entity : MonoBehaviour
             transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         if (subState == EntitySubStates.None)
         {

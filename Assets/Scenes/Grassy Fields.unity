@@ -327,14 +327,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
-      propertyPath: defaultAirSpeed
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
-      propertyPath: defaultGroundSpeed
-      value: 22
-      objectReference: {fileID: 0}
     - target: {fileID: 4941728321735437585, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

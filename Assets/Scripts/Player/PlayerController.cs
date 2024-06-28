@@ -108,6 +108,13 @@ public class PlayerController : Entity
         bufferUseMagic = false;
     }
 
+    // Drop item on attack
+    public override void Attack()
+    {
+        base.Attack();
+        inventory.dropCarry(false);
+    }
+
 
     private Interactive currentInteraction = null;
     private void UpdateInteraction()

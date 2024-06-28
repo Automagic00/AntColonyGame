@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultJumpSpeed: 12
-  defaultGroundSpeed: 20
+  defaultGroundSpeed: 22
   defaultAirSpeed: 15
   defaultJumps: 1
   groundFriction: 5
@@ -68,7 +68,7 @@ MonoBehaviour:
   attacks:
   - origin: {x: 1, y: 0}
     size: {x: 1.5, y: 1}
-    duration: 0.75
+    duration: 0.25
     damage: 10
     knockback: 10
   projectiles:
