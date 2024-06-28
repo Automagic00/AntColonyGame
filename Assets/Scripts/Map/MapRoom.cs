@@ -17,8 +17,9 @@ public class Room : ScriptableObject
     public const string G_DOWN = "gen_down";
 
     public GameObject layout;
-    public float weight;
-    public float currentWeight;
+    public float weight = 1;
+    public float depth = 1;
+    protected float currentWeight;
 
     public bool allowMirror = true;
 
@@ -33,7 +34,7 @@ public class Room : ScriptableObject
 
     private List<Transform> _objs = new List<Transform>();
 
-    private void refreshInitialization()
+    public void refreshInitialization()
     {
         _init = false;
         _leftExits.Clear();
@@ -76,7 +77,6 @@ public class Room : ScriptableObject
                     default: break;
                 }
             }
-
     }
 
     public List<Transform> objs
@@ -117,6 +117,7 @@ public class Room : ScriptableObject
             return _plat;
         }
     }
+
 
     public List<Vector3Int> leftExits
     {
@@ -210,6 +211,7 @@ public class Room : ScriptableObject
         // Create a clone of the layout
         mirrored.layout = Instantiate(layout);
         Destroy(mirrored.layout);
+        mirrored.layout.name = layout.name + "_Mirrored";
 
         for (int x = bounds.xMin; x < bounds.xMax; x++)
             for (int y = bounds.yMin; y < bounds.yMax; y++)
@@ -241,20 +243,24 @@ public class Room : ScriptableObject
     public void Used()
     {
         currentWeight -= 0.1f;
-        if (currentWeight <= 0) currentWeight = 0.1f;
+    }
+    public void UndoUsed()
+    {
+        currentWeight += 0.1f;
+
     }
 
     public static Room weightedRandom(List<Room> options)
     {
         float totalWeight = 0;
 
-        foreach (Room r in options) totalWeight += r.currentWeight;
+        foreach (Room r in options) totalWeight += Math.Max(0.1f, r.currentWeight);
 
         float weight = UnityEngine.Random.Range(0, totalWeight);
 
         foreach (Room r in options)
         {
-            weight -= r.currentWeight;
+            weight -= Math.Max(0.1f, r.currentWeight);
             if (weight <= 0) return r;
         }
         return options.Last();
