@@ -1,27 +1,38 @@
 
+using System;
 using UnityEngine;
 
 public class ItemBehavior : Interactable
 {
-    public Item item;
+    [SerializeField]
+    private Item _item;
     public Inventory player;
 
     public virtual void Start()
     {
-        GetComponent<SpriteRenderer>().sprite = item.sprite;
         player = GameObject.Find("Player").GetComponent<Inventory>();
+        if (_item != null) item = _item;
+    }
+    public Item item
+    {
+        get => _item;
+        set
+        {
+            _item = value;
+            GetComponent<SpriteRenderer>().sprite = _item.sprite;
+        }
     }
 
 
     // Pick up on interact
     public override void interact()
     {
-        if (item.GetType() == typeof(Weapon))
+        if (_item.GetType() == typeof(Weapon))
         {
             if (player.weapon != null)
                 player.dropWeapon(true);
 
-            player.weapon = (Weapon)item;
+            player.weapon = (Weapon)_item;
             Destroy(this.gameObject);
         }
         else
@@ -29,7 +40,7 @@ public class ItemBehavior : Interactable
             if (player.carry != null)
                 player.dropCarry(true);
 
-            player.carry = item;
+            player.carry = _item;
             Destroy(this.gameObject);
         }
     }
