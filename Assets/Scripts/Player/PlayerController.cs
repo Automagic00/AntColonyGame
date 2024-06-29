@@ -65,10 +65,10 @@ public class PlayerController : Entity
         vThrottle = downKey - upKey;
         vThrottleJump = downKey - jumpKey;
 
-        if (Input.GetKeyDown(KeyCode.Space)) bufferUseJump = true;
-        if (Input.GetKeyDown(KeyCode.E)) bufferUseAttack = true;
-        if (Input.GetKeyDown(KeyCode.Q)) bufferUseDodge = true;
-        if (Input.GetKeyDown(KeyCode.C)) bufferUseMagic = true;
+        if (Input.GetKeyDown(KeyCode.Space) && !PauseController.gameIsPaused) bufferUseJump = true;
+        if (Input.GetMouseButtonDown(0) && !PauseController.gameIsPaused) bufferUseAttack = true;
+        if (Input.GetMouseButtonDown(1) && !PauseController.gameIsPaused) bufferUseDodge = true;
+       // if (Input.GetKeyDown(KeyCode.C)) bufferUseMagic = true;
 
         UpdateInteraction();
     }
@@ -87,8 +87,8 @@ public class PlayerController : Entity
             Attack();
         if (bufferUseDodge)
             Dodge();
-        if (bufferUseMagic)
-            FireProjectile(projectiles[0]);
+        /*if (bufferUseMagic)
+            FireProjectile(projectiles[0]);*/
 
 
         transform.position = boundPlayer(transform.position);
