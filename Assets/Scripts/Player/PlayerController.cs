@@ -66,8 +66,8 @@ public class PlayerController : Entity
         vThrottleJump = downKey - jumpKey;
 
         if (Input.GetKeyDown(KeyCode.Space)) bufferUseJump = true;
-        if (Input.GetKeyDown(KeyCode.X)) bufferUseAttack = true;
-        if (Input.GetKeyDown(KeyCode.Z)) bufferUseDodge = true;
+        if (Input.GetKeyDown(KeyCode.E)) bufferUseAttack = true;
+        if (Input.GetKeyDown(KeyCode.Q)) bufferUseDodge = true;
         if (Input.GetKeyDown(KeyCode.C)) bufferUseMagic = true;
 
         UpdateInteraction();

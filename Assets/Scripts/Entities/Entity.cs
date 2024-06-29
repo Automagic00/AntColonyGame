@@ -83,17 +83,17 @@ public class Entity : MonoBehaviour
 
     public virtual void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<BoxCollider2D>();
         // Init all stats to default
         ModifyStats(1, 1, 1, 0, 1);
     }
 
     public virtual void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<BoxCollider2D>();
         rb.gravityScale = grav;
         currentHealth = maxHP;
-        
+
     }
 
     public void ModifyStats(float groundSpeedMod, float airSpeedMod, float jumpSpeedMod, int doubleJumpMod, float hpMod)
@@ -198,7 +198,7 @@ public class Entity : MonoBehaviour
         {
             subState = EntitySubStates.Atk;
 
-            attackAngle = new Vector2 (x,y);
+            attackAngle = new Vector2(x, y);
         }
 
     }

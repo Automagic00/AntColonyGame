@@ -37,8 +37,8 @@ public class ItemBehavior : Interactable
             {
                 player.dropWeapon(true);
                 player.weapon = (Weapon)_item;
-
             }
+            Debug.Log(player.weapon);
 
             Destroy(this.gameObject);
         }

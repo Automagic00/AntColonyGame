@@ -23,9 +23,9 @@ MonoBehaviour:
   jumpHeightMod: 1
   hpMod: 1
   doubleJumpMod: 0
-  holdPosition: {x: 0, y: 0}
+  holdPosition: {x: 0.11, y: 0.41}
   weaponType: 0
   baseDamage: 10
   attackSpeed: 1
-  splash: {fileID: 0}
+  splash: {fileID: 11400000, guid: 112828e324f257e48a787028561a1d57, type: 2}
   Projectile: {fileID: 0}

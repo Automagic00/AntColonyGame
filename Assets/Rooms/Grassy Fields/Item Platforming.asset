@@ -15,6 +15,7 @@ MonoBehaviour:
   layout: {fileID: 1853980688481997053, guid: 6a3df859908c16e44881ad1fe75c64da, type: 3}
   weight: 0.25
   depth: 1
-  overheadBounds: 0
-  requiredCount: 1
+  overheadBounds: -3
+  minAmount: 0
+  maxAmount: -1
   allowMirror: 1

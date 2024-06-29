@@ -206,6 +206,7 @@ public class Room : ScriptableObject
             return fg.cellBounds;
         }
     }
+    public bool isMirrored => this != unmirrored;
     public Room unmirrored
     {
         get

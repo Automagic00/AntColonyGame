@@ -177,7 +177,7 @@ public class MapGenerator : MonoBehaviour
                 // Don't continue late
                 if (depth >= root.maxDepth && room.exits > 1)
                 {
-                    lowPriorityValidRooms.Add(room);
+                    // lowPriorityValidRooms.Add(room);
                     continue;
                 }
                 // Don't repeat rooms
@@ -336,7 +336,9 @@ public class MapGenerator : MonoBehaviour
                     SpawnChance chance = t.GetComponent<SpawnChance>();
                     if (chance != null && !chance.SpawnCheck(spawnSeed, root.seed)) continue;
 
-                    Instantiate(t, new UnityEngine.Vector3(roomLoc.x, roomLoc.y, 0) + t.position, UnityEngine.Quaternion.identity);
+                    Transform spawned = Instantiate(t, new UnityEngine.Vector3(roomLoc.x, roomLoc.y, 0) + t.position, UnityEngine.Quaternion.identity);
+                    if (room.isMirrored)
+                        spawned.localScale = new UnityEngine.Vector3(spawned.localScale.x * -1, spawned.localScale.y, spawned.localScale.z);
                 }
 
                 BoundsInt bounds = room.fg.cellBounds;

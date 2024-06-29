@@ -2519,8 +2519,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8cbf9b1f5092bcb40babcbdc84ba643f, type: 2}
   - {fileID: 11400000, guid: 0034866eb3ad9b243894beb400acae07, type: 2}
   - {fileID: 11400000, guid: ad8594d3f2c0fc54ea1542b9879c2436, type: 2}
-  minDepth: 4
-  maxDepth: 5
+  minDepth: 3
+  maxDepth: 4
   requiredRoomDepth: 1.2
   requiredRoomIncrement: 0.7
 --- !u!19719996 &6433734372411016096

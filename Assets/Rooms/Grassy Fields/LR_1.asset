@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: 1e587ebcae87506499b339c49c6fe904, type: 3}
   weight: 0.75
-  depth: 0.7
+  depth: 0.5
   overheadBounds: 8
   minAmount: 0
   maxAmount: -1
