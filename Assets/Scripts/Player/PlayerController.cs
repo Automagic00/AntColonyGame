@@ -147,10 +147,16 @@ public class PlayerController : Entity
         if (drop != null)
         {
             Vector2 throwDirection = new Vector2(hThrottle, -vThrottle);
+            // Don't throw non-throwables horizontally
             if (inventory.carry.throwDamage <= 0) throwDirection.x = 0;
+            // Arc throwables up slightly
             else if (throwDirection.x != 0) throwDirection.y += 0.4f;
+
+            // Only care about the direction
             throwDirection = throwDirection.normalized;
             Vector2 pushDirection = -throwDirection;
+
+            // Bias against gravity slightly
             if (throwDirection.y != 0)
             {
                 throwDirection.y += 0.25f;
@@ -162,8 +168,12 @@ public class PlayerController : Entity
             else
             {
                 inventory.throwCarry(throwDirection);
+
                 rb.velocity += 3 * (1.5f + drop.weight / 3) * pushDirection;
-                // TODO if pushDirection.y < 0 rb.velocity.y = pushdirection.y
+
+                // Cancel upwards momentum on toss up
+                if (pushDirection.y < 0 && rb.velocity.y > 0)
+                    rb.velocity = new Vector3(rb.velocity.x, 0);
             }
         }
     }
