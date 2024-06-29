@@ -109,8 +109,9 @@ public class PlayerController : Entity
     // Drop item on attack
     public override void Attack(float x = 0, float y = 0)
     {
-        base.Attack(x,y);
-        inventory.dropCarry(false);
+        base.Attack(x, y);
+        if (inventory.weapon == null)
+            inventory.dropCarry(false);
     }
 
 
