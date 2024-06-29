@@ -3,15 +3,40 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
 
+    [SerializeField]
     private Item _carry;
+    public Item carry
+    {
+        get => _carry;
+        set
+        {
+            _carry = value;
+            if (_carry == null) carrySprite.sprite = null;
+            else carrySprite.sprite = _carry.sprite;
+        }
+    }
+    [SerializeField]
+    private Item _mouseHold;
+    public Item mouseHold
+    {
+        get => _mouseHold;
+        set
+        {
+            _mouseHold = value;
+            // if (_mouseHold == null) mouseHoldSprite.sprite = null;
+            // else mouseHoldSprite.sprite = _carry.sprite;
+        }
+    }
 
+    [SerializeField]
     private Weapon _weapon;
-    private List<Ring> rings = new List<Ring>(MAX_RINGS);
+    private Ring[] rings = new Ring[MAX_RINGS];
     private const int MAX_RINGS = 6;
 
 
@@ -25,18 +50,12 @@ public class Inventory : MonoBehaviour
         carrySprite = transform.Find("Hold").GetComponent<SpriteRenderer>();
         weaponPosition = transform.Find("Sugar_Ant_Sprite").Find("Hands").Find("Weapon").gameObject;
         weaponSprite = weaponPosition.GetComponent<SpriteRenderer>();
+        // Refresh sprites
+        carry = _carry;
+        weapon = _weapon;
+
     }
 
-    public Item carry
-    {
-        get => _carry;
-        set
-        {
-            _carry = value;
-            if (_carry == null) carrySprite.sprite = null;
-            else carrySprite.sprite = _carry.sprite;
-        }
-    }
     public bool holding(Item item) => carry == item || weapon == item;
     public void remove(Item item)
     {
@@ -45,6 +64,19 @@ public class Inventory : MonoBehaviour
     }
 
     public GameObject itemPrefab;
+
+    public void dropMouse()
+    {
+        if (mouseHold == null) return;
+
+        GameObject throwItem = Instantiate(itemPrefab, transform.Find("Hold").position, Quaternion.identity);
+        throwItem.GetComponent<ItemBehavior>().item = mouseHold;
+
+        throwItem.GetComponent<Rigidbody2D>().velocity = new Vector3(-2.5f * transform.localScale.x, 4, 0);
+
+        mouseHold = null;
+    }
+
     public void dropCarry(bool backwards)
     {
         if (carry == null) return;
@@ -90,13 +122,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool RingsFull() => rings.Count >= MAX_RINGS;
+    public bool RingsFull() => rings.Length >= MAX_RINGS;
     public void SetRing(Ring ring, int index)
     {
         rings[index] = ring;
         updateEquipmentStats();
     }
-    public Ring ring(int index) => rings[index];
+    public Ring GetRing(int index) => rings[index];
 
 
     private void updateEquipmentStats()
@@ -127,6 +159,8 @@ public class Inventory : MonoBehaviour
     private void updateWeaponStats()
     {
         updateEquipmentStats();
+        if (weapon == null) return;
+
         weaponPosition.transform.localPosition = weapon.holdPosition;
 
         if (weapon.weaponType == Weapon.WeaponType.Melee)
@@ -148,7 +182,7 @@ public class Inventory : MonoBehaviour
             List<Equipment> equipmentList = new List<Equipment>();
             if (_weapon != null) equipmentList.Add(_weapon);
             equipmentList.AddRange(rings);
-            return equipmentList;
+            return equipmentList.Where(i => i != null).ToList();
         }
     }
 

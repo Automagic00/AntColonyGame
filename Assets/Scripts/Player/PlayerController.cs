@@ -54,12 +54,12 @@ public class PlayerController : Entity
             new Vector3(Globals.mapBounds.max.x - camWid, Globals.mapBounds.max.y - camHei, 0)
         );
 
-        float leftKey = Input.GetKey(KeyCode.LeftArrow) ? 1 : 0;
-        float rightKey = Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
+        float leftKey = Input.GetKey(KeyCode.A) ? 1 : 0;
+        float rightKey = Input.GetKey(KeyCode.D) ? 1 : 0;
 
-        float upKey = Input.GetKey(KeyCode.UpArrow) ? 1 : 0;
+        float upKey = Input.GetKey(KeyCode.W) ? 1 : 0;
         float jumpKey = Input.GetKey(KeyCode.Space) ? 1 : 0;
-        float downKey = Input.GetKey(KeyCode.DownArrow) ? 1 : 0;
+        float downKey = Input.GetKey(KeyCode.S) ? 1 : 0;
 
         hThrottle = rightKey - leftKey;
         vThrottle = downKey - upKey;
@@ -159,6 +159,7 @@ public class PlayerController : Entity
             {
                 inventory.throwCarry(throwDirection);
                 rb.velocity += 3 * (1.5f + drop.weight / 3) * pushDirection;
+                // TODO if pushDirection.y < 0 rb.velocity.y = pushdirection.y
             }
         }
     }
