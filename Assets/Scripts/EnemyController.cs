@@ -11,6 +11,7 @@ public class EnemyController : Entity
     public float attackRange = 3;
     public float attackCooldown = 4;
     private bool attackOnCooldown = false;
+    private Vector2 angle;
 
     private GameObject player;
     private bool aggro = false;
@@ -85,7 +86,11 @@ public class EnemyController : Entity
             }
             else if (enemyAttackType == attackType.Ranged && Vector2.Distance(player.transform.position, transform.position) < attackRange)
             {
-                FireProjectile(projectiles[Random.Range(0, projectiles.Length - 1)]);
+                angle = transform.position - player.transform.position;
+                angle = angle.normalized;
+                Debug.Log(angle);
+                Attack(-angle.x,-angle.y);
+                //FireProjectile(projectiles[Random.Range(0, projectiles.Length - 1)],angle);
                 jump = false;
                 direction = 0;
                 StartCoroutine(AttackCooldown());
@@ -108,11 +113,12 @@ public class EnemyController : Entity
     {
         bool ledge = !Physics2D.Raycast(rb.position + new Vector2((float)((col.bounds.extents.x + 0.1) * facing), -col.bounds.extents.y), Vector2.down, 0.2f, LayerMask.GetMask("Ground"));
         bool wall = Physics2D.Raycast(rb.position + new Vector2((float)((col.bounds.extents.x + 0.1) * facing), 0), new Vector2((float)(0.1 * facing), 0), col.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground"));
+        bool otherEnemy = Physics2D.Raycast(rb.position + new Vector2((float)((col.bounds.extents.x + 0.1) * facing), 0), new Vector2((float)(0.1 * facing), 0), col.bounds.extents.y + 0.1f, LayerMask.GetMask("Enemy"));
         Debug.DrawRay(rb.position + new Vector2((float)((col.bounds.extents.x + 0.1) * facing), -col.bounds.extents.y), Vector2.down);
         Debug.DrawRay(rb.position + new Vector2((float)((col.bounds.extents.x + 0.1) * facing), 0), new Vector2((float)(0.1 * facing), 0));
         //Debug.Log(ledge);
 
-        if (ledge == true || wall == true) //If there is a ledge or wall, turn around
+        if (ledge == true || wall == true || otherEnemy == true) //If there is a ledge or wall, turn around
         {
             facing *= -1;
             //transform.localScale *= new Vector2(-1,1);

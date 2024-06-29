@@ -16,8 +16,6 @@ public class ProjectileLife : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.tag);
-        Debug.Log(owner.tag);
         if (collision.tag != owner.tag && !entitiesHit.Contains(collision.gameObject) && collision.tag != "Projectile")
         {
             if (collision.GetComponent<Entity>() != null && collision.GetComponent<Entity>().GetInvuln() == false)
