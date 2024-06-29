@@ -46,6 +46,7 @@ public class Entity : MonoBehaviour
     public float currentHealth;
     public bool hurt;
     private bool invuln = false;
+    private Vector2 attackAngle;
     //public bool dead = false;
 
     public float defaultRollSpeed = 12;
@@ -191,12 +192,15 @@ public class Entity : MonoBehaviour
             transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
     }
 
-    public virtual void Attack()
+    public virtual void Attack(float x = 0, float y = 0)
     {
         if (subState == EntitySubStates.None)
         {
             subState = EntitySubStates.Atk;
+
+            attackAngle = new Vector2 (x,y);
         }
+
     }
 
     public void Dodge()
@@ -237,7 +241,7 @@ public class Entity : MonoBehaviour
 
     public void FireProjectile(Projectile proj)
     {
-        CreateProjectile.Create(proj, this);
+        CreateProjectile.Create(proj, this, attackAngle);
     }
 
     public void EndAttack()
@@ -310,6 +314,13 @@ public class Entity : MonoBehaviour
         Destroy(hitbox.gameObject);
     }
 
+    public IEnumerator DestroyHitboxOnStop(BoxCollider2D hitbox)
+    {
+        rb = GetComponent<Rigidbody2D>();
+        yield return new WaitUntil(() => rb.velocity == Vector2.zero);
+        Destroy(hitbox.gameObject);
+    }
+
     public IEnumerator DamageInvulnerabilityPeriod(float invulnTime)
     {
         StartInvuln();
@@ -337,6 +348,12 @@ public class Entity : MonoBehaviour
 
         if (collision.tag == "Hitbox" && invuln == false)
         {
+            //Dont let items hit player
+            if (collision.transform.parent.GetComponent<ItemBehavior>() != null && transform.tag == "Player")
+            {
+                return;
+            }
+
             HitboxData hitboxData = collision.GetComponent<HitboxData>();
             Hurt(hitboxData, collision.transform.parent.gameObject);
         }

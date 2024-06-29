@@ -12,9 +12,10 @@ public class HitboxData : MonoBehaviour
     public float knockback;
     public int pierce; //Only for projectiles
     public GameObject owner;
+    public bool hitboxActiveOnMove;
 
 
-    public HitboxData(Vector2 originIn,Vector2 sizeIn, float durationIn, float dmgIn, float kbIn, int pierceIn = 0, GameObject ownerIn = null)
+    public HitboxData(Vector2 originIn, Vector2 sizeIn, float durationIn, float dmgIn, float kbIn, int pierceIn = 0, GameObject ownerIn = null, bool activeOnMoveIn = false)
     {
         origin = originIn;
         size = sizeIn;
@@ -23,6 +24,7 @@ public class HitboxData : MonoBehaviour
         knockback = kbIn;
         pierce = pierceIn;
         owner = ownerIn;
+        hitboxActiveOnMove = activeOnMoveIn;
     }
 }
 
@@ -55,7 +57,15 @@ public class Hitbox : MonoBehaviour
         gizmo.size = hitboxData.size;
 
         //Hitbox Lifetime
-        owner.StartCoroutine(owner.DestroyHitbox(hitboxData.duration, hitbox));
+        if (hitboxData.duration > 0)
+        {
+            owner.StartCoroutine(owner.DestroyHitbox(hitboxData.duration, hitbox));
+        }
+
+        if (hitboxData.hitboxActiveOnMove == true)
+        {
+            owner.StartCoroutine(owner.DestroyHitboxOnStop(hitbox));
+        }
     }
 
     public HitboxData GetHitboxData()
