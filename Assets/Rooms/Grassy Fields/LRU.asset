@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a365807df86b4694ba21bbca341ef3fe, type: 3}
-  m_Name: LR_1
+  m_Name: LRU
   m_EditorClassIdentifier: 
-  layout: {fileID: 1853980688481997053, guid: 1e587ebcae87506499b339c49c6fe904, type: 3}
-  weight: 0.75
-  depth: 0.7
-  overheadBounds: 8
+  layout: {fileID: 1853980688481997053, guid: 02608462f7de72843ae131d2fcf7d108, type: 3}
+  weight: 2
+  depth: 0.2
+  overheadBounds: 0
   minAmount: 0
   maxAmount: -1
   allowMirror: 1
