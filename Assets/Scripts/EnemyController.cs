@@ -88,8 +88,7 @@ public class EnemyController : Entity
             {
                 angle = transform.position - player.transform.position;
                 angle = angle.normalized;
-                Debug.Log(angle);
-                Attack(-angle.x,-angle.y);
+                Attack(-angle.x, -angle.y);
                 //FireProjectile(projectiles[Random.Range(0, projectiles.Length - 1)],angle);
                 jump = false;
                 direction = 0;

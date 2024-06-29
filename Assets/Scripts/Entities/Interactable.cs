@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour
 {
 
+    [HideInInspector]
     public bool canInteract = true;
     public abstract void interact();
 

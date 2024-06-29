@@ -6,7 +6,7 @@ public class ItemBehavior : Interactable
 {
     [SerializeField]
     private Item _item;
-    public Inventory player;
+    private Inventory player;
 
     public virtual void Start()
     {
@@ -27,12 +27,19 @@ public class ItemBehavior : Interactable
     // Pick up on interact
     public override void interact()
     {
-        if (_item.GetType() == typeof(Weapon))
+        if (_item is Weapon)
         {
-            if (player.weapon != null)
+            if (player.weapon == null)
+                player.weapon = (Weapon)_item;
+            else if (player.carry == null)
+                player.carry = _item;
+            else
+            {
                 player.dropWeapon(true);
+                player.weapon = (Weapon)_item;
 
-            player.weapon = (Weapon)_item;
+            }
+
             Destroy(this.gameObject);
         }
         else

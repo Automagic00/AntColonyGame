@@ -36,13 +36,12 @@ public class InventorySlot : MonoBehaviour
 
     void Update()
     {
-
+        // Update sprite if item changes
         if (lastItem != GetItem())
         {
             lastItem = GetItem();
             setSprite(lastItem);
         }
-
 
         // Track mouse
         if (slot == Slot.Mouse)

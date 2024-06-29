@@ -6,7 +6,7 @@ using TMPro;
 public class PauseController : MonoBehaviour
 {
     public static bool gameIsPaused;
-    public GameObject pauseText;
+    public InventoryUI pauseMenu;
 
     void Update()
     {
@@ -21,12 +21,14 @@ public class PauseController : MonoBehaviour
         if (gameIsPaused)
         {
             Time.timeScale = 0f;
-            pauseText.gameObject.SetActive(true);
+            pauseMenu.Pause();
+            pauseMenu.gameObject.SetActive(true);
         }
         else
         {
             Time.timeScale = 1;
-            pauseText.gameObject.SetActive(false);
+            pauseMenu.gameObject.SetActive(false);
+            pauseMenu.Unpause();
         }
     }
 }

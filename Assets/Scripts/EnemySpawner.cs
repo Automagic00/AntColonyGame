@@ -42,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
                     enemyPrefabRespawn = enemy.enemyPrefab;
                 }
                 break;
-            } 
+            }
         }
     }
 
@@ -50,12 +50,12 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemySpawned != null)
         {
-            Debug.Log("is visible: " + enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible);
+            // Debug.Log("is visible: " + enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible);
             if (!enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible && enemySpawned.GetComponent<EnemyController>().GetCurrentSubState() == EnemyController.EntitySubStates.Dead && respawning == false)
             {
                 respawning = true;
                 respawnRoutine = StartCoroutine(TryRespawn());
-                
+
             }
             else if (enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible)
             {
