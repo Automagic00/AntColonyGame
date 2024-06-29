@@ -46,6 +46,8 @@ public class PlayerController : Entity
 
     void Update()
     {
+        if (PauseController.gameIsPaused)
+            return;
 
         var camHei = _camera.orthographicSize;
         var camWid = camHei * _camera.aspect;
@@ -54,21 +56,22 @@ public class PlayerController : Entity
             new Vector3(Globals.mapBounds.max.x - camWid, Globals.mapBounds.max.y - camHei, 0)
         );
 
-        float leftKey = Input.GetKey(KeyCode.A) ? 1 : 0;
-        float rightKey = Input.GetKey(KeyCode.D) ? 1 : 0;
+        float leftKey = (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) ? 1 : 0;
+        float rightKey = (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) ? 1 : 0;
 
-        float upKey = Input.GetKey(KeyCode.W) ? 1 : 0;
+        float upKey = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) ? 1 : 0;
         float jumpKey = Input.GetKey(KeyCode.Space) ? 1 : 0;
-        float downKey = Input.GetKey(KeyCode.S) ? 1 : 0;
+        float downKey = (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) ? 1 : 0;
 
         hThrottle = rightKey - leftKey;
         vThrottle = downKey - upKey;
         vThrottleJump = downKey - jumpKey;
 
-        if (Input.GetKeyDown(KeyCode.Space) && !PauseController.gameIsPaused) bufferUseJump = true;
-        if (Input.GetMouseButtonDown(0) && !PauseController.gameIsPaused) bufferUseAttack = true;
-        if (Input.GetMouseButtonDown(1) && !PauseController.gameIsPaused) bufferUseDodge = true;
-       // if (Input.GetKeyDown(KeyCode.C)) bufferUseMagic = true;
+        // Buffer inputs
+        if (Input.GetKeyDown(KeyCode.Space)) bufferUseJump = true;
+        if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.Z)) bufferUseAttack = true;
+        if (Input.GetMouseButtonDown(1) || Input.GetKey(KeyCode.X)) bufferUseDodge = true;
+        // if (Input.GetKeyDown(KeyCode.C)) bufferUseMagic = true;
 
         UpdateInteraction();
     }
