@@ -2521,8 +2521,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ad8594d3f2c0fc54ea1542b9879c2436, type: 2}
   minDepth: 2.5
   maxDepth: 4
-  requiredRoomDepth: 1.2
-  requiredRoomIncrement: 0.7
+  requiredRoomDepth: 0.5
+  requiredRoomIncrement: 1.5
 --- !u!19719996 &6433734372411016096
 TilemapCollider2D:
   m_ObjectHideFlags: 0
