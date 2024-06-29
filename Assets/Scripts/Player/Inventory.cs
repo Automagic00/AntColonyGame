@@ -63,6 +63,8 @@ public class Inventory : MonoBehaviour
         GameObject throwItem = Instantiate(itemPrefab, transform.position, Quaternion.identity);
         throwItem.GetComponent<ItemBehavior>().item = carry;
         throwItem.GetComponent<Rigidbody2D>().velocity = new Vector3(12f * direction.x, 5f * direction.y, 0);
+        ItemBehavior thrownItemData = throwItem.GetComponent<ItemBehavior>();
+        Hitbox.CreateHitbox(new HitboxData(Vector2.zero, Vector2.one, 0, thrownItemData.item.throwDamage, 4, 0, player.gameObject, true), throwItem.GetComponent<Entity>());
 
         carry = null;
     }

@@ -310,6 +310,13 @@ public class Entity : MonoBehaviour
         Destroy(hitbox.gameObject);
     }
 
+    public IEnumerator DestroyHitboxOnStop(BoxCollider2D hitbox)
+    {
+        rb = GetComponent<Rigidbody2D>();
+        yield return new WaitUntil(() => rb.velocity == Vector2.zero);
+        Destroy(hitbox.gameObject);
+    }
+
     public IEnumerator DamageInvulnerabilityPeriod(float invulnTime)
     {
         StartInvuln();
@@ -337,6 +344,12 @@ public class Entity : MonoBehaviour
 
         if (collision.tag == "Hitbox" && invuln == false)
         {
+            //Dont let items hit player
+            if (collision.transform.parent.GetComponent<ItemBehavior>() != null && transform.tag == "Player")
+            {
+                return;
+            }
+
             HitboxData hitboxData = collision.GetComponent<HitboxData>();
             Hurt(hitboxData, collision.transform.parent.gameObject);
         }
