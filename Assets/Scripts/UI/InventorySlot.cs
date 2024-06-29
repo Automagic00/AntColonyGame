@@ -55,12 +55,8 @@ public class InventorySlot : MonoBehaviour
 
     public void Clicked()
     {
-        // Toss item
         if (slot == Slot.Mouse)
-        {
-            player.dropMouse();
             return;
-        }
 
         // Swap current and mouse
         Item prev = GetItem();
