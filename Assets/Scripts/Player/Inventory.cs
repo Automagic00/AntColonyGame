@@ -140,22 +140,114 @@ public class Inventory : MonoBehaviour
         float jumpHeightMod = 1;
         float hpMod = 1;
         int doubleJumpMod = 0;
-
-        // TODO modify hitbox properties
+        float defenseMod = 1;
+        float knockbackMod = 1;
+        int multishotMod = 0;
+        int pierceMod = 0;
+        float rollSpeedMod = 1;
         float damageMod = 1;
+        float attackSpeedMod = 1;
         // TODO add other modifiers here as needed
 
-        foreach (Equipment modifier in equipment)
+        foreach (Equipment equip in equipment)
         {
-            groundspeedMod *= modifier.groundspeedMod;
-            airspeedMod *= modifier.airspeedMod;
-            damageMod *= modifier.damageMod;
-            jumpHeightMod *= modifier.jumpHeightMod;
-            hpMod *= modifier.hpMod;
-            doubleJumpMod += modifier.doubleJumpMod;
+            groundspeedMod *= equip.groundspeedMod;
+            airspeedMod *= equip.airspeedMod;
+            damageMod *= equip.damageMod;
+            jumpHeightMod *= equip.jumpHeightMod;
+            hpMod *= equip.hpMod;
+            doubleJumpMod += equip.doubleJumpMod;
+            defenseMod *= equip.defMod;
+            knockbackMod *= equip.knockbackMod;
+            multishotMod += equip.multishotMod;
+            pierceMod += equip.pierceMod;
+            rollSpeedMod *= equip.rollSpeedMod;
+            attackSpeedMod *= equip.attackSpeedMod;
+
+            List<Equipment.Modifiers> combinedModList = new List<Equipment.Modifiers>();
+            if (equip.modifiers != null)
+            {
+                combinedModList = equip.baseModifiers.Concat(equip.modifiers).ToList();
+            }
+            else
+            {
+                combinedModList = equip.baseModifiers;
+            }
+            //Debug.Log(equip.modifiers.Count());
+
+            if (combinedModList != null)
+            {
+                foreach (Equipment.Modifiers equipMod in combinedModList)
+                {
+                    if (equipMod == Equipment.Modifiers.StoneSkin)
+                    {
+                        defenseMod += 0.15f * (int)equip.rarity;
+                        groundspeedMod -= 0.05f * (int)equip.rarity;
+                        airspeedMod -= 0.05f * (int)equip.rarity;
+                    }
+                    else if (equipMod == Equipment.Modifiers.FeatherWeight)
+                    {
+                        defenseMod -= 0.05f * (int)equip.rarity;
+                        jumpHeightMod += 0.05f * (int)equip.rarity;
+                    }
+                    else if (equipMod == Equipment.Modifiers.SprintersSpikes)
+                    {
+                        groundspeedMod += 0.15f * (int)equip.rarity;
+                        airspeedMod += 0.15f * (int)equip.rarity;
+                        jumpHeightMod -= 0.05f * (int)equip.rarity;
+                    }
+                    else if (equipMod == Equipment.Modifiers.GlassCanon)
+                    {
+                        damageMod += 0.15f * (int)equip.rarity;
+                        hpMod -= 0.05f * (int)equip.rarity;
+                    }
+                    else if (equipMod == Equipment.Modifiers.RolyPolySoul)
+                    {
+                        rollSpeedMod += 0.15f * (int)equip.rarity;
+                        defenseMod += 0.05f * (int)equip.rarity;
+                        damageMod -= 0.05f * (int)equip.rarity;
+                    }
+                    else if (equipMod == Equipment.Modifiers.ScarabBeetleSoul)
+                    {
+                        groundspeedMod -= 0.05f * (int)equip.rarity;
+                        airspeedMod -= 0.05f * (int)equip.rarity;
+                        damageMod += 0.15f * (int)equip.rarity;
+                        knockbackMod += 0.05f * (int)equip.rarity;
+                    }
+                    else if (equipMod == Equipment.Modifiers.WaspSoul)
+                    {
+                        groundspeedMod += 0.15f * (int)equip.rarity;
+                        airspeedMod += 0.15f * (int)equip.rarity;
+                        doubleJumpMod += 1;
+                        defenseMod -= 0.1f * (int)equip.rarity;
+                    }
+                    else if (equipMod == Equipment.Modifiers.Blunt)
+                    {
+                        damageMod -= 0.05f * (int)equip.rarity;
+                        knockbackMod += 0.1f * (int)equip.rarity;
+                    }
+                    else if (equipMod == Equipment.Modifiers.Sharp)
+                    {
+                        damageMod += 0.1f * (int)equip.rarity;
+                        knockbackMod -= 0.05f * (int)equip.rarity;
+                    }
+                    else if (equipMod == Equipment.Modifiers.Multishot)
+                    {
+                        damageMod -= 0.1f * (int)equip.rarity;
+                        multishotMod += 1 * (int)equip.rarity;
+                    }
+                    else if (equipMod == Equipment.Modifiers.Piercing)
+                    {
+                        knockbackMod -= 0.1f * (int)equip.rarity;
+                        pierceMod += 1 * (int)equip.rarity;
+                    }
+                }
+            }
         }
 
-        player.ModifyStats(groundspeedMod, airspeedMod, jumpHeightMod, doubleJumpMod, hpMod);
+
+
+        player.ModifyStats(groundspeedMod, airspeedMod, jumpHeightMod, doubleJumpMod,damageMod, hpMod, defenseMod,knockbackMod,rollSpeedMod,multishotMod,pierceMod,attackSpeedMod);
     }
 
     private void updateWeaponStats()

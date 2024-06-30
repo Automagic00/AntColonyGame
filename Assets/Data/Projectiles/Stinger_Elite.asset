@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Stinger_Elite
   m_EditorClassIdentifier: 
   name: Stinger
-  damage: 15
+  damage: 20
   knockback: 10
   size: {x: 0.2, y: 0.2}
   speed: 10
   pierce: 0
   projFired: 3
-  multiProjSpread: 30
+  multiProjSpread: 15
   lifetime: 2
   sprites:
   - {fileID: 21300000, guid: 2721eab969bfdd34cbf4581f5927938d, type: 3}

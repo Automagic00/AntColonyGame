@@ -19,12 +19,20 @@ MonoBehaviour:
   throwDamage: 5
   xSize: 1
   ySize: 1
+  rarity: 1
+  baseModifiers: 090000000a000000
+  modifiers: 
   groundspeedMod: 1
   airspeedMod: 1
   damageMod: 1
   jumpHeightMod: 1
   hpMod: 1
+  defMod: 1
+  knockbackMod: 1
+  rollSpeedMod: 1
   doubleJumpMod: 0
+  multishotMod: 0
+  pierceMod: 0
   holdPosition: {x: 0.149, y: 0.269}
   weaponType: 1
   baseDamage: 0

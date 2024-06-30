@@ -22,11 +22,19 @@ public class Interactive : MonoBehaviour
     private Sprite lastUpdatedSprite;
 
 
-    void Awake()
+    void Start()
     {
         // Setup outline to use sprite
         outline = transform.Find("Outline").gameObject;
-        sprite = GetComponent<SpriteRenderer>();
+        
+        if (GetComponent<SpriteRenderer>() != null)
+        {
+            sprite = GetComponent<SpriteRenderer>();
+        }
+        else if(GetComponentInChildren<SpriteRenderer>() != null)
+        {
+            sprite = GetComponentInChildren<SpriteRenderer>();
+        }
 
         // Set constants from parent sprite renderer
         for (int i = 0; i < outline.transform.childCount; i++)

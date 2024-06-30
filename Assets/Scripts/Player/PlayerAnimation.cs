@@ -76,6 +76,8 @@ public class PlayerAnimation : MonoBehaviour
                 animator.SetBool("RangedWeaponEquipped", false);
             }
         }
+
+        animator.SetFloat("AttackSpeed", entity.attackSpeed);
     }
     public void EndHurt()
     {

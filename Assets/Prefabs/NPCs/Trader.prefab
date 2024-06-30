@@ -842,6 +842,7 @@ GameObject:
   - component: {fileID: 5354060855040272600}
   - component: {fileID: 2770408899809803529}
   - component: {fileID: 305495990181368711}
+  - component: {fileID: -6309077148853674969}
   m_Layer: 0
   m_Name: Trader
   m_TagString: Untagged
@@ -907,8 +908,8 @@ SpriteRenderer:
   m_SortingLayerID: -1918842155
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 21c5222648f09fc408d483e8e9191dd5, type: 3}
-  m_Color: {r: 0.5189683, g: 1, b: 0.48584908, a: 1}
+  m_Sprite: {fileID: -435785182, guid: 8c8a01217ba3d7747ac5eb84d908c68c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -949,6 +950,27 @@ MonoBehaviour:
   interactDistance: 2
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   interactor: {fileID: 2770408899809803529}
+--- !u!95 &-6309077148853674969
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370749867379044888}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: abb34ef4e7e3f3347bc72ec1f48df0f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8590630883751633904
 GameObject:
   m_ObjectHideFlags: 0

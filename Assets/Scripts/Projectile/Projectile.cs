@@ -16,4 +16,27 @@ public class Projectile : ScriptableObject
     public float lifetime;
 
     public Sprite[] sprites;
+
+    private void Init(Projectile baseData)
+    {
+        name = baseData.name;
+        damage = baseData.damage;
+        knockback = baseData.knockback;
+        size = baseData.size;
+        speed = baseData.speed;
+        pierce = baseData.pierce;
+        projFired = baseData.projFired;
+        multiProjSpread = baseData.multiProjSpread;
+        lifetime = baseData.lifetime;
+
+        sprites = baseData.sprites;
+    }
+
+    public static Projectile InitProjectile(Projectile baseData)
+    {
+        var proj = CreateInstance<Projectile>();
+        proj.Init(baseData);
+
+        return proj;
+    }
 }

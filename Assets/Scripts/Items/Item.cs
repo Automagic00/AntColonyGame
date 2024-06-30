@@ -14,8 +14,3 @@ public class Item : ScriptableObject
 
     public float xSize = 1, ySize = 1;
 }
-
-public class Ring : Equipment
-{
-
-}

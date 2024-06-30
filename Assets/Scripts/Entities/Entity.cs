@@ -42,15 +42,22 @@ public class Entity : MonoBehaviour
     public float grav = 3f;
     private float maxFallSpeed = 32f;
     public float defaultMaxHealth = 100;
-    /*[HideInInspector]*/
+    [HideInInspector]
     public float maxHP;
     public float currentHealth;
+    private float defense;
     public bool hurt;
     private bool invuln = false;
     private Vector2 attackAngle;
     //public bool dead = false;
 
     public float defaultRollSpeed = 12;
+    public float rollSpeed;
+    public float knockbackBonus;
+    public int multishotBouns;
+    public int pierceBonus;
+    public float damageBonus;
+    public float attackSpeed;
     public float defaultInvulnTime = 0.2f;
 
     public AudioClip jumpSfx;
@@ -87,7 +94,7 @@ public class Entity : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         // Init all stats to default
-        ModifyStats(1, 1, 1, 0, 1);
+        ModifyStats(1, 1, 1, 0,1, 1, 1,1,1,0,0,1);
     }
 
     public virtual void Start()
@@ -97,17 +104,25 @@ public class Entity : MonoBehaviour
 
     }
 
-    public void ModifyStats(float groundSpeedMod, float airSpeedMod, float jumpSpeedMod, int doubleJumpMod, float hpMod)
+    public void ModifyStats(float groundSpeedMod, float airSpeedMod, float jumpSpeedMod, int doubleJumpMod,float damageMod, float hpMod, float defenseMod, float knockbackMod, float rollspeedMod, int multishotMod, int pierceMod, float attackSpeedMod)
     {
         groundSpeed = defaultGroundSpeed * groundSpeedMod;
         airSpeed = defaultAirSpeed * airSpeedMod;
         jumpSpeed = defaultJumpSpeed * jumpSpeedMod;
         jumps = defaultJumps + doubleJumpMod;
+        defense = 1 * defenseMod;
+        damageBonus = damageMod;
 
         // Keep hp:maxHP the same before and after
         float hpRatio = (maxHP != 0) ? currentHealth / maxHP : 1;
         maxHP = defaultMaxHealth * hpMod;
         currentHealth = maxHP * hpRatio;
+
+        knockbackBonus = knockbackMod;
+        rollSpeed = defaultRollSpeed * rollspeedMod;
+        multishotBouns = multishotMod;
+        pierceBonus = pierceMod;
+        attackSpeed = attackSpeedMod;
     }
 
     void updateState()
@@ -211,7 +226,7 @@ public class Entity : MonoBehaviour
         {
             subState = EntitySubStates.Dodge;
             Physics2D.IgnoreLayerCollision(6, 7);
-            rb.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * defaultRollSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * rollSpeed, rb.velocity.y);
         }
     }
 
@@ -229,7 +244,6 @@ public class Entity : MonoBehaviour
         {
             subState = EntitySubStates.None;
             Physics2D.IgnoreLayerCollision(6, 7, false);
-            //rb.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * defaultRollSpeed, rb.velocity.y);
         }
     }
 
@@ -237,12 +251,24 @@ public class Entity : MonoBehaviour
     {
         //Vector2 hitboxOffset = new Vector3(1, 0, 0) * Mathf.Sign(transform.localScale.x);
         HitboxData hitbox = attacks[i].Convert();
+        hitbox.knockback *= knockbackBonus;
+        hitbox.damage *= damageBonus;
 
         Hitbox.CreateHitbox(hitbox, this);
     }
 
-    public void FireProjectile(Projectile proj)
+    public void FireProjectile(Projectile baseProj)
     {
+        Projectile proj = Projectile.InitProjectile(baseProj);
+        proj.damage *= damageBonus;
+        proj.knockback *= knockbackBonus;
+        proj.pierce += pierceBonus;
+        
+        proj.projFired += multishotBouns;
+
+        if (proj.multiProjSpread == 0)
+            proj.multiProjSpread = proj.projFired != 0 ? 15 : 0;
+
         CreateProjectile.Create(proj, this, attackAngle);
     }
 
@@ -375,7 +401,7 @@ public class Entity : MonoBehaviour
         subState = EntitySubStates.Hurt;
         if (GetComponent<ItemBehavior>() == null)
         {
-            currentHealth -= hitboxData.damage;
+            currentHealth -= hitboxData.damage * (1/defense);
         }
         rb.velocity = new Vector2(hitboxData.knockback * Mathf.Sign(transform.position.x - owner.transform.position.x), 5);
 

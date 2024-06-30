@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using Unity.Loading;
 using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -15,9 +15,12 @@ public class Trader : Interactable
 
     public Item want, give;
 
+    public AnimatorController[] animators;
+
     void Awake()
     {
-
+        Animator anim = transform.Find("Sprite").GetComponent<Animator>();
+        anim.runtimeAnimatorController = animators[Random.Range(0, animators.Length)];
         player = GameObject.Find("Player").GetComponent<Inventory>();
         
         interactive = GetComponent<Interactive>();
@@ -35,8 +38,8 @@ public class Trader : Interactable
         
         Vector3 scale = transform.localScale;
         int direction = player.transform.position.x > transform.position.x ? 1 : -1;
-            transform.localScale = new Vector3(direction*Math.Abs(scale.x), scale.y, scale.z);
-            contents.localScale = new Vector3(direction*Math.Abs(contents.localScale .x), contents.localScale .y, contents.localScale.z);
+            transform.localScale = new Vector3(direction*Mathf.Abs(scale.x), scale.y, scale.z);
+            contents.localScale = new Vector3(direction*Mathf.Abs(contents.localScale .x), contents.localScale .y, contents.localScale.z);
             
 
     }

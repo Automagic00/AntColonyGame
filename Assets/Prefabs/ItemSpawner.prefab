@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: ItemSpawner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,5 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemPrefab: {fileID: 6261384679600572615, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
   itemSpawnData:
-  - itemData: {fileID: 0}
+  - itemData: {fileID: 11400000, guid: 344a6dfe55af3dd47b4cd84cf092f505, type: 2}
+    weight: 1
+  itemRarityData:
+  - rarity: 5
     weight: 1
