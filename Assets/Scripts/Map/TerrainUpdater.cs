@@ -10,13 +10,14 @@ public class NewBehaviourScript : MonoBehaviour
 
 
     public GameObject[] gameStatePrefabs;
-    private Tilemap fg, bg;
+    private Tilemap fg, bg, plat;
 
     void Awake()
     {
 
         // Set camera bounds to tilemap
         Tilemap tilemap = transform.Find("Tiles").GetComponent<Tilemap>();
+        tilemap.CompressBounds();
 
         Vector3 worldmin = tilemap.transform.TransformPoint(tilemap.localBounds.min);
         Vector3 worldmax = tilemap.transform.TransformPoint(tilemap.localBounds.max) + new Vector3(0, 16, 0);
@@ -28,6 +29,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         bg = transform.Find("BGTiles").GetComponent<Tilemap>();
         fg = transform.Find("Tiles").GetComponent<Tilemap>();
+        plat = transform.Find("Platforms").GetComponent<Tilemap>();
 
 
         // Update map when game progresses
@@ -53,9 +55,16 @@ public class NewBehaviourScript : MonoBehaviour
     void add(GameObject prefab)
     {
         Tilemap addBG = prefab.transform.Find("pfBGTiles").GetComponent<Tilemap>();
-        Tilemap addFG = prefab.transform.Find("pfTiles").GetComponent<Tilemap>();
         addTilemaps(addBG, bg);
+        Tilemap addFG = prefab.transform.Find("pfTiles").GetComponent<Tilemap>();
         addTilemaps(addFG, fg);
+        if (prefab.transform.Find("pfPlatforms") != null)
+        {
+            Tilemap addPlat = prefab.transform.Find("pfPlatforms").GetComponent<Tilemap>();
+            if (addPlat != null)
+                addTilemaps(addPlat, plat);
+        }
+
 
         Transform addObjects = prefab.transform.Find("objects");
         if (addObjects != null)

@@ -5087,9 +5087,13 @@ MonoBehaviour:
   col: {fileID: 0}
   aggroRangeStart: 5
   aggroRangeEnd: 10
+  waypointDistance: 3
   attackRange: 2.5
-  attackCooldown: 2
+  attackCooldown: 1.25
+  aggroSpeedMod: 1
   enemyAttackType: 1
+  enemyMovementType: 1
+  flyingPatrolRange: 3
   facing: 0
 --- !u!50 &8927654619115382497
 Rigidbody2D:

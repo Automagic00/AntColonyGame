@@ -50,9 +50,9 @@ public class MapGenerator : MonoBehaviour
 
         RemoveArrows();
         UpdateMapBounds();
-        StartCoroutine( DelayNavMesh());
+        StartCoroutine(DelayNavMesh());
     }
-  
+
 
     public float minDepth = 4, maxDepth = 6;
     public float requiredRoomDepth = 2f;
@@ -91,7 +91,7 @@ public class MapGenerator : MonoBehaviour
         foreach (Node n in rootNodes)
             n.ApplyToMap();
 
-        
+
     }
 
     void RemoveArrows()
@@ -111,6 +111,7 @@ public class MapGenerator : MonoBehaviour
     void UpdateMapBounds()
     {
         Tilemap tilemap = transform.Find("Tiles").GetComponent<Tilemap>();
+        tilemap.CompressBounds();
 
         worldmin = tilemap.transform.TransformPoint(tilemap.localBounds.min);
         worldmax = tilemap.transform.TransformPoint(tilemap.localBounds.max) + new UnityEngine.Vector3(0, 16, 0);
@@ -134,7 +135,7 @@ public class MapGenerator : MonoBehaviour
 
         //Mathf.RoundToInt()
         grid.center = center;
-        grid.SetDimensions(Mathf.RoundToInt(size.x), Mathf.RoundToInt(size.y),1);
+        grid.SetDimensions(Mathf.RoundToInt(size.x), Mathf.RoundToInt(size.y), 1);
         Bounds bound = new Bounds();
         bound.SetMinMax(worldmin, worldmax);
 
@@ -371,8 +372,8 @@ public class MapGenerator : MonoBehaviour
                     if (chance != null && !chance.SpawnCheck(spawnSeed, root.seed)) continue;
 
                     Transform spawned = Instantiate(t, new UnityEngine.Vector3(roomLoc.x, roomLoc.y, 0) + t.position, UnityEngine.Quaternion.identity);
-                    if (room.isMirrored)
-                        spawned.localScale = new UnityEngine.Vector3(spawned.localScale.x * -1, spawned.localScale.y, spawned.localScale.z);
+                    // if (room.isMirrored)
+                    //     spawned.localScale = new UnityEngine.Vector3(spawned.localScale.x * -1, spawned.localScale.y, spawned.localScale.z);
                 }
 
                 BoundsInt bounds = room.fg.cellBounds;
@@ -394,6 +395,6 @@ public class MapGenerator : MonoBehaviour
                 n.ApplyToMap();
         }
 
-        
+
     }
 }

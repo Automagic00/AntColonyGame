@@ -5358,6 +5358,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5493702213440978005, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493702213440978005, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6261384679600572615, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
       propertyPath: m_Name
       value: Item
@@ -5366,6 +5374,26 @@ PrefabInstance:
       propertyPath: item
       value: 
       objectReference: {fileID: 11400000, guid: 4ebf245a523c4e54e8b3e503eca8cc0e, type: 2}
+    - target: {fileID: 7704190190105591337, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
+      propertyPath: _item
+      value: 
+      objectReference: {fileID: 11400000, guid: 95a6a90715e98104480680fdc695b271, type: 2}
+    - target: {fileID: 8342710419267567651, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342710419267567651, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342710419267567651, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2f0dda4cc05d75047a8950f41e7a4a65, type: 3}
+    - target: {fileID: 8342710419267567651, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5391,7 +5419,7 @@ PrefabInstance:
     - target: {fileID: 2770408899809803529, guid: 4254ebfd5db96dd43996dbfd7d245f71, type: 3}
       propertyPath: want
       value: 
-      objectReference: {fileID: 11400000, guid: 4ebf245a523c4e54e8b3e503eca8cc0e, type: 2}
+      objectReference: {fileID: 11400000, guid: 95a6a90715e98104480680fdc695b271, type: 2}
     - target: {fileID: 3122317359449098758, guid: 4254ebfd5db96dd43996dbfd7d245f71, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.37

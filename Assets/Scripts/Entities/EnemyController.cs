@@ -24,6 +24,7 @@ public class EnemyController : Entity
 
     private GameObject player;
     private bool aggro = false;
+    public float aggroSpeedMod = 1;
     public enum attackType
     {
         None = 0,
@@ -218,7 +219,8 @@ public class EnemyController : Entity
             jump = false;
             direction = 0;
         }
-        Move(direction, jump ? 1 : 0, jump);
+        Move(direction * aggroSpeedMod, jump ? 1 : 0, jump);
+        
     }
 
     public void Patrol()

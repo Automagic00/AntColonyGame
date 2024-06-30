@@ -172,8 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 1216953957346998922}
   defaultJumpSpeed: 12
-  defaultGroundSpeed: 15
-  defaultAirSpeed: 10
+  defaultGroundSpeed: 12
+  defaultAirSpeed: 8
   defaultJumps: 1
   groundFriction: 5
   airFriction: 3
@@ -193,9 +193,13 @@ MonoBehaviour:
   col: {fileID: 0}
   aggroRangeStart: 5
   aggroRangeEnd: 10
+  waypointDistance: 3
   attackRange: 5
   attackCooldown: 2
+  aggroSpeedMod: 1.2
   enemyAttackType: 0
+  enemyMovementType: 1
+  flyingPatrolRange: 3
   facing: 0
 --- !u!50 &2325910871162430398
 Rigidbody2D:

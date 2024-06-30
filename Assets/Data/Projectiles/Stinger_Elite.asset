@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100d51aa2010468418a83fc2848270ba, type: 3}
+  m_Name: Stinger_Elite
+  m_EditorClassIdentifier: 
+  name: Stinger
+  damage: 15
+  knockback: 10
+  size: {x: 0.2, y: 0.2}
+  speed: 10
+  pierce: 0
+  projFired: 3
+  multiProjSpread: 30
+  lifetime: 2
+  sprites:
+  - {fileID: 21300000, guid: 2721eab969bfdd34cbf4581f5927938d, type: 3}

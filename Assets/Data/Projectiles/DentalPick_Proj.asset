@@ -16,8 +16,10 @@ MonoBehaviour:
   damage: 10
   knockback: 5
   size: {x: 1, y: 1}
-  speed: 10
+  speed: 15
   pierce: 0
+  projFired: 1
+  multiProjSpread: 0
   lifetime: 1
   sprites:
   - {fileID: -1827592648, guid: 6a2d5a2541afac84b84d3e366ff267a5, type: 3}
