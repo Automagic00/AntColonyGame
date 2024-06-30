@@ -2579,6 +2579,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9119328ff0cda7f439934fdf36c00adf, type: 2}
   - {fileID: 11400000, guid: bd9ea391a9ef7414bbe78334d3c19770, type: 2}
   - {fileID: 11400000, guid: 713fb0140b7fa764bacb504537a2db66, type: 2}
+  - {fileID: 11400000, guid: a435a6e0469db264f81f85ca140ddaff, type: 2}
   doorTiles:
   - {fileID: 11400000, guid: d1af07f49aab04e45848d9f6094c3416, type: 2}
   - {fileID: 11400000, guid: 8cbf9b1f5092bcb40babcbdc84ba643f, type: 2}

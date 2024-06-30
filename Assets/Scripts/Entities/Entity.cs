@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,7 +40,7 @@ public class Entity : MonoBehaviour
     public float groundFriction = 8f;
     public float airFriction = 6f;
     public float grav = 3f;
-
+    private float maxFallSpeed = 32f;
     public float defaultMaxHealth = 100;
     /*[HideInInspector]*/
     public float maxHP;
@@ -155,7 +156,8 @@ public class Entity : MonoBehaviour
         // Friction
         float frictionCoefficient = (state == EntityStates.Ground) ? groundFriction : airFriction;
         float frictionForce = Mathf.Max(0, 1 - frictionCoefficient / 60);
-        rb.velocity = new Vector2(frictionForce * rb.velocity.x, rb.velocity.y);
+        //rb.velocity = new Vector2(frictionForce * rb.velocity.x, rb.velocity.y);
+        rb.velocity = new Vector2(frictionForce * rb.velocity.x, MathF.Max(rb.velocity.y, -maxFallSpeed));
     }
 
     public void Move(float hIn, float vIn, bool jump)

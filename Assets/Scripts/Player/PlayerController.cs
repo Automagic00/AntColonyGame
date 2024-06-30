@@ -78,6 +78,7 @@ public class PlayerController : Entity
 
     public override void FixedUpdate()
     {
+        Debug.Log(rb.velocity.y);
         if (PauseController.gameIsPaused)
             return;
 
