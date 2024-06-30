@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Trader : Interactable
@@ -24,6 +27,11 @@ public class Trader : Interactable
     void Update()
     {
         canInteract = canTrade();
+        // Face player
+        Vector3 scale = transform.localScale;
+        int direction = player.transform.position.x > transform.position.x ? 1 : -1;
+            transform.localScale = new Vector3(direction*Math.Abs(scale.x), scale.y, scale.z);
+
     }
 
     public override void enterInteractionRange()
