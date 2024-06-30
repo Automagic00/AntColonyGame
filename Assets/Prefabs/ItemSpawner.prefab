@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemPrefab: {fileID: 6261384679600572615, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
   itemSpawnData:
-  - itemData: {fileID: 11400000, guid: 344a6dfe55af3dd47b4cd84cf092f505, type: 2}
-    weight: 1
+  - itemData: {fileID: 0}
+    weight: 0
   itemRarityData:
-  - rarity: 5
+  - rarity: 1
     weight: 1
