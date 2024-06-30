@@ -32,14 +32,22 @@ public class NewBehaviourScript : MonoBehaviour
 
         // Update map when game progresses
         Globals.addProgressionListener(updateMap);
-        updateMap();
+
+        // Load existing
+        for (int i = 0; i <= Globals.gameProgression; i++)
+            addPrefab(i);
+    }
+    void OnDestroy()
+    {
+        Globals.removeProgressionListener(updateMap);
     }
 
-    void updateMap()
+    void updateMap() => addPrefab(Globals.gameProgression);
+    void addPrefab(int i)
     {
-        if (Globals.gameProgression >= 0 && Globals.gameProgression < gameStatePrefabs.Length
-        && gameStatePrefabs[Globals.gameProgression] != null)
-            add(gameStatePrefabs[Globals.gameProgression]);
+        if (i >= 0 && i < gameStatePrefabs.Length
+        && gameStatePrefabs[i] != null)
+            add(gameStatePrefabs[i]);
     }
 
     void add(GameObject prefab)

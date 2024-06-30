@@ -159,9 +159,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1918842155
+  m_SortingLayer: 1
+  m_SortingOrder: -100
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1248611438017531637
 MonoBehaviour:
@@ -540,8 +540,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canInteract: 1
-  text: Grassy Fields
-  sceneName: Grassy Fields
+  text: Home
+  sceneName: Tutorial
 --- !u!1 &3111335093848895856
 GameObject:
   m_ObjectHideFlags: 0

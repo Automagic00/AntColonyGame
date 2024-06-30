@@ -712,6 +712,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7089630404251775487}
     m_Modifications:
+    - target: {fileID: 1490463710981680995, guid: 646480f3d22dd9c41925221c86a8f36f, type: 3}
+      propertyPath: text
+      value: Grassy Fields
+      objectReference: {fileID: 0}
+    - target: {fileID: 1490463710981680995, guid: 646480f3d22dd9c41925221c86a8f36f, type: 3}
+      propertyPath: sceneName
+      value: Grassy Fields
+      objectReference: {fileID: 0}
     - target: {fileID: 2630672047847183249, guid: 646480f3d22dd9c41925221c86a8f36f, type: 3}
       propertyPath: m_Name
       value: Door

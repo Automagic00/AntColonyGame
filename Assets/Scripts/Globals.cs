@@ -21,4 +21,5 @@ public static class Globals
 
     private static List<UnityAction> onProgression = new List<UnityAction>();
     public static void addProgressionListener(UnityAction onProgress) => onProgression.Add(onProgress);
+    public static void removeProgressionListener(UnityAction onProgress) => onProgression.Remove(onProgress);
 }
