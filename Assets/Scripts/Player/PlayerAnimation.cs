@@ -106,6 +106,10 @@ public class PlayerAnimation : MonoBehaviour
         entity.FireProjectile(entity.projectiles[i]);
     }
 
+    public void AddVelocity(float speed)
+    {
+        entity.rb.AddForce(new Vector2(speed * Mathf.Sign(entity.rb.transform.localScale.x), 0),ForceMode2D.Impulse);
+    }
 
     public void AttackSplash(int i)
     {
