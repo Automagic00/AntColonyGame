@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
+//using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Pathfinding;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class MapGenerator : MonoBehaviour
 
     private float seed;
 
+
+    private Vector3 worldmin;
+    private Vector3 worldmax;
+    private bool astarscanned = false;
 
     void Start()
     {
@@ -45,8 +50,9 @@ public class MapGenerator : MonoBehaviour
 
         RemoveArrows();
         UpdateMapBounds();
+        StartCoroutine( DelayNavMesh());
     }
-
+  
 
     public float minDepth = 4, maxDepth = 6;
     public float requiredRoomDepth = 2f;
@@ -84,6 +90,8 @@ public class MapGenerator : MonoBehaviour
 
         foreach (Node n in rootNodes)
             n.ApplyToMap();
+
+        
     }
 
     void RemoveArrows()
@@ -104,12 +112,38 @@ public class MapGenerator : MonoBehaviour
     {
         Tilemap tilemap = transform.Find("Tiles").GetComponent<Tilemap>();
 
-        UnityEngine.Vector3 worldmin = tilemap.transform.TransformPoint(tilemap.localBounds.min);
-        UnityEngine.Vector3 worldmax = tilemap.transform.TransformPoint(tilemap.localBounds.max) + new UnityEngine.Vector3(0, 16, 0);
+        worldmin = tilemap.transform.TransformPoint(tilemap.localBounds.min);
+        worldmax = tilemap.transform.TransformPoint(tilemap.localBounds.max) + new UnityEngine.Vector3(0, 16, 0);
 
         Globals.mapBounds = new Bounds();
         Globals.mapBounds.SetMinMax(worldmin, worldmax);
 
+    }
+
+    public IEnumerator DelayNavMesh()
+    {
+        yield return new WaitForSeconds(.2f);
+        UpdateNavMesh();
+    }
+    public void UpdateNavMesh()
+    {
+        GridGraph grid = AstarPath.active.data.gridGraph;
+
+        Vector3 size = worldmax - worldmin;
+        Vector3 center = (worldmax + worldmin) / 2;
+
+        //Mathf.RoundToInt()
+        grid.center = center;
+        grid.SetDimensions(Mathf.RoundToInt(size.x), Mathf.RoundToInt(size.y),1);
+        Bounds bound = new Bounds();
+        bound.SetMinMax(worldmin, worldmax);
+
+        Tilemap tilemap = transform.Find("Tiles").GetComponent<Tilemap>();
+
+        /*CompositeCollider2D col = transform.Find("Tiles").GetComponent<CompositeCollider2D>();
+        col.GenerateGeometry();
+        Physics2D.SyncTransforms();*/
+        AstarPath.active.Scan();
     }
     class Node
     {
@@ -359,5 +393,7 @@ public class MapGenerator : MonoBehaviour
             foreach (Node n in children)
                 n.ApplyToMap();
         }
+
+        
     }
 }
