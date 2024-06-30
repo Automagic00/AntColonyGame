@@ -11,6 +11,8 @@ public class Item : ScriptableObject
 
     public float weight = 2;
     public float throwDamage = 0;
+
+    public float xSize = 1, ySize = 1;
 }
 
 public class Ring : Equipment

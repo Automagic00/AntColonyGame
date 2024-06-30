@@ -19,7 +19,16 @@ public class ItemBehavior : Interactable
         set
         {
             _item = value;
-            GetComponent<SpriteRenderer>().sprite = _item.sprite;
+            if (_item != null)
+            {
+                GetComponent<SpriteRenderer>().sprite = _item.sprite;
+                GetComponent<BoxCollider2D>().size = new Vector2(_item.xSize, _item.ySize);
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().sprite = null;
+                GetComponent<BoxCollider2D>().size = new Vector2(1, 1);
+            }
         }
     }
 

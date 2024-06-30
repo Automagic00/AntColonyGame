@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Nectar
   sprite: {fileID: 21300000, guid: 5557634f9cb95a443b4ae009235baf3e, type: 3}
-  flavorText: 
+  flavorText: As yummy as it looks
   weight: 1
   throwDamage: 0
+  xSize: 0.8
+  ySize: 0.8

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pebble
   sprite: {fileID: 21300000, guid: 2ee1e86545ce5f44cbcba4ee1190a1b7, type: 3}
-  flavorText: 
+  flavorText: Even smaller than an ant
   weight: 3
   throwDamage: 20
+  xSize: 0.6
+  ySize: 0.6

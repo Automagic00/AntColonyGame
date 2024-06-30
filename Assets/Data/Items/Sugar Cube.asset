@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Sugar Cube
   sprite: {fileID: 21300000, guid: dd8bc197def70934faa6e52e0690ea39, type: 3}
-  flavorText: 
+  flavorText: Heavy and yummy
   weight: 7
   throwDamage: 20
+  xSize: 0.6
+  ySize: 0.6
