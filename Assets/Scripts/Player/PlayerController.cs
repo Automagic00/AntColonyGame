@@ -69,8 +69,8 @@ public class PlayerController : Entity
 
         // Buffer inputs
         if (Input.GetKeyDown(KeyCode.Space)) bufferUseJump = true;
-        if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.Z)) bufferUseAttack = true;
-        if (Input.GetMouseButtonDown(1) || Input.GetKey(KeyCode.X)) bufferUseDodge = true;
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Z)) bufferUseAttack = true;
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.X)) bufferUseDodge = true;
         // if (Input.GetKeyDown(KeyCode.C)) bufferUseMagic = true;
 
         UpdateInteraction();
