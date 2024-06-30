@@ -4900,6 +4900,7 @@ GameObject:
   - component: {fileID: 2060121314198783755}
   - component: {fileID: 7777833058834458022}
   - component: {fileID: 8540741152697098455}
+  - component: {fileID: 3683051275893190333}
   m_Layer: 6
   m_Name: Wasp
   m_TagString: Enemy
@@ -4939,11 +4940,11 @@ MonoBehaviour:
   mat: {fileID: 418261701692963867}
   defaultJumpSpeed: 12
   defaultGroundSpeed: 15
-  defaultAirSpeed: 10
+  defaultAirSpeed: 5
   defaultJumps: 1
   groundFriction: 5
-  airFriction: 3
-  grav: 3
+  airFriction: 1
+  grav: 0
   defaultMaxHealth: 40
   maxHP: 0
   currentHealth: 0
@@ -4959,9 +4960,12 @@ MonoBehaviour:
   col: {fileID: 0}
   aggroRangeStart: 6
   aggroRangeEnd: 10
+  waypointDistance: 3
   attackRange: 5
   attackCooldown: 2
   enemyAttackType: 2
+  enemyMovementType: 2
+  flyingPatrolRange: 5
   facing: 0
 --- !u!50 &7777833058834458022
 Rigidbody2D:
@@ -5035,6 +5039,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.69, y: 1.63}
   m_EdgeRadius: 0
+--- !u!114 &3683051275893190333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3622209496111958776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &3874579200272069962
 GameObject:
   m_ObjectHideFlags: 0
