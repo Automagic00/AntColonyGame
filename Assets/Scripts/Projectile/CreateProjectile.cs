@@ -25,7 +25,7 @@ public class CreateProjectile : MonoBehaviour
         }
         else
         {
-            float angleRotation = Vector2.Angle(Vector2.right, angle);
+            float angleRotation = Vector2.SignedAngle(Vector2.right, angle);
             projObj.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angleRotation));
         }
 

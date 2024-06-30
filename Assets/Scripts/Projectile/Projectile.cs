@@ -11,6 +11,8 @@ public class Projectile : ScriptableObject
     public Vector2 size;
     public float speed;
     public int pierce; //How many enemies will it pierce
+    public int projFired = 1;
+    public float multiProjSpread;
     public float lifetime;
 
     public Sprite[] sprites;
