@@ -15,6 +15,10 @@ MonoBehaviour:
   name: Dental Pick
   sprite: {fileID: 21300000, guid: ebdd1e565f9b5ed46ae644dc25ffc21b, type: 3}
   flavorText: Minty and pristine
+  weight: 2
+  throwDamage: 5
+  xSize: 1
+  ySize: 1
   groundspeedMod: 1
   airspeedMod: 1
   damageMod: 1

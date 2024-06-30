@@ -16,7 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   flavorText: I dont know what to put here tbh
   weight: 2
-  throwDamage: 0
+  throwDamage: 10
   xSize: 1
   ySize: 1
   groundspeedMod: 1
@@ -25,7 +25,7 @@ MonoBehaviour:
   jumpHeightMod: 1
   hpMod: 1
   doubleJumpMod: 0
-  holdPosition: {x: 0, y: 0}
+  holdPosition: {x: 0.11, y: 0.41}
   weaponType: 0
   baseDamage: 30
   attackSpeed: 1

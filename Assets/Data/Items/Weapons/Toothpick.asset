@@ -15,6 +15,10 @@ MonoBehaviour:
   name: Toothpick
   sprite: {fileID: 21300000, guid: ef1a034407f945940a08260054f3870d, type: 3}
   flavorText: Smells a bit funky
+  weight: 2
+  throwDamage: 5
+  xSize: 1
+  ySize: 1
   groundspeedMod: 1
   airspeedMod: 1
   damageMod: 1
