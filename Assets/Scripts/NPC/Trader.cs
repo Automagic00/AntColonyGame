@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Loading;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class Trader : Interactable
     private Interactive interactive;
 
     private GameObject interactionBox;
+    private Transform contents;
 
     public Item want, give;
 
@@ -17,8 +19,10 @@ public class Trader : Interactable
     {
 
         player = GameObject.Find("Player").GetComponent<Inventory>();
+        
         interactive = GetComponent<Interactive>();
         interactionBox = transform.Find("TradeBox").gameObject;
+        contents = interactionBox.transform.Find("contents");
     }
 
 
@@ -28,16 +32,19 @@ public class Trader : Interactable
     {
         canInteract = canTrade();
         // Face player
+        
         Vector3 scale = transform.localScale;
         int direction = player.transform.position.x > transform.position.x ? 1 : -1;
             transform.localScale = new Vector3(direction*Math.Abs(scale.x), scale.y, scale.z);
+            contents.localScale = new Vector3(direction*Math.Abs(contents.localScale .x), contents.localScale .y, contents.localScale.z);
+            
 
     }
 
     public override void enterInteractionRange()
     {
-        interactionBox.transform.Find("want").GetComponent<SpriteRenderer>().sprite = want.sprite;
-        interactionBox.transform.Find("give").GetComponent<SpriteRenderer>().sprite = give.sprite;
+        contents.transform.Find("want").GetComponent<SpriteRenderer>().sprite = want.sprite;
+        contents.transform.Find("give").GetComponent<SpriteRenderer>().sprite = give.sprite;
         interactionBox.SetActive(true);
     }
     public override void exitInteractionRange()
