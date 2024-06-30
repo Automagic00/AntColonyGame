@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QueenAnt : Interactable, Dialoguer
 {
@@ -69,11 +70,30 @@ public class QueenAnt : Interactable, Dialoguer
                 new DialogueItem(){text="Meanwhile, search the Grassy Fields for more supplies!"},
                 new DialogueItem(){text="Be warned though- the bugs there may be hostile to us.\n(press Z to attack)"},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
-            case 3: // TUTORIAL part 3: Go to grassy fields now
-                return new List<DialogueItem>(){
+            case 3:
+                // TUTORIAL part 3: Go to grassy fields now
+                if (SceneManager.GetActiveScene().name == "Tutorial")
+                    return new List<DialogueItem>(){
                 new DialogueItem(){name="Queen Tyr", picture=GetComponent<SpriteRenderer>().sprite},
                 new DialogueItem(){text="Search the Grassy Fields for more supplies!"},
                 new DialogueItem(){text="Be warned though- the bugs there may be hostile to us.\n(press Z to attack)"},
+                new DialogueItem(){action=()=>{canInteract = true;}}};
+
+                // Returned from grassy fields
+                //TODO
+                return new List<DialogueItem>(){
+                new DialogueItem(){name="Queen Tyr", picture=GetComponent<SpriteRenderer>().sprite},
+                new DialogueItem(){action=()=>{Globals.gameProgression++;}},
+                new DialogueItem(){text="I make big house now. :3"},
+                new DialogueItem(){action=()=>{canInteract = true;}}};
+            case 4:
+            case 5:
+            case 6:
+                //TODO
+                return new List<DialogueItem>(){
+                new DialogueItem(){name="Queen Tyr", picture=GetComponent<SpriteRenderer>().sprite},
+                new DialogueItem(){action=()=>{Globals.gameProgression++;}},
+                new DialogueItem(){text="I make house bigger now :3"},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
 
         }
