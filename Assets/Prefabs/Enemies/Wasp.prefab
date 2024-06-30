@@ -4940,10 +4940,10 @@ MonoBehaviour:
   mat: {fileID: 418261701692963867}
   defaultJumpSpeed: 12
   defaultGroundSpeed: 15
-  defaultAirSpeed: 5
+  defaultAirSpeed: 40
   defaultJumps: 1
   groundFriction: 5
-  airFriction: 1
+  airFriction: 3
   grav: 0
   defaultMaxHealth: 40
   maxHP: 0
@@ -4958,11 +4958,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 778084f33841b7e4d9c8ffb5a2fb6fcd, type: 2}
   rb: {fileID: 0}
   col: {fileID: 0}
-  aggroRangeStart: 6
-  aggroRangeEnd: 10
+  aggroRangeStart: 7
+  aggroRangeEnd: 14
   waypointDistance: 3
   attackRange: 5
   attackCooldown: 2
+  aggroSpeedMod: 1
   enemyAttackType: 2
   enemyMovementType: 2
   flyingPatrolRange: 5
