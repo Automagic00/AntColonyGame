@@ -16,7 +16,7 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        if (canAdvanceDialouge && Input.GetKeyDown(KeyCode.F))
+        if (canAdvanceDialouge && (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.C) || Input.GetMouseButtonDown(2)))
         {
             bool skippedText = skipText();
             if (!skippedText)
