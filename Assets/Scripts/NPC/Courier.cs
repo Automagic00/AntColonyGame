@@ -41,11 +41,15 @@ public class Courier : Interactable
 
     public override void enterInteractionRange()
     {
+        Animator anim = transform.Find("Sprite").GetComponent<Animator>();
+        anim.SetBool("PlayerInRange", true);
         // contents.transform.Find("want").GetComponent<SpriteRenderer>().sprite = want.sprite;
         // interactionBox.SetActive(true);
     }
     public override void exitInteractionRange()
     {
+        Animator anim = transform.Find("Sprite").GetComponent<Animator>();
+        anim.SetBool("PlayerInRange", false);
         interactionBox.SetActive(false);
     }
 

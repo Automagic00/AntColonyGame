@@ -75,4 +75,15 @@ public class AnthillCourier : Interactable, Dialoguer
         Dialogue.OpenDialogue(this);
     }
 
+    public override void enterInteractionRange()
+    {
+        Animator anim = transform.Find("Sprite").GetComponent<Animator>();
+        anim.SetBool("PlayerInRange", true);
+    }
+    public override void exitInteractionRange()
+    {
+        Animator anim = transform.Find("Sprite").GetComponent<Animator>();
+        anim.SetBool("PlayerInRange", false);
+    }
+
 }
