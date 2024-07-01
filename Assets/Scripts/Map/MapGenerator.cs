@@ -118,10 +118,10 @@ public class MapGenerator : MonoBehaviour
         {
             minDepth = 0.5f;
             maxDepth = 1.5f;
-            requiredRoomDepth = 0.1f;
+            requiredRoomDepth = 0;
             requiredRoomIncrement = 0.25f;
-            npcTradeLength = 1;
-            minItems = 0;
+            npcTradeLength = 2;
+            minItems = 1;
         }
         else
             switch (Globals.gameProgression)
@@ -131,38 +131,38 @@ public class MapGenerator : MonoBehaviour
                     maxDepth = 2.5f;
                     requiredRoomDepth = 0.5f;
                     requiredRoomIncrement = 0.5f;
-                    npcTradeLength = 1;
-                    minItems = 1;
+                    npcTradeLength = 2;
+                    minItems = 2;
                     break;
                 case 5:
                     minDepth = 2f;
                     maxDepth = 3.5f;
                     requiredRoomDepth = 1.0f;
                     requiredRoomIncrement = 0.75f;
-                    npcTradeLength = 2;
-                    minItems = 1;
+                    npcTradeLength = 3;
+                    minItems = 2;
                     break;
                 case 6:
                     minDepth = 3f;
                     maxDepth = 4.5f;
                     requiredRoomDepth = 1.5f;
                     requiredRoomIncrement = 1.0f;
-                    npcTradeLength = 2;
-                    minItems = 2;
+                    npcTradeLength = 3;
+                    minItems = 3;
                     break;
                 default:
                     minDepth = 5f;
                     maxDepth = 6f;
                     requiredRoomDepth = 2.5f;
                     requiredRoomIncrement = 1.25f;
-                    npcTradeLength = 3;
-                    minItems = 3;
+                    npcTradeLength = 4;
+                    minItems = 4;
                     break;
             }
 
         foreach (Room r in traderRooms)
             r.minAmount = 0;
-        for (int i = 0; i <= npcTradeLength + 1; i++)
+        for (int i = 0; i <= npcTradeLength; i++)
             traderRooms[Random.Range(0, traderRooms.Count)].minAmount++;
         foreach (Room r in traderRooms)
             r.maxAmount = r.minAmount + 1;
@@ -171,7 +171,6 @@ public class MapGenerator : MonoBehaviour
             r.minAmount = 0;
         for (int i = 0; i < minItems; i++)
             itemRooms[Random.Range(0, itemRooms.Count)].minAmount++;
-
     }
 
     public IEnumerator DelayMakeItemTradeRoute()
@@ -199,7 +198,7 @@ public class MapGenerator : MonoBehaviour
         // Always start trades with leaf
         List<Item> tradeRoute = new List<Item> { allItems[0] };
         possibleTrades.Remove(allItems[0]);
-        for (int i = 0; i < npcTradeLength; i++)
+        for (int i = 1; i < npcTradeLength; i++)
         {
             Item tradeItem = possibleTrades[0];
             tradeRoute.Add(tradeItem);

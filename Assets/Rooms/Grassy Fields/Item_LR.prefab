@@ -10160,7 +10160,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 541049354, guid: 5ae801b0a50516148ba88179b20bdf1d, type: 3}
       - {fileID: 1002670518, guid: 5ae801b0a50516148ba88179b20bdf1d, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -9, y: 9, z: 0}
@@ -10764,7 +10764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomMinRange: 0
-  roomMaxRange: 50
+  roomMaxRange: 80
   sceneMinRange: 0
   sceneMaxRange: 100
   afterGameProgression: 3
