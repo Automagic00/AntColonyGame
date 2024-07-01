@@ -130,6 +130,8 @@ public class PlayerController : Entity
             currentInteraction = interact;
         }
 
+        if (Dialogue.dialogueIsOpen) return;
+
         // Show interact on UI
         if (uiInteractButton != null) uiInteractButton.gameObject.SetActive(currentInteraction != null);
 
