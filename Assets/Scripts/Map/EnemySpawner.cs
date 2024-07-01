@@ -18,10 +18,12 @@ public class EnemySpawner : MonoBehaviour
     private GameObject enemyPrefabRespawn;
     private bool respawning = false;
     private Coroutine respawnRoutine;
+    private Camera cam;
 
     // Start is called before the first frame update
     void Start()
     {
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         //TODO: Stop enemies from spawning twice on mapGen
         //Delay is a temp fix
         StartCoroutine(Delay());
@@ -31,14 +33,15 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemySpawned != null)
         {
+            //Debug.Log(IsVisible(transform.position, new Vector3(8, 6, 50), cam));
             // Debug.Log("is visible: " + enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible);
-            if (!enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible && enemySpawned.GetComponent<EnemyController>().GetCurrentSubState() == EnemyController.EntitySubStates.Dead && respawning == false)
+            if (!IsVisible(transform.position, new Vector3(8, 6, 50), cam) && enemySpawned.GetComponent<EnemyController>().GetCurrentSubState() == EnemyController.EntitySubStates.Dead && respawning == false)
             {
                 respawning = true;
                 respawnRoutine = StartCoroutine(TryRespawn());
 
             }
-            else if (enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible)
+            else if (IsVisible(transform.position, new Vector3(8, 6, 50), cam))
             {
                 if (respawnRoutine != null)
                     StopCoroutine(respawnRoutine);
@@ -86,5 +89,13 @@ public class EnemySpawner : MonoBehaviour
         enemySpawned = Instantiate(enemyPrefabRespawn, transform.localPosition, transform.rotation);
         Debug.Log("EnemySpawned " + enemySpawned.transform.position);
     }
+
+    bool IsVisible(Vector3 pos, Vector3 boundSize, Camera camera)
+    {
+        var bounds = new Bounds(pos, boundSize);
+        var planes = GeometryUtility.CalculateFrustumPlanes(camera);
+        return GeometryUtility.TestPlanesAABB(planes, bounds);
+    }
+
 
 }

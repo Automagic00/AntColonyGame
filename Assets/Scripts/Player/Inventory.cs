@@ -5,12 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Inventory : MonoBehaviour
 {
 
     [SerializeField]
-    private Item _carry;
+    private static Item _carry;
     public Item carry
     {
         get => _carry;
@@ -35,8 +36,22 @@ public class Inventory : MonoBehaviour
     }
 
     [SerializeField]
-    private Weapon _weapon;
-    private Ring[] rings = new Ring[MAX_RINGS];
+    private static Weapon _weapon;
+
+    public Weapon weapon
+    {
+        get => _weapon;
+        set
+        {
+            _weapon = value;
+            if (_weapon == null) weaponSprite.sprite = null;
+            else weaponSprite.sprite = _weapon.sprite;
+            updateWeaponStats();
+        }
+    }
+
+    [SerializeField]
+    private static Ring[] rings = new Ring[MAX_RINGS];
     private const int MAX_RINGS = 6;
 
 
@@ -50,10 +65,13 @@ public class Inventory : MonoBehaviour
         carrySprite = transform.Find("Hold").GetComponent<SpriteRenderer>();
         weaponPosition = transform.Find("Sugar_Ant_Sprite").Find("Hands").Find("Weapon").gameObject;
         weaponSprite = weaponPosition.GetComponent<SpriteRenderer>();
+
         // Refresh sprites
         carry = _carry;
         weapon = _weapon;
 
+        if (SceneManager.GetActiveScene().name == "Anthill")
+            ClearInventory(true, false);
     }
 
     public bool holding(Item item) => carry == item || weapon == item;
@@ -110,18 +128,6 @@ public class Inventory : MonoBehaviour
         throwItem.GetComponent<Rigidbody2D>().velocity = new Vector3(2.5f * transform.localScale.x * (backwards ? -1 : 1), 4, 0);
 
         weapon = null;
-    }
-
-    public Weapon weapon
-    {
-        get => _weapon;
-        set
-        {
-            _weapon = value;
-            if (_weapon == null) weaponSprite.sprite = null;
-            else weaponSprite.sprite = _weapon.sprite;
-            updateWeaponStats();
-        }
     }
 
     public bool RingsFull() => rings.Length >= MAX_RINGS;
@@ -247,7 +253,7 @@ public class Inventory : MonoBehaviour
 
 
 
-        player.ModifyStats(groundspeedMod, airspeedMod, jumpHeightMod, doubleJumpMod,damageMod, hpMod, defenseMod,knockbackMod,rollSpeedMod,multishotMod,pierceMod,attackSpeedMod);
+        player.ModifyStats(groundspeedMod, airspeedMod, jumpHeightMod, doubleJumpMod, damageMod, hpMod, defenseMod, knockbackMod, rollSpeedMod, multishotMod, pierceMod, attackSpeedMod);
     }
 
     private void updateWeaponStats()
@@ -273,8 +279,7 @@ public class Inventory : MonoBehaviour
     {
         get
         {
-            List<Equipment> equipmentList = new List<Equipment>();
-            if (_weapon != null) equipmentList.Add(_weapon);
+            List<Equipment> equipmentList = new List<Equipment> { _weapon };
             equipmentList.AddRange(rings);
             return equipmentList.Where(i => i != null).ToList();
         }

@@ -25,10 +25,14 @@ public class InventorySlot : MonoBehaviour
     private Item lastItem;
     private Canvas canvas;
 
-    void Start()
+    void Awake()
     {
         canvas = FindAnyObjectByType<Canvas>();
         player = FindAnyObjectByType<Inventory>();
+    }
+
+    void Start()
+    {
         mouse = transform.parent.Find("Mouse Slot").GetComponent<InventorySlot>();
         sprite = transform.Find("item").GetComponent<Image>();
     }
@@ -121,5 +125,5 @@ public class InventorySlot : MonoBehaviour
         }
     }
 
-    
+
 }

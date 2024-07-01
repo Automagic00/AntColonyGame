@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d330e264899b149827a815e65630f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statWindowPrefab: {fileID: 0}
   outlineSize: 2
   interactDistance: 5
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
@@ -120,6 +121,11 @@ MonoBehaviour:
   canInteract: 1
   want1: {fileID: 11400000, guid: 95a6a90715e98104480680fdc695b271, type: 2}
   want2: {fileID: 11400000, guid: 76aed060a6c505046875e0231b6f86b8, type: 2}
+  want3: {fileID: 11400000, guid: f9e292b509738c84eba30aded6ca7c82, type: 2}
+  want4: {fileID: 11400000, guid: 7e97022dc17873240bfffad211633342, type: 2}
+  want5: {fileID: 11400000, guid: 4ebf245a523c4e54e8b3e503eca8cc0e, type: 2}
+  want6: {fileID: 11400000, guid: c497a03a0f76c1643bb747d51af371dd, type: 2}
+  dialogueIcon: {fileID: 21300000, guid: b4669993471c4b043a459aa49b1a351b, type: 3}
 --- !u!95 &6596726461384571019
 Animator:
   serializedVersion: 5
