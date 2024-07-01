@@ -51,6 +51,36 @@ public class ItemBehavior : Interactable
 
             Destroy(this.gameObject);
         }
+        else if (_item is Ring)
+        {
+            bool ringFull = false;
+            for(int i = 0; i < 6; i++)
+            {
+                if(player.GetRing(i) == null)
+                {
+                    player.SetRing((Ring)_item, i);
+                    break;
+                }
+                else if(i == 5)
+                {
+                    ringFull = true;
+                }
+            }
+
+            if (ringFull)
+            {
+                if (player.carry == null)
+                {
+                    player.carry = _item;
+                }
+                else
+                {
+                    player.dropCarry(true);
+                    player.carry = _item;
+                }
+            }
+            Destroy(this.gameObject);
+        }
         else
         {
             if (player.carry != null)

@@ -114,9 +114,9 @@ public class Entity : MonoBehaviour
         damageBonus = damageMod;
 
         // Keep hp:maxHP the same before and after
-        float hpRatio = (maxHP != 0) ? currentHealth / maxHP : 1;
-        maxHP = defaultMaxHealth * hpMod;
-        currentHealth = maxHP * hpRatio;
+        //float hpRatio = (maxHP != 0) ? currentHealth / maxHP : 1;
+        maxHP = defaultMaxHealth * hpMod < 1 ? 1 : defaultMaxHealth * hpMod;
+        currentHealth = currentHealth > maxHP? maxHP : currentHealth;
 
         knockbackBonus = knockbackMod;
         rollSpeed = defaultRollSpeed * rollspeedMod;
