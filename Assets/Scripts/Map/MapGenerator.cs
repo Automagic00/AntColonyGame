@@ -135,7 +135,7 @@ public class MapGenerator : MonoBehaviour
 
         foreach (Room r in traderRooms)
             r.minAmount = 0;
-        for (int i = 0; i < npcTradeLength; i++)
+        for (int i = 0; i <= npcTradeLength; i++)
             traderRooms[Random.Range(0, traderRooms.Count)].minAmount++;
         foreach (Room r in traderRooms)
             r.maxAmount = r.minAmount + 1;
@@ -186,10 +186,7 @@ public class MapGenerator : MonoBehaviour
         // BACKUP: If missing traders in route, spawn some at start
         for (int i = 0; i + traders.Count < tradeRoute.Count - 1; i++)
         {
-            // TODO generate traders
             traders.Add(Instantiate(traders[0], new Vector3(i, 4.8f, 0), Quaternion.identity));
-
-
         }
 
         /// Set random item to starting trade, and setup traders
@@ -319,7 +316,7 @@ public class MapGenerator : MonoBehaviour
     {
         string ret = "";
         for (int i = 0; i < rooms.Count(); i++)
-            if (rooms[i].minAmount > 0)
+            if (roomCount[i] < rooms[i].minAmount)
                 ret += rooms[i].name + ": " + rooms[i].minAmount + " (" + roomCount[i] + ")\n";
 
         return ret;
@@ -451,17 +448,17 @@ public class MapGenerator : MonoBehaviour
                     validRooms.Remove(r);
                     i--;
                 }
-                // else if (root.roomCount[roomIndex] >= r.unmirrored.minAmount && r.exits <= 1 && stillNeedsRooms)
-                // {
-                //     validRooms.Remove(r);
-                //     i--;
-                // }
+                else if (depth >= root.requiredRoomDepth && root.roomCount[roomIndex] >= r.unmirrored.minAmount && r.exits <= 1 && stillNeedsRooms)
+                {
+                    validRooms.Remove(r);
+                    i--;
+                }
                 // Force complete
-                // else if (root.genQueue.Count == 1 && !root.willComleteRequiredRooms(r))
-                // {
-                //     validRooms.Remove(r);
-                //     i--;
-                // }
+                else if (root.genQueue.Count == 1 && !root.willComleteRequiredRooms(r) && r.exits <= 1)
+                {
+                    validRooms.Remove(r);
+                    i--;
+                }
             }
             for (int i = 0; i < lowPriorityValidRooms.Count; i++)
             {
@@ -472,17 +469,17 @@ public class MapGenerator : MonoBehaviour
                     lowPriorityValidRooms.Remove(r);
                     i--;
                 }
-                // else if (root.roomCount[roomIndex] >= r.unmirrored.minAmount && r.exits <= 1 && stillNeedsRooms)
-                // {
-                //     lowPriorityValidRooms.Remove(r);
-                //     i--;
-                // }
+                else if (depth >= root.requiredRoomDepth && root.roomCount[roomIndex] >= r.unmirrored.minAmount && r.exits <= 1 && stillNeedsRooms)
+                {
+                    lowPriorityValidRooms.Remove(r);
+                    i--;
+                }
                 // Force complete
-                // else if (root.genQueue.Count == 1 && !root.willComleteRequiredRooms(r))
-                // {
-                //     lowPriorityValidRooms.Remove(r);
-                //     i--;
-                // }
+                else if (root.genQueue.Count == 1 && !root.willComleteRequiredRooms(r) && r.exits <= 1)
+                {
+                    lowPriorityValidRooms.Remove(r);
+                    i--;
+                }
             }
 
             if (depth < root.requiredRoomDepth) return;
