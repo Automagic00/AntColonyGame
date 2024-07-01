@@ -31,6 +31,9 @@ public class MapGenerator : MonoBehaviour
     private Vector3 worldmin;
     private Vector3 worldmax;
 
+    public Item[] allItems;
+    public Item[] allValuables;
+
     void Start()
     {
         bg = transform.Find("BGTiles").GetComponent<Tilemap>();
@@ -83,14 +86,14 @@ public class MapGenerator : MonoBehaviour
 
         if (QueenAnt.queenWants != null)
             targetItem = QueenAnt.queenWants[System.Math.Clamp(Globals.gameProgression - 1, 0, QueenAnt.queenWants.Count - 1)];
-        else targetItem = Item.Items[2];
+        else targetItem = allItems[2];
 
         int minItems;
 
         if (Globals.gameProgression <= 3)
         {
             minDepth = 0.5f;
-            maxDepth = 1.5f;
+            maxDepth = 2f;
             requiredRoomDepth = 0.1f;
             requiredRoomIncrement = 0.25f;
             npcTradeLength = 1;
@@ -101,7 +104,7 @@ public class MapGenerator : MonoBehaviour
             {
                 case 4:
                     minDepth = 1.0f;
-                    maxDepth = 2.5f;
+                    maxDepth = 3f;
                     requiredRoomDepth = 0.5f;
                     requiredRoomIncrement = 0.5f;
                     npcTradeLength = 1;
@@ -109,7 +112,7 @@ public class MapGenerator : MonoBehaviour
                     break;
                 case 5:
                     minDepth = 2f;
-                    maxDepth = 4.0f;
+                    maxDepth = 5f;
                     requiredRoomDepth = 1.0f;
                     requiredRoomIncrement = 0.75f;
                     npcTradeLength = 2;
@@ -117,7 +120,7 @@ public class MapGenerator : MonoBehaviour
                     break;
                 case 6:
                     minDepth = 3f;
-                    maxDepth = 5.5f;
+                    maxDepth = 7f;
                     requiredRoomDepth = 1.5f;
                     requiredRoomIncrement = 1.0f;
                     npcTradeLength = 2;
@@ -125,7 +128,7 @@ public class MapGenerator : MonoBehaviour
                     break;
                 default:
                     minDepth = 5f;
-                    maxDepth = 8.0f;
+                    maxDepth = 9f;
                     requiredRoomDepth = 2.5f;
                     requiredRoomIncrement = 1.25f;
                     npcTradeLength = 3;
@@ -164,16 +167,16 @@ public class MapGenerator : MonoBehaviour
         traders.Shuffle();
 
         // Make list of valid trade items
-        List<Item> possibleTrades = new List<Item>(Item.Items);
+        List<Item> possibleTrades = new List<Item>(allItems);
         possibleTrades.Shuffle();
         possibleTrades.Remove(targetItem);
-        List<Item> valuables = new List<Item>(Item.valuables);
+        List<Item> valuables = new List<Item>(allValuables);
         valuables.Shuffle();
 
         /// Make expected trade route
         // Always start trades with leaf
-        List<Item> tradeRoute = new List<Item> { Item.Items[0] };
-        possibleTrades.Remove(Item.Items[0]);
+        List<Item> tradeRoute = new List<Item> { allItems[0] };
+        possibleTrades.Remove(allItems[0]);
         for (int i = 0; i < npcTradeLength; i++)
         {
             Item tradeItem = possibleTrades[0];
@@ -205,18 +208,16 @@ public class MapGenerator : MonoBehaviour
         if (items.Count > 0)
             for (int i = 0; i < items.Count || i < traders.Count; i++)
             {
-                if (possibleTrades.Count == 0 && valuables.Count >= 2)
-                {
-                    Item valuable = valuables[0];
-                    possibleTrades.Add(valuable);
-                    valuables.Remove(valuable);
-                }
 
                 // Only choose a new trade item if it can set one
                 if (i < items.Count && possibleTrades.Count > 0)
                 {
                     goodTradeItem = possibleTrades[0];
                     possibleTrades.Remove(goodTradeItem);
+                }
+                else
+                {
+                    goodTradeItem = allItems[0];
                 }
                 // Only choose a new weapon if it can give one
                 if (i < traders.Count && valuables.Count > 0)
@@ -426,7 +427,7 @@ public class MapGenerator : MonoBehaviour
                     continue;
                 }
                 // Don't repeat rooms
-                if (parent != null && room == parent.room)
+                if (parent != null && room.unmirrored == parent.room.unmirrored)
                 {
                     lowPriorityValidRooms.Add(room);
                     continue;

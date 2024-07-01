@@ -81,7 +81,6 @@ public class ItemSpawner : MonoBehaviour
                         itemSpawned.GetComponent<ItemBehavior>().item = equipment;
 
                         equipment.rarity = item.rarity;
-                        Debug.Log(equipment.rarity);
                         //Add Modifiers
                         for (int i = 1; i < (int)item.rarity; i++)
                         {

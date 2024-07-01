@@ -1,31 +1,24 @@
 using System.Collections.Generic;
 using Unity.Loading;
 using Unity.VisualScripting;
-using UnityEditor.Animations;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Nurse : Interactable
 {
     private Inventory player;
     private Entity playerEntity;
-    private Interactive interactive;
 
     private GameObject interactionBox;
     private Transform contents;
 
     public Item want;
 
-    public AnimatorController[] animators;
 
     void Awake()
     {
-        Animator anim = transform.Find("Sprite").GetComponent<Animator>();
-        anim.runtimeAnimatorController = animators[Random.Range(0, animators.Length)];
         player = GameObject.Find("Player").GetComponent<Inventory>();
         playerEntity = player.GetComponent<Entity>();
 
-        interactive = GetComponent<Interactive>();
         interactionBox = transform.Find("TradeBox").gameObject;
         contents = interactionBox.transform.Find("contents");
     }
