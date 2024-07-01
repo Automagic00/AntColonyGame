@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    
     [System.Serializable]
     public class EnemySpawnData
     {
@@ -21,29 +22,9 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float totalWeight = 0;
-
-        foreach (var enemy in enemySpawnData)
-        {
-            totalWeight += enemy.weight;
-        }
-
-        float randomPick = Random.Range(0, totalWeight);
-        float testWeight = 0;
-
-        foreach (var enemy in enemySpawnData)
-        {
-            testWeight += enemy.weight;
-            if (testWeight >= randomPick)
-            {
-                if (enemy.enemyPrefab != null)
-                {
-                    enemySpawned = Instantiate(enemy.enemyPrefab, transform.position, transform.rotation);
-                    enemyPrefabRespawn = enemy.enemyPrefab;
-                }
-                break;
-            }
-        }
+        //TODO: Stop enemies from spawning twice on mapGen
+        //Delay is a temp fix
+        StartCoroutine(Delay());
     }
 
     private void Update()
@@ -71,11 +52,39 @@ public class EnemySpawner : MonoBehaviour
             respawning = false;
         }
     }
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1f);
+        float totalWeight = 0;
+
+        foreach (var enemy in enemySpawnData)
+        {
+            totalWeight += enemy.weight;
+        }
+
+        float randomPick = Random.Range(0, totalWeight);
+        float testWeight = 0;
+
+        foreach (var enemy in enemySpawnData)
+        {
+            testWeight += enemy.weight;
+            if (testWeight >= randomPick)
+            {
+                if (enemy.enemyPrefab != null)
+                {
+                    enemySpawned = Instantiate(enemy.enemyPrefab, transform.localPosition, transform.rotation);
+                    enemyPrefabRespawn = enemy.enemyPrefab;
+                }
+                break;
+            }
+        }
+    }
 
     private IEnumerator TryRespawn()
     {
         yield return new WaitForSeconds(respawnTime);
-        enemySpawned = Instantiate(enemyPrefabRespawn, transform.position, transform.rotation);
+        enemySpawned = Instantiate(enemyPrefabRespawn, transform.localPosition, transform.rotation);
+        Debug.Log("EnemySpawned " + enemySpawned.transform.position);
     }
 
 }
