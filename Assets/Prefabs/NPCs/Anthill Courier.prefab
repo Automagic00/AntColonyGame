@@ -900,7 +900,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 1
   dialogueIcon: {fileID: 21300000, guid: a4b5183a8c2af0d46955eb217811b94e, type: 3}
-  questItems: []
+  questItems:
+  - {fileID: 11400000, guid: 20f6e51b7d0e10b44b0402455370cabc, type: 2}
+  - {fileID: 11400000, guid: 136594f9ff86aa549ac9f05db87dd6a5, type: 2}
+  - {fileID: 11400000, guid: 03267f9928d1c6343b6fca63cefa131f, type: 2}
+  - {fileID: 11400000, guid: a18583e1a4ff81647a181b408fff6618, type: 2}
+  - {fileID: 11400000, guid: 4889df68808aab04cb781bde65c75b93, type: 2}
+  - {fileID: 11400000, guid: 9406459483551c44faa9cc9a8a21a204, type: 2}
+  - {fileID: 11400000, guid: 8c1f4113932821e4abcbcc8e532b3353, type: 2}
+  - {fileID: 11400000, guid: 57f815a58f18714478b19ffc740d3522, type: 2}
 --- !u!114 &305495990181368711
 MonoBehaviour:
   m_ObjectHideFlags: 0
