@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using System.Linq;
 
 public class Interactive : MonoBehaviour
 {
@@ -167,7 +168,19 @@ public class Interactive : MonoBehaviour
 
         modifiers.text = "";
         modifiers.color = rarity.color;
-        foreach (Equipment.Modifiers itemMods in itemData.modifiers)
+
+        List<Equipment.Modifiers> combinedMods = new List<Equipment.Modifiers>();
+
+        if (itemData.baseModifiers != null)
+        {
+            combinedMods.AddRange(itemData.baseModifiers);
+        }
+        if (itemData.modifiers != null)
+        {
+            combinedMods.AddRange(itemData.modifiers);
+        }
+
+        foreach (Equipment.Modifiers itemMods in combinedMods)
         {
             switch (itemMods)
             {
