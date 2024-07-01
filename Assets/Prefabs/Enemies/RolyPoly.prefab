@@ -192,13 +192,16 @@ MonoBehaviour:
   defaultInvulnTime: 0.4
   jumpSfx: {fileID: 8300000, guid: 6f84988ac5b81ba4295475ef6f1cc858, type: 3}
   doubleJumpSfx: {fileID: 8300000, guid: a7a8daa1113a5e141be24309dfccd230, type: 3}
+  landSfx: {fileID: 0}
+  attackSfx: {fileID: 0}
+  dodgeSfx: {fileID: 0}
   attacks: []
   projectiles:
   - {fileID: 11400000, guid: 512bb3cee6ea17147bf497b7953338af, type: 2}
   rb: {fileID: 0}
   col: {fileID: 0}
-  aggroRangeStart: 5
-  aggroRangeEnd: 10
+  aggroRangeStart: 4
+  aggroRangeEnd: 8
   waypointDistance: 3
   attackRange: 5
   attackCooldown: 2

@@ -4939,8 +4939,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 418261701692963867}
   defaultJumpSpeed: 12
-  defaultGroundSpeed: 15
-  defaultAirSpeed: 40
+  defaultGroundSpeed: 10
+  defaultAirSpeed: 25
   defaultJumps: 1
   groundFriction: 5
   airFriction: 3
@@ -4959,13 +4959,16 @@ MonoBehaviour:
   defaultInvulnTime: 0.4
   jumpSfx: {fileID: 8300000, guid: 6f84988ac5b81ba4295475ef6f1cc858, type: 3}
   doubleJumpSfx: {fileID: 8300000, guid: a7a8daa1113a5e141be24309dfccd230, type: 3}
+  landSfx: {fileID: 0}
+  attackSfx: {fileID: 0}
+  dodgeSfx: {fileID: 0}
   attacks: []
   projectiles:
   - {fileID: 11400000, guid: 778084f33841b7e4d9c8ffb5a2fb6fcd, type: 2}
   rb: {fileID: 0}
   col: {fileID: 0}
-  aggroRangeStart: 7
-  aggroRangeEnd: 14
+  aggroRangeStart: 4
+  aggroRangeEnd: 10
   waypointDistance: 3
   attackRange: 5
   attackCooldown: 2
