@@ -79,7 +79,7 @@ public class InventoryUI : MonoBehaviour
                 case Equipment.Rarity.Uncommon: rarity.text = "Uncommon"; rarity.color = Color.green; break;
                 case Equipment.Rarity.Rare: rarity.text = "Rare"; rarity.color = Color.blue; break;
                 case Equipment.Rarity.Mythic: rarity.text = "Mythic"; rarity.color = Color.magenta; break;
-                case Equipment.Rarity.Legendary: rarity.text = "Legendary"; rarity.color = Color.yellow; break;
+                case Equipment.Rarity.Legendary: rarity.text = "Legendary"; rarity.color = new Color(245f/255f,135f/255f,39f/255f,1); break;
                 default: break;
             }
 
@@ -99,7 +99,7 @@ public class InventoryUI : MonoBehaviour
                     case Equipment.Modifiers.ScarabBeetleSoul: modifiers.text += "Scarab Beetle Soul:\n    +Damage, +Knockback, -Speed \n\n"; break;
                     case Equipment.Modifiers.Sharp: modifiers.text += "Sharp:\n    +Damage, -Knockback \n\n"; break;
                     case Equipment.Modifiers.SprintersSpikes: modifiers.text += "Sprinters Spikes:\n    +Speed, -Jump Height \n\n"; break;
-                    case Equipment.Modifiers.StoneSkin: modifiers.text += "Stone Skin:\n    +Defense, -Speed \n"; break;
+                    case Equipment.Modifiers.StoneSkin: modifiers.text += "Stone Skin:\n    +Defense, -Speed \n\n"; break;
                     case Equipment.Modifiers.WaspSoul: modifiers.text += "Wasp Soul:\n    +Speed, +Double Jump, -Defense \n\n"; break;
                 }
             }

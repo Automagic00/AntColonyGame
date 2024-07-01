@@ -62,6 +62,10 @@ public class PlayerAnimation : MonoBehaviour
         {
             animator.SetBool("Aggro", entity.GetComponent<EnemyController>().GetAggro());
         }
+        if (entity.GetType() == typeof(PlayerController))
+        {
+            animator.SetFloat("AttackSpeed", entity.attackSpeed);
+        }
 
         if (inventory != null)
         {
@@ -77,7 +81,7 @@ public class PlayerAnimation : MonoBehaviour
             }
         }
 
-        animator.SetFloat("AttackSpeed", entity.attackSpeed);
+        
     }
     public void EndHurt()
     {
