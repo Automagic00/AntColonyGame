@@ -36,7 +36,7 @@ public class ItemSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         float totalWeight = 0;
-        float totalRarityWeight =0;
+        float totalRarityWeight = 0;
         foreach (var item in itemSpawnData)
         {
             totalWeight += item.weight;
@@ -89,7 +89,7 @@ public class ItemSpawner : MonoBehaviour
                             RollModifier(equipment);
                         }
 
-                        
+
                     }
                     else if (itemSpawned.GetComponent<ItemBehavior>().item.GetType() == typeof(Ring))
                     {
@@ -98,11 +98,9 @@ public class ItemSpawner : MonoBehaviour
                         itemSpawned.GetComponent<ItemBehavior>().item = equipment;
 
                         equipment.rarity = item.rarity;
-                        Debug.Log(equipment.rarity);
                         //Add Modifiers
                         for (int i = 1; i < (int)item.rarity; i++)
                         {
-                            Debug.Log("RollMod");
                             RollModifier(equipment);
                         }
                     }
@@ -112,7 +110,7 @@ public class ItemSpawner : MonoBehaviour
             }
         }
 
-        
+
     }
 
     private void RollModifier(Equipment equip)
@@ -153,34 +151,34 @@ public class ItemSpawner : MonoBehaviour
             equip.modifiers = new List<Equipment.Modifiers>();
             equip.modifiers.Add((Equipment.Modifiers)modRolled);
         }
-        
-        
-        
+
+
+
     }
 
-   /* private void Update()
-    {
-        if (enemySpawned != null)
-        {
-            // Debug.Log("is visible: " + enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible);
-            if (!enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible && enemySpawned.GetComponent<EnemyController>().GetCurrentSubState() == EnemyController.EntitySubStates.Dead && respawning == false)
-            {
-                respawning = true;
-                respawnRoutine = StartCoroutine(TryRespawn());
+    /* private void Update()
+     {
+         if (enemySpawned != null)
+         {
+             // Debug.Log("is visible: " + enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible);
+             if (!enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible && enemySpawned.GetComponent<EnemyController>().GetCurrentSubState() == EnemyController.EntitySubStates.Dead && respawning == false)
+             {
+                 respawning = true;
+                 respawnRoutine = StartCoroutine(TryRespawn());
 
-            }
-            else if (enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible)
-            {
-                if (respawnRoutine != null)
-                    StopCoroutine(respawnRoutine);
-                respawning = false;
-            }
-        }
-        else
-        {
-            if (respawnRoutine != null)
-                StopCoroutine(respawnRoutine);
-            respawning = false;
-        }
-    }*/
+             }
+             else if (enemySpawned.GetComponentInChildren<SpriteRenderer>().isVisible)
+             {
+                 if (respawnRoutine != null)
+                     StopCoroutine(respawnRoutine);
+                 respawning = false;
+             }
+         }
+         else
+         {
+             if (respawnRoutine != null)
+                 StopCoroutine(respawnRoutine);
+             respawning = false;
+         }
+     }*/
 }

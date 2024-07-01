@@ -28,12 +28,12 @@ public class Interactive : MonoBehaviour
     {
         // Setup outline to use sprite
         outline = transform.Find("Outline").gameObject;
-        
+
         if (GetComponent<SpriteRenderer>() != null)
         {
             sprite = GetComponent<SpriteRenderer>();
         }
-        else if(GetComponentInChildren<SpriteRenderer>() != null)
+        else if (GetComponentInChildren<SpriteRenderer>() != null)
         {
             sprite = GetComponentInChildren<SpriteRenderer>();
         }
@@ -48,13 +48,14 @@ public class Interactive : MonoBehaviour
             childSpr.flipX = sprite.flipX;
             childSpr.flipY = sprite.flipY;
 
-            outline.transform.GetChild(i).transform.localPosition *= outlineSize / sprite.sprite.pixelsPerUnit;
+            if (sprite.sprite != null)
+                outline.transform.GetChild(i).transform.localPosition *= outlineSize / sprite.sprite.pixelsPerUnit;
         }
         updateOutlineSprites();
 
-        if (statWindowPrefab != null && GetComponent<ItemBehavior>().item != null && (GetComponent<ItemBehavior>().item.GetType() == typeof( Equipment) || GetComponent<ItemBehavior>().item.GetType() == typeof(Weapon) || GetComponent<ItemBehavior>().item.GetType() == typeof(Ring)))
+        if (statWindowPrefab != null && GetComponent<ItemBehavior>().item != null && (GetComponent<ItemBehavior>().item.GetType() == typeof(Equipment) || GetComponent<ItemBehavior>().item.GetType() == typeof(Weapon) || GetComponent<ItemBehavior>().item.GetType() == typeof(Ring)))
         {
-            statWindow = Instantiate(statWindowPrefab,transform.position, transform.rotation,transform);
+            statWindow = Instantiate(statWindowPrefab, transform.position, transform.rotation, transform);
             statWindow.SetActive(false);
         }
     }
@@ -151,10 +152,10 @@ public class Interactive : MonoBehaviour
         TMP_Text modifiers = statWindow.transform.Find("Modifiers").GetComponent<TMP_Text>();
 
         name.text = itemData.name;
-        
+
         switch (itemData.rarity)
         {
-            case Equipment.Rarity.Common:rarity.text = "Common"; rarity.color = Color.white; break;
+            case Equipment.Rarity.Common: rarity.text = "Common"; rarity.color = Color.white; break;
             case Equipment.Rarity.Uncommon: rarity.text = "Uncommon"; rarity.color = Color.green; break;
             case Equipment.Rarity.Rare: rarity.text = "Rare"; rarity.color = Color.blue; break;
             case Equipment.Rarity.Mythic: rarity.text = "Mythic"; rarity.color = Color.magenta; break;

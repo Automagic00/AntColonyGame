@@ -91,7 +91,7 @@ public class MapGenerator : MonoBehaviour
             requiredRoomDepth = 0.1f;
             requiredRoomIncrement = 0.25f;
             npcTradeLength = 1;
-            minItems = 1;
+            minItems = 2;
         }
         else
             switch (Globals.gameProgression)
@@ -101,7 +101,7 @@ public class MapGenerator : MonoBehaviour
                     maxDepth = 2.5f;
                     requiredRoomDepth = 0.5f;
                     requiredRoomIncrement = 0.5f;
-                    npcTradeLength = 2;
+                    npcTradeLength = 1;
                     minItems = 2;
                     break;
                 case 5:
@@ -117,7 +117,7 @@ public class MapGenerator : MonoBehaviour
                     maxDepth = 5.5f;
                     requiredRoomDepth = 1.5f;
                     requiredRoomIncrement = 1.0f;
-                    npcTradeLength = 3;
+                    npcTradeLength = 2;
                     minItems = 3;
                     break;
                 default:
@@ -171,13 +171,14 @@ public class MapGenerator : MonoBehaviour
         // Always start trades with leaf
         List<Item> tradeRoute = new List<Item> { Item.Items[0] };
         possibleTrades.Remove(Item.Items[0]);
-        for (int i = 1; i < npcTradeLength; i++)
+        for (int i = 0; i < npcTradeLength; i++)
         {
             Item tradeItem = possibleTrades[0];
             tradeRoute.Add(tradeItem);
             possibleTrades.Remove(tradeItem);
         }
         tradeRoute.Add(targetItem);
+        Debug.Log(tradeRoute.toString());
 
         /// Set random item to starting trade, and setup traders
         items[0].item = tradeRoute[0];

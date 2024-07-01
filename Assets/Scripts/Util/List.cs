@@ -18,7 +18,7 @@ public static class ListExt
         }
     }
 
-    public static String toString<T>(this IList<T> list)
+    public static string toString<T>(this IList<T> list)
     {
 
         return string.Join(", ", list);
