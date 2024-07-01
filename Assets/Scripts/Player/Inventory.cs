@@ -280,8 +280,7 @@ public class Inventory : MonoBehaviour
         get
         {
             List<Equipment> equipmentList = new List<Equipment> { _weapon };
-            if (rings != null)
-                equipmentList.AddRange(rings);
+            equipmentList.AddRange(rings);
             return equipmentList.Where(i => i != null).ToList();
         }
     }
@@ -295,7 +294,8 @@ public class Inventory : MonoBehaviour
             carry = null;
 
         if (clearRings)
-            rings = null;
+            for (int i = 0; i < rings.Length; i++)
+                rings[i] = null;
     }
 
 }

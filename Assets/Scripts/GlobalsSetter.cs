@@ -6,7 +6,7 @@ public class GlobalsSetter : MonoBehaviour
 {
 
     public int skipToProgression = -1;
-    void Start()
+    void Awake()
     {
         if (Globals.gameProgression < skipToProgression)
             Globals.gameProgression = skipToProgression;
