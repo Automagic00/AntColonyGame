@@ -122,6 +122,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &562865531 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7454776962144699231, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
+  m_PrefabInstance: {fileID: 4391986927637198938}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d116a2a69972e73439184bdef198f968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1029082471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,7 +1019,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1218,7 +1229,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1965,8 +1976,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: -352428585, guid: 62e4f1d47bf168f46b7bed87e40944b2, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 4
@@ -1997,8 +2008,8 @@ Tilemap:
     m_Data: {fileID: 496448521, guid: 62e4f1d47bf168f46b7bed87e40944b2, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: -177553174, guid: 62e4f1d47bf168f46b7bed87e40944b2, type: 3}
-  - m_RefCount: 2
-    m_Data: {fileID: -352428585, guid: 62e4f1d47bf168f46b7bed87e40944b2, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 38
     m_Data: {fileID: 855492719, guid: 62e4f1d47bf168f46b7bed87e40944b2, type: 3}
   - m_RefCount: 13
@@ -2336,6 +2347,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1708543103567097092, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4114503130583802397, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2415,6 +2430,18 @@ PrefabInstance:
     - target: {fileID: 4114503130583802397, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844722105495448484, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045335019347883451, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 562865531}
+    - target: {fileID: 9045335019347883451, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToColony
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2565,24 +2592,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rooms:
   - {fileID: 11400000, guid: 01c248d411a36cd4c83de21e0ebbbeef, type: 2}
+  - {fileID: 11400000, guid: 482aef79baeda9345a6fe4671ee1d8dc, type: 2}
+  - {fileID: 11400000, guid: df1a3078b5aa47f4892bd95f659231cf, type: 2}
   - {fileID: 11400000, guid: dd036f4014fcb4b4c8617ed0701aa28f, type: 2}
   - {fileID: 11400000, guid: 63b13cbe44c52004897d1fe94bf444db, type: 2}
   - {fileID: 11400000, guid: 3d5a3e63eee7a00459c0fa943f9c2265, type: 2}
   - {fileID: 11400000, guid: b02a0cbccc1e87647b4fb60330abecb0, type: 2}
   - {fileID: 11400000, guid: bf89908aa5278d3439d4cdf5d9828dd0, type: 2}
+  - {fileID: 11400000, guid: 399eb8b623ce6f345a4c1cc383a6d6e6, type: 2}
+  - {fileID: 11400000, guid: 274c466e6f78f27469507411ab2aedb9, type: 2}
   - {fileID: 11400000, guid: 9c50e3edf25edbb409635c59597127fa, type: 2}
+  - {fileID: 11400000, guid: 010962514fafdba41b3799a57a2c9081, type: 2}
+  - {fileID: 11400000, guid: a435a6e0469db264f81f85ca140ddaff, type: 2}
   - {fileID: 11400000, guid: 22a1914e4c85d5648bb7fce300137a81, type: 2}
-  - {fileID: 11400000, guid: 482aef79baeda9345a6fe4671ee1d8dc, type: 2}
   - {fileID: 11400000, guid: 5a702daf2d066ed41becb077b8f91789, type: 2}
   - {fileID: 11400000, guid: 5225d8b19a88be0449ecbe87a71a0e04, type: 2}
-  - {fileID: 11400000, guid: 010962514fafdba41b3799a57a2c9081, type: 2}
   - {fileID: 11400000, guid: a2df2e52179bc9c42a546ab348e9542a, type: 2}
   - {fileID: 11400000, guid: 7039d602dcfe1704b9074359694d5c5f, type: 2}
   - {fileID: 11400000, guid: 9119328ff0cda7f439934fdf36c00adf, type: 2}
   - {fileID: 11400000, guid: bd9ea391a9ef7414bbe78334d3c19770, type: 2}
   - {fileID: 11400000, guid: 713fb0140b7fa764bacb504537a2db66, type: 2}
-  - {fileID: 11400000, guid: a435a6e0469db264f81f85ca140ddaff, type: 2}
   - {fileID: 11400000, guid: 454288e88b23fa44491ab12ca5675707, type: 2}
+  - {fileID: 11400000, guid: 5c1e9b85f44c7a043a65d89ac418bcec, type: 2}
+  - {fileID: 11400000, guid: be3bc8df30dff704ebb923dfcbcc5f4d, type: 2}
   doorTiles:
   - {fileID: 11400000, guid: d1af07f49aab04e45848d9f6094c3416, type: 2}
   - {fileID: 11400000, guid: 8cbf9b1f5092bcb40babcbdc84ba643f, type: 2}

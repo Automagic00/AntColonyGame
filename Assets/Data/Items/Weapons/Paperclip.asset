@@ -30,7 +30,7 @@ MonoBehaviour:
   defMod: 1
   knockbackMod: 1
   rollSpeedMod: 1
-  attackSpeedMod: 1
+  attackSpeedMod: 0.5
   doubleJumpMod: 0
   multishotMod: 0
   pierceMod: 0

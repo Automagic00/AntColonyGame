@@ -28,6 +28,13 @@ public class ItemSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //TODO: Stop enemies from spawning twice on mapGen
+        //Delay is a temp fix
+        StartCoroutine(Delay());
+    }
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1f);
         float totalWeight = 0;
         float totalRarityWeight =0;
         foreach (var item in itemSpawnData)

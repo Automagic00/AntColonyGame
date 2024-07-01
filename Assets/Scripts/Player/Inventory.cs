@@ -280,4 +280,16 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void ClearInventory(bool clearWeapon = true, bool clearCarry = true, bool clearRings = true)
+    {
+        if (clearWeapon)
+            weapon = null;
+
+        if (clearCarry)
+            carry = null;
+
+        if (clearRings)
+            rings = null;
+    }
+
 }
