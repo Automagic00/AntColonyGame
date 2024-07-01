@@ -171,7 +171,7 @@ public class Interactive : MonoBehaviour
             {
                 case Equipment.Modifiers.Blunt: modifiers.text += "Blunt \n"; break;
                 case Equipment.Modifiers.FeatherWeight: modifiers.text += "Feather Weight \n"; break;
-                case Equipment.Modifiers.GlassCanon: modifiers.text += "Glass Canon \n"; break;
+                case Equipment.Modifiers.GlassCanon: modifiers.text += "Glass Cannon \n"; break;
                 case Equipment.Modifiers.Multishot: modifiers.text += "Multishot \n"; break;
                 case Equipment.Modifiers.Piercing: modifiers.text += "Piercing \n"; break;
                 case Equipment.Modifiers.RolyPolySoul: modifiers.text += "Roly Poly Soul \n"; break;

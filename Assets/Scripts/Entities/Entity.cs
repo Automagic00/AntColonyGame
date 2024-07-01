@@ -62,7 +62,9 @@ public class Entity : MonoBehaviour
 
     public AudioClip jumpSfx;
     public AudioClip doubleJumpSfx;
-
+    public AudioClip landSfx;
+    public AudioClip attackSfx;
+    public AudioClip dodgeSfx;
 
     [System.Serializable]
     public class HitboxDataClass
@@ -146,6 +148,8 @@ public class Entity : MonoBehaviour
                 if (below)
                 {
                     state = EntityStates.Ground;
+                    if (landSfx != null)
+                        AudioSource.PlayClipAtPoint(landSfx, transform.position,0.4f);
                     //currentJumps = jumps;
                     if (subState == EntitySubStates.Hurt)
                     {
@@ -214,6 +218,8 @@ public class Entity : MonoBehaviour
         if (subState == EntitySubStates.None)
         {
             subState = EntitySubStates.Atk;
+            if (attackSfx != null)
+                AudioSource.PlayClipAtPoint(attackSfx, transform.position,0.5f);
 
             attackAngle = new Vector2(x, y);
         }
@@ -225,6 +231,8 @@ public class Entity : MonoBehaviour
         if (subState == EntitySubStates.None)
         {
             subState = EntitySubStates.Dodge;
+            if (dodgeSfx != null)
+                AudioSource.PlayClipAtPoint(dodgeSfx, transform.position,0.5f);
             Physics2D.IgnoreLayerCollision(6, 7);
             rb.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * rollSpeed, rb.velocity.y);
         }

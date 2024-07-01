@@ -7,6 +7,8 @@ public class DeathScreen : MonoBehaviour
 {
     PlayerController player;
     public GameObject display;
+    public AudioClip[] mouseOverSounds;
+    public AudioClip confirmSound;
 
     private void Start()
     {
@@ -23,9 +25,16 @@ public class DeathScreen : MonoBehaviour
     }
     public void ReturnToColony()
     {
+        
         Inventory inventory = GameObject.Find("Player").GetComponent<Inventory>();
         inventory.ClearInventory();
 
+        AudioSource.PlayClipAtPoint(confirmSound, inventory.transform.position);
         SceneManager.LoadScene("Anthill");
+    }
+    public void MouseOver()
+    {
+        AudioClip clip = mouseOverSounds[Random.Range(0,mouseOverSounds.Length)];
+        AudioSource.PlayClipAtPoint(clip, GameObject.Find("Player").transform.position);
     }
 }

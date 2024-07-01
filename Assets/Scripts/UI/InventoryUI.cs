@@ -92,7 +92,7 @@ public class InventoryUI : MonoBehaviour
                 {
                     case Equipment.Modifiers.Blunt: modifiers.text += "Blunt:\n    +Knockback, -Damage \n\n"; break;
                     case Equipment.Modifiers.FeatherWeight: modifiers.text += "Feather Weight:\n    +Jump Height, -Defense \n\n"; break;
-                    case Equipment.Modifiers.GlassCanon: modifiers.text += "Glass Canon:\n    +Damage, -Max Health \n\n"; break;
+                    case Equipment.Modifiers.GlassCanon: modifiers.text += "Glass Cannon:\n    +Damage, -Max Health \n\n"; break;
                     case Equipment.Modifiers.Multishot: modifiers.text += "Multishot:\n    +Projectiles, -Damage \n\n"; break;
                     case Equipment.Modifiers.Piercing: modifiers.text += "Piercing:\n    +Projectile Pierce, -Knockback \n\n"; break;
                     case Equipment.Modifiers.RolyPolySoul: modifiers.text += "Roly Poly Soul:\n    +Roll Speed, +Defense, -Damage \n\n"; break;

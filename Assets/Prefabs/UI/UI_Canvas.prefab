@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 7345919140535428062}
   - component: {fileID: 8569399125383618964}
   - component: {fileID: 9045335019347883451}
-  - component: {fileID: 7844722105495448484}
+  - component: {fileID: 8801763364692581025}
   m_Layer: 5
   m_Name: Home Button
   m_TagString: Untagged
@@ -818,7 +818,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7844722105495448484}
+      - m_Target: {fileID: 7454776962144699231}
         m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
         m_MethodName: ReturnToColony
         m_Mode: 1
@@ -830,7 +830,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7844722105495448484
+--- !u!114 &8801763364692581025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -839,10 +839,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2584638067577451011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d116a2a69972e73439184bdef198f968, type: 3}
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  display: {fileID: 0}
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7454776962144699231}
+          m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
+          m_MethodName: MouseOver
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2612616246548901408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,6 +1078,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   display: {fileID: 1708543103567097092}
+  mouseOverSounds:
+  - {fileID: 8300000, guid: bb46bcc4f210b2844b2e0455ba971b2d, type: 3}
+  - {fileID: 8300000, guid: e32dfb3b5290ba44fbf2fe20cc6daf8d, type: 3}
+  - {fileID: 8300000, guid: 759345f952d6ec64386c434ee61efbf5, type: 3}
+  confirmSound: {fileID: 8300000, guid: 85e9987b8c7de0344afd7a40380529fc, type: 3}
 --- !u!1 &3692525709317765883
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,13 +3156,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8945139736231901819}
-          m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-          m_MethodName: UpdateStatWindow
-          m_Mode: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: Sound, Assembly-CSharp
+          m_MethodName: PlayRandomSound
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 9162060161886512237}
-            m_ObjectArgumentAssemblyTypeName: InventorySlot, Assembly-CSharp
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -3168,17 +3189,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7252138545846741710, guid: c150c4990c4fcd04bafaa30fc2defceb, type: 3}
   m_PrefabInstance: {fileID: 763988893488917230}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9162060161886512237 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8483681041205218947, guid: c150c4990c4fcd04bafaa30fc2defceb, type: 3}
-  m_PrefabInstance: {fileID: 763988893488917230}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6924856030639824998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22d145852168259499f6dc6425c1806c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1106619553412681569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4288,13 +4298,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8945139736231901819}
-          m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-          m_MethodName: UpdateStatWindow
-          m_Mode: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: Sound, Assembly-CSharp
+          m_MethodName: PlayRandomSound
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 1569167798101533156}
-            m_ObjectArgumentAssemblyTypeName: InventorySlot, Assembly-CSharp
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -4316,17 +4326,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &1569167798101533156 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8483681041205218947, guid: c150c4990c4fcd04bafaa30fc2defceb, type: 3}
-  m_PrefabInstance: {fileID: 6952110012895473511}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 791198938262676975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22d145852168259499f6dc6425c1806c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7389437602868970734
 PrefabInstance:
   m_ObjectHideFlags: 0
