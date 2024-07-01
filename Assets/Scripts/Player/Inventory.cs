@@ -74,6 +74,9 @@ public class Inventory : MonoBehaviour
         //     ClearInventory(true, false);
     }
 
+    public bool carryingOneOf(Item[] items) =>
+        carry != null && items.Where((item) => item.name == carry.name).Count() > 0;
+
     public bool holding(Item item) => carry == item || weapon == item;
     public void remove(Item item)
     {

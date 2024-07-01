@@ -47,7 +47,7 @@ public class AnthillCourier : Interactable, Dialoguer
             };
         }
 
-        if (questItems.Contains(player.carry))
+        if (player.carryingOneOf(questItems))
         {
             return new List<DialogueItem>(){
                 new DialogueItem(){name="Courier", picture=dialogueIcon},

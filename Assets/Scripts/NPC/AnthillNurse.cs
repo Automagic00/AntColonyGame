@@ -22,7 +22,7 @@ public class AnthillNurse : Interactable, Dialoguer
                 new DialogueItem(){text="You might need to provide your own bandages, though."},
             };
 
-        if (questItems.Contains(player.carry))
+        if (player.carryingOneOf(questItems))
         {
             bool likesWeapon = player.carry.name.ToLower() == "needle";
             return new List<DialogueItem>(){
