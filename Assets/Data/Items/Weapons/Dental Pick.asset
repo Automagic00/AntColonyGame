@@ -30,12 +30,12 @@ MonoBehaviour:
   defMod: 1
   knockbackMod: 1
   rollSpeedMod: 1
+  attackSpeedMod: 1
   doubleJumpMod: 0
   multishotMod: 0
   pierceMod: 0
   holdPosition: {x: 0.149, y: 0.269}
   weaponType: 1
   baseDamage: 0
-  attackSpeed: 1
   splash: {fileID: 0}
   Projectile: {fileID: 11400000, guid: 9673f67c5c2005749a464681fc59c7a0, type: 2}
