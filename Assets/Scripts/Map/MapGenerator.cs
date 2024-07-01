@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Pathfinding;
 using UnityEditor;
+using UnityEngine.Assertions;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class MapGenerator : MonoBehaviour
     private List<Room> itemRooms = new List<Room>();
 
     private int[] roomCount;
+
 
     public TileBase[] doorTiles;
 
@@ -41,10 +43,11 @@ public class MapGenerator : MonoBehaviour
         PullMapGenSettings();
 
         GenerateMap();
+        Debug.Assert(allRequiredRoomsDone(), "Missing some required rooms: " + requiredRoomsToString());
 
         RemoveArrows();
         UpdateMapBounds();
-        // MakeItemTradeRoute();
+
         StartCoroutine(DelayMakeItemTradeRoute());
         StartCoroutine(DelayNavMesh());
     }
@@ -91,7 +94,7 @@ public class MapGenerator : MonoBehaviour
             requiredRoomDepth = 0.1f;
             requiredRoomIncrement = 0.25f;
             npcTradeLength = 1;
-            minItems = 2;
+            minItems = 1;
         }
         else
             switch (Globals.gameProgression)
@@ -179,6 +182,15 @@ public class MapGenerator : MonoBehaviour
         }
         tradeRoute.Add(targetItem);
         Debug.Log(tradeRoute.toString());
+
+        // BACKUP: If missing traders in route, spawn some at start
+        for (int i = 0; i + traders.Count < tradeRoute.Count - 1; i++)
+        {
+            // TODO generate traders
+            traders.Add(Instantiate(traders[0], new Vector3(i, 4.8f, 0), Quaternion.identity));
+
+
+        }
 
         /// Set random item to starting trade, and setup traders
         items[0].item = tradeRoute[0];
@@ -293,6 +305,32 @@ public class MapGenerator : MonoBehaviour
 
         Globals.mapBounds = new Bounds();
         Globals.mapBounds.SetMinMax(worldmin, worldmax);
+    }
+
+    bool allRequiredRoomsDone()
+    {
+        for (int i = 0; i < rooms.Count(); i++)
+            if (roomCount[i] < rooms[i].minAmount)
+                return false;
+
+        return true;
+    }
+    string requiredRoomsToString()
+    {
+        string ret = "";
+        for (int i = 0; i < rooms.Count(); i++)
+            if (rooms[i].minAmount > 0)
+                ret += rooms[i].name + ": " + rooms[i].minAmount + " (" + roomCount[i] + ")\n";
+
+        return ret;
+    }
+    bool willComleteRequiredRooms(Room r)
+    {
+        for (int i = 0; i < rooms.Count(); i++)
+            if (roomCount[i] + (rooms[i] == r.unmirrored ? 1 : 0) < rooms[i].minAmount)
+                return false;
+
+        return true;
 
     }
 
@@ -403,6 +441,7 @@ public class MapGenerator : MonoBehaviour
         }
         private void PrioritizeRequiredRooms()
         {
+            bool stillNeedsRooms = !root.allRequiredRoomsDone();
             for (int i = 0; i < validRooms.Count; i++)
             {
                 Room r = validRooms[i];
@@ -412,6 +451,38 @@ public class MapGenerator : MonoBehaviour
                     validRooms.Remove(r);
                     i--;
                 }
+                // else if (root.roomCount[roomIndex] >= r.unmirrored.minAmount && r.exits <= 1 && stillNeedsRooms)
+                // {
+                //     validRooms.Remove(r);
+                //     i--;
+                // }
+                // Force complete
+                // else if (root.genQueue.Count == 1 && !root.willComleteRequiredRooms(r))
+                // {
+                //     validRooms.Remove(r);
+                //     i--;
+                // }
+            }
+            for (int i = 0; i < lowPriorityValidRooms.Count; i++)
+            {
+                Room r = lowPriorityValidRooms[i];
+                int roomIndex = System.Array.FindIndex(root.rooms, match => match == r.unmirrored);
+                if (root.roomCount[roomIndex] >= r.unmirrored.maxAmount && r.unmirrored.maxAmount >= 0)
+                {
+                    lowPriorityValidRooms.Remove(r);
+                    i--;
+                }
+                // else if (root.roomCount[roomIndex] >= r.unmirrored.minAmount && r.exits <= 1 && stillNeedsRooms)
+                // {
+                //     lowPriorityValidRooms.Remove(r);
+                //     i--;
+                // }
+                // Force complete
+                // else if (root.genQueue.Count == 1 && !root.willComleteRequiredRooms(r))
+                // {
+                //     lowPriorityValidRooms.Remove(r);
+                //     i--;
+                // }
             }
 
             if (depth < root.requiredRoomDepth) return;
@@ -424,44 +495,37 @@ public class MapGenerator : MonoBehaviour
                 depth >= root.requiredRoomDepth + root.roomCount[roomIndex] * root.requiredRoomIncrement)
                     stillRequired.Add(r);
             }
+            foreach (Room r in lowPriorityValidRooms)
+            {
+                int roomIndex = System.Array.FindIndex(root.rooms, match => match == r.unmirrored);
+                if (root.roomCount[roomIndex] < r.unmirrored.minAmount &&
+                depth >= root.requiredRoomDepth + root.roomCount[roomIndex] * root.requiredRoomIncrement)
+                    stillRequired.Add(r);
+            }
 
             if (stillRequired.Count > 0)
             {
+                lowPriorityValidRooms = lowPriorityValidRooms.Except(stillRequired).ToList();
                 lowPriorityValidRooms.AddRange(validRooms.Except(stillRequired));
                 validRooms = stillRequired;
             }
-        }
-
-        public void RemoveRoomOption()
-        {
-            if (room == null) return;
-            room.UndoUsed(root.maxDepth);
-            root.blockedArea.Remove(bounds);
-
-            int roomIndex = System.Array.FindIndex(root.rooms, r => r == room.unmirrored);
-            if (roomIndex != -1) root.roomCount[roomIndex]--;
-
-            foreach (Node c in children) c.RemoveRoomOption();
-            foreach (Node c in children) root.genQueue.Remove(c);
-            children.Clear();
-
-            room = null;
         }
 
         public void ChooseRoom()
         {
             PrioritizeRequiredRooms();
 
-            while (room == null && (validRooms.Count > 0 || lowPriorityValidRooms.Count > 0))
+            while (room == null && validRooms.Count > 0)
             {
+
+                Room place = Room.weightedRandom(validRooms);
+                validRooms.Remove(place);
+
                 if (validRooms.Count == 0)
                 {
                     validRooms.AddRange(lowPriorityValidRooms);
                     lowPriorityValidRooms.Clear();
                 }
-
-                Room place = Room.weightedRandom(validRooms);
-                validRooms.Remove(place);
 
                 // Find location to place
                 switch (from)
@@ -514,7 +578,7 @@ public class MapGenerator : MonoBehaviour
             room.Used(root.maxDepth);
             root.blockedArea.Add(bounds);
             int roomIndex = System.Array.FindIndex(root.rooms, r => r == room.unmirrored);
-            if (roomIndex != -1) root.roomCount[roomIndex]++;
+            root.roomCount[roomIndex]++;
 
 
             // Repeat on exits
@@ -534,6 +598,22 @@ public class MapGenerator : MonoBehaviour
 
             foreach (Node child in children)
                 root.genQueue.Add(child);
+        }
+
+        public void RemoveRoomOption()
+        {
+            if (room == null) return;
+            room.UndoUsed(root.maxDepth);
+            root.blockedArea.Remove(bounds);
+
+            int roomIndex = System.Array.FindIndex(root.rooms, r => r == room.unmirrored);
+            root.roomCount[roomIndex]--;
+
+            foreach (Node c in children) c.RemoveRoomOption();
+            foreach (Node c in children) root.genQueue.Remove(c);
+            children.Clear();
+
+            room = null;
         }
 
         public void ApplyToMap()

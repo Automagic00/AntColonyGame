@@ -280,7 +280,8 @@ public class Inventory : MonoBehaviour
         get
         {
             List<Equipment> equipmentList = new List<Equipment> { _weapon };
-            equipmentList.AddRange(rings);
+            if (rings != null)
+                equipmentList.AddRange(rings);
             return equipmentList.Where(i => i != null).ToList();
         }
     }

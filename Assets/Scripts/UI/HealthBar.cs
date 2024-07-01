@@ -7,7 +7,7 @@ public class HealthBar : MonoBehaviour
 {
     private Entity player;
     //private Slider hpSlider;
-    private float healthPerPiece = 20;
+    private float healthPerPiece = 10;
     private float pieceWidth = 30;
     public GameObject borderFolder;
     public GameObject healthbarFolder;
@@ -32,7 +32,7 @@ public class HealthBar : MonoBehaviour
         if (pieces <= 2)
         {
             pieces = 2;
-            
+
             //Remove old midsections if they exist
             if (borderFolder.transform.childCount != pieces)
             {
@@ -83,7 +83,7 @@ public class HealthBar : MonoBehaviour
                     //Set Piece Transforms
                     GameObject borderPiece = new GameObject("BorderPiece_" + i);
                     borderPiece.transform.SetParent(borderFolder.transform);
-                    borderPiece.transform.localPosition = new Vector3(-15 + (pieceWidth * i),0,0);
+                    borderPiece.transform.localPosition = new Vector3(-15 + (pieceWidth * i), 0, 0);
 
                     GameObject healthPiece = new GameObject("HealthPiece_" + i);
                     healthPiece.transform.SetParent(healthbarFolder.transform);
@@ -110,7 +110,7 @@ public class HealthBar : MonoBehaviour
 
                 }
                 //Adjust End Piece
-                borderEnd.transform.localPosition = new Vector3(-15 + (pieceWidth * (pieces-1)), 0, 0);
+                borderEnd.transform.localPosition = new Vector3(-15 + (pieceWidth * (pieces - 1)), 0, 0);
                 healthbarEnd.transform.localPosition = new Vector3(-15 + (pieceWidth * (pieces - 1)), 0, 0);
             }
         }
@@ -119,7 +119,7 @@ public class HealthBar : MonoBehaviour
 
         //mask.GetComponent<RectTransform>().sizeDelta = new Vector2(pieces * pieceWidth,70);
         mask.GetComponent<RectTransform>().offsetMin = new Vector2((pieces - 2) * -pieceWidth, 0);
-        mask.GetComponent<RectTransform>().offsetMax = new Vector2((pieces-2) * pieceWidth, 0);
+        mask.GetComponent<RectTransform>().offsetMax = new Vector2((pieces - 2) * pieceWidth, 0);
         mask.padding = new Vector4(0, 0, (1 - hpPercent) * (pieces * pieceWidth), 0);
         //hpSlider.value = player.currentHealth / player.maxHP;
     }
