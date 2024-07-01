@@ -86,7 +86,7 @@ public class QueenAnt : Interactable, Dialoguer
                 new DialogueItem(){action=()=> {player.remove(want2);}},
                 new DialogueItem(){action=()=>{Globals.gameProgression++;}},
                 new DialogueItem(){text="Excellent work! Ohoho!"},
-                new DialogueItem(){text="I shall signal this success to the followers."},
+                new DialogueItem(){text="I shall signal this success to the colony."},
                 new DialogueItem(){text="Meanwhile, search the Grassy Fields for more supplies!"},
                 new DialogueItem(){text="Be warned though- the bugs there may be hostile to us.\n(press Z to attack)"},
                 new DialogueItem(){action=()=>{canInteract = true;}}};

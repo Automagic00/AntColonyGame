@@ -23,9 +23,8 @@ public class Door : Interactable
         overhead.text = text.ToUpper();
 
         // Fades in
-        overhead.color = new Color(1,1,1,0);
+        overhead.color = new Color(1, 1, 1, 0);
         fade = overhead.color;
-        Debug.Log(overhead.color);
     }
 
     private Coroutine currentCoroutine;
