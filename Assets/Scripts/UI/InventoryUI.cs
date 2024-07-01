@@ -81,7 +81,7 @@ public class InventoryUI : MonoBehaviour
                 case Equipment.Rarity.Uncommon: rarity.text = "Uncommon"; rarity.color = Color.green; break;
                 case Equipment.Rarity.Rare: rarity.text = "Rare"; rarity.color = Color.blue; break;
                 case Equipment.Rarity.Mythic: rarity.text = "Mythic"; rarity.color = Color.magenta; break;
-                case Equipment.Rarity.Legendary: rarity.text = "Legendary"; rarity.color = new Color(245f/255f,135f/255f,39f/255f,1); break;
+                case Equipment.Rarity.Legendary: rarity.text = "Legendary"; rarity.color = new Color(245f / 255f, 135f / 255f, 39f / 255f, 1); break;
                 default: break;
             }
 

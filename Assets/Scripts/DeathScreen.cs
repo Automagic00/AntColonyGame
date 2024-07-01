@@ -25,16 +25,16 @@ public class DeathScreen : MonoBehaviour
     }
     public void ReturnToColony()
     {
-        
+        // TODO re-enable after jam
         Inventory inventory = GameObject.Find("Player").GetComponent<Inventory>();
-        inventory.ClearInventory();
+        // inventory.ClearInventory();
 
         AudioSource.PlayClipAtPoint(confirmSound, inventory.transform.position);
         SceneManager.LoadScene("Anthill");
     }
     public void MouseOver()
     {
-        AudioClip clip = mouseOverSounds[Random.Range(0,mouseOverSounds.Length)];
+        AudioClip clip = mouseOverSounds[Random.Range(0, mouseOverSounds.Length)];
         AudioSource.PlayClipAtPoint(clip, GameObject.Find("Player").transform.position);
     }
 }
