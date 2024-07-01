@@ -90,6 +90,7 @@ public class Interactive : MonoBehaviour
 
     public static Interactive closestInteractable(Vector3 position)
     {
+        if (Dialogue.dialogueIsOpen) return null;
         Interactive interact = null;
         float dist = 999;
 

@@ -6,20 +6,18 @@ using UnityEngine;
 public class Courier : Interactable
 {
     private Inventory player;
-    private Entity playerEntity;
 
     private GameObject interactionBox;
     private Transform contents;
 
     public Item want;
 
-    private static List<Item> courierBag = new List<Item>();
+    public static List<Item> courierBag = new List<Item>();
 
 
     void Awake()
     {
         player = GameObject.Find("Player").GetComponent<Inventory>();
-        playerEntity = player.GetComponent<Entity>();
 
         interactionBox = transform.Find("TradeBox").gameObject;
         contents = interactionBox.transform.Find("contents");

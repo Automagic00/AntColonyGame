@@ -26,7 +26,6 @@ public class QueenAnt : Interactable, Dialoguer
 
     public override void interact()
     {
-        this.canInteract = false;
         Dialogue.OpenDialogue(this);
     }
 

@@ -98,7 +98,7 @@ public class MapGenerator : MonoBehaviour
             foreach (Room room in nurseRooms)
                 room.maxAmount = 0;
         }
-        if (!Globals.nurseEnabled)
+        if (!Globals.courierEnabled)
         {
             if (GameObject.Find("Courier") != null)
                 Destroy(GameObject.Find("Courier"));
