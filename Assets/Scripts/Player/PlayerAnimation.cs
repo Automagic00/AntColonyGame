@@ -110,7 +110,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void AddVelocity(float speed)
     {
-        entity.rb.AddForce(new Vector2(speed * Mathf.Sign(entity.rb.transform.localScale.x), 0),ForceMode2D.Impulse);
+        entity.rb.AddForce(new Vector2(speed * Mathf.Sign(entity.rb.transform.localScale.x), 0), ForceMode2D.Impulse);
     }
 
     public void AttackSplash(int i)
@@ -120,7 +120,7 @@ public class PlayerAnimation : MonoBehaviour
         int flip = Mathf.Sign(entity.transform.localScale.x) == -1 ? 1 : 0;
         psr.flip = new Vector3(flip, 0, 0);
         particleSystem.transform.localRotation = Mathf.Sign(entity.transform.localScale.x) == -1 ? Quaternion.Euler(-90, -180, 0) : Quaternion.Euler(-90, 0, 0);
-        
+
         main.flipRotation = Mathf.Sign(entity.transform.localScale.x) == -1 ? 1 : 0;
 
         psr.material = entity.attacks[i].splash.splashMaterial;

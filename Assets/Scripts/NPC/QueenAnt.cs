@@ -7,7 +7,13 @@ public class QueenAnt : Interactable, Dialoguer
 {
     private Inventory player;
 
+    // Tutorial
     public Item want1, want2;
+    // Post-tutorial
+    public Item want3, want4, want5, want6;
+
+    public Sprite dialogueIcon;
+
     void Awake()
     {
         player = GameObject.Find("Player").GetComponent<Inventory>();
@@ -25,7 +31,7 @@ public class QueenAnt : Interactable, Dialoguer
         {
             case 0: // TUTORIAL part 0: Intro
                 return new List<DialogueItem>(){
-                new DialogueItem(){name="Queen Tyr", picture=GetComponent<SpriteRenderer>().sprite},
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
                 new DialogueItem(){action=()=>{Globals.gameProgression++;}},
                 new DialogueItem(){text="Oh loyal follower, I have most unfortunate news..."},
                 new DialogueItem(){text="The cursed wasps have destroyed everything!"},
@@ -40,12 +46,12 @@ public class QueenAnt : Interactable, Dialoguer
             case 1: // TUTORIAL part 1: Bring a leaf
                 if (!player.holding(want1))
                     return new List<DialogueItem>(){
-                new DialogueItem(){name="Queen Tyr", picture=GetComponent<SpriteRenderer>().sprite},
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
                 new DialogueItem(){text="Go henceforth, and bring me a "+want1.name+"!"},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
 
                 return new List<DialogueItem>(){
-                new DialogueItem(){name="Queen Tyr", picture=GetComponent<SpriteRenderer>().sprite},
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
                 new DialogueItem(){action=()=> {player.remove(want1);}},
                 new DialogueItem(){action=()=>{Globals.gameProgression++;}},
                 new DialogueItem(){text="Excellent... Our nest's restoration is under way."},
@@ -56,13 +62,13 @@ public class QueenAnt : Interactable, Dialoguer
             case 2: // TUTORIAL part 2: Bring a twig (traded)
                 if (!player.holding(want2))
                     return new List<DialogueItem>(){
-                new DialogueItem(){name="Queen Tyr", picture=GetComponent<SpriteRenderer>().sprite},
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
                 new DialogueItem(){text="To continue construction, I require a "+want2.name+"!"},
                 new DialogueItem(){text="If you seem stuck, find some of my loyal followers. They may be willing to trade with you."},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
 
                 return new List<DialogueItem>(){
-                new DialogueItem(){name="Queen Tyr", picture=GetComponent<SpriteRenderer>().sprite},
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
                 new DialogueItem(){action=()=> {player.remove(want2);}},
                 new DialogueItem(){action=()=>{Globals.gameProgression++;}},
                 new DialogueItem(){text="Excellent work!"},
@@ -74,29 +80,69 @@ public class QueenAnt : Interactable, Dialoguer
                 // TUTORIAL part 3: Go to grassy fields now
                 if (SceneManager.GetActiveScene().name == "Tutorial")
                     return new List<DialogueItem>(){
-                new DialogueItem(){name="Queen Tyr", picture=GetComponent<SpriteRenderer>().sprite},
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
                 new DialogueItem(){text="Search the Grassy Fields for more supplies!"},
                 new DialogueItem(){text="Be warned though- the bugs there may be hostile to us.\n(press Z to attack)"},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
 
                 // Returned from grassy fields
-                //TODO
-                return new List<DialogueItem>(){
-                new DialogueItem(){name="Queen Tyr", picture=GetComponent<SpriteRenderer>().sprite},
-                new DialogueItem(){action=()=>{Globals.gameProgression++;}},
-                new DialogueItem(){text="I make big house now. :3"},
-                new DialogueItem(){action=()=>{canInteract = true;}}};
-            case 4:
-            case 5:
-            case 6:
-                //TODO
-                return new List<DialogueItem>(){
-                new DialogueItem(){name="Queen Tyr", picture=GetComponent<SpriteRenderer>().sprite},
-                new DialogueItem(){action=()=>{Globals.gameProgression++;}},
-                new DialogueItem(){text="I make house bigger now :3"},
+                if (!player.holding(want3))
+                    return new List<DialogueItem>(){
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
+                new DialogueItem(){text="Next, I require a "+want3.name+"."},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
 
+                return new List<DialogueItem>(){
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
+                new DialogueItem(){action=()=>{Globals.gameProgression++;}},
+                new DialogueItem(){action=()=> {player.remove(want3);}},
+                new DialogueItem(){text="Thank you for the "+want3.name+"!"},
+                new DialogueItem(){text="Next, go fetch me a "+want4.name+"."},
+                new DialogueItem(){action=()=>{canInteract = true;}}};
+            case 4:
+                if (!player.holding(want4))
+                    return new List<DialogueItem>(){
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
+                new DialogueItem(){text="Next, I require a "+want4.name+"."},
+                new DialogueItem(){action=()=>{canInteract = true;}}};
+
+                return new List<DialogueItem>(){
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
+                new DialogueItem(){action=()=>{Globals.gameProgression++;}},
+                new DialogueItem(){action=()=> {player.remove(want4);}},
+                new DialogueItem(){text="Thank you for the "+want4.name+"!"},
+                new DialogueItem(){text="Next, go fetch me a "+want5.name+"."},
+                new DialogueItem(){action=()=>{canInteract = true;}}};
+            case 5:
+                if (!player.holding(want5))
+                    return new List<DialogueItem>(){
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
+                new DialogueItem(){text="Next, I require a "+want5.name+"."},
+                new DialogueItem(){action=()=>{canInteract = true;}}};
+
+                return new List<DialogueItem>(){
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
+                new DialogueItem(){action=()=>{Globals.gameProgression++;}},
+                new DialogueItem(){action=()=> {player.remove(want5);}},
+                new DialogueItem(){text="Thank you for the "+want5.name+"!"},
+                new DialogueItem(){text="Next, go fetch me a "+want6.name+"."},
+                new DialogueItem(){action=()=>{canInteract = true;}}};
+            case 6:
+                if (!player.holding(want6))
+                    return new List<DialogueItem>(){
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
+                new DialogueItem(){text="Next, I require a "+want6.name+"."},
+                new DialogueItem(){action=()=>{canInteract = true;}}};
+
+                return new List<DialogueItem>(){
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
+                new DialogueItem(){action=()=>{Globals.gameProgression++;}},
+                new DialogueItem(){action=()=> {player.remove(want6);}},
+                new DialogueItem(){text="Thank you for the "+want6.name+"!"},
+                new DialogueItem(){text="I'm all done now."},
+                new DialogueItem(){action=()=>{canInteract = true;}}};
         }
+
         Debug.LogError("Game progression missing dialogue: " + Globals.gameProgression);
         return new List<DialogueItem>();
     }

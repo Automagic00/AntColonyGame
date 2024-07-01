@@ -94,7 +94,7 @@ public class Entity : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         // Init all stats to default
-        ModifyStats(1, 1, 1, 0,1, 1, 1,1,1,0,0,1);
+        ModifyStats(1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1);
     }
 
     public virtual void Start()
@@ -104,7 +104,7 @@ public class Entity : MonoBehaviour
 
     }
 
-    public void ModifyStats(float groundSpeedMod, float airSpeedMod, float jumpSpeedMod, int doubleJumpMod,float damageMod, float hpMod, float defenseMod, float knockbackMod, float rollspeedMod, int multishotMod, int pierceMod, float attackSpeedMod)
+    public void ModifyStats(float groundSpeedMod, float airSpeedMod, float jumpSpeedMod, int doubleJumpMod, float damageMod, float hpMod, float defenseMod, float knockbackMod, float rollspeedMod, int multishotMod, int pierceMod, float attackSpeedMod)
     {
         groundSpeed = defaultGroundSpeed * groundSpeedMod;
         airSpeed = defaultAirSpeed * airSpeedMod;
@@ -116,7 +116,7 @@ public class Entity : MonoBehaviour
         // Keep hp:maxHP the same before and after
         //float hpRatio = (maxHP != 0) ? currentHealth / maxHP : 1;
         maxHP = defaultMaxHealth * hpMod < 1 ? 1 : defaultMaxHealth * hpMod;
-        currentHealth = currentHealth > maxHP? maxHP : currentHealth;
+        currentHealth = currentHealth > maxHP ? maxHP : currentHealth;
 
         knockbackBonus = knockbackMod;
         rollSpeed = defaultRollSpeed * rollspeedMod;
@@ -263,7 +263,7 @@ public class Entity : MonoBehaviour
         proj.damage *= damageBonus;
         proj.knockback *= knockbackBonus;
         proj.pierce += pierceBonus;
-        
+
         proj.projFired += multishotBouns;
 
         if (proj.multiProjSpread == 0)
@@ -313,10 +313,9 @@ public class Entity : MonoBehaviour
         if (collision.collider.tag == "Ground")
         {
             below = Physics2D.BoxCast(rb.position, new Vector2(col.size.x - 0.15f, col.bounds.extents.y), 0, Vector2.down, col.bounds.extents.y - 0.1f, LayerMask.GetMask("Ground"));
-            if (currentJumps == jumps && rb.velocity.y! < 0)
-            {
+            if (currentJumps == jumps && rb.velocity.y! < 0 && gameObject.activeSelf)
                 StartCoroutine(CoyoteTime());
-            }
+
         }
 
         updateState();
@@ -401,7 +400,7 @@ public class Entity : MonoBehaviour
         subState = EntitySubStates.Hurt;
         if (GetComponent<ItemBehavior>() == null)
         {
-            currentHealth -= hitboxData.damage * (1/defense);
+            currentHealth -= hitboxData.damage * (1 / defense);
         }
         rb.velocity = new Vector2(hitboxData.knockback * Mathf.Sign(transform.position.x - owner.transform.position.x), 5);
 
