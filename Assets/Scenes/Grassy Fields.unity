@@ -2561,6 +2561,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 22a1914e4c85d5648bb7fce300137a81, type: 2}
   - {fileID: 11400000, guid: 482aef79baeda9345a6fe4671ee1d8dc, type: 2}
   - {fileID: 11400000, guid: 5a702daf2d066ed41becb077b8f91789, type: 2}
+  - {fileID: 11400000, guid: 5225d8b19a88be0449ecbe87a71a0e04, type: 2}
   - {fileID: 11400000, guid: 010962514fafdba41b3799a57a2c9081, type: 2}
   - {fileID: 11400000, guid: a2df2e52179bc9c42a546ab348e9542a, type: 2}
   - {fileID: 11400000, guid: 7039d602dcfe1704b9074359694d5c5f, type: 2}
@@ -2568,6 +2569,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bd9ea391a9ef7414bbe78334d3c19770, type: 2}
   - {fileID: 11400000, guid: 713fb0140b7fa764bacb504537a2db66, type: 2}
   - {fileID: 11400000, guid: a435a6e0469db264f81f85ca140ddaff, type: 2}
+  - {fileID: 11400000, guid: 454288e88b23fa44491ab12ca5675707, type: 2}
   doorTiles:
   - {fileID: 11400000, guid: d1af07f49aab04e45848d9f6094c3416, type: 2}
   - {fileID: 11400000, guid: 8cbf9b1f5092bcb40babcbdc84ba643f, type: 2}

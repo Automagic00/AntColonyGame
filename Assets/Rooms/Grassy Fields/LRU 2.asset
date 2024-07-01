@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LRU 2
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: 121e6b34cc3b5ef4ca94880b9bb5a875, type: 3}
-  weight: 2
+  weight: 0.2
   depth: 0.5
   overheadBounds: 0
   minAmount: 0
