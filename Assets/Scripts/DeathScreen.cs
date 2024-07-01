@@ -25,9 +25,10 @@ public class DeathScreen : MonoBehaviour
     }
     public void ReturnToColony()
     {
-        // TODO re-enable after jam
         Inventory inventory = GameObject.Find("Player").GetComponent<Inventory>();
+        // TODO re-enable after jam
         // inventory.ClearInventory();
+        inventory.ClearInventory(false, true, false);
 
         AudioSource.PlayClipAtPoint(confirmSound, inventory.transform.position);
         SceneManager.LoadScene("Anthill");
