@@ -2790,7 +2790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8483681041205218947, guid: c150c4990c4fcd04bafaa30fc2defceb, type: 3}
       propertyPath: ringNumber
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3170,7 +3170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8483681041205218947, guid: c150c4990c4fcd04bafaa30fc2defceb, type: 3}
       propertyPath: ringNumber
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

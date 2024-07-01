@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dd748801e1a6c4ebadeaa37fa93fbd, type: 3}
+  m_Name: Beetle Ring
+  m_EditorClassIdentifier: 
+  name: Beetle Ring
+  sprite: {fileID: 21300000, guid: 61716a4a1b652e54fbd2ca1ba1076091, type: 3}
+  flavorText: 
+  weight: 2
+  throwDamage: 0
+  xSize: 1
+  ySize: 1
+  rarity: 1
+  baseModifiers: 05000000
+  modifiers: 
+  groundspeedMod: 1
+  airspeedMod: 1
+  damageMod: 1
+  jumpHeightMod: 1
+  hpMod: 1
+  defMod: 1
+  knockbackMod: 1
+  rollSpeedMod: 1
+  attackSpeedMod: 1
+  doubleJumpMod: 0
+  multishotMod: 0
+  pierceMod: 0
