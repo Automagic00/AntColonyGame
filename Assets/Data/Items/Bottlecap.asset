@@ -16,6 +16,6 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 5ff33f391e46c7248b071ae1f11ad81b, type: 3}
   flavorText: Good for collecting and throwing
   weight: 5
-  throwDamage: 40
+  throwDamage: 30
   xSize: 1
   ySize: 0.8

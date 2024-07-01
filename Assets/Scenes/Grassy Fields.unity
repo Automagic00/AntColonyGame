@@ -2171,7 +2171,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 2076533869, guid: dc25d9a6b0ebd33418bb44748cae254c, type: 3}
       - {fileID: -1514636979, guid: dc25d9a6b0ebd33418bb44748cae254c, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 2, y: 4, z: 0}
@@ -2840,6 +2840,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 454288e88b23fa44491ab12ca5675707, type: 2}
   - {fileID: 11400000, guid: 5c1e9b85f44c7a043a65d89ac418bcec, type: 2}
   - {fileID: 11400000, guid: be3bc8df30dff704ebb923dfcbcc5f4d, type: 2}
+  - {fileID: 11400000, guid: 3188b675397bbf643a0b0f0ebbeef1c0, type: 2}
+  - {fileID: 11400000, guid: bf050b20ba799ee4db8325f5b20740b8, type: 2}
   doorTiles:
   - {fileID: 11400000, guid: d1af07f49aab04e45848d9f6094c3416, type: 2}
   - {fileID: 11400000, guid: 8cbf9b1f5092bcb40babcbdc84ba643f, type: 2}
@@ -2881,8 +2883,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a648f15f33d1cee4690179d3ebe33139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipToProgression: 7
+  skipToProgression: 3
   enableNurse: 0
+  enableCourier: 0
 --- !u!19719996 &6433734372411016096
 TilemapCollider2D:
   m_ObjectHideFlags: 0

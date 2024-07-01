@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Stinger
   damage: 20
-  knockback: 10
+  knockback: 18
   size: {x: 0.2, y: 0.2}
   speed: 10
   pierce: 0

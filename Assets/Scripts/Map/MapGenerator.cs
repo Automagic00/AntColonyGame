@@ -208,7 +208,6 @@ public class MapGenerator : MonoBehaviour
             possibleTrades.Remove(tradeItem);
         }
         tradeRoute.Add(targetItem);
-        Debug.Log(tradeRoute.toString());
 
         // BACKUP: If missing traders in route, spawn some at start
         for (int i = 0; i + traders.Count < tradeRoute.Count - 1; i++)
@@ -659,10 +658,24 @@ public class MapGenerator : MonoBehaviour
                     {
                         Vector3Int pos = new Vector3Int(x, y) + roomLoc;
 
-                        TileBase pbg = room.bg.GetTile(new Vector3Int(x, y));
-                        if (pbg != null) root.bg.SetTile(pos, pbg);
                         TileBase pfg = room.fg.GetTile(new Vector3Int(x, y));
                         if (pfg != null) root.fg.SetTile(pos, pfg);
+                    }
+                bounds = room.bg.cellBounds;
+                for (int x = bounds.xMin; x < bounds.xMax; x++)
+                    for (int y = bounds.yMin; y < bounds.yMax; y++)
+                    {
+                        Vector3Int pos = new Vector3Int(x, y) + roomLoc;
+
+                        TileBase pbg = room.bg.GetTile(new Vector3Int(x, y));
+                        if (pbg != null) root.bg.SetTile(pos, pbg);
+                    }
+                bounds = room.plat.cellBounds;
+                for (int x = bounds.xMin; x < bounds.xMax; x++)
+                    for (int y = bounds.yMin; y < bounds.yMax; y++)
+                    {
+                        Vector3Int pos = new Vector3Int(x, y) + roomLoc;
+
                         TileBase pplat = room.plat.GetTile(new Vector3Int(x, y));
                         if (pplat != null) root.plat.SetTile(pos, pplat);
                     }

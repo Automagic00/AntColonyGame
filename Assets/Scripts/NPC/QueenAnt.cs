@@ -50,9 +50,9 @@ public class QueenAnt : Interactable, Dialoguer
                 new DialogueItem(){text="Oh loyal follower, I have most unfortunate news..."},
                 new DialogueItem(){text="The cursed wasps have destroyed everything!"},
                 new DialogueItem(){text="Our nest, our empire... all gone."},
-                new DialogueItem(){text="...", action=()=>{GetComponent<SpriteRenderer>().flipX=false;}},
+                new DialogueItem(){text="...", action=()=>{/*GetComponent<SpriteRenderer>().flipX=false;*/}},
                 new DialogueItem(){text="It seems we've no choice but to build it all back from scratch.",
-                                    action=()=>{GetComponent<SpriteRenderer>().flipX=true;}},
+                                    action=()=>{/*GetComponent<SpriteRenderer>().flipX=true;*/}},
                 new DialogueItem(){text="This land seems suitable.\nI am in need of materials."},
                 new DialogueItem(){text="Go east and find me a "+want1.name+". We may make something of this yet."},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
@@ -119,7 +119,7 @@ public class QueenAnt : Interactable, Dialoguer
                 new DialogueItem(){text="Go into the Grassy Fields and fetch me "+want4.name+" for the builders."},
 
                 new DialogueItem(){action=()=>{canInteract = true;}}};
-            
+
             case 4:
                 // Queen expects Nectar
                 if (!player.holding(want4))
@@ -137,7 +137,7 @@ public class QueenAnt : Interactable, Dialoguer
                 new DialogueItem(){text="With this, our Builders are refreshed and working harder than ever!"},
                 new DialogueItem(){text="But I'm afraid we still need more material to expand! Go fetch me a "+want5.name+" from the Grassy Fields."},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
-                
+
             case 5:
                 // pebble
                 if (!player.holding(want5))
@@ -186,7 +186,7 @@ public class QueenAnt : Interactable, Dialoguer
                 new DialogueItem(){text="Feel free to continue exploring the Grassy Fields if you would like."},
                 new DialogueItem(){text="(On behalf of the Development Team, thanks for playing!)"},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
-                
+
 
         }
 
