@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +9,7 @@ public class Door : Interactable
 {
 
     public string text, sceneName;
-
+    Color fade;
     private TextMeshPro overhead;
 
     public override void interact()
@@ -24,7 +23,9 @@ public class Door : Interactable
         overhead.text = text.ToUpper();
 
         // Fades in
-        overhead.color = Color.white.WithAlpha(0);
+        overhead.color = new Color(1,1,1,0);
+        fade = overhead.color;
+        Debug.Log(overhead.color);
     }
 
     private Coroutine currentCoroutine;
@@ -43,7 +44,9 @@ public class Door : Interactable
     {
         while (overhead.color.a < 1.0f)
         {
-            overhead.color = overhead.color.WithAlpha(overhead.color.a + Time.deltaTime / time);
+            //fade.a = overhead.color.a;
+            fade.a = overhead.color.a + Time.deltaTime / time;
+            overhead.color = fade;
             yield return null;
         }
     }
@@ -51,7 +54,8 @@ public class Door : Interactable
     {
         while (overhead.color.a > 0.0f)
         {
-            overhead.color = overhead.color.WithAlpha(overhead.color.a - Time.deltaTime / time);
+            fade.a = overhead.color.a - Time.deltaTime / time;
+            overhead.color = fade;
             yield return null;
         }
     }

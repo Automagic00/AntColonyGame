@@ -105,8 +105,12 @@ public class HealthBar : MonoBehaviour
                     hpImage.sprite = healthbarSprites[lastUsedSpriteIndex];
 
                     //fix scale
-                    borderPiece.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 70);
-                    healthPiece.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 70);
+                    float xScalar = Screen.width / 1920f;
+                    float yScalar = Screen.height / 1080f;
+                    Debug.Log(Screen.width + ", " + Screen.height);
+                    Debug.Log(xScalar + ", " + yScalar);
+                    borderPiece.GetComponent<RectTransform>().sizeDelta = new Vector2(30 * xScalar, 70 * yScalar);
+                    healthPiece.GetComponent<RectTransform>().sizeDelta = new Vector2(30 * xScalar, 70 * yScalar);
 
                 }
                 //Adjust End Piece

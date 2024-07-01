@@ -1,8 +1,3 @@
-using System.Collections.Generic;
-using Unity.Loading;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Trader : Interactable
@@ -14,7 +9,7 @@ public class Trader : Interactable
 
     public Item want, give;
 
-    public AnimatorController[] animators;
+    public RuntimeAnimatorController[] animators;
 
     void Awake()
     {

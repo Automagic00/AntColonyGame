@@ -141,7 +141,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: a6b350c7b3b630d44ac422aa12decb6e, type: 2}
+  - {fileID: 8253697624691271577, guid: 3edc52f67e619bd44bde720a5bd70347, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185,8 +185,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a6b350c7b3b630d44ac422aa12decb6e, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: a6b350c7b3b630d44ac422aa12decb6e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3edc52f67e619bd44bde720a5bd70347, type: 2}
+  m_sharedMaterial: {fileID: 8253697624691271577, guid: 3edc52f67e619bd44bde720a5bd70347, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -523,6 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d330e264899b149827a815e65630f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statWindowPrefab: {fileID: 0}
   outlineSize: 2
   interactDistance: 3
   outlineColor: {r: 0.504717, g: 1, b: 0.99515027, a: 1}
@@ -540,8 +541,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canInteract: 1
-  text: Home
-  sceneName: Tutorial
+  text: Grassy Fields
+  sceneName: Grassy Fields
 --- !u!1 &3111335093848895856
 GameObject:
   m_ObjectHideFlags: 0

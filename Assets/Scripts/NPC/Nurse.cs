@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using Unity.Loading;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Nurse : Interactable
