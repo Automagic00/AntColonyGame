@@ -9787,6 +9787,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
+      propertyPath: landSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 811da8101640ab44cbb2c97780578c27, type: 3}
+    - target: {fileID: 4726289366238920415, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
+      propertyPath: attackSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: ccbdbacaf8844eb4d87b4d9af1a4b06a, type: 3}
     - target: {fileID: 4941728321735437585, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.79
@@ -9826,10 +9834,6 @@ PrefabInstance:
     - target: {fileID: 4941728321735437585, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8403771907283430603, guid: 975fd1b142a95204b8c3c3824a97ac97, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
