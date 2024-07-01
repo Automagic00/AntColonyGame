@@ -4950,6 +4950,12 @@ MonoBehaviour:
   currentHealth: 0
   hurt: 0
   defaultRollSpeed: 8
+  rollSpeed: 0
+  knockbackBonus: 0
+  multishotBouns: 0
+  pierceBonus: 0
+  damageBonus: 0
+  attackSpeed: 0
   defaultInvulnTime: 0.4
   jumpSfx: {fileID: 8300000, guid: 6f84988ac5b81ba4295475ef6f1cc858, type: 3}
   doubleJumpSfx: {fileID: 8300000, guid: a7a8daa1113a5e141be24309dfccd230, type: 3}
@@ -4993,7 +4999,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &8540741152697098455
 BoxCollider2D:
