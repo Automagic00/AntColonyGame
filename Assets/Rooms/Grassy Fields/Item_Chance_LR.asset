@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Item_Chance_LR
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: d9a87f969a8f47c4d978cb9b4102d46a, type: 3}
-  weight: 0.5
+  weight: 1
   depth: 0.2
   overheadBounds: 8
   minAmount: 0
