@@ -70,8 +70,8 @@ public class Inventory : MonoBehaviour
         carry = _carry;
         weapon = _weapon;
 
-        if (SceneManager.GetActiveScene().name == "Anthill")
-            ClearInventory(true, false);
+        // if (SceneManager.GetActiveScene().name == "Anthill")
+        //     ClearInventory(true, false);
     }
 
     public bool holding(Item item) => carry == item || weapon == item;

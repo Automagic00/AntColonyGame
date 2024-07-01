@@ -481,9 +481,9 @@ SpriteRenderer:
   m_SortingLayerID: -1918842155
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2979690, guid: 4de6edab89f990b42868bbf9050bcb1a, type: 3}
+  m_Sprite: {fileID: -1440533941, guid: 9e76604e458e1834bb2a8a9729c906ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -500,7 +500,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5559757687741360435}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ba929624885e90e4aa6fbeb322859c8b, type: 2}
   m_CullingMode: 0
@@ -859,10 +859,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3122317359449098758}
-  - component: {fileID: 7677452523034456980}
+  - component: {fileID: 8875505731337772703}
   - component: {fileID: 305495990181368711}
   m_Layer: 0
-  m_Name: Nurse
+  m_Name: Courier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -886,7 +886,7 @@ Transform:
   - {fileID: 7584214072278873352}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7677452523034456980
+--- !u!114 &8875505731337772703
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -895,7 +895,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7370749867379044888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: add278c03c3351747bf1bde5fdfc70c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5663e21ee82084548bc62d84d92a2d77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canInteract: 1
@@ -916,7 +916,7 @@ MonoBehaviour:
   outlineSize: 2
   interactDistance: 2
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  interactor: {fileID: 7677452523034456980}
+  interactor: {fileID: 8875505731337772703}
 --- !u!1 &8590630883751633904
 GameObject:
   m_ObjectHideFlags: 0

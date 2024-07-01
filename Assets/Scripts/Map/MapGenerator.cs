@@ -17,6 +17,8 @@ public class MapGenerator : MonoBehaviour
 
     private List<Room> traderRooms = new List<Room>();
     private List<Room> itemRooms = new List<Room>();
+    private List<Room> nurseRooms = new List<Room>();
+    private List<Room> courierRooms = new List<Room>();
 
     private int[] roomCount;
 
@@ -73,6 +75,10 @@ public class MapGenerator : MonoBehaviour
             Transform objs = room.layout.transform.Find("objects");
             if (objs.Find("Trader") != null)
                 traderRooms.Add(room);
+            if (objs.Find("Nurse") != null)
+                nurseRooms.Add(room);
+            if (objs.Find("Courier") != null)
+                courierRooms.Add(room);
             if (objs.Find("Item") != null && objs.Find("Item").GetComponent<SpawnChance>() == null)
                 itemRooms.Add(room);
         }
@@ -84,10 +90,28 @@ public class MapGenerator : MonoBehaviour
     {
         if (!pullSettingsFromGameProgression) return;
 
+        // NPCs
+        if (!Globals.nurseEnabled)
+        {
+            if (GameObject.Find("Nurse") != null)
+                Destroy(GameObject.Find("Nurse"));
+            foreach (Room room in nurseRooms)
+                room.maxAmount = 0;
+        }
+        if (!Globals.nurseEnabled)
+        {
+            if (GameObject.Find("Courier") != null)
+                Destroy(GameObject.Find("Courier"));
+            foreach (Room room in courierRooms)
+                room.maxAmount = 0;
+        }
+
+        // Trading
         if (QueenAnt.queenWants != null)
             targetItem = QueenAnt.queenWants[System.Math.Clamp(Globals.gameProgression - 1, 0, QueenAnt.queenWants.Count - 1)];
         else targetItem = allItems[2];
 
+        // Map gen
         int minItems;
 
         if (Globals.gameProgression <= 3)
@@ -138,7 +162,7 @@ public class MapGenerator : MonoBehaviour
 
         foreach (Room r in traderRooms)
             r.minAmount = 0;
-        for (int i = 0; i <= npcTradeLength; i++)
+        for (int i = 0; i <= npcTradeLength + 1; i++)
             traderRooms[Random.Range(0, traderRooms.Count)].minAmount++;
         foreach (Room r in traderRooms)
             r.maxAmount = r.minAmount + 1;

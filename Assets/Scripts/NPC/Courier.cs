@@ -3,7 +3,7 @@ using Unity.Loading;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Nurse : Interactable
+public class Courier : Interactable
 {
     private Inventory player;
     private Entity playerEntity;
@@ -12,6 +12,8 @@ public class Nurse : Interactable
     private Transform contents;
 
     public Item want;
+
+    private static List<Item> courierBag = new List<Item>();
 
 
     void Awake()
@@ -24,11 +26,11 @@ public class Nurse : Interactable
     }
 
 
-    bool canTrade() => player.holding(want);
+    bool canGive() => player.carry != null;
 
     void Update()
     {
-        canInteract = canTrade();
+        canInteract = canGive();
         // Face player
 
         Vector3 scale = transform.localScale;
@@ -41,10 +43,8 @@ public class Nurse : Interactable
 
     public override void enterInteractionRange()
     {
-        if (playerEntity.currentHealth == playerEntity.maxHP) return;
-
-        contents.transform.Find("want").GetComponent<SpriteRenderer>().sprite = want.sprite;
-        interactionBox.SetActive(true);
+        // contents.transform.Find("want").GetComponent<SpriteRenderer>().sprite = want.sprite;
+        // interactionBox.SetActive(true);
     }
     public override void exitInteractionRange()
     {
@@ -53,11 +53,11 @@ public class Nurse : Interactable
 
     public override void interact()
     {
-        if (!canTrade()) return;
+        if (!canGive()) return;
 
+        courierBag.Add(player.carry);
         player.carry = null;
-        playerEntity.currentHealth = playerEntity.maxHP;
-        exitInteractionRange();
 
+        exitInteractionRange();
     }
 }
