@@ -69,7 +69,7 @@ public class ItemSpawner : MonoBehaviour
         foreach (var item in itemRarityData)
         {
             testWeight += item.weight;
-            if (totalRarityWeight >= randomPick)
+            if (testWeight >= randomPick)
             {
                 if (itemSpawned != null && (itemSpawned.GetComponent<ItemBehavior>().item.GetType() == typeof(Equipment) || itemSpawned.GetComponent<ItemBehavior>().item.GetType() == typeof(Weapon) || itemSpawned.GetComponent<ItemBehavior>().item.GetType() == typeof(Ring)))
                 {

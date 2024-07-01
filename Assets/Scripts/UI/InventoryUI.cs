@@ -2,6 +2,8 @@
 
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
+using System.Linq;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -75,7 +77,7 @@ public class InventoryUI : MonoBehaviour
 
             switch (itemData.rarity)
             {
-                case Equipment.Rarity.Common: rarity.text = "Common"; rarity.color = Color.white; break;
+                case Equipment.Rarity.Common: rarity.text = "Common"; rarity.color = Color.gray; break;
                 case Equipment.Rarity.Uncommon: rarity.text = "Uncommon"; rarity.color = Color.green; break;
                 case Equipment.Rarity.Rare: rarity.text = "Rare"; rarity.color = Color.blue; break;
                 case Equipment.Rarity.Mythic: rarity.text = "Mythic"; rarity.color = Color.magenta; break;
@@ -86,7 +88,19 @@ public class InventoryUI : MonoBehaviour
 
             modifiers.text = "";
             modifiers.color = rarity.color;
-            foreach (Equipment.Modifiers itemMods in itemData.modifiers)
+
+            List<Equipment.Modifiers> combinedMods = new List<Equipment.Modifiers>();
+
+            if (itemData.baseModifiers!=null)
+            {
+                combinedMods.AddRange(itemData.baseModifiers);
+            }
+            if (itemData.modifiers != null)
+            {
+                combinedMods.AddRange(itemData.modifiers);
+            }
+
+            foreach (Equipment.Modifiers itemMods in combinedMods)
             {
                 switch (itemMods)
                 {
