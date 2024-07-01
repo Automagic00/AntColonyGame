@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a365807df86b4694ba21bbca341ef3fe, type: 3}
   m_Name: R
   m_EditorClassIdentifier: 
-  layout: {fileID: 1853980688481997053, guid: 6ae12635483ece249bb300c6fa334e69, type: 3}
+  layout: {fileID: 1853980688481997053, guid: 09c97f1b70d02a547b667b709ccd3c67, type: 3}
   weight: 0.5
   depth: 1
   overheadBounds: 0
   minAmount: 0
   maxAmount: -1
-  allowMirror: 1
+  allowMirror: 0
