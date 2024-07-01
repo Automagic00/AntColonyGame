@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 447abec179a27444c93635e9d3c952d9, type: 3}
-  m_Name: Dental Pick
+  m_Script: {fileID: 11500000, guid: 77dd748801e1a6c4ebadeaa37fa93fbd, type: 3}
+  m_Name: Beetle Ring
   m_EditorClassIdentifier: 
-  name: Dental Pick
-  sprite: {fileID: 21300000, guid: ebdd1e565f9b5ed46ae644dc25ffc21b, type: 3}
-  flavorText: Minty and pristine
+  name: Beetle Ring
+  sprite: {fileID: 21300000, guid: 61716a4a1b652e54fbd2ca1ba1076091, type: 3}
+  flavorText: 
   weight: 2
-  throwDamage: 5
+  throwDamage: 0
   xSize: 1
   ySize: 1
   rarity: 1
-  baseModifiers: 090000000a000000
+  baseModifiers: 05000000
   modifiers: 
   groundspeedMod: 1
   airspeedMod: 1
@@ -34,8 +34,3 @@ MonoBehaviour:
   doubleJumpMod: 0
   multishotMod: 0
   pierceMod: 0
-  holdPosition: {x: 0.149, y: 0.269}
-  weaponType: 1
-  baseDamage: 0
-  splash: {fileID: 0}
-  Projectile: {fileID: 11400000, guid: 9673f67c5c2005749a464681fc59c7a0, type: 2}

@@ -331,9 +331,9 @@ TextureImporter:
       name: HP_bar_divider
       rect:
         serializedVersion: 2
-        x: 360
+        x: 362
         y: 0
-        width: 30
+        width: 25
         height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

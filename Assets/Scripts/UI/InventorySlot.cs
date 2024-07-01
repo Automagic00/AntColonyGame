@@ -95,7 +95,7 @@ public class InventorySlot : MonoBehaviour
         }
         return false;
     }
-    private Item GetItem()
+    public Item GetItem()
     {
         switch (slot)
         {
@@ -120,4 +120,6 @@ public class InventorySlot : MonoBehaviour
             sprite.sprite = set.sprite;
         }
     }
+
+    
 }

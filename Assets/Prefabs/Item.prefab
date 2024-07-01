@@ -575,6 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d330e264899b149827a815e65630f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statWindowPrefab: {fileID: 6760712521727427325, guid: 738aa7a5c55a65b4983b4153eaef27f5, type: 3}
   outlineSize: 2
   interactDistance: 2
   outlineColor: {r: 1, g: 0.9512589, b: 0.5411765, a: 1}
@@ -604,6 +605,12 @@ MonoBehaviour:
   currentHealth: 0
   hurt: 0
   defaultRollSpeed: 12
+  rollSpeed: 0
+  knockbackBonus: 0
+  multishotBouns: 0
+  pierceBonus: 0
+  damageBonus: 0
+  attackSpeed: 0
   defaultInvulnTime: 0.2
   jumpSfx: {fileID: 0}
   doubleJumpSfx: {fileID: 0}
