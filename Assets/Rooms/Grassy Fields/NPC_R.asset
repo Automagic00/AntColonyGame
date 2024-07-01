@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: NPC_R
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: 6ae12635483ece249bb300c6fa334e69, type: 3}
-  weight: 0.4
+  weight: 0.2
   depth: 1
   overheadBounds: 0
-  minAmount: 2
+  minAmount: 1
   maxAmount: 3
   allowMirror: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LD
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: 0a11edc99fc26ed458c4eb548a71eb47, type: 3}
-  weight: 0.2
+  weight: 0.4
   depth: 0.3
   overheadBounds: 8
   minAmount: 0

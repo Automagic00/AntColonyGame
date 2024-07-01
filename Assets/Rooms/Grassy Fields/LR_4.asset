@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: LR_4
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: 8145c3554980aa34997f6a3629559a74, type: 3}
-  weight: 0.5
-  depth: 1.2
+  weight: 0.6
+  depth: 1.1
   overheadBounds: 6
+  minAmount: 0
+  maxAmount: -1
   allowMirror: 1

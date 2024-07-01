@@ -117,42 +117,42 @@ public class MapGenerator : MonoBehaviour
         if (Globals.gameProgression <= 3)
         {
             minDepth = 0.5f;
-            maxDepth = 2f;
+            maxDepth = 1.5f;
             requiredRoomDepth = 0.1f;
             requiredRoomIncrement = 0.25f;
             npcTradeLength = 1;
-            minItems = 1;
+            minItems = 0;
         }
         else
             switch (Globals.gameProgression)
             {
                 case 4:
                     minDepth = 1.0f;
-                    maxDepth = 3f;
+                    maxDepth = 2.5f;
                     requiredRoomDepth = 0.5f;
                     requiredRoomIncrement = 0.5f;
                     npcTradeLength = 1;
-                    minItems = 2;
+                    minItems = 1;
                     break;
                 case 5:
                     minDepth = 2f;
-                    maxDepth = 5f;
+                    maxDepth = 3.5f;
                     requiredRoomDepth = 1.0f;
                     requiredRoomIncrement = 0.75f;
                     npcTradeLength = 2;
-                    minItems = 2;
+                    minItems = 1;
                     break;
                 case 6:
                     minDepth = 3f;
-                    maxDepth = 7f;
+                    maxDepth = 4.5f;
                     requiredRoomDepth = 1.5f;
                     requiredRoomIncrement = 1.0f;
                     npcTradeLength = 2;
-                    minItems = 3;
+                    minItems = 2;
                     break;
                 default:
                     minDepth = 5f;
-                    maxDepth = 9f;
+                    maxDepth = 6f;
                     requiredRoomDepth = 2.5f;
                     requiredRoomIncrement = 1.25f;
                     npcTradeLength = 3;
@@ -227,22 +227,11 @@ public class MapGenerator : MonoBehaviour
 
 
         /// Use up remaining items & traders for weapons
-        Item goodTradeItem = null, giveWeapon = null;
+        Item giveWeapon = null;
         if (items.Count > 0)
             for (int i = 0; i < items.Count || i < traders.Count; i++)
             {
 
-                // Only choose a new trade item if it can set one
-                if (i < items.Count && possibleTrades.Count > 0)
-                {
-                    goodTradeItem = possibleTrades[0];
-                    possibleTrades.Remove(goodTradeItem);
-                }
-                else
-                {
-                    goodTradeItem = allItems[0];
-                }
-                // Only choose a new weapon if it can give one
                 if (i < traders.Count && valuables.Count > 0)
                 {
                     giveWeapon = valuables[0];
@@ -250,10 +239,10 @@ public class MapGenerator : MonoBehaviour
                 }
 
                 if (i < items.Count)
-                    items[i].item = goodTradeItem;
+                    items[i].item = allItems[0];
                 if (i < traders.Count)
                 {
-                    traders[i].want = goodTradeItem;
+                    traders[i].want = tradeRoute[Random.Range(0, tradeRoute.Count / 2)];
                     traders[i].give = giveWeapon;
                 }
             }

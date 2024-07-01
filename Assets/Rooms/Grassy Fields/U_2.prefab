@@ -2807,7 +2807,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 25
+      m_TileSpriteIndex: 27
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2827,7 +2827,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 20
+      m_TileSpriteIndex: 25
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2877,7 +2877,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 23
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3062,22 +3062,22 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 864585964, guid: b29889fe7833ef242a76ed61176450ec, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 31457d730e92bbf4c984f0a593534d1e, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 4
     m_Data: {fileID: 470534612, guid: b29889fe7833ef242a76ed61176450ec, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -692029171, guid: b29889fe7833ef242a76ed61176450ec, type: 3}
+    m_Data: {fileID: 864585964, guid: b29889fe7833ef242a76ed61176450ec, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 779653284, guid: b29889fe7833ef242a76ed61176450ec, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -692029171, guid: b29889fe7833ef242a76ed61176450ec, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1033024412, guid: b29889fe7833ef242a76ed61176450ec, type: 3}
   - m_RefCount: 4
@@ -3250,7 +3250,7 @@ PrefabInstance:
     - target: {fileID: 7704190190105591337, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
       propertyPath: _item
       value: 
-      objectReference: {fileID: 11400000, guid: 20f6e51b7d0e10b44b0402455370cabc, type: 2}
+      objectReference: {fileID: 11400000, guid: 95a6a90715e98104480680fdc695b271, type: 2}
     - target: {fileID: 8342710419267567651, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
       propertyPath: m_Size.x
       value: 1
@@ -3262,7 +3262,7 @@ PrefabInstance:
     - target: {fileID: 8342710419267567651, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 61716a4a1b652e54fbd2ca1ba1076091, type: 3}
+      objectReference: {fileID: 21300000, guid: 2f0dda4cc05d75047a8950f41e7a4a65, type: 3}
     - target: {fileID: 8342710419267567651, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -3270,32 +3270,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6261384679600572615, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 389965362957438773}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
---- !u!1 &3671009662087365622 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6261384679600572615, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
-  m_PrefabInstance: {fileID: 7212202436270017329}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &389965362957438773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3671009662087365622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee91bd151500e545bd628c6b12d7787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomMinRange: 0
-  roomMaxRange: 100
-  sceneMinRange: 0
-  sceneMaxRange: 100
 --- !u!4 &6362639007239064798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4348860476953954287, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}

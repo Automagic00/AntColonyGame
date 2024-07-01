@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: LR_8
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: eee59fb9882f35f4a86c10fc38dceb54, type: 3}
-  weight: 0.75
-  depth: 0.7
+  weight: 0.4
+  depth: 0.5
   overheadBounds: 0
   minAmount: 0
   maxAmount: 1

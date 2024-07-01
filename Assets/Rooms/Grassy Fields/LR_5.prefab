@@ -101,6 +101,7 @@ MonoBehaviour:
   roomMaxRange: 100
   sceneMinRange: 0
   sceneMaxRange: 100
+  afterGameProgression: 3
 --- !u!1 &926987848765480910
 GameObject:
   m_ObjectHideFlags: 0
@@ -5570,7 +5571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8547189890815678722, guid: d79628edb417b2b4fb9f7d05df5a69ce, type: 3}
       propertyPath: enemySpawnData.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8547189890815678722, guid: d79628edb417b2b4fb9f7d05df5a69ce, type: 3}
       propertyPath: enemySpawnData.Array.data[2].weight
@@ -5580,6 +5581,10 @@ PrefabInstance:
       propertyPath: enemySpawnData.Array.data[3].weight
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8547189890815678722, guid: d79628edb417b2b4fb9f7d05df5a69ce, type: 3}
+      propertyPath: enemySpawnData.Array.data[0].enemyPrefab
+      value: 
+      objectReference: {fileID: 441572140439806487, guid: f788ef8becf522346a30f75f9743508d, type: 3}
     - target: {fileID: 8547189890815678722, guid: d79628edb417b2b4fb9f7d05df5a69ce, type: 3}
       propertyPath: enemySpawnData.Array.data[2].enemyPrefab
       value: 
@@ -5595,6 +5600,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3791627812898467444, guid: d79628edb417b2b4fb9f7d05df5a69ce, type: 3}
       insertIndex: 1
       addedObject: {fileID: 4841740864826062306}
+    - targetCorrespondingSourceObject: {fileID: 3791627812898467444, guid: d79628edb417b2b4fb9f7d05df5a69ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6022720431945071074}
   m_SourcePrefab: {fileID: 100100000, guid: d79628edb417b2b4fb9f7d05df5a69ce, type: 3}
 --- !u!4 &7234246004664500322 stripped
 Transform:
@@ -5622,6 +5630,24 @@ MonoBehaviour:
   roomMaxRange: 50
   sceneMinRange: 0
   sceneMaxRange: 100
+  afterGameProgression: 3
+--- !u!114 &6022720431945071074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7267365538636270493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee91bd151500e545bd628c6b12d7787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomMinRange: 0
+  roomMaxRange: 60
+  sceneMinRange: 0
+  sceneMaxRange: 100
+  afterGameProgression: 4
 --- !u!1001 &8485219339955853216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5711,6 +5737,7 @@ MonoBehaviour:
   roomMaxRange: 100
   sceneMinRange: 0
   sceneMaxRange: 100
+  afterGameProgression: 3
 --- !u!4 &6815420750202674598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3122317359449098758, guid: 4254ebfd5db96dd43996dbfd7d245f71, type: 3}

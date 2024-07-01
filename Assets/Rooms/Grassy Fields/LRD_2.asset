@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: LRD_2
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: a3992afcfa564af41aac5f67d219a92d, type: 3}
-  weight: 0.2
-  depth: 0.3
+  weight: 0.3
+  depth: 0.2
   overheadBounds: 8
   minAmount: 0
   maxAmount: -1

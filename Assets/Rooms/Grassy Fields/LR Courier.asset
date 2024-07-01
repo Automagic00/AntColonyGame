@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: LR Courier
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: 1fcd396fb5e02b14c86970b64151b2bf, type: 3}
-  weight: 0.2
+  weight: 0.3
   depth: 0.2
   overheadBounds: 8
   minAmount: 0
-  maxAmount: 2
+  maxAmount: 0
   allowMirror: 1
