@@ -17,5 +17,5 @@ MonoBehaviour:
   depth: 0.5
   overheadBounds: 8
   minAmount: 0
-  maxAmount: -1
+  maxAmount: 0
   allowMirror: 1

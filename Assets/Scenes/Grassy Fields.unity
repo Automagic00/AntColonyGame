@@ -996,7 +996,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1206,7 +1206,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1953,8 +1953,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: -352428585, guid: 62e4f1d47bf168f46b7bed87e40944b2, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 4
@@ -1985,8 +1985,8 @@ Tilemap:
     m_Data: {fileID: 496448521, guid: 62e4f1d47bf168f46b7bed87e40944b2, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: -177553174, guid: 62e4f1d47bf168f46b7bed87e40944b2, type: 3}
-  - m_RefCount: 2
-    m_Data: {fileID: -352428585, guid: 62e4f1d47bf168f46b7bed87e40944b2, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 38
     m_Data: {fileID: 855492719, guid: 62e4f1d47bf168f46b7bed87e40944b2, type: 3}
   - m_RefCount: 13
@@ -2557,25 +2557,29 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3d5a3e63eee7a00459c0fa943f9c2265, type: 2}
   - {fileID: 11400000, guid: b02a0cbccc1e87647b4fb60330abecb0, type: 2}
   - {fileID: 11400000, guid: bf89908aa5278d3439d4cdf5d9828dd0, type: 2}
+  - {fileID: 11400000, guid: 399eb8b623ce6f345a4c1cc383a6d6e6, type: 2}
+  - {fileID: 11400000, guid: 274c466e6f78f27469507411ab2aedb9, type: 2}
   - {fileID: 11400000, guid: 9c50e3edf25edbb409635c59597127fa, type: 2}
+  - {fileID: 11400000, guid: 010962514fafdba41b3799a57a2c9081, type: 2}
+  - {fileID: 11400000, guid: a435a6e0469db264f81f85ca140ddaff, type: 2}
   - {fileID: 11400000, guid: 22a1914e4c85d5648bb7fce300137a81, type: 2}
   - {fileID: 11400000, guid: 482aef79baeda9345a6fe4671ee1d8dc, type: 2}
   - {fileID: 11400000, guid: 5a702daf2d066ed41becb077b8f91789, type: 2}
   - {fileID: 11400000, guid: 5225d8b19a88be0449ecbe87a71a0e04, type: 2}
-  - {fileID: 11400000, guid: 010962514fafdba41b3799a57a2c9081, type: 2}
   - {fileID: 11400000, guid: a2df2e52179bc9c42a546ab348e9542a, type: 2}
   - {fileID: 11400000, guid: 7039d602dcfe1704b9074359694d5c5f, type: 2}
   - {fileID: 11400000, guid: 9119328ff0cda7f439934fdf36c00adf, type: 2}
   - {fileID: 11400000, guid: bd9ea391a9ef7414bbe78334d3c19770, type: 2}
   - {fileID: 11400000, guid: 713fb0140b7fa764bacb504537a2db66, type: 2}
-  - {fileID: 11400000, guid: a435a6e0469db264f81f85ca140ddaff, type: 2}
   - {fileID: 11400000, guid: 454288e88b23fa44491ab12ca5675707, type: 2}
+  - {fileID: 11400000, guid: 5c1e9b85f44c7a043a65d89ac418bcec, type: 2}
+  - {fileID: 11400000, guid: be3bc8df30dff704ebb923dfcbcc5f4d, type: 2}
   doorTiles:
   - {fileID: 11400000, guid: d1af07f49aab04e45848d9f6094c3416, type: 2}
   - {fileID: 11400000, guid: 8cbf9b1f5092bcb40babcbdc84ba643f, type: 2}
   - {fileID: 11400000, guid: 0034866eb3ad9b243894beb400acae07, type: 2}
   - {fileID: 11400000, guid: ad8594d3f2c0fc54ea1542b9879c2436, type: 2}
-  minDepth: 2.5
+  minDepth: 3
   maxDepth: 4
   requiredRoomDepth: 0.5
   requiredRoomIncrement: 1.5
