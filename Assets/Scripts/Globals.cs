@@ -8,6 +8,7 @@ public static class Globals
     public static Bounds mapBounds;
 
     private static int _progression = 0;
+    public static bool nurseEnabled, courierEnabled;
 
     public static int gameProgression
     {
