@@ -14,6 +14,8 @@ public class QueenAnt : Interactable, Dialoguer
 
     public static List<Item> queenWants;
 
+    public Item gameCompletedDrop;
+
     public Sprite dialogueIcon;
 
     void Awake()
@@ -28,7 +30,15 @@ public class QueenAnt : Interactable, Dialoguer
     {
         Dialogue.OpenDialogue(this);
     }
+    public void dropItem()
+    {
+        GameObject giveItem = Instantiate(player.itemPrefab, transform.position, Quaternion.identity);
+        giveItem.GetComponent<ItemBehavior>().item = gameCompletedDrop;
 
+        float direction = player.transform.position.x > transform.position.x ? 1 : -1;
+        giveItem.GetComponent<Rigidbody2D>().velocity = new Vector3(2f * direction, 2, 0);
+
+    }
     public List<DialogueItem> getDialogue()
     {
         switch (Globals.gameProgression)
@@ -75,7 +85,7 @@ public class QueenAnt : Interactable, Dialoguer
                 new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
                 new DialogueItem(){action=()=> {player.remove(want2);}},
                 new DialogueItem(){action=()=>{Globals.gameProgression++;}},
-                new DialogueItem(){text="Excellent work!"},
+                new DialogueItem(){text="Excellent work! Ohoho!"},
                 new DialogueItem(){text="I shall signal this success to the followers."},
                 new DialogueItem(){text="Meanwhile, search the Grassy Fields for more supplies!"},
                 new DialogueItem(){text="Be warned though- the bugs there may be hostile to us.\n(press Z to attack)"},
@@ -86,42 +96,55 @@ public class QueenAnt : Interactable, Dialoguer
                     return new List<DialogueItem>(){
                 new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
                 new DialogueItem(){text="Search the Grassy Fields for more supplies!"},
-                new DialogueItem(){text="Be warned though- the bugs there may be hostile to us.\n(press Z to attack)"},
+                new DialogueItem(){text="Please bring me a "+want3.name+"."},
+                new DialogueItem(){text="You may have to find other materials and trade with other ants to get it..."},
+                new DialogueItem(){text="Be warned though- the bugs there are hostile to us!\n(press Z to attack)"},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
 
-                // Returned from grassy fields
+                // Returned from grassy fields, Queen expects Bottlecap
                 if (!player.holding(want3))
                     return new List<DialogueItem>(){
                 new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
-                new DialogueItem(){text="Next, I require a "+want3.name+"."},
+                new DialogueItem(){text="Search the Grassy Fields for a "+want3.name+"."},
+                new DialogueItem(){text="You may have to find other materials and trade with other ants to get it."},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
 
                 return new List<DialogueItem>(){
                 new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
                 new DialogueItem(){action=()=>{Globals.gameProgression++;}},
                 new DialogueItem(){action=()=> {player.remove(want3);}},
-                new DialogueItem(){text="Thank you for the "+want3.name+"!"},
-                new DialogueItem(){text="Next, go fetch me a "+want4.name+"."},
+                new DialogueItem(){text="I see you have the "+want3.name+" I asked for!"},
+                new DialogueItem(){text="This will be of great use to our builders!"},
+                new DialogueItem(){text="My subjects have been working all day and need energy to finish renovations to the colony."},
+                new DialogueItem(){text="Go into the Grassy Fields and fetch me "+want4.name+" for the builders."},
+
                 new DialogueItem(){action=()=>{canInteract = true;}}};
+            
             case 4:
+                // Queen expects Nectar
                 if (!player.holding(want4))
                     return new List<DialogueItem>(){
                 new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
-                new DialogueItem(){text="Next, I require a "+want4.name+"."},
+                new DialogueItem(){text="Have you brought back the "+want4.name+" I requested?"},
+                new DialogueItem(){text="Search the Grassy Fields. You may have to find other materials and trade with other ants to get it."},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
 
                 return new List<DialogueItem>(){
                 new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
                 new DialogueItem(){action=()=>{Globals.gameProgression++;}},
                 new DialogueItem(){action=()=> {player.remove(want4);}},
-                new DialogueItem(){text="Thank you for the "+want4.name+"!"},
-                new DialogueItem(){text="Next, go fetch me a "+want5.name+"."},
+                new DialogueItem(){text="Thank you, I'll take that "+want4.name+" now!"},
+                new DialogueItem(){text="With this, our Builders are refreshed and working harder than ever!"},
+                new DialogueItem(){text="But I'm afraid we still need more material to expand! Go fetch me a "+want5.name+" from the Grassy Fields."},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
+                
             case 5:
+                // pebble
                 if (!player.holding(want5))
                     return new List<DialogueItem>(){
                 new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
-                new DialogueItem(){text="Next, I require a "+want5.name+"."},
+                new DialogueItem(){text="Have you brought back the "+want5.name+" I requested?"},
+                new DialogueItem(){text="Search the Grassy Fields. You may have to find other materials and trade with other ants to get it."},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
 
                 return new List<DialogueItem>(){
@@ -129,13 +152,16 @@ public class QueenAnt : Interactable, Dialoguer
                 new DialogueItem(){action=()=>{Globals.gameProgression++;}},
                 new DialogueItem(){action=()=> {player.remove(want5);}},
                 new DialogueItem(){text="Thank you for the "+want5.name+"!"},
-                new DialogueItem(){text="Next, go fetch me a "+want6.name+"."},
+                new DialogueItem(){text="With this we can build our colony deeper!"},
+                new DialogueItem(){text="I'm afraid the Nectar you brought back for the colony did not last long... we may need something stronger to give my subjects more energy while they are hard at work."},
+                new DialogueItem(){text="Go fetch me a "+want6.name+" from the Grassy Fields."},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
             case 6:
                 if (!player.holding(want6))
                     return new List<DialogueItem>(){
                 new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
-                new DialogueItem(){text="Next, I require a "+want6.name+"."},
+                new DialogueItem(){text="Have you brought back the "+want6.name+" I requested?"},
+                new DialogueItem(){text="Search the Grassy Fields. You may have to find other materials and trade with other ants to get it."},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
 
                 return new List<DialogueItem>(){
@@ -143,8 +169,25 @@ public class QueenAnt : Interactable, Dialoguer
                 new DialogueItem(){action=()=>{Globals.gameProgression++;}},
                 new DialogueItem(){action=()=> {player.remove(want6);}},
                 new DialogueItem(){text="Thank you for the "+want6.name+"!"},
-                new DialogueItem(){text="I'm all done now."},
+                new DialogueItem(){text="This will give our builders plenty of energy to expand the colony!"},
+                new DialogueItem(){text="...and we're all done now! You have been a great help."},
+                new DialogueItem(){text="You have completed all of your duties and proven yourself as my loyal subject."},
+                new DialogueItem(){text="Feel free to continue exploring the Grassy Fields if you would like."},
+                new DialogueItem(){text="Please take this "+gameCompletedDrop.name+" as a token of my gratitude!"},
+                new DialogueItem(){action=()=>{dropItem();}},
                 new DialogueItem(){action=()=>{canInteract = true;}}};
+            case 7:
+
+
+                return new List<DialogueItem>(){
+                new DialogueItem(){name="Queen Tyr", picture=dialogueIcon},
+                new DialogueItem(){text="I'm all done now."},
+                new DialogueItem(){text="You have completed all of your duties and proven yourself as my loyal subject."},
+                new DialogueItem(){text="Feel free to continue exploring the Grassy Fields if you would like."},
+                new DialogueItem(){text="(On behalf of the Development Team, thanks for playing!)"},
+                new DialogueItem(){action=()=>{canInteract = true;}}};
+                
+
         }
 
         Debug.LogError("Game progression missing dialogue: " + Globals.gameProgression);
