@@ -171,8 +171,6 @@ public class MapGenerator : MonoBehaviour
             r.minAmount = 0;
         for (int i = 0; i < minItems; i++)
             itemRooms[Random.Range(0, itemRooms.Count)].minAmount++;
-        foreach (Room r in itemRooms)
-            r.maxAmount = r.minAmount + 1;
 
     }
 

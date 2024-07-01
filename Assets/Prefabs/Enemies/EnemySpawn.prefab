@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ff3eac96c4749409dde04f674c4b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 60
+  respawnTime: 30
   enemySpawnData:
   - enemyPrefab: {fileID: 3071022364905130618, guid: 3c7df55793dd981429cd35feb9d91f7b, type: 3}
     weight: 1
