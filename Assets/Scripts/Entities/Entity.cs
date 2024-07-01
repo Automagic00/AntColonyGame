@@ -65,7 +65,7 @@ public class Entity : MonoBehaviour
     public AudioClip landSfx;
     public AudioClip attackSfx;
     public AudioClip dodgeSfx;
-
+    private float volumeMod;
     [System.Serializable]
     public class HitboxDataClass
     {
@@ -95,6 +95,15 @@ public class Entity : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
+
+        if (this.GetType() == typeof(EnemyController))
+        {
+            volumeMod = 0.2f;
+        }
+        else
+        {
+            volumeMod = 1;
+        }
         // Init all stats to default
         ModifyStats(1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1);
     }
@@ -149,7 +158,7 @@ public class Entity : MonoBehaviour
                 {
                     state = EntityStates.Ground;
                     if (landSfx != null)
-                        AudioSource.PlayClipAtPoint(landSfx, transform.position,0.4f);
+                        AudioSource.PlayClipAtPoint(landSfx, transform.position,0.4f * volumeMod);
                     //currentJumps = jumps;
                     if (subState == EntitySubStates.Hurt)
                     {
@@ -197,7 +206,7 @@ public class Entity : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, vSpeed);
             currentJumps--;
             StopCoroutine(CoyoteTime());
-            AudioSource.PlayClipAtPoint(jumpSfx, transform.position);
+            AudioSource.PlayClipAtPoint(jumpSfx, transform.position, volumeMod);
             // below = false;
         }
 
@@ -219,7 +228,7 @@ public class Entity : MonoBehaviour
         {
             subState = EntitySubStates.Atk;
             if (attackSfx != null)
-                AudioSource.PlayClipAtPoint(attackSfx, transform.position,0.5f);
+                AudioSource.PlayClipAtPoint(attackSfx, transform.position,0.5f * volumeMod);
 
             attackAngle = new Vector2(x, y);
         }
@@ -232,7 +241,7 @@ public class Entity : MonoBehaviour
         {
             subState = EntitySubStates.Dodge;
             if (dodgeSfx != null)
-                AudioSource.PlayClipAtPoint(dodgeSfx, transform.position,0.5f);
+                AudioSource.PlayClipAtPoint(dodgeSfx, transform.position,0.5f * volumeMod);
             Physics2D.IgnoreLayerCollision(6, 7);
             rb.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * rollSpeed, rb.velocity.y);
         }

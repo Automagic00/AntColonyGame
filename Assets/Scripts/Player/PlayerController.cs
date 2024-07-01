@@ -133,7 +133,7 @@ public class PlayerController : Entity
         // Show interact on UI
         if (uiInteractButton != null) uiInteractButton.gameObject.SetActive(currentInteraction != null);
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.C) || Input.GetMouseButtonDown(2))
             Interact();
     }
     private void Interact()
