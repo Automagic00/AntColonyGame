@@ -72,6 +72,9 @@ MonoBehaviour:
   defaultInvulnTime: 1
   jumpSfx: {fileID: 8300000, guid: 6f84988ac5b81ba4295475ef6f1cc858, type: 3}
   doubleJumpSfx: {fileID: 8300000, guid: a7a8daa1113a5e141be24309dfccd230, type: 3}
+  landSfx: {fileID: 8300000, guid: 811da8101640ab44cbb2c97780578c27, type: 3}
+  attackSfx: {fileID: 8300000, guid: ccbdbacaf8844eb4d87b4d9af1a4b06a, type: 3}
+  dodgeSfx: {fileID: 8300000, guid: aa7d852a3a527a14aa2ee3990bce5f6b, type: 3}
   attacks:
   - origin: {x: 1, y: 0}
     size: {x: 1.5, y: 1}
@@ -104,9 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a90f98b0dd2f55d4394c9fe37e4de579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _carry: {fileID: 0}
   _mouseHold: {fileID: 0}
-  _weapon: {fileID: 0}
   itemPrefab: {fileID: 6261384679600572615, guid: 49f15ea95ff8dcb48ab654afb463c79f, type: 3}
 --- !u!50 &8403771907283430603
 Rigidbody2D:
