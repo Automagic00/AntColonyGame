@@ -493,6 +493,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1830693931459210661, guid: c19477895903da9478e526ae86ceb6d2, type: 3}
+      propertyPath: data.dataString
+      value: UEsDBBQAAAgIAACAn+stIypiWwIAABIFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z2jAQ/SuMziVjQ/NBby0hpIckTGgnF1+EtMYaZMkjyQGS4b93V7axS6cnxHtvd9+uVv5kyvgKRLBu6ZR8shLYtxGjM/sy6slHOPCtNWv1AZ3mTclQkIhHzSsPyiKeUpi3JQSnxHez1SROEKyNyq0rF3ILc+uDRzjn2gNSzgaKNgh9jtgBf8YzCjniaXJLpw88zZLRCY8CTADXSzthJ2tUtRGalxVIstyL006dNjKDzbQKMi6s1sq3Tlg4VrHTdVWAA2pVKo6Nxerp1e01IgWobRHI5zD8Jc89hNaU48d75XBETV72wzZzK7nfNc7eua6p0l301KR8+ocdp5HOnS0fu6ppQhVCocTulR8F92Ew1iF8P3Aex7Pnesc3Gt4KMM926WxtJJLB1RRae5jc93/Pjc0LELseb6xegHX1/8uhHk6x98Ncq3JD1NXXBlhrG+cdrx4c3sxPNBwXw7cpECUXvz384tvhBrXEg3I+INV2acjextaOpGwRZ0bd1GFunYEIt6YrMFyH4wrThMsLvOAGZS+YB05vpS3ect0TuAiJcK9PkgtqZffny/KF3T+BL17qoJWB3jQRzzinuTWm2a/hTLqwde1yLgZh21rJv1eL8evZTT6ZJLPp3eYuuZ6OJ2Iipmk6gxuQUxCSxd1TBvvketUYbceDt2b65Ab3rPuEjJaOV3HXpeP7pfoo7WDkyuR2LRyAeWkynI2DwyL4KuVCKhzQGkJQJt43+8yYtmIHMjsnymKni0NwPOuzZKxS7zYQkrF5/GZkjODzLq8cvCvYU/Eu2Ymd/gBQSwMEFAAACAgAAICf68DXIMVtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tFKiqaVZmpGRgaWxRZKFgamxrlGyUbKxoaFlqllqinFqcopSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAICf6y0jKmJbAgAAEgUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAICf68DXIMVtAAAAeAAAAAkAJAAAAAAAAAAAAAAAqAIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABgAwAAAAA=
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830693931459210661, guid: c19477895903da9478e526ae86ceb6d2, type: 3}
+      propertyPath: showUnwalkableNodes
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830693931459210661, guid: c19477895903da9478e526ae86ceb6d2, type: 3}
+      propertyPath: colorSettings._SolidColor.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6172987813171449210, guid: c19477895903da9478e526ae86ceb6d2, type: 3}
       propertyPath: m_Name
       value: AStar Nav
@@ -2082,6 +2094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6275156941795688196}
   - component: {fileID: 4862143747443906697}
+  - component: {fileID: 6275156941795688198}
   - component: {fileID: 6275156941795688197}
   m_Layer: 0
   m_Name: Map
@@ -2575,10 +2588,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8cbf9b1f5092bcb40babcbdc84ba643f, type: 2}
   - {fileID: 11400000, guid: 0034866eb3ad9b243894beb400acae07, type: 2}
   - {fileID: 11400000, guid: ad8594d3f2c0fc54ea1542b9879c2436, type: 2}
-  minDepth: 2.5
-  maxDepth: 4
-  requiredRoomDepth: 0.5
-  requiredRoomIncrement: 1.5
+  pullSettingsFromGameProgression: 1
+  minDepth: 0.1
+  maxDepth: 1
+  requiredRoomDepth: 0.1
+  requiredRoomIncrement: 0
+--- !u!114 &6275156941795688198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2838915865877486595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a648f15f33d1cee4690179d3ebe33139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skipToProgression: 3
 --- !u!19719996 &6433734372411016096
 TilemapCollider2D:
   m_ObjectHideFlags: 0

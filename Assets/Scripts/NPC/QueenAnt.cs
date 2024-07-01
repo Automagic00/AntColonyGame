@@ -12,11 +12,16 @@ public class QueenAnt : Interactable, Dialoguer
     // Post-tutorial
     public Item want3, want4, want5, want6;
 
+    public static List<Item> queenWants;
+
     public Sprite dialogueIcon;
 
     void Awake()
     {
         player = GameObject.Find("Player").GetComponent<Inventory>();
+
+        queenWants = new List<Item>();
+        queenWants.AddRange(new Item[] { want1, want2, want3, want4, want5, want6 });
     }
 
     public override void interact()

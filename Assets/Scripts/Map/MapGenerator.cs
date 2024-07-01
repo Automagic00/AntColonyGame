@@ -6,12 +6,16 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Pathfinding;
+using UnityEditor;
 
 public class MapGenerator : MonoBehaviour
 {
 
     public Room[] rooms;
     private List<Room> allRooms = new List<Room>();
+
+    private List<Room> traderRooms = new List<Room>();
+    private List<Room> itemRooms = new List<Room>();
 
     private int[] roomCount;
 
@@ -24,7 +28,6 @@ public class MapGenerator : MonoBehaviour
 
     private Vector3 worldmin;
     private Vector3 worldmax;
-    private bool astarscanned = false;
 
     void Start()
     {
@@ -34,6 +37,20 @@ public class MapGenerator : MonoBehaviour
 
         seed = Random.Range(0, 100f);
 
+        LoadRoomData();
+        PullMapGenSettings();
+
+        GenerateMap();
+
+        RemoveArrows();
+        UpdateMapBounds();
+        // MakeItemTradeRoute();
+        StartCoroutine(DelayMakeItemTradeRoute());
+        StartCoroutine(DelayNavMesh());
+    }
+
+    private void LoadRoomData()
+    {
         roomCount = new int[rooms.Count()];
 
         foreach (Room r in rooms) r.refreshInitialization();
@@ -45,20 +62,179 @@ public class MapGenerator : MonoBehaviour
         foreach (Room room in allRooms)
             room.Prepare();
 
+        foreach (Room room in rooms)
+        {
+            Transform objs = room.layout.transform.Find("objects");
+            if (objs.Find("Trader") != null)
+                traderRooms.Add(room);
+            if (objs.Find("Item") != null && objs.Find("Item").GetComponent<SpawnChance>() == null)
+                itemRooms.Add(room);
+        }
 
-        GenerateMap();
+    }
+    public bool pullSettingsFromGameProgression = true;
 
-        RemoveArrows();
-        UpdateMapBounds();
-        StartCoroutine(DelayNavMesh());
+    private void PullMapGenSettings()
+    {
+        if (!pullSettingsFromGameProgression) return;
+
+        if (QueenAnt.queenWants != null)
+            targetItem = QueenAnt.queenWants[System.Math.Clamp(Globals.gameProgression - 1, 0, QueenAnt.queenWants.Count - 1)];
+        else targetItem = Item.Items[2];
+
+        int minItems;
+
+        if (Globals.gameProgression <= 3)
+        {
+            minDepth = 0.5f;
+            maxDepth = 1.5f;
+            requiredRoomDepth = 0.1f;
+            requiredRoomIncrement = 0.25f;
+            npcTradeLength = 1;
+            minItems = 1;
+        }
+        else
+            switch (Globals.gameProgression)
+            {
+                case 4:
+                    minDepth = 1.0f;
+                    maxDepth = 2.5f;
+                    requiredRoomDepth = 0.5f;
+                    requiredRoomIncrement = 0.5f;
+                    npcTradeLength = 2;
+                    minItems = 2;
+                    break;
+                case 5:
+                    minDepth = 2f;
+                    maxDepth = 4.0f;
+                    requiredRoomDepth = 1.0f;
+                    requiredRoomIncrement = 0.75f;
+                    npcTradeLength = 2;
+                    minItems = 2;
+                    break;
+                case 6:
+                    minDepth = 3f;
+                    maxDepth = 5.5f;
+                    requiredRoomDepth = 1.5f;
+                    requiredRoomIncrement = 1.0f;
+                    npcTradeLength = 3;
+                    minItems = 3;
+                    break;
+                default:
+                    minDepth = 5f;
+                    maxDepth = 8.0f;
+                    requiredRoomDepth = 2.5f;
+                    requiredRoomIncrement = 1.25f;
+                    npcTradeLength = 3;
+                    minItems = 3;
+                    break;
+            }
+
+        foreach (Room r in traderRooms)
+            r.minAmount = 0;
+        for (int i = 0; i < npcTradeLength; i++)
+            traderRooms[Random.Range(0, traderRooms.Count)].minAmount++;
+        foreach (Room r in traderRooms)
+            r.maxAmount = r.minAmount + 1;
+
+        foreach (Room r in itemRooms)
+            r.minAmount = 0;
+        for (int i = 0; i < minItems; i++)
+            itemRooms[Random.Range(0, itemRooms.Count)].minAmount++;
+        foreach (Room r in itemRooms)
+            r.maxAmount = r.minAmount + 1;
+
     }
 
+    public IEnumerator DelayMakeItemTradeRoute()
+    {
+        yield return new WaitForSeconds(.2f);
+        MakeItemTradeRoute();
+    }
+    private void MakeItemTradeRoute()
+    {
+        /// Find all items and traders in the map (shuffle for random order)
+        List<ItemBehavior> items = FindObjectsOfType<ItemBehavior>()
+        .Where((item) => item.GetComponent<SpawnChance>() == null).ToList();
+        items.Shuffle();
+        List<Trader> traders = FindObjectsOfType<Trader>().ToList();
+        traders.Shuffle();
+
+        // Make list of valid trade items
+        List<Item> possibleTrades = new List<Item>(Item.Items);
+        possibleTrades.Shuffle();
+        possibleTrades.Remove(targetItem);
+        List<Item> valuables = new List<Item>(Item.valuables);
+        valuables.Shuffle();
+
+        /// Make expected trade route
+        // Always start trades with leaf
+        List<Item> tradeRoute = new List<Item> { Item.Items[0] };
+        possibleTrades.Remove(Item.Items[0]);
+        for (int i = 1; i < npcTradeLength; i++)
+        {
+            Item tradeItem = possibleTrades[0];
+            tradeRoute.Add(tradeItem);
+            possibleTrades.Remove(tradeItem);
+        }
+        tradeRoute.Add(targetItem);
+
+        /// Set random item to starting trade, and setup traders
+        items[0].item = tradeRoute[0];
+        items.Remove(items[0]);
+        for (int i = 0; i < tradeRoute.Count - 1; i++)
+        {
+            traders[0].want = tradeRoute[i];
+            traders[0].give = tradeRoute[i + 1];
+            traders.Remove(traders[0]);
+        }
+
+
+        /// Use up remaining items & traders for weapons
+        Item goodTradeItem = null, giveWeapon = null;
+        if (items.Count > 0)
+            for (int i = 0; i < items.Count || i < traders.Count; i++)
+            {
+                if (possibleTrades.Count == 0 && valuables.Count >= 2)
+                {
+                    Item valuable = valuables[0];
+                    possibleTrades.Add(valuable);
+                    valuables.Remove(valuable);
+                }
+
+                // Only choose a new trade item if it can set one
+                if (i < items.Count && possibleTrades.Count > 0)
+                {
+                    goodTradeItem = possibleTrades[0];
+                    possibleTrades.Remove(goodTradeItem);
+                }
+                // Only choose a new weapon if it can give one
+                if (i < traders.Count && valuables.Count > 0)
+                {
+                    giveWeapon = valuables[0];
+                    valuables.Remove(giveWeapon);
+                }
+
+                if (i < items.Count)
+                    items[i].item = goodTradeItem;
+                if (i < traders.Count)
+                {
+                    traders[i].want = goodTradeItem;
+                    traders[i].give = giveWeapon;
+                }
+            }
+    }
+
+
+    private Item targetItem;
+    private int npcTradeLength;
 
     public float minDepth = 4, maxDepth = 6;
     public float requiredRoomDepth = 2f;
     public float requiredRoomIncrement = 0.5f;
     private List<Node> genQueue = new List<Node>();
     private List<BoundsInt> blockedArea = new List<BoundsInt>();
+
     void GenerateMap()
     {
         // Find all doors
@@ -90,8 +266,6 @@ public class MapGenerator : MonoBehaviour
 
         foreach (Node n in rootNodes)
             n.ApplyToMap();
-
-
     }
 
     void RemoveArrows()

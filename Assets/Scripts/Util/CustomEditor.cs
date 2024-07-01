@@ -12,7 +12,6 @@ public class CustomInspector : Editor
         {
             ItemBehavior item = (ItemBehavior)target;
             item.item = item.item;
-            Debug.Log(item.item);
         }
     }
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   flavorText: I dont know what to put here tbh
   weight: 2
   throwDamage: 10
-  xSize: 1
+  xSize: 0.7
   ySize: 1
   rarity: 1
   baseModifiers: 
@@ -28,10 +28,14 @@ MonoBehaviour:
   jumpHeightMod: 1
   hpMod: 1
   defMod: 1
+  knockbackMod: 1
+  rollSpeedMod: 1
+  attackSpeedMod: 1
   doubleJumpMod: 0
+  multishotMod: 0
+  pierceMod: 0
   holdPosition: {x: 0.11, y: 0.41}
   weaponType: 0
   baseDamage: 30
-  attackSpeed: 1
   splash: {fileID: 11400000, guid: 112828e324f257e48a787028561a1d57, type: 2}
   Projectile: {fileID: 0}

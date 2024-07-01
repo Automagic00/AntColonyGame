@@ -12,6 +12,8 @@ public class ItemBehavior : Interactable
     {
         player = GameObject.Find("Player").GetComponent<Inventory>();
         if (_item != null) item = _item;
+
+        Debug.Assert(_item != null);
     }
     public Item item
     {
@@ -23,11 +25,6 @@ public class ItemBehavior : Interactable
             {
                 GetComponent<SpriteRenderer>().sprite = _item.sprite;
                 GetComponent<BoxCollider2D>().size = new Vector2(_item.xSize, _item.ySize);
-            }
-            else
-            {
-                GetComponent<SpriteRenderer>().sprite = null;
-                GetComponent<BoxCollider2D>().size = new Vector2(1, 1);
             }
         }
     }
@@ -54,14 +51,14 @@ public class ItemBehavior : Interactable
         else if (_item is Ring)
         {
             bool ringFull = false;
-            for(int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++)
             {
-                if(player.GetRing(i) == null)
+                if (player.GetRing(i) == null)
                 {
                     player.SetRing((Ring)_item, i);
                     break;
                 }
-                else if(i == 5)
+                else if (i == 5)
                 {
                     ringFull = true;
                 }
