@@ -17,6 +17,9 @@ public class Room : ScriptableObject
     public const string G_DOWN = "gen_down";
 
     public GameObject layout;
+
+    public string roomType;
+    public string[] allowedRoomsL, allowedRoomsR, allowedRoomsU, allowedRoomsD;
     public float weight = 1;
     public float depth = 1;
     public int overheadBounds = 8;
