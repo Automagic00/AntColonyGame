@@ -6,14 +6,15 @@ using UnityEngine.Tilemaps;
 namespace UnityEngine
 {
 
-    public class RuleTile<T> : FancyRuleTile
+#pragma warning disable CS0436 // Type conflicts with imported type
+    public class RuleTile<T> : RuleTile
     {
         public sealed override Type m_NeighborType { get { return typeof(T); } }
     }
 
     [Serializable]
     [CreateAssetMenu(fileName = "New Rule Tile", menuName = "2D/Tiles/Fancy Rule Tile")]
-    public class FancyRuleTile : TileBase
+    public class RuleTile : TileBase
     {
         public static Tilemap[] tileMaps;
         private static string[] nullTiles = { "gen_left", "gen_right", "gen_up", "gen_down" };
@@ -90,8 +91,8 @@ namespace UnityEngine
         {
             if (tile is RuleOverrideTile)
                 tile = (tile as RuleOverrideTile).m_Tile;
-            else if (tile is FancyRuleTile)
-                tile = (tile as FancyRuleTile).m_Self;
+            else if (tile is RuleTile)
+                tile = (tile as RuleTile).m_Self;
 
             switch (neighbor)
             {
@@ -360,3 +361,4 @@ namespace UnityEngine
         }
     }
 }
+#pragma warning restore CS0436 // Type conflicts with imported type

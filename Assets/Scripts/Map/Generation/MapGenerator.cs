@@ -313,6 +313,7 @@ public class MapGenerator : MonoBehaviour
     {
         Tilemap tilemap = transform.Find("Tiles").GetComponent<Tilemap>();
         tilemap.CompressBounds();
+        tilemap.RefreshAllTiles();
 
         worldmin = tilemap.transform.TransformPoint(tilemap.localBounds.min);
         worldmax = tilemap.transform.TransformPoint(tilemap.localBounds.max) + new UnityEngine.Vector3(0, 16, 0);
