@@ -11,12 +11,13 @@ using Object = UnityEngine.Object;
 //private const string s_XIconString = "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAABoSURBVDhPnY3BDcAgDAOZhS14dP1O0x2C/LBEgiNSHvfwyZabmV0jZRUpq2zi6f0DJwdcQOEdwwDLypF0zHLMa9+NQRxkQ+ACOT2STVw/q8eY1346ZlE54sYAhVhSDrjwFymrSFnD2gTZpls2OvFUHAAAAABJRU5ErkJggg==";
 namespace UnityEditor
 {
-    [CustomEditor(typeof(CustomRuleTile), true)]
+    [CustomEditor(typeof(FancyRuleTile), true)]
     [CanEditMultipleObjects]
     internal class RuleTileEditor : Editor
     {
         private const string s_XIconString = "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAABoSURBVDhPnY3BDcAgDAOZhS14dP1O0x2C/LBEgiNSHvfwyZabmV0jZRUpq2zi6f0DJwdcQOEdwwDLypF0zHLMa9+NQRxkQ+ACOT2STVw/q8eY1346ZlE54sYAhVhSDrjwFymrSFnD2gTZpls2OvFUHAAAAABJRU5ErkJggg==";
         private const string s_OIconString = "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAxnpUWHRSYXcgcHJvZmlsZSB0eXBlIGV4aWYAAHjabVDbDcQgDPtnihuBkPAah7ZUug1u/DMkrdqqRjjBQSbE9d93d5+BQOIk5pJqSh6QKjU0JMUr2mTyMlmxW6S77s5CgMSIrMeS7P6h02mgoSGLF6OyWmG5F6qYf3kY2UM8OgpINjOqZsRBC2QGTb/lUy35+oWl+zuKbjdo7dPbk732PEvG9LYIkUPoDBnMLNoAjy2OG5I8ueIicUIesRoLk3WCgbzN6YD7A9UeWkFp8TiyAAABhGlDQ1BJQ0MgcHJvZmlsZQAAeJx9kT1Iw0AcxV9TpSoVBwuKOGSoTu2iUhylikWwUNoKrTqYXPoFTRqSFBdHwbXg4Mdi1cHFWVcHV0EQ/ABxdnBSdJES/5cUWsR4cNyPd/ced+8AoVllqtkzB6iaZaQTcTGXXxUDrwigHyOIISIxU09mFrPwHF/38PH1LsqzvM/9OQaVgskAn0g8x3TDIt4gjm1aOud94hArSwrxOXHEoAsSP3JddvmNc8lhgWeGjGx6njhELJa6WO5iVjZU4hnisKJqlC/kXFY4b3FWq3XWvid/YbCgrWS4TnMcCSwhiRREyKijgiosRGnVSDGRpv24h3/M8afIJZOrAkaOBdSgQnL84H/wu1uzOD3lJgXjQO+LbX9MAIFdoNWw7e9j226dAP5n4Err+GtNYPaT9EZHCx8BQ9vAxXVHk/eAyx1g9EmXDMmR/DSFYhF4P6NvygPDt8DAmttbex+nD0CWulq+AQ4OgckSZa97vLuvu7d/z7T7+wET5nLnDftzqwAADXZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDQuNC4wLUV4aXYyIj4KIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgIHhtbG5zOkdJTVA9Imh0dHA6Ly93d3cuZ2ltcC5vcmcveG1wLyIKICAgIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIgogICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIgogICB4bXBNTTpEb2N1bWVudElEPSJnaW1wOmRvY2lkOmdpbXA6NTAwMDUzZmItNmE5ZC00ZTRjLTgyYjYtZWQxZGIwZmJkYjdkIgogICB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVhMTM1ODY3LWM1OWQtNDFlNy04OThlLTIyNDQzNzZkODJmNSIKICAgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOmE4Y2YzNTYyLThlMjQtNDRlNS04OWI1LTMyMDdhYzY4NjJkYSIKICAgZGM6Rm9ybWF0PSJpbWFnZS9wbmciCiAgIEdJTVA6QVBJPSIyLjAiCiAgIEdJTVA6UGxhdGZvcm09IldpbmRvd3MiCiAgIEdJTVA6VGltZVN0YW1wPSIxNzIwNTY5MzQyMTcxMTc4IgogICBHSU1QOlZlcnNpb249IjIuMTAuMzQiCiAgIHRpZmY6T3JpZW50YXRpb249IjEiCiAgIHhtcDpDcmVhdG9yVG9vbD0iR0lNUCAyLjEwIgogICB4bXA6TWV0YWRhdGFEYXRlPSIyMDI0OjA3OjA5VDE2OjU1OjQxLTA3OjAwIgogICB4bXA6TW9kaWZ5RGF0ZT0iMjAyNDowNzowOVQxNjo1NTo0MS0wNzowMCI+CiAgIDx4bXBNTTpIaXN0b3J5PgogICAgPHJkZjpTZXE+CiAgICAgPHJkZjpsaQogICAgICBzdEV2dDphY3Rpb249InNhdmVkIgogICAgICBzdEV2dDpjaGFuZ2VkPSIvIgogICAgICBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmEwODFhZTY4LWQ2M2EtNDc3MS1iODg3LWU5NzA0YzA1NGM2ZCIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iR2ltcCAyLjEwIChXaW5kb3dzKSIKICAgICAgc3RFdnQ6d2hlbj0iMjAyNC0wNy0wOVQxNjo1NTo0MiIvPgogICAgPC9yZGY6U2VxPgogICA8L3htcE1NOkhpc3Rvcnk+CiAgPC9yZGY6RGVzY3JpcHRpb24+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgCjw/eHBhY2tldCBlbmQ9InciPz4UFAouAAAABmJLR0QAPQAiACJOWxQiAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAB3RJTUUH6AcJFzcqqz58wgAAAKNJREFUKM+tk80NwyAMhR8oGwTJd/bIXJ6BudjDd0tkBnohkevSNmrzTpal9+E/Aibacu4+V0WCzy0zUyF6ATLQPSRYozWx6hn7/AEI3siq+3ghGXAbkNUCnspm1d2aTL9plN4OAAAsvtwrKkRgoEfXS/pkqiLJziLiD91jLkTnVN9py7nZ+cQqEmwfVzRdVSFaGWjf9nzfhV267QGb3vYvv+oBkMVlxA3njaoAAAAASUVORK5CYII=";
+        private const string s_NullIconString = "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAxXpUWHRSYXcgcHJvZmlsZSB0eXBlIGV4aWYAAHjabVBbDsQgCPznFHsEeVTxOHZrk73BHn9RaNM2O4nDCGREoH8/O7wGCAVkKZprzskgVSo1E5ocbTImmezYI+I9D2eBLMUW2a+ao//I42ngoZlaLkb6jsJ6L1QJf30YxUM8JiITWxjVMGLyAoZB82+lXLVcv7D2dIf6gUHvPr0TxmvPuxTb3rZYkok6W9qYWXwAHkeAm4kyuVojTo2sxswlJrGF/NvTAfgB1eJaRl4gl/gAAAGEaUNDUElDQyBwcm9maWxlAAB4nH2RPUjDQBzFX1OlKhUHC4o4ZKhO7aJSHKWKRbBQ2gqtOphc+gVNGpIUF0fBteDgx2LVwcVZVwdXQRD8AHF2cFJ0kRL/lxRaxHhw3I939x537wChWWWq2TMHqJplpBNxMZdfFQOvCKAfI4ghIjFTT2YWs/AcX/fw8fUuyrO8z/05BpWCyQCfSDzHdMMi3iCObVo6533iECtLCvE5ccSgCxI/cl12+Y1zyWGBZ4aMbHqeOEQslrpY7mJWNlTiGeKwomqUL+RcVjhvcVardda+J39hsKCtZLhOcxwJLCGJFETIqKOCKixEadVIMZGm/biHf8zxp8glk6sCRo4F1KBCcvzgf/C7W7M4PeUmBeNA74ttf0wAgV2g1bDt72Pbbp0A/mfgSuv4a01g9pP0RkcLHwFD28DFdUeT94DLHWD0SZcMyZH8NIViEXg/o2/KA8O3wMCa21t7H6cPQJa6Wr4BDg6ByRJlr3u8u6+7t3/PtPv7ARPmcucN+3OrAAANdmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNC40LjAtRXhpdjIiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iCiAgICB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIgogICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICAgeG1sbnM6R0lNUD0iaHR0cDovL3d3dy5naW1wLm9yZy94bXAvIgogICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iCiAgIHhtcE1NOkRvY3VtZW50SUQ9ImdpbXA6ZG9jaWQ6Z2ltcDpjM2RlNjVjNy1iY2Q1LTQxMzktOGEyMS1jMDhkYTQ1OGY4ZTUiCiAgIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6ODcyMTdlOTEtN2EzNi00MDM3LTlmZDYtNjY0ZjRiYzY0ODFmIgogICB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NjEzYmExYzAtNzFhYi00ODNiLThmNTAtZDlkZjQ5MTAxMTQzIgogICBkYzpGb3JtYXQ9ImltYWdlL3BuZyIKICAgR0lNUDpBUEk9IjIuMCIKICAgR0lNUDpQbGF0Zm9ybT0iV2luZG93cyIKICAgR0lNUDpUaW1lU3RhbXA9IjE3MjA1NzA3MTgzOTA1NjAiCiAgIEdJTVA6VmVyc2lvbj0iMi4xMC4zNCIKICAgdGlmZjpPcmllbnRhdGlvbj0iMSIKICAgeG1wOkNyZWF0b3JUb29sPSJHSU1QIDIuMTAiCiAgIHhtcDpNZXRhZGF0YURhdGU9IjIwMjQ6MDc6MDlUMTc6MTg6MzctMDc6MDAiCiAgIHhtcDpNb2RpZnlEYXRlPSIyMDI0OjA3OjA5VDE3OjE4OjM3LTA3OjAwIj4KICAgPHhtcE1NOkhpc3Rvcnk+CiAgICA8cmRmOlNlcT4KICAgICA8cmRmOmxpCiAgICAgIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiCiAgICAgIHN0RXZ0OmNoYW5nZWQ9Ii8iCiAgICAgIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MGRmYzU3ZGUtMTJjYy00MTgxLTg4YTYtN2I5OGFiMGMzNDU1IgogICAgICBzdEV2dDpzb2Z0d2FyZUFnZW50PSJHaW1wIDIuMTAgKFdpbmRvd3MpIgogICAgICBzdEV2dDp3aGVuPSIyMDI0LTA3LTA5VDE3OjE4OjM4Ii8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/PmDIGQEAAAAGYktHRADGADkAOeup8BMAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAHdElNRQfoBwoAEiZBp/oVAAAASklEQVQoz2NgYGBgsFVSus+ABrCJYYjbKindP2Zp+R9ZEJsYTnG6G4DVP8QagNUkkgwgVvEwMQBn4JEU4sQkBKITB/0NIJiL0MQAIlexmCMKpZsAAAAASUVORK5CYII=";
         private const string s_Arrow0 = "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAACYSURBVDhPzZExDoQwDATzE4oU4QXXcgUFj+YxtETwgpMwXuFcwMFSRMVKKwzZcWzhiMg91jtg34XIntkre5EaT7yjjhI9pOD5Mw5k2X/DdUwFr3cQ7Pu23E/BiwXyWSOxrNqx+ewnsayam5OLBtbOGPUM/r93YZL4/dhpR/amwByGFBz170gNChA6w5bQQMqramBTgJ+Z3A58WuWejPCaHQAAAABJRU5ErkJggg==";
         private const string s_Arrow1 = "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAABqSURBVDhPxYzBDYAgEATpxYcd+PVr0fZ2siZrjmMhFz6STIiDs8XMlpEyi5RkO/d66TcgJUB43JfNBqRkSEYDnYjhbKD5GIUkDqRDwoH3+NgTAw+bL/aoOP4DOgH+iwECEt+IlFmkzGHlAYKAWF9R8zUnAAAAAElFTkSuQmCC";
         private const string s_Arrow2 = "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAAC0SURBVDhPjVE5EsIwDMxPKFKYF9CagoJH8xhaMskLmEGsjOSRkBzYmU2s9a58TUQUmCH1BWEHweuKP+D8tphrWcAHuIGrjPnPNY8X2+DzEWE+FzrdrkNyg2YGNNfRGlyOaZDJOxBrDhgOowaYW8UW0Vau5ZkFmXbbDr+CzOHKmLinAXMEePyZ9dZkZR+s5QX2O8DY3zZ/sgYcdDqeEVp8516o0QQV1qeMwg6C91toYoLoo+kNt/tpKQEVvFQAAAAASUVORK5CYII=";
@@ -36,7 +37,7 @@ namespace UnityEditor
             {
                 if (s_Arrows == null)
                 {
-                    s_Arrows = new Texture2D[11];
+                    s_Arrows = new Texture2D[12];
                     s_Arrows[0] = Base64ToTexture(s_Arrow0);
                     s_Arrows[1] = Base64ToTexture(s_Arrow1);
                     s_Arrows[2] = Base64ToTexture(s_Arrow2);
@@ -47,6 +48,7 @@ namespace UnityEditor
                     s_Arrows[8] = Base64ToTexture(s_Arrow8);
                     s_Arrows[9] = Base64ToTexture(s_XIconString);
                     s_Arrows[10] = Base64ToTexture(s_OIconString);
+                    s_Arrows[11] = Base64ToTexture(s_NullIconString);
                 }
                 return s_Arrows;
             }
@@ -68,7 +70,7 @@ namespace UnityEditor
             }
         }
 
-        private CustomRuleTile tile { get => target as CustomRuleTile; }
+        private FancyRuleTile tile { get => target as FancyRuleTile; }
         private ReorderableList m_ReorderableList;
 
         internal const float k_DefaultElementHeight = 48f;
@@ -78,10 +80,11 @@ namespace UnityEditor
 
         public void OnEnable()
         {
+            if (tile == null) return;
             if (tile.m_TilingRules == null)
-                tile.m_TilingRules = new List<CustomRuleTile.TilingRule>();
+                tile.m_TilingRules = new List<FancyRuleTile.TilingRule>();
 
-            m_ReorderableList = new ReorderableList(tile.m_TilingRules, typeof(CustomRuleTile.TilingRule), true, true, true, true);
+            m_ReorderableList = new ReorderableList(tile.m_TilingRules, typeof(FancyRuleTile.TilingRule), true, true, true, true);
             m_ReorderableList.drawHeaderCallback = OnDrawHeader;
             m_ReorderableList.drawElementCallback = OnDrawElement;
             m_ReorderableList.elementHeightCallback = GetElementHeight;
@@ -100,9 +103,9 @@ namespace UnityEditor
             {
                 switch (tile.m_TilingRules[index].m_Output)
                 {
-                    case CustomRuleTile.TilingRule.OutputSprite.Random:
+                    case FancyRuleTile.TilingRule.OutputSprite.Random:
                         return k_DefaultElementHeight + k_SingleLineHeight * (tile.m_TilingRules[index].m_Sprites.Length + 3) + k_PaddingBetweenRules;
-                    case CustomRuleTile.TilingRule.OutputSprite.Animation:
+                    case FancyRuleTile.TilingRule.OutputSprite.Animation:
                         return k_DefaultElementHeight + k_SingleLineHeight * (tile.m_TilingRules[index].m_Sprites.Length + 2) + k_PaddingBetweenRules;
                 }
             }
@@ -111,7 +114,7 @@ namespace UnityEditor
 
         private void OnDrawElement(Rect rect, int index, bool isactive, bool isfocused)
         {
-            CustomRuleTile.TilingRule rule = tile.m_TilingRules[index];
+            FancyRuleTile.TilingRule rule = tile.m_TilingRules[index];
 
             float yPos = rect.yMin + 2f;
             float height = rect.height - k_PaddingBetweenRules;
@@ -131,8 +134,8 @@ namespace UnityEditor
 
         private void OnAddElement(ReorderableList list)
         {
-            CustomRuleTile.TilingRule rule = new CustomRuleTile.TilingRule();
-            rule.m_Output = CustomRuleTile.TilingRule.OutputSprite.Single;
+            FancyRuleTile.TilingRule rule = new FancyRuleTile.TilingRule();
+            rule.m_Output = FancyRuleTile.TilingRule.OutputSprite.Single;
             rule.m_Sprites[0] = tile.m_DefaultSprite;
             rule.m_GameObject = tile.m_DefaultGameObject;
             rule.m_ColliderType = tile.m_DefaultColliderType;
@@ -168,7 +171,7 @@ namespace UnityEditor
         {
             EditorGUI.BeginChangeCheck();
             tile.m_DefaultSprite = EditorGUILayout.ObjectField("Default Sprite", tile.m_DefaultSprite, typeof(Sprite), false) as Sprite;
-            // tile.m_CheckAllTilemaps = EditorGUILayout.Toggle("Check All Tile Maps", tile.m_CheckAllTilemaps);
+            tile.m_CheckAllTilemaps = EditorGUILayout.Toggle("Check All Tile Maps", tile.m_CheckAllTilemaps);
             tile.m_DefaultGameObject = EditorGUILayout.ObjectField("Default Game Object", tile.m_DefaultGameObject, typeof(GameObject), false) as GameObject;
             tile.m_DefaultColliderType = (Tile.ColliderType)EditorGUILayout.EnumPopup("Default Collider", tile.m_DefaultColliderType);
             if (EditorGUI.EndChangeCheck())
@@ -176,7 +179,7 @@ namespace UnityEditor
 
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();
-            var baseFields = typeof(RuleTile).GetFields().Select(field => field.Name);
+            var baseFields = typeof(FancyRuleTile).GetFields().Select(field => field.Name);
             var fields = target.GetType().GetFields().Select(field => field.Name).Where(field => !baseFields.Contains(field));
             foreach (var field in fields)
                 EditorGUILayout.PropertyField(serializedObject.FindProperty(field), true);
@@ -194,14 +197,19 @@ namespace UnityEditor
             // TODO this is where we add custom rules to the GUI
             switch (neighbor)
             {
-                case CustomRuleTile.TilingRule.Neighbor.This:
+                case FancyRuleTile.TilingRule.Neighbor.DontCare:
+                    break;
+                case FancyRuleTile.TilingRule.Neighbor.This:
                     GUI.DrawTexture(rect, arrows[arrowIndex]);
                     break;
-                case CustomRuleTile.TilingRule.Neighbor.Empty:
+                case FancyRuleTile.TilingRule.Neighbor.NotThis:
+                    GUI.DrawTexture(rect, arrows[9]);
+                    break;
+                case FancyRuleTile.TilingRule.Neighbor.OtherTile:
                     GUI.DrawTexture(rect, arrows[10]);
                     break;
-                case CustomRuleTile.TilingRule.Neighbor.NotThis:
-                    GUI.DrawTexture(rect, arrows[9]);
+                case FancyRuleTile.TilingRule.Neighbor.MustBeNull:
+                    GUI.DrawTexture(rect, arrows[11]);
                     break;
                 default:
                     var style = new GUIStyle();
@@ -221,23 +229,23 @@ namespace UnityEditor
             }
         }
 
-        internal virtual void RuleTransformOnGUI(Rect rect, CustomRuleTile.TilingRule.Transform ruleTransform)
+        internal virtual void RuleTransformOnGUI(Rect rect, FancyRuleTile.TilingRule.Transform ruleTransform)
         {
             switch (ruleTransform)
             {
-                case CustomRuleTile.TilingRule.Transform.Rotated:
+                case FancyRuleTile.TilingRule.Transform.Rotated:
                     GUI.DrawTexture(rect, autoTransforms[0]);
                     break;
-                case CustomRuleTile.TilingRule.Transform.MirrorX:
+                case FancyRuleTile.TilingRule.Transform.MirrorX:
                     GUI.DrawTexture(rect, autoTransforms[1]);
                     break;
-                case CustomRuleTile.TilingRule.Transform.MirrorY:
+                case FancyRuleTile.TilingRule.Transform.MirrorY:
                     GUI.DrawTexture(rect, autoTransforms[2]);
                     break;
             }
         }
 
-        internal void RuleNeighborUpdate(Rect rect, CustomRuleTile.TilingRule tilingRule, int index)
+        internal void RuleNeighborUpdate(Rect rect, FancyRuleTile.TilingRule tilingRule, int index)
         {
             if (Event.current.type == EventType.MouseDown && ContainsMousePosition(rect))
             {
@@ -253,11 +261,11 @@ namespace UnityEditor
             }
         }
 
-        internal void RuleTransformUpdate(Rect rect, CustomRuleTile.TilingRule tilingRule)
+        internal void RuleTransformUpdate(Rect rect, FancyRuleTile.TilingRule tilingRule)
         {
             if (Event.current.type == EventType.MouseDown && ContainsMousePosition(rect))
             {
-                tilingRule.m_RuleTransform = (CustomRuleTile.TilingRule.Transform)(int)Mathf.Repeat((int)tilingRule.m_RuleTransform + GetMouseChange(), 4);
+                tilingRule.m_RuleTransform = (FancyRuleTile.TilingRule.Transform)(int)Mathf.Repeat((int)tilingRule.m_RuleTransform + GetMouseChange(), 4);
                 GUI.changed = true;
                 Event.current.Use();
             }
@@ -273,7 +281,7 @@ namespace UnityEditor
             return Event.current.button == 1 ? -1 : 1;
         }
 
-        internal virtual void RuleMatrixOnGUI(CustomRuleTile tile, Rect rect, CustomRuleTile.TilingRule tilingRule)
+        internal virtual void RuleMatrixOnGUI(FancyRuleTile tile, Rect rect, FancyRuleTile.TilingRule tilingRule)
         {
             Handles.color = EditorGUIUtility.isProSkin ? new Color(1f, 1f, 1f, 0.2f) : new Color(0f, 0f, 0f, 0.2f);
             int index = 0;
@@ -313,18 +321,18 @@ namespace UnityEditor
             }
         }
 
-        internal static void SpriteOnGUI(Rect rect, CustomRuleTile.TilingRule tilingRule)
+        internal static void SpriteOnGUI(Rect rect, FancyRuleTile.TilingRule tilingRule)
         {
             tilingRule.m_Sprites[0] = EditorGUI.ObjectField(new Rect(rect.xMax - rect.height, rect.yMin, rect.height, rect.height), tilingRule.m_Sprites[0], typeof(Sprite), false) as Sprite;
         }
 
-        internal static void RuleInspectorOnGUI(Rect rect, CustomRuleTile.TilingRule tilingRule)
+        internal static void RuleInspectorOnGUI(Rect rect, FancyRuleTile.TilingRule tilingRule)
         {
             float y = rect.yMin;
             EditorGUI.BeginChangeCheck();
-            GUI.Label(new Rect(rect.xMin, y, k_LabelWidth, k_SingleLineHeight), "Rule");
-            tilingRule.m_RuleTransform = (CustomRuleTile.TilingRule.Transform)EditorGUI.EnumPopup(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), tilingRule.m_RuleTransform);
-            y += k_SingleLineHeight;
+            // GUI.Label(new Rect(rect.xMin, y, k_LabelWidth, k_SingleLineHeight), "Rule");
+            // tilingRule.m_RuleTransform = (FancyRuleTile.TilingRule.Transform)EditorGUI.EnumPopup(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), tilingRule.m_RuleTransform);
+            // y += k_SingleLineHeight;
             GUI.Label(new Rect(rect.xMin, y, k_LabelWidth, k_SingleLineHeight), "Game Object");
             tilingRule.m_GameObject = (GameObject)EditorGUI.ObjectField(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), "", tilingRule.m_GameObject, typeof(GameObject), false);
             y += k_SingleLineHeight;
@@ -332,28 +340,27 @@ namespace UnityEditor
             tilingRule.m_ColliderType = (Tile.ColliderType)EditorGUI.EnumPopup(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), tilingRule.m_ColliderType);
             y += k_SingleLineHeight;
             GUI.Label(new Rect(rect.xMin, y, k_LabelWidth, k_SingleLineHeight), "Output");
-            tilingRule.m_Output = (CustomRuleTile.TilingRule.OutputSprite)EditorGUI.EnumPopup(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), tilingRule.m_Output);
+            tilingRule.m_Output = (FancyRuleTile.TilingRule.OutputSprite)EditorGUI.EnumPopup(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), tilingRule.m_Output);
             y += k_SingleLineHeight;
 
-            if (tilingRule.m_Output == CustomRuleTile.TilingRule.OutputSprite.Animation)
+            if (tilingRule.m_Output == FancyRuleTile.TilingRule.OutputSprite.Animation)
             {
                 GUI.Label(new Rect(rect.xMin, y, k_LabelWidth, k_SingleLineHeight), "Speed");
-                tilingRule.m_MinAnimationSpeed = EditorGUI.FloatField(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), tilingRule.m_MinAnimationSpeed);
-                tilingRule.m_MaxAnimationSpeed = EditorGUI.FloatField(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), tilingRule.m_MaxAnimationSpeed);
+                tilingRule.m_AnimationSpeed = EditorGUI.FloatField(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), tilingRule.m_AnimationSpeed);
                 y += k_SingleLineHeight;
             }
-            if (tilingRule.m_Output == CustomRuleTile.TilingRule.OutputSprite.Random)
+            if (tilingRule.m_Output == FancyRuleTile.TilingRule.OutputSprite.Random)
             {
                 GUI.Label(new Rect(rect.xMin, y, k_LabelWidth, k_SingleLineHeight), "Noise");
                 tilingRule.m_PerlinScale = EditorGUI.Slider(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), tilingRule.m_PerlinScale, 0.001f, 0.999f);
                 y += k_SingleLineHeight;
 
                 GUI.Label(new Rect(rect.xMin, y, k_LabelWidth, k_SingleLineHeight), "Shuffle");
-                tilingRule.m_RandomTransform = (CustomRuleTile.TilingRule.Transform)EditorGUI.EnumPopup(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), tilingRule.m_RandomTransform);
+                tilingRule.m_RandomTransform = (FancyRuleTile.TilingRule.Transform)EditorGUI.EnumPopup(new Rect(rect.xMin + k_LabelWidth, y, rect.width - k_LabelWidth, k_SingleLineHeight), tilingRule.m_RandomTransform);
                 y += k_SingleLineHeight;
             }
 
-            if (tilingRule.m_Output != CustomRuleTile.TilingRule.OutputSprite.Single)
+            if (tilingRule.m_Output != FancyRuleTile.TilingRule.OutputSprite.Single)
             {
                 GUI.Label(new Rect(rect.xMin, y, k_LabelWidth, k_SingleLineHeight), "Size");
                 EditorGUI.BeginChangeCheck();
@@ -433,13 +440,13 @@ namespace UnityEditor
         class RuleTileRuleWrapper
         {
             [SerializeField]
-            public List<RuleTile.TilingRule> rules = new List<RuleTile.TilingRule>();
+            public List<FancyRuleTile.TilingRule> rules = new List<FancyRuleTile.TilingRule>();
         }
 
-        [MenuItem("CONTEXT/RuleTile/Copy All Rules")]
+        [MenuItem("CONTEXT/FancyRuleTile/Copy All Rules")]
         private static void CopyAllRules(MenuCommand item)
         {
-            RuleTile tile = item.context as RuleTile;
+            FancyRuleTile tile = item.context as FancyRuleTile;
             if (tile == null)
                 return;
 
@@ -449,10 +456,10 @@ namespace UnityEditor
             EditorGUIUtility.systemCopyBuffer = rulesJson;
         }
 
-        [MenuItem("CONTEXT/RuleTile/Paste Rules")]
+        [MenuItem("CONTEXT/FancyRuleTile/Paste Rules")]
         private static void PasteRules(MenuCommand item)
         {
-            RuleTile tile = item.context as RuleTile;
+            FancyRuleTile tile = item.context as FancyRuleTile;
             if (tile == null)
                 return;
 

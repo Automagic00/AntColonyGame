@@ -10,10 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eafc1f36768d0694789a929266fcb7f2, type: 3}
-  m_Name: Idk
-  m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 0}
-  m_DefaultColliderType: 1
-  m_TilingRules: []
-  m_TilingRules: []
+  m_Name: Fancy Ground
+  m_EditorClassIdentifier: Assembly-CSharp:UnityEngine:FancyRuleTile
