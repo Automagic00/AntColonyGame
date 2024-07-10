@@ -21,9 +21,9 @@ TagManager:
   - Player
   - Item
   - Projectile
-  - 
-  - 
-  - 
+  - MiniMap
+  - Fog
+  - FogStencil
   - 
   - 
   - 
@@ -55,4 +55,7 @@ TagManager:
     locked: 0
   - name: Top
     uniqueID: 3952032615
+    locked: 0
+  - name: Fog
+    uniqueID: 3286625045
     locked: 0
