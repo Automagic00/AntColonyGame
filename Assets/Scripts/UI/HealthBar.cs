@@ -107,8 +107,6 @@ public class HealthBar : MonoBehaviour
                     //fix scale
                     float xScalar = Screen.width / 1920f;
                     float yScalar = Screen.height / 1080f;
-                    Debug.Log(Screen.width + ", " + Screen.height);
-                    Debug.Log(xScalar + ", " + yScalar);
                     borderPiece.GetComponent<RectTransform>().sizeDelta = new Vector2(30 * xScalar, 70 * yScalar);
                     healthPiece.GetComponent<RectTransform>().sizeDelta = new Vector2(30 * xScalar, 70 * yScalar);
 
