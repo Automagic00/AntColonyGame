@@ -11,7 +11,7 @@ public class FogCameraSize : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(Globals.mapBounds.center.x, Globals.mapBounds.center.y,-14);
+        transform.position = new Vector3(Globals.mapBounds.center.x, Globals.mapBounds.center.y, -14);
 
         float xBoundSize = Globals.mapBounds.max.x - Globals.mapBounds.min.x;
         float yBoundSize = Globals.mapBounds.max.y - Globals.mapBounds.min.y;
@@ -23,13 +23,13 @@ public class FogCameraSize : MonoBehaviour
         }
         else
         {
-            float scalar = (yBoundSize) * 2.55f;
+            float scalar = (yBoundSize / 100) * 2.75f;
             transform.localScale = new Vector3(scalar, scalar, 1);
         }
 
         cam = GetComponent<Camera>();
         cam.orthographicSize = transform.localScale.x * projectionSizeMult;
-        
-        
+
+
     }
 }
