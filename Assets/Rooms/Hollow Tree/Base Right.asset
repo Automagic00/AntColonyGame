@@ -19,9 +19,10 @@ MonoBehaviour:
   allowedRoomsR: []
   allowedRoomsU: []
   allowedRoomsD: []
-  weight: 0.4
-  depth: 0.2
+  weight: 1
+  depth: 1
   overheadBounds: 0
   minAmount: 0
   maxAmount: -1
-  allowMirror: 1
+  allowMirror: 0
+  letEndEarly: 1

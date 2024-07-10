@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: eafc1f36768d0694789a929266fcb7f2, type: 3}
   m_Name: Ground
   m_EditorClassIdentifier: Assembly-CSharp:UnityEngine:FancyRuleTile
   m_DefaultSprite: {fileID: -1535050198, guid: 32eb6c9f2ef87e8428a9b416877e3a92, type: 3}

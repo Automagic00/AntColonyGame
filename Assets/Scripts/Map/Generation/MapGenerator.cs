@@ -458,7 +458,7 @@ public class MapGenerator : MonoBehaviour
                         break;
                 }
                 // Don't exit early
-                if (depth < root.minDepth && room.exits <= 1)
+                if (depth < root.minDepth && !room.letEndEarly && room.exits <= 1)
                 {
                     lowPriorityValidRooms.Add(room);
                     continue;
@@ -470,13 +470,19 @@ public class MapGenerator : MonoBehaviour
                     continue;
                 }
                 // Don't repeat rooms
-                if (parent != null && room.unmirrored == parent.room.unmirrored)
+                if (parent != null && !room.allowRepeat && room.unmirrored == parent.room.unmirrored)
                 {
                     lowPriorityValidRooms.Add(room);
                     continue;
                 }
 
                 validRooms.Add(room);
+            }
+
+            if (validRooms.Count == 0)
+            {
+                validRooms.AddRange(lowPriorityValidRooms);
+                lowPriorityValidRooms.Clear();
             }
         }
 
@@ -555,6 +561,7 @@ public class MapGenerator : MonoBehaviour
 
         public void ChooseRoom()
         {
+            foreach (Node node in root.rootNodes) Debug.Log(node.toString());
             PrioritizeRequiredRooms();
 
             while (room == null && validRooms.Count > 0)
@@ -615,7 +622,6 @@ public class MapGenerator : MonoBehaviour
                 }
                 return;
             }
-            // foreach (Node node in root.rootNodes) Debug.Log(node.toString());
 
             // ROOM CHOSEN. Set data
             room.Used(root.maxDepth);
@@ -711,11 +717,17 @@ public class MapGenerator : MonoBehaviour
         {
             if (room == null) return "_";
 
-            string name = room.name + ", [";
-            foreach (Node n in children)
-                name += n.toString();
-            name = name.Substring(0, name.Length - 1);
-            return name + "]";
+            string name = room.name;
+            if (children.Count > 0)
+            {
+                name += " [";
+                foreach (Node n in children)
+                    name += n.toString() + ", ";
+                name = name.Substring(0, name.Length - 2);
+                name += "]";
+
+            }
+            return name;
         }
     }
 

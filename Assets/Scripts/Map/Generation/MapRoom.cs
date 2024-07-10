@@ -29,6 +29,8 @@ public class Room : ScriptableObject
     public int maxAmount = -1; // negative value = no max limit
 
     public bool allowMirror = true;
+    public bool letEndEarly = false;
+    public bool allowRepeat = false;
 
     private bool _init;
     protected Room _unmirrored;
@@ -226,8 +228,13 @@ public class Room : ScriptableObject
 
         Room mirrored = ScriptableObject.CreateInstance<Room>();
         mirrored.weight = weight;
+        mirrored.depth = depth;
+        mirrored.overheadBounds = overheadBounds;
         mirrored.allowMirror = false;
+        mirrored.letEndEarly = letEndEarly;
         mirrored.name = "rev_" + name;
+        mirrored.roomType = roomType;
+        mirrored.allowRepeat = allowRepeat;
         // Create a clone of the layout
         mirrored.layout = Instantiate(layout);
         Destroy(mirrored.layout);
