@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a365807df86b4694ba21bbca341ef3fe, type: 3}
-  m_Name: Tree Exit
+  m_Name: Base Center
   m_EditorClassIdentifier: 
-  layout: {fileID: 1853980688481997053, guid: c027cf8d53bac4d42becc0cb2bb4c4cf, type: 3}
-  roomType: tree_br
+  layout: {fileID: 1853980688481997053, guid: b9254a30dad866243a476c49bbec2541, type: 3}
+  roomType: bc
   allowedRoomsL:
-  - tree center
-  allowedRoomsR: []
+  - bl
+  allowedRoomsR:
+  - br
   allowedRoomsU: []
   allowedRoomsD: []
   weight: 0.4
   depth: 0.2
-  overheadBounds: 8
+  overheadBounds: 0
   minAmount: 0
   maxAmount: -1
   allowMirror: 1

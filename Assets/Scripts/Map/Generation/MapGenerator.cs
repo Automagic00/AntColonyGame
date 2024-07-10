@@ -13,9 +13,9 @@ public class MapGenerator : MonoBehaviour
 {
 
     public Room[] rooms;
+    public string[] startingRoomTypes;
 
-    [HideInInspector]
-    public List<Room> allRooms = new List<Room>(),
+    private List<Room> allRooms = new List<Room>(),
         traderRooms = new List<Room>(),
         itemRooms = new List<Room>(),
         nurseRooms = new List<Room>(),
@@ -24,7 +24,6 @@ public class MapGenerator : MonoBehaviour
     private int[] roomCount;
 
 
-    public TileBase[] doorTiles;
 
     private Tilemap fg, bg, plat;
 
@@ -33,10 +32,6 @@ public class MapGenerator : MonoBehaviour
 
     private Vector3 worldmin;
     private Vector3 worldmax;
-
-    public Item[] allItems;
-    public Item[] allValuables;
-
     void Start()
     {
         bg = transform.Find("BGTiles").GetComponent<Tilemap>();
@@ -161,17 +156,23 @@ public class MapGenerator : MonoBehaviour
                     break;
             }
 
-        foreach (Room r in traderRooms)
-            r.minAmount = 0;
-        for (int i = 0; i <= npcTradeLength; i++)
-            traderRooms[Random.Range(0, traderRooms.Count)].minAmount++;
-        foreach (Room r in traderRooms)
-            r.maxAmount = r.minAmount + 1;
+        if (traderRooms.Count > 0)
+        {
+            foreach (Room r in traderRooms)
+                r.minAmount = 0;
+            for (int i = 0; i <= npcTradeLength; i++)
+                traderRooms[Random.Range(0, traderRooms.Count)].minAmount++;
+            foreach (Room r in traderRooms)
+                r.maxAmount = r.minAmount + 1;
+        }
 
-        foreach (Room r in itemRooms)
-            r.minAmount = 0;
-        for (int i = 0; i < minItems; i++)
-            itemRooms[Random.Range(0, itemRooms.Count)].minAmount++;
+        if (itemRooms.Count > 0)
+        {
+            foreach (Room r in itemRooms)
+                r.minAmount = 0;
+            for (int i = 0; i < minItems; i++)
+                itemRooms[Random.Range(0, itemRooms.Count)].minAmount++;
+        }
     }
 
     public IEnumerator DelayMakeItemTradeRoute()
@@ -181,6 +182,8 @@ public class MapGenerator : MonoBehaviour
     }
     private void MakeItemTradeRoute()
     {
+        if (traderRooms.Count == 0 || itemRooms.Count == 0) return;
+
         /// Find all items and traders in the map (shuffle for random order)
         List<ItemBehavior> items = FindObjectsOfType<ItemBehavior>()
         .Where((item) => item.GetComponent<SpawnChance>() == null).ToList();
@@ -254,18 +257,16 @@ public class MapGenerator : MonoBehaviour
     public float requiredRoomDepth = 2f;
     public float requiredRoomIncrement = 0.5f;
 
-    public string[] startingRooms;
 
     private List<Node> genQueue = new List<Node>();
 
+    private List<Node> rootNodes = new List<Node>();
     private List<Node> acceptedNodes = new List<Node>();
     private List<BoundsInt> blockedArea = new List<BoundsInt>();
 
     void GenerateMap()
     {
         // Find all doors
-        List<Node> rootNodes = new List<Node>();
-
         fg.CompressBounds();
         BoundsInt bounds = fg.cellBounds;
         for (int x = bounds.xMin; x < bounds.xMax; x++)
@@ -411,33 +412,48 @@ public class MapGenerator : MonoBehaviour
                     break;
             }
 
-            // Find rooms with matching exit
+            GetValidRooms();
+        }
+        void GetValidRooms()
+        {
             foreach (Room room in root.allRooms)
             {
-                // if (parent == null && root.startingRooms.Length > 0
-                // && !root.startingRooms.Contains(room.roomType)) continue;
+                if (parent == null && root.startingRoomTypes.Length > 0
+                && !root.startingRoomTypes.Contains(room.roomType)) continue;
 
                 switch (from)
                 {
                     case Room.G_LEFT:
                         if (!room.hasRight) continue;
-                        // if (parent != null && parent.room.allowedRoomsL.Length > 0
-                        // && !parent.room.allowedRoomsL.Contains(room.roomType)) continue;
+                        // Match room types
+                        if (parent != null && room.allowedRoomsR.Length > 0
+                        && !room.allowedRoomsR.Contains(parent.room.roomType)) continue;
+                        if (parent != null && parent.room.allowedRoomsL.Length > 0
+                        && !parent.room.allowedRoomsL.Contains(room.roomType)) continue;
                         break;
                     case Room.G_RIGHT:
                         if (!room.hasLeft) continue;
-                        // if (parent != null && parent.room.allowedRoomsR.Length > 0
-                        // && !parent.room.allowedRoomsR.Contains(room.roomType)) continue;
+                        // Match room types
+                        if (parent != null && room.allowedRoomsL.Length > 0
+                        && !room.allowedRoomsL.Contains(parent.room.roomType)) continue;
+                        if (parent != null && parent.room.allowedRoomsR.Length > 0
+                        && !parent.room.allowedRoomsR.Contains(room.roomType)) continue;
                         break;
                     case Room.G_UP:
                         if (!room.hasDown) continue;
-                        // if (parent != null && parent.room.allowedRoomsU.Length > 0
-                        // && !parent.room.allowedRoomsU.Contains(room.roomType)) continue;
+                        // Match room types
+                        if (parent != null && room.allowedRoomsD.Length > 0
+                        && !room.allowedRoomsD.Contains(parent.room.roomType)) continue;
+                        if (parent != null && parent.room.allowedRoomsU.Length > 0
+                        && !parent.room.allowedRoomsU.Contains(room.roomType)) continue;
                         break;
                     case Room.G_DOWN:
                         if (!room.hasUp) continue;
-                        // if (parent != null && parent.room.allowedRoomsD.Length > 0
-                        // && !parent.room.allowedRoomsD.Contains(room.roomType)) continue;
+                        // Match room types
+                        if (parent != null && room.allowedRoomsU.Length > 0
+                        && !room.allowedRoomsU.Contains(parent.room.roomType)) continue;
+                        if (parent != null && parent.room.allowedRoomsD.Length > 0
+                        && !parent.room.allowedRoomsD.Contains(room.roomType)) continue;
                         break;
                 }
                 // Don't exit early
@@ -461,8 +477,9 @@ public class MapGenerator : MonoBehaviour
 
                 validRooms.Add(room);
             }
-
         }
+
+
         private void PrioritizeRequiredRooms()
         {
             bool stillNeedsRooms = !root.allRequiredRoomsDone();
@@ -597,6 +614,7 @@ public class MapGenerator : MonoBehaviour
                 }
                 return;
             }
+            // foreach (Node node in root.rootNodes) Debug.Log(node.toString());
 
             // ROOM CHOSEN. Set data
             room.Used(root.maxDepth);
@@ -688,9 +706,21 @@ public class MapGenerator : MonoBehaviour
                 n.ApplyToMap();
         }
 
-        private Transform Instantiate(Transform t, Vector3 vector3, Quaternion identity)
+        public string toString()
         {
-            throw new System.NotImplementedException();
+            if (room == null) return "_";
+
+            string name = room.name + ", [";
+            foreach (Node n in children)
+                name += n.toString();
+            name = name.Substring(0, name.Length - 1);
+            return name + "]";
         }
     }
+
+    public TileBase[] doorTiles;
+
+    public Item[] allItems;
+    public Item[] allValuables;
+
 }

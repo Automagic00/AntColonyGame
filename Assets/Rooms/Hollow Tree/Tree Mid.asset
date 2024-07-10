@@ -20,7 +20,7 @@ MonoBehaviour:
   allowedRoomsD: []
   weight: 0.4
   depth: 0.2
-  overheadBounds: 8
+  overheadBounds: 0
   minAmount: 0
   maxAmount: -1
   allowMirror: 1

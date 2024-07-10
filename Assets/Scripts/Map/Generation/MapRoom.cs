@@ -227,11 +227,17 @@ public class Room : ScriptableObject
         Room mirrored = ScriptableObject.CreateInstance<Room>();
         mirrored.weight = weight;
         mirrored.allowMirror = false;
+        mirrored.name = "rev_" + name;
         // Create a clone of the layout
         mirrored.layout = Instantiate(layout);
         Destroy(mirrored.layout);
         mirrored.layout.name = layout.name + "_Mirrored";
         mirrored._unmirrored = this;
+
+        mirrored.allowedRoomsL = allowedRoomsR;
+        mirrored.allowedRoomsR = allowedRoomsL;
+        mirrored.allowedRoomsU = allowedRoomsU;
+        mirrored.allowedRoomsD = allowedRoomsD;
 
         for (int x = bounds.xMin; x < bounds.xMax; x++)
             for (int y = bounds.yMin; y < bounds.yMax; y++)
