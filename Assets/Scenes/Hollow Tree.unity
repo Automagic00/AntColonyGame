@@ -369,6 +369,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 220686636313279215, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 220686636313279215, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.875476
+      objectReference: {fileID: 0}
+    - target: {fileID: 220686636313279215, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.6556604
+      objectReference: {fileID: 0}
+    - target: {fileID: 220686636313279215, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 11272
+      objectReference: {fileID: 0}
+    - target: {fileID: 3605813096929146497, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 9215
+      objectReference: {fileID: 0}
     - target: {fileID: 7552167896049856968, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -775,9 +795,9 @@ GameObject:
   - component: {fileID: 644262926397926637}
   - component: {fileID: 2675070874650084062}
   - component: {fileID: 2034913746501325232}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BGTiles
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
