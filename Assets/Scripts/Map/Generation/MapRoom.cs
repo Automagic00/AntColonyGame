@@ -285,6 +285,19 @@ public class Room : ScriptableObject
 
     public float effectiveWeight { get => Math.Max(Math.Min(weight, 0.1f), currentWeight); }
 
+    public float effectiveDepth(float currentDepth, float maxDepth)
+    {
+        if (exits <= 2) return currentDepth + depth;
+        // return currentDepth + depth;
+        // Split multi-exit rooms across exits
+        float depthDiff = maxDepth - currentDepth;
+
+        int splitFactor = exits - 2;
+        // 2 exits = 0, 3 exits = 1/2, 4 exits = 2/3, etc
+        return currentDepth + depth + Mathf.Max(0, depthDiff * splitFactor / (splitFactor + 1));
+
+    }
+
     public static Room weightedRandom(List<Room> options)
     {
         float totalWeight = 0;

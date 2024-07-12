@@ -745,16 +745,16 @@ public class MapGenerator : MonoBehaviour
             Vector3Int entrance = pos - roomLoc;
             foreach (Vector3Int exit in room.leftExits)
                 if (exit != entrance)
-                    children.Add(new Node(root, this, roomLoc + exit, Room.G_LEFT, depth + room.depth));
+                    children.Add(new Node(root, this, roomLoc + exit, Room.G_LEFT, room.effectiveDepth(depth, root.maxDepth)));
             foreach (Vector3Int exit in room.rightExits)
                 if (exit != entrance)
-                    children.Add(new Node(root, this, roomLoc + exit, Room.G_RIGHT, depth + room.depth));
+                    children.Add(new Node(root, this, roomLoc + exit, Room.G_RIGHT, room.effectiveDepth(depth, root.maxDepth)));
             foreach (Vector3Int exit in room.upExits)
                 if (exit != entrance)
-                    children.Add(new Node(root, this, roomLoc + exit, Room.G_UP, depth + room.depth));
+                    children.Add(new Node(root, this, roomLoc + exit, Room.G_UP, room.effectiveDepth(depth, root.maxDepth)));
             foreach (Vector3Int exit in room.downExits)
                 if (exit != entrance)
-                    children.Add(new Node(root, this, roomLoc + exit, Room.G_DOWN, depth + room.depth));
+                    children.Add(new Node(root, this, roomLoc + exit, Room.G_DOWN, room.effectiveDepth(depth, root.maxDepth)));
 
             foreach (Node child in children)
                 root.genQueue.Add(child);

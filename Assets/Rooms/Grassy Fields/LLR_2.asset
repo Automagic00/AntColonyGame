@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: LLR_2
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: 12322400882ce044cb7b64b86cfd586f, type: 3}
+  roomType: 
+  allowedRoomsL: []
+  allowedRoomsR: []
+  allowedRoomsU: []
+  allowedRoomsD: []
   weight: 1
-  depth: 0.1
+  depth: 0.4
   overheadBounds: 8
   minAmount: 0
   maxAmount: -1
   allowMirror: 1
+  letEndEarly: 0
+  allowRepeat: 0
