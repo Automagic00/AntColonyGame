@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: Item_Chance_LR
   m_EditorClassIdentifier: 
   layout: {fileID: 1853980688481997053, guid: d9a87f969a8f47c4d978cb9b4102d46a, type: 3}
-  weight: 0.4
+  roomType: 
+  allowedRoomsL: []
+  allowedRoomsR: []
+  allowedRoomsU: []
+  allowedRoomsD: []
+  weight: 0.05
   depth: 0.2
   overheadBounds: 8
   minAmount: 0
-  maxAmount: -1
+  maxAmount: 2
   allowMirror: 1
+  letEndEarly: 0
+  allowRepeat: 0
