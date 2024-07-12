@@ -17,7 +17,8 @@ namespace UnityEngine
     public class RuleTile : TileBase
     {
         public static Tilemap[] tileMaps;
-        private static string[] nullTiles = { "gen_left", "gen_right", "gen_up", "gen_down" };
+        private static string[] nullTiles = { "gen_left", "gen_right", "gen_up", "gen_down",
+        "Grass 1", "Grass 2", "Grass 3", "Grass 4", "Pillar 1", "Pillar 2", "Rocks 1", "Rocks 2" };
 
         public virtual Type m_NeighborType { get { return typeof(TilingRule.Neighbor); } }
 
