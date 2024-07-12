@@ -2798,6 +2798,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: be3bc8df30dff704ebb923dfcbcc5f4d, type: 2}
   - {fileID: 11400000, guid: 3188b675397bbf643a0b0f0ebbeef1c0, type: 2}
   - {fileID: 11400000, guid: bf050b20ba799ee4db8325f5b20740b8, type: 2}
+  startingRoomTypes: []
+  pullSettingsFromGameProgression: 1
+  minDepth: 0.1
+  maxDepth: 1
+  requiredRoomDepth: 0.1
+  requiredRoomIncrement: 0
   doorTiles:
   - {fileID: 11400000, guid: d1af07f49aab04e45848d9f6094c3416, type: 2}
   - {fileID: 11400000, guid: 8cbf9b1f5092bcb40babcbdc84ba643f, type: 2}
@@ -2822,11 +2828,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4889df68808aab04cb781bde65c75b93, type: 2}
   - {fileID: 11400000, guid: 9406459483551c44faa9cc9a8a21a204, type: 2}
   - {fileID: 11400000, guid: 8c1f4113932821e4abcbcc8e532b3353, type: 2}
-  pullSettingsFromGameProgression: 1
-  minDepth: 0.1
-  maxDepth: 1
-  requiredRoomDepth: 0.1
-  requiredRoomIncrement: 0
 --- !u!114 &6275156941795688198
 MonoBehaviour:
   m_ObjectHideFlags: 0

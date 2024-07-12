@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FogCameraSize : MonoBehaviour
 {
-    //public GameObject Map;
+    public Material FogMat;
     private Camera cam;
     private float projectionSizeMult = 21.3333f;
     private float fogSizeMult = 2;
@@ -18,15 +18,17 @@ public class FogCameraSize : MonoBehaviour
 
         if (xBoundSize > yBoundSize)
         {
-            float scalar = (xBoundSize / 100) * 2.55f;
+            float scalar = (xBoundSize / 100) * 2.75f;
             transform.localScale = new Vector3(scalar, scalar, 1);
+            FogMat.SetFloat("_Radius", 0.01f + (scalar / 1000));
         }
         else
         {
             float scalar = (yBoundSize / 100) * 2.75f;
             transform.localScale = new Vector3(scalar, scalar, 1);
+            FogMat.SetFloat("_Radius", 0.01f + (scalar / 1000));
         }
-
+        
         cam = GetComponent<Camera>();
         cam.orthographicSize = transform.localScale.x * projectionSizeMult;
 
