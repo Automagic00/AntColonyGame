@@ -561,7 +561,7 @@ public class MapGenerator : MonoBehaviour
 
         public void ChooseRoom()
         {
-            foreach (Node node in root.rootNodes) Debug.Log(node.toString());
+            // foreach (Node node in root.rootNodes) Debug.Log(node.toString());
             PrioritizeRequiredRooms();
 
             while (room == null && validRooms.Count > 0)
