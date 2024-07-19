@@ -10,6 +10,7 @@ public class InventoryUI : MonoBehaviour
 
     private Inventory player;
     public GameObject statWindow;
+
     void Start()
     {
         player = FindAnyObjectByType<Inventory>();
@@ -23,7 +24,7 @@ public class InventoryUI : MonoBehaviour
         screenPos.z = transform.position.z;
         transform.position = screenPos;
 
-        setFlipped(player.transform.localScale.x == -1);
+        // setFlipped(player.transform.localScale.x == -1);
     }
 
     public void Unpause()
@@ -32,16 +33,16 @@ public class InventoryUI : MonoBehaviour
     }
 
 
-    // Flip layout, but not children (double the flip to cancel)
-    private void setFlipped(bool flipped)
-    {
-        Vector3 scale = new Vector3(flipped ? -1 : 1, 1, 1);
+    // // Flip layout, but not children (double the flip to cancel)
+    // private void setFlipped(bool flipped)
+    // {
+    //     Vector3 scale = new Vector3(flipped ? -1 : 1, 1, 1);
 
-        transform.localScale = scale;
-        for (int i = 0; i < transform.childCount; i++)
-            transform.GetChild(i).transform.localScale = scale;
+    //     transform.localScale = scale;
+    //     for (int i = 0; i < transform.childCount; i++)
+    //         transform.GetChild(i).transform.localScale = scale;
 
-    }
+    // }
 
     public void CloseStatWindow()
     {
@@ -91,7 +92,7 @@ public class InventoryUI : MonoBehaviour
 
             List<Equipment.Modifiers> combinedMods = new List<Equipment.Modifiers>();
 
-            if (itemData.baseModifiers!=null)
+            if (itemData.baseModifiers != null)
             {
                 combinedMods.AddRange(itemData.baseModifiers);
             }
