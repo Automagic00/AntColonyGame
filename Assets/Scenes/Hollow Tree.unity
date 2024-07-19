@@ -369,26 +369,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 220686636313279215, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 220686636313279215, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.875476
-      objectReference: {fileID: 0}
-    - target: {fileID: 220686636313279215, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.6556604
-      objectReference: {fileID: 0}
-    - target: {fileID: 220686636313279215, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 11272
-      objectReference: {fileID: 0}
-    - target: {fileID: 3605813096929146497, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 9215
-      objectReference: {fileID: 0}
     - target: {fileID: 7552167896049856968, guid: 03a85b03503630f479bf213fa30c1d8d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2382,6 +2362,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2615695111044611200, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4114503130583802397, guid: d4dcbca47a1e3b7409aa62154f166277, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2632,10 +2616,14 @@ MonoBehaviour:
   startingRoomTypes:
   - bl
   pullSettingsFromGameProgression: 0
+  itemPrefab: {fileID: 0}
+  traderPrefab: {fileID: 0}
+  roomOrigin: {x: 0, y: 0}
   minDepth: 1.5
   maxDepth: 2
   requiredRoomDepth: 1
   requiredRoomIncrement: 0
+  targetItem: {fileID: 0}
   doorTiles:
   - {fileID: 11400000, guid: d1af07f49aab04e45848d9f6094c3416, type: 2}
   - {fileID: 11400000, guid: 8cbf9b1f5092bcb40babcbdc84ba643f, type: 2}
@@ -2660,6 +2648,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4889df68808aab04cb781bde65c75b93, type: 2}
   - {fileID: 11400000, guid: 9406459483551c44faa9cc9a8a21a204, type: 2}
   - {fileID: 11400000, guid: 8c1f4113932821e4abcbcc8e532b3353, type: 2}
+  allValuablesWeights: []
 --- !u!114 &6275156941795688198
 MonoBehaviour:
   m_ObjectHideFlags: 0
