@@ -105,13 +105,13 @@ public class MapGenerator : MonoBehaviour
 
         // Trading
         if (QueenAnt.queenWants != null)
-            targetItem = QueenAnt.queenWants[System.Math.Clamp(Globals.gameProgression - 1, 0, QueenAnt.queenWants.Count - 1)];
+            targetItem = QueenAnt.queenWants[System.Math.Clamp(Globals.majorProgression - 1, 0, QueenAnt.queenWants.Count - 1)];
         else if (targetItem == null) targetItem = allItems[2]; // bottlecap
 
         // Map gen
         int minItemRoom, minTradeRoom;
 
-        if (Globals.gameProgression <= 3)
+        if (Globals.majorProgression <= 3)
         {
             minDepth = 0.5f;
             maxDepth = 1.5f;
@@ -121,7 +121,7 @@ public class MapGenerator : MonoBehaviour
             minItemRoom = 1;
         }
         else
-            switch (Globals.gameProgression)
+            switch (Globals.majorProgression)
             {
                 case 4:
                     minDepth = 1.0f;

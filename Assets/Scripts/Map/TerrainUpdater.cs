@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,50 +11,63 @@ public class NewBehaviourScript : MonoBehaviour
 
 
     public GameObject[] gameStatePrefabs;
+
+    public MinorPrefabs[] majorPrefabList;
+    [Serializable] public struct MinorPrefabs { public GameObject[] minorPrefabs; }
+
     private Tilemap fg, bg, plat;
 
     void Awake()
     {
-
-        // Set camera bounds to tilemap
-        Tilemap tilemap = transform.Find("Tiles").GetComponent<Tilemap>();
-        tilemap.CompressBounds();
-
-        Vector3 worldmin = tilemap.transform.TransformPoint(tilemap.localBounds.min);
-        Vector3 worldmax = tilemap.transform.TransformPoint(tilemap.localBounds.max) + new Vector3(0, 16, 0);
-
-        Globals.mapBounds = new Bounds();
-        Globals.mapBounds.SetMinMax(worldmin, worldmax);
+        Globals.BoundToTilemap(transform.Find("Tiles").GetComponent<Tilemap>());
     }
+
     void Start()
     {
         bg = transform.Find("BGTiles").GetComponent<Tilemap>();
         fg = transform.Find("Tiles").GetComponent<Tilemap>();
         plat = transform.Find("Platforms").GetComponent<Tilemap>();
 
-
         // Update map when game progresses
         Globals.addProgressionListener(updateMap);
 
         // Load existing
-        for (int i = 0; i <= Globals.gameProgression; i++)
-            addPrefab(i);
+        addPreviousProgression();
+
+        Globals.BoundToTilemap(transform.Find("Tiles").GetComponent<Tilemap>());
     }
     void OnDestroy()
     {
         Globals.removeProgressionListener(updateMap);
     }
 
-    void updateMap() => addPrefab(Globals.gameProgression);
-    void addPrefab(int i)
+    void addPreviousProgression()
     {
-        if (i >= 0 && i < gameStatePrefabs.Length
-        && gameStatePrefabs[i] != null)
-            add(gameStatePrefabs[i]);
+        // Add all previous prefabs
+        for (int i = 0; i < Globals.majorProgression - 1 && i < majorPrefabList.Length; i++)
+            foreach (GameObject pf in majorPrefabList[i].minorPrefabs)
+                add(pf);
+
+        // Add current minor progression
+        int ii = Globals.majorProgression;
+        if (ii < majorPrefabList.Length)
+            for (int j = 0; j < Globals.minorProgression + 1 && j < majorPrefabList[ii].minorPrefabs.Length; j++)
+                add(majorPrefabList[ii].minorPrefabs[j]);
+
+    }
+
+    void updateMap()
+    {
+        int i = Globals.majorProgression, j = Globals.minorProgression;
+
+        if (i < majorPrefabList.Length && j < majorPrefabList[i].minorPrefabs.Length)
+            add(majorPrefabList[i].minorPrefabs[j]);
     }
 
     void add(GameObject prefab)
     {
+        if (prefab == null) return;
+
         Tilemap addBG = prefab.transform.Find("pfBGTiles").GetComponent<Tilemap>();
         addTilemaps(addBG, bg);
         Tilemap addFG = prefab.transform.Find("pfTiles").GetComponent<Tilemap>();
